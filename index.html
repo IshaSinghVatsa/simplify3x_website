@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copora - Driving business growth through expert strategy</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/three@0.151.3/build/three.min.js"></script>
+    <script src="https://unpkg.com/globe.gl@^2.32.0/dist/globe.gl.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://unpkg.com/d3-geo@3"></script>
+    <style>
+        .globe-embed { background:#ffffff; padding:0px 0; }
+        #globe { width:615px; height:615px; margin:0 auto; position:relative; }
+        #globe canvas { width:100% !important; height:100% !important; display:block; }
+        .globe-pin { position:absolute; transform: translate(-50%, -100%); pointer-events:auto; }
+        .globe-pin svg { width:22px; height:22px; display:block; filter: drop-shadow(0 0 4px rgba(0,0,0,.6)); }
+    </style>
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="#home">
+                        <img src="assets/images/Logo.jpg" alt="Copora Logo">
+                    </a>
+                </div>
+              <div class="header-actions">
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="dropdown">
+                            <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">What we offer</button>
+                            <div class="dropdown-menu" role="menu">
+                                <div class="dropdown-col">
+                                 
+                                    <a href="#" class="dropdown-item">Hire3x</a>
+                                    <a href="#" class="dropdown-item">SimplifyQA</a>
+                                    <a href="#" class="dropdown-item">Bominso</a>
+                                    <a href="#" class="dropdown-item">Custom Solutions</a>  
+                                    <a href="#" class="dropdown-item">Walnut</a>
+                                    <a href="#" class="dropdown-item">Simplify Foods</a>
+                                    <a href="#" class="dropdown-item">DevOps Arc</a>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Who we are</button>
+                            <div class="dropdown-menu" role="menu">
+                                <div class="dropdown-col">
+                                   
+                                    <a href="#about" class="dropdown-item">About Us</a>
+                                    <a href="#blog" class="dropdown-item">Insights</a>
+                                    <a href="#" class="dropdown-item">Life @ Simplify3x</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Industires</button>
+                            <div class="dropdown-menu" role="menu">
+                                <div class="dropdown-col">
+                                    <a href="#case-studies" class="dropdown-item">Tech</a>
+                                    <a href="#case-studies" class="dropdown-item">Health</a>
+                                    <a href="#case-studies" class="dropdown-item">Lifestyle</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#case-studies" class="nav-link">Customer Stories </a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                  
+                    <a href="#contact" class="btn btn-primary">
+                        <span class="btn-text">Contact now</span>
+                        <span class="btn-text-hover">Contact now</span>
+                    </a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </header>
+   
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- <video autoplay muted loop playsinline webkit-playsinline preload="auto" class="hero-video">
+            <source src="assets/images/background-1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+        <img src="assets/images/image (4).png" alt="" class="hero-video">
+        <!-- <img src="assets/images/dots-2.png" alt="" class="hero-video-2"> -->
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="hero-text">
+                        <h1 class="hero-title"> Turning complex problems into simple solutions for lasting growth</h1>
+                        <div class="header-actions">
+                            <a href="#ecosystem" class="btn btn-primary">
+                                <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
+                                <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
+                            </a>
+                            <a href="#lets-talk-button" class="btn btn-primary">
+                                <span class="btn-text ">REQUEST A DEMO</span>
+                                <span class="btn-text-hover">REQUEST A DEMO</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="hero-images">
+                        <div class="hero-main-image">
+                            <img src="assets/images/front-girl.jpg" alt="Business consultation">
+                        </div>
+                        <div class="hero-testimonial">
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">"The consultants helped us shape a sustainable HR strategy that emphasized performance, retention, and employee well-being."</p>
+                                <div class="testimonial-author">
+                                    <img src="assets/images/68314ec582b2956a9125402e_hero-image-02.jpg" alt="Sofia Grant" class="author-image">
+                                    <div class="author-info">
+                                        <span class="author-name">Sofia Grant</span>
+                                        <span class="author-title">Director of Strategy</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hero-growth-card">
+                                <div class="growth-text">
+                                    <span class="growth-title">Our Case Studies</span>
+                                </div>
+                                <img src="assets/images/laptop.jpg" alt="Business growth" class="growth-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+  
+    <section class="clients">
+        <div class="container">
+            <div class="clients-content">
+                <div class="client-right-overlay"></div>
+                <div class="client-left-overlay"></div>
+                <div class="clients-text">
+                    <span class="clients-title">CLIENTS WHO TRUST US</span>
+                </div>
+                <div class="clients-logos">
+                    <div class="logo-scroll">
+                        <img src="assets/images/684d4d3179d5b07d8c356553_09-dark.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/6831785571146b4274e8f472_client-01.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/6831785513d9bcc07197e8f1_client-02.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/68317855a7c08c07852cf939_client-03.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/6831785505b847e698f99d36_client-04.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/683178637427f0c59b4f5e3f_client-05.svg" alt="Client Logo" class="client-logo">
+                        <!-- Duplicate for seamless scroll -->
+                        <img src="assets/images/684d4d3179d5b07d8c356553_09-dark.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/6831785571146b4274e8f472_client-01.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/6831785513d9bcc07197e8f1_client-02.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/68317855a7c08c07852cf939_client-03.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/6831785505b847e698f99d36_client-04.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/683178637427f0c59b4f5e3f_client-05.svg" alt="Client Logo" class="client-logo">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+       
+    </section>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="services-header">
+              
+                <h2 class="section-title-2">Innovation at Core</h2>
+                <p class="section-description color-black">Empowering enterprises with technology built for tomorrow.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <a href="#" class="service-link">
+                        <img src="assets/images/fuutre-r.jpg" alt="Business strategy" class="service-image">
+                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur">
+                        <div class="service-title">
+                            <div class="service-title-1">Future Ready</div>
+                            <div>Preparing enterprises with solutions built for tomorrow.</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="#" class="service-link">
+                        <img src="assets/images/trust.jpg" alt="Process optimization" class="service-image">
+                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur">
+                        <div class="service-title">
+                            <div class="service-title-1">Trustworthy</div>
+                            <div>Technology you can rely on, every step of the way.</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="#" class="service-link">
+                        <img src="assets/images/inclusivity.jpg" alt="Financial advisory" class="service-image">
+                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur">
+                        <div class="service-title">
+                            <div class="service-title-1">Inclusive</div>
+                            <div>An ecosystem that empowers everyone to grow.</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="#" class="service-link">
+                        <img src="assets/images/impact.jpg" alt="Market research" class="service-image">
+                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur">
+                        <div class="service-title">
+                            <div class="service-title-1">Impact Driven</div>
+                            <div>Simplifying complexity to deliver real results.</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<div id="ecosystem" class="stats">
+    <div class="container">
+        <div class="section-title-2 text-center" >OUR ECOSYSTEM</div>
+    <div class="orbit-container">
+        <button class="center-btn">Simplify3x</button>
+        <div class="orbit">
+          <div class="orbit-card pos-0">
+            <div class="orbit-card-inner">
+              <div class="orbit-flip">
+                <div class="orbit-card-face orbit-front">
+                  <div class="orbit-title">SIMPLIFYQA</div>
+                  <div class="orbit-description">Strategic technology consulting services</div>
+                </div>
+                <div class="orbit-card-face orbit-back">
+                  <div class="orbit-title">More</div>
+                  <div>Discovery, Roadmaps</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-card pos-60">
+            <div class="orbit-card-inner">
+              <div class="orbit-flip">
+                <div class="orbit-card-face orbit-front">
+                  <div class="orbit-title">HIRE3X</div>
+                  <div class="orbit-description">AI-powered solutions for intelligent automation</div>
+                </div>
+                <div class="orbit-card-face orbit-back">
+                  <div class="orbit-title">More</div>
+                  <div>Cloud, SaaS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-card pos-120">
+            <div class="orbit-card-inner">
+              <div class="orbit-flip">
+                <div class="orbit-card-face orbit-front">
+                  <div class="orbit-title">DEVOPS ARC</div>
+                  <div class="orbit-description">Cloud infrastructure made simple and scalable</div>
+                </div>
+                <div class="orbit-card-face orbit-back">
+                  <div class="orbit-title">More</div>
+                  <div>Bootcamps</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-card pos-180">
+            <div class="orbit-card-inner">
+              <div class="orbit-flip">
+                <div class="orbit-card-face orbit-front">
+                  <div class="orbit-title">WALNUT</div>
+                  <div class="orbit-description">Advanced data analytics and insights platform</div>
+                </div>
+                <div class="orbit-card-face orbit-back">
+                  <div class="orbit-title">More</div>
+                  <div>PoCs, Pilots</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-card pos-240">
+            <div class="orbit-card-inner">
+              <div class="orbit-flip">
+                <div class="orbit-card-face orbit-front">
+                  <div class="orbit-title">BOMINSO</div>
+                  <div class="orbit-description">Cross-platform mobile app development</div>
+                </div>
+                <div class="orbit-card-face orbit-back">
+                  <div class="orbit-title">More</div>
+                  <div>ISVs, GSIs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-card pos-300">
+            <div class="orbit-card-inner">
+              <div class="orbit-flip">
+                <div class="orbit-card-face orbit-front">
+                  <div class="orbit-title">SIMPLIFY FOODS</div>
+                  <div class="orbit-description">Enterprise-grade security and compliance</div>
+                </div>
+                <div class="orbit-card-face orbit-back">
+                  <div class="orbit-title">More</div>
+                  <div>Events, OSS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-card pos-309">
+            <div class="orbit-card-inner">
+              <div class="orbit-flip">
+                <div class="orbit-card-face orbit-front">
+                  <div class="orbit-title">CUSTOM SOLUTIONS</div>
+                  <div class="orbit-description">Streamlined development and deployment</div>
+                </div>
+                <div class="orbit-card-face orbit-back">
+                  <div class="orbit-title">More</div>
+                  <div>SLAs, Enablement</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div id="lets-talk" class="talk-box">
+        <div>
+            Let's discuss your business goals - schedule a demo now
+          </div>
+          <a id="lets-talk-button" href="#contact" class="btn btn-primary">
+            <span class="btn-text ">LET'S TALK</span>
+        </a>
+    </div>
+    </div>
+</div>
+<section class="purpose">
+    <div class="container">
+        <div class="purpose-content">
+           <div>
+            <div class="section-title-2">Our Purpose</div>
+            <div class="purpose-description">Empowering business worldwide with innovative technology solutions that <br/> drive sustainable growth and success.</div>
+
+            <div class="purpose-cards">
+                <div class="purpose-card">
+                    <div class="purpose-card-number">200+</div>
+                    <div class="purpose-card-text">Employees</div>
+                </div>
+                <div class="purpose-card">
+                    <div class="purpose-card-number">15+</div>
+                    <div class="purpose-card-text">Offices Wprldwide</div>
+                </div>
+               
+            </div>
+            <div class="purpose-cards">
+              
+                <div class="purpose-card">
+                    <div class="purpose-card-number">50+</div>
+                    <div class="purpose-card-text">Countires Served</div>
+                </div>
+                <div class="purpose-card">
+                    <div class="purpose-card-number">1000+</div>
+                    <div class="purpose-card-text">Happy Clients</div>
+                </div>
+            </div>
+           </div>
+
+            <!-- Globe Embed (above hero) -->
+    <section class="globe-embed">
+        <div class="container">
+            <div id="globe"></div>
+        </div>
+    </section>
+    <script>
+      const ORANGE = '#ff8a00';
+      const OFF_WHITE = '#b3b3b3';
+      const BG = '#ffffff';
+
+      const el = document.getElementById('globe');
+      if (el && typeof Globe === 'function') {
+        const world = Globe()
+          .width(777).height(777)
+          .backgroundColor(BG)
+          .showAtmosphere(true)
+          .atmosphereColor(ORANGE)
+          .atmosphereAltitude(0.25)
+          .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+          (el);
+
+        // Land-only dots: sample a grid and keep only points on land polygons
+        (async () => {
+          try {
+            const topo = await fetch('https://unpkg.com/world-atlas@2/land-110m.json').then(r => r.json());
+            const land = topojson.feature(topo, topo.objects.land); // GeoJSON
+            const step = 1.3; // denser dots
+            const points = [];
+            for (let lat = -85; lat <= 85; lat += step) {
+              for (let lng = -180; lng < 180; lng += step) {
+                if (d3.geoContains(land, [lng, lat])) {
+                  points.push({ lat, lng, alt: 0.003, w: Math.random() });
+                }
+              }
+            }
+            world
+              .pointsData(points)
+              .pointAltitude('alt')
+              .pointRadius(0.0075)
+              .pointColor(d => d.w < 0.22 ? OFF_WHITE : ORANGE);
+          } catch (e) {
+            console.error('Land dots load failed', e);
+          }
+        })();
+
+        const INDIA    = { lat: 12.9716, lng: 77.5946 };
+        const MALAYSIA = { lat: 3.1390,  lng: 101.6869 };
+        const KENYA    = { lat: -1.2921, lng: 36.8219 };
+        const USA      = { lat: 37.7749, lng: -122.4194 };
+        const DUBAI    = { lat: 25.2048, lng: 55.2708 };
+        const LONDON   = { lat: 51.5074, lng: -0.1278 };
+
+        // Sequential routes: India → Malaysia → USA → Dubai → Kenya
+        const sequenceSegments = [
+          { startLat: INDIA.lat,    startLng: INDIA.lng,    endLat: MALAYSIA.lat, endLng: MALAYSIA.lng },
+          { startLat: MALAYSIA.lat, startLng: MALAYSIA.lng, endLat: USA.lat,      endLng: USA.lng },
+          { startLat: USA.lat,      startLng: USA.lng,      endLat: DUBAI.lat,    endLng: DUBAI.lng },
+          { startLat: DUBAI.lat,    startLng: DUBAI.lng,    endLat: KENYA.lat,    endLng: KENYA.lng }
+        ];
+
+        // Solid base + moving head for each connection
+        const arcs = sequenceSegments.flatMap(s => [
+          { ...s, type: 'base' },
+          { ...s, type: 'head' }
+        ]);
+
+        world
+          .arcsData(arcs)
+          .arcColor(() => ORANGE)
+          .arcAltitudeAutoScale(0.6)
+          .arcStroke(d => d.type === 'base' ? 1.2 : 1.6)
+          .arcDashLength(d => d.type === 'base' ? 1 : 0.18)
+          .arcDashGap(d => d.type === 'base' ? 0 : 1)
+          .arcDashInitialGap(d => d.type === 'base' ? 0 : Math.random())
+          .arcDashAnimateTime(d => d.type === 'base' ? 0 : 1800);
+
+        world.controls().autoRotate = true;
+        world.controls().autoRotateSpeed = 0.28;
+
+        // HTML pins for five locations
+        const pinSvg = (fill) => `\n<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">\n  <path fill="${fill}" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>\n</svg>`;
+
+        const pinData = [
+          { name:'India',    lat:12.9716, lng:77.5946,  color:'#1e90ff' },
+          { name:'Malaysia', lat:3.1390,  lng:101.6869, color:'#1e90ff' },
+          { name:'USA',      lat:37.7749, lng:-122.4194,color:'#ff3b30' },
+          { name:'Dubai',    lat:25.2048, lng:55.2708,  color:'#4cd964' },
+          { name:'Kenya',    lat:-1.2921, lng:36.8219,  color:'#ffffff' }
+        ];
+
+        world
+          .htmlElementsData(pinData)
+          .htmlElement(d => { const el = document.createElement('div'); el.className='globe-pin'; el.innerHTML = pinSvg(d.color); el.title = d.name; return el; })
+          .htmlLat(d => d.lat)
+          .htmlLng(d => d.lng)
+          .htmlAltitude(0.05);
+      }
+    </script>
+           <!-- <div class="purpose-map">
+            
+            <img src="assets/images/Map.png" alt="Purpose Image">
+           </div> -->
+             <!-- <div class="purpose-map">
+                
+                <img src="assets/images/Map.png" class="map" alt="World Map" style="width: 100%;">
+              
+               
+                <div class="pin" style="top: 45%; left: 66%;">
+                  <img class="purpose-pin" src="assets/images/location.svg" alt="Pin">
+                  <span class="country-label" style="top: 21px;left: -3px;">India</span>
+                </div>
+                <div class="pin" style=" top: 34%;left: 22%;">
+                    <img class="purpose-pin" src="assets/images/location.svg" alt="Pin">
+                    <span class="country-label" style="top: 22px;left: 0px;">U.S.</span>
+                  </div>
+                  <div class="pin" style="    top: 57%;left: 75%;">
+                    <img class="purpose-pin" src="assets/images/location.svg" alt="Pin">
+                    <span class="country-label" style="    top: 22px;left: -17px;">Malaysia</span>
+                  </div>
+                  <div class="pin" style="top: 42%; left: 59%;">
+                    <img class="purpose-pin" src="assets/images/location.svg" alt="Pin">
+                    <span class="country-label" style="top: 22px;left: -13px;">Dubai</span>
+                  </div>
+                  <div class="pin" style="top: 60%;left: 52%;">
+                    <img class="purpose-pin" src="assets/images/location.svg" alt="Pin">
+                    <span class="country-label" style="top: 22px; left: -11px;">Kenya</span>
+                  </div>
+              </div> -->
+            <!-- <div  class="purpose-title">
+                AWARDS AND RECOGNITIONS
+            </div>
+            <div class="purpose-awards">
+                <div class="purpose-award">
+                    Best Tech Innovation 2023
+                </div>
+                <div class="purpose-award">
+                    Top Employer 2023
+                </div>
+                <div class="purpose-award">
+                    Leader in Digital Solutions
+                </div>
+                <div class="purpose-award">
+                    Industry Leader Award
+                </div>
+            </div> -->
+            
+        </div>
+    </div>
+
+</section>
+<section class="clients">
+    <div class="container">
+        <div class="clients-content">
+            <div class="client-right-overlay"></div>
+            <div class="client-left-overlay"></div>
+            <div class="clients-text">
+                <span class="clients-title">AWARDS AND RECOGNITIONS</span>
+            </div>
+            <div class="clients-logos">
+                <div class="logo-scroll">
+                    <div class="purpose-awards">
+                        <div class="purpose-award">
+                            Best Tech Innovation 2023
+                        </div>
+                        <div class="purpose-award">
+                            Top Employer 2023
+                        </div>
+                        <div class="purpose-award">
+                            Leader in Digital Solutions
+                        </div>
+                        <div class="purpose-award">
+                            Industry Leader Award
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+   
+</section>
+    <!-- <section class="maps">
+        <div class="container">
+            <div class="section-title-2 ">We Dominate the entire world sitting in Banglore</div>
+            <div class="presence-in">Presence in</div>
+            <div class="map-container">
+                
+                <img src="assets/images/Map.png" class="map" alt="World Map">
+              
+               
+                <div class="pin" style="top: 48%; left: 62%;">
+                  <img src="assets/images/location.svg" alt="Pin">
+                  <span class="country-label" style="top: 21px;left: -3px;">India</span>
+                </div>
+                <div class="pin" style=" top: 34%;left: 26%;">
+                    <img src="assets/images/location.svg" alt="Pin">
+                    <span class="country-label" style="top: 22px;left: 7px;">U.S.</span>
+                  </div>
+                  <div class="pin" style="    top: 57%;left: 67%;">
+                    <img src="assets/images/location.svg" alt="Pin">
+                    <span class="country-label" style="    top: 22px;left: -17px;">Malaysia</span>
+                  </div>
+                  <div class="pin" style="top: 44%; left: 58%;">
+                    <img src="assets/images/location.svg" alt="Pin">
+                    <span class="country-label" style="top: 22px;left: -13px;">Dubai</span>
+                  </div>
+                  <div class="pin" style="top: 60%;left: 52%;">
+                    <img src="assets/images/location.svg" alt="Pin">
+                    <span class="country-label" style="top: 22px; left: -11px;">Kenya</span>
+                  </div>
+              </div>
+        </div>
+    </section> -->
+
+    <!-- About Section -->
+    <!-- <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-left">
+                    <div class="about-text">
+                        <div class="section-label">About Copora</div>
+                        <h2 class="section-title">Driven by insight. Focused on results.</h2>
+                        <p class="section-description">We provide tailored consulting solutions to help businesses overcome challenges, seize opportunities, and achieve sustainable growth.</p>
+                        <a href="#" class="btn btn-secondary about-btn">
+                            <span class="btn-text">More about us</span>
+                            <span class="btn-text-hover">More about us</span>
+                        </a>
+                    </div>
+                   
+                </div>
+                <div class="about-right">
+                    <img src="assets/images/683402267e12e0bbfdb7f14c_a5bbe35d323660fa5848dc7f66f36921_about-image.jpg" alt="About Copora" class="about-image">
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Work Process Section -->
+    <!-- <section class="work-process">
+        <div class="container">
+            <div class="work-process-content">
+                <div class="work-process-left">
+                    <div class="process-cta">
+                        <img src="assets/images/683543557f15cafe06b24971_work-step-01.jpg" alt="Work process" class="process-image">
+                        <div class="process-cta-text">
+                            <span class="cta-question">Want to know what's possible?</span>
+                            <a href="#contact" class="cta-link">Get in touch now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-process-right">
+                    <div class="process-header">
+                        <div class="section-label">How we work</div>
+                        <h2 class="section-title">Smart steps to business growth</h2>
+                        <p class="section-description">We follow a strategic four-step approach designed to drive measurable results. From deep discovery to ongoing optimization, every step is focused on moving your business forward with clarity, efficiency, and impact.</p>
+                    </div>
+                    <div class="process-tabs">
+                        <div class="tab-list">
+                            <button class="tab-button active" data-tab="understand">Understand</button>
+                            <button class="tab-button" data-tab="strategize">Strategize</button>
+                            <button class="tab-button" data-tab="execute">Execute</button>
+                            <button class="tab-button" data-tab="optimize">Optimize</button>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-panel active" id="understand">
+                                <p>We begin by listening closely to your challenges and goals. Through research and deep business analysis, we uncover insights. This foundation shapes every strategy we build moving forward.</p>
+                            </div>
+                            <div class="tab-panel" id="strategize">
+                                <p>Based on our understanding, we develop comprehensive strategies tailored to your specific needs and market conditions. Our strategic approach ensures sustainable growth and competitive advantage.</p>
+                            </div>
+                            <div class="tab-panel" id="execute">
+                                <p>We work alongside your team to implement the strategies effectively. Our hands-on approach ensures smooth execution and immediate impact on your business operations.</p>
+                            </div>
+                            <div class="tab-panel" id="optimize">
+                                <p>Continuous improvement is key to long-term success. We monitor results, analyze performance, and optimize strategies to ensure sustained growth and maximum ROI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Featured Case Study Section -->
+    <!-- <section class="featured-case-study">
+        <div class="container">
+            <div class="featured-case-study-content">
+                <div class="featured-header">
+                    <div class="section-label">Our case studies</div>
+                    <h2 class="section-title">Featured case study</h2>
+                    <p class="section-description">Explore a selection of our featured case study to see how we've helped businesses overcome challenges and reach their full potential.</p>
+                </div>
+                <div class="featured-case">
+                    <a href="#" class="featured-case-link">
+                        <img src="assets/images/685534f87298b4672c24a73e_case-study-LG-01.webp" alt="Market entry strategy for a fintech startup" class="featured-case-image">
+                        <div class="featured-case-info">
+                            <span class="case-category">Financial</span>
+                            <h3 class="case-title">Market entry strategy for a fintech startup</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Case Studies Section -->
+    <!-- <section id="case-studies" class="case-studies">
+        <div class="container">
+            <div class="case-studies-header">
+                <div class="case-studies-title">
+                    <span class="section-label">Recent case studies</span>
+                </div>
+                <div class="case-studies-cta">
+                    <a href="#contact" class="btn btn-outline">
+                        <span class="btn-text">Let's work together</span>
+                        <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="btn-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="case-studies-grid">
+                <div class="case-study-card">
+                    <div class="case-study-content">
+                        <div class="case-study-info">
+                            <span class="case-category">Financial</span>
+                            <h3 class="case-title">Digital transformation for a healthcare provider</h3>
+                        </div>
+                        <div class="case-study-details">
+                            <p class="case-description">A leading healthcare provider underwent a digital transformation to modernize patient services and streamline internal operations.</p>
+                            <div class="case-result">
+                                <div class="result-label">Less time spent on manual tasks</div>
+                                <div class="result-value">50%</div>
+                            </div>
+                            <a href="#" class="btn btn-secondary">
+                                <span class="btn-text">See detail</span>
+                                <span class="btn-text-hover">See detail</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="case-study-image">
+                        <img src="assets/images/68553509f8f48051c432cf08_case-study-LG-02.webp" alt="Digital transformation for a healthcare provider">
+                    </div>
+                </div>
+                <div class="case-study-card">
+                    <div class="case-study-content">
+                        <div class="case-study-info">
+                            <span class="case-category">Financial</span>
+                            <h3 class="case-title">International expansion for a retail</h3>
+                        </div>
+                        <div class="case-study-details">
+                            <p class="case-description">A European lifestyle retail brand partnered with our team to enter the Middle East and Southeast Asia markets.</p>
+                            <div class="case-result">
+                                <div class="result-label">Cut in operational admin load</div>
+                                <div class="result-value">30%</div>
+                            </div>
+                            <a href="#" class="btn btn-secondary">
+                                <span class="btn-text">See detail</span>
+                                <span class="btn-text-hover">See detail</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="case-study-image">
+                        <img src="assets/images/684bf967b1f4adeb40b1263f_case-study-LG-03.webp" alt="International expansion for a retail">
+                    </div>
+                </div>
+                <div class="case-study-card">
+                    <div class="case-study-content">
+                        <div class="case-study-info">
+                            <span class="case-category">Website Design</span>
+                            <h3 class="case-title">Website for a green energy consulting firm</h3>
+                        </div>
+                        <div class="case-study-details">
+                            <p class="case-description">A green energy consulting firm to design a modern corporate website that showcases its global impact and expertise.</p>
+                            <div class="case-result">
+                                <div class="result-label">Decrease in backend workload</div>
+                                <div class="result-value">37%</div>
+                            </div>
+                            <a href="#" class="btn btn-secondary">
+                                <span class="btn-text">See detail</span>
+                                <span class="btn-text-hover">See detail</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="case-study-image">
+                        <img src="assets/images/68553524070277be23816a67_case-study-LG-04.webp" alt="Website for a green energy consulting firm">
+                    </div>
+                </div>
+            </div>
+            <div class="case-studies-footer">
+                <a href="#" class="btn btn-secondary">
+                    <span class="btn-text">View all case studies</span>
+                    <span class="btn-text-hover">View all case studies</span>
+                </a>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Testimonials Section -->
+    <!-- <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <div class="testimonials-info">
+                    <div class="section-label">Testimonials</div>
+                    <h2 class="section-title">Proven impact, shared experiences</h2>
+                    <p class="section-description">From startups to enterprises, our clients share how our strategic consulting helped them achieve lasting success.</p>
+                    <div class="testimonials-rating">
+                        <img src="assets/icons/6836b2f44d58153c9f94d1e8_rate-star.svg" alt="Star rating" class="rating-star">
+                        <span class="rating-text">450+ reviews</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials-content">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-author">
+                            <span class="author-name">Amanda Lewis</span>
+                            <span class="author-title">Director of Strategy</span>
+                        </div>
+                        <p class="testimonial-preview">Our company was growing fast, but our culture couldn't keep pace.</p>
+                    </div>
+                    <div class="testimonial-results">
+                        <div class="result-item">
+                            <div class="result-number">18%</div>
+                            <div class="result-label">Reduced costs</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-number">50%</div>
+                            <div class="result-label">Boosting productivity</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-video">
+                    <div class="video-controls">
+                        <div class="video-button">
+                            <span class="video-text">Watch review</span>
+                            <img src="assets/icons/6836e2494430f4f3b0c4185d_video-icon.svg" alt="Video icon" class="video-icon">
+                        </div>
+                        <div class="video-play">
+                            <span class="play-text">Watch a review</span>
+                            <img src="assets/icons/6836e2494430f4f3b0c4185d_video-icon.svg" alt="Video icon" class="video-icon">
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-profile">
+                    <div class="profile-image">
+                        <img src="assets/images/6836e5f5a4694c074d2325de_52291f00d7062ab738d0995727ef25e8_Smiling Asian Woman.jpg" alt="Amanda Lewis" class="profile-img">
+                        <div class="profile-info">
+                            <h4 class="profile-name">Amanda Lewis</h4>
+                            <span class="profile-title">Director of Strategy</span>
+                        </div>
+                    </div>
+                    <p class="testimonial-full">Within the first three months, we saw a 35% boost in our sales performance and streamlined several underperforming areas of our operation.</p>
+                </div>
+            </div>
+            <div class="testimonials-cta">
+                <div class="cta-content">
+                    <p class="cta-text">Let's discuss your business goals — schedule your 20-minute consultation now.</p>
+                    <a href="#contact" class="btn btn-primary">
+                        <span class="btn-text">Let's talk</span>
+                        <span class="btn-text-hover">Let's talk</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Blog Section -->
+    <!-- <section id="blog" class="blog">
+        <div class="container">
+            <div class="blog-header">
+                <div class="blog-info">
+                    <div class="section-label">Our blog</div>
+                    <h2 class="section-title">Insights & Ideas</h2>
+                    <p class="section-description">Our blog delivers fresh perspectives on business growth, innovation, leadership, and operational efficiency.</p>
+                </div>
+                <div class="blog-cta">
+                    <a href="#" class="btn btn-secondary">
+                        <span class="btn-text">See all blog</span>
+                        <span class="btn-text-hover">See all blog</span>
+                    </a>
+                </div>
+            </div>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <a href="#" class="blog-link">
+                        <img src="assets/images/6842c86b60c7281d07d47b27_blog-image-01.webp" alt="Why your company needs a strategic roadmap in 2025" class="blog-image">
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-category">Strategy</span>
+                                <span class="blog-date">June 20, 2025</span>
+                            </div>
+                            <h3 class="blog-title">Why your company needs a strategic roadmap in 2025</h3>
+                        </div>
+                        <img src="assets/images/683d2036c018cbe8e6a00518_blog-arrow.svg" alt="Read more" class="blog-arrow">
+                    </a>
+                </article>
+                <article class="blog-card">
+                    <a href="#" class="blog-link">
+                        <img src="assets/images/6842cca2debce9f99ff675c3_blog-image-002.webp" alt="From goals to KPIs: Turning vision into measurable success" class="blog-image">
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-category">Planning</span>
+                                <span class="blog-date">June 20, 2025</span>
+                            </div>
+                            <h3 class="blog-title">From goals to KPIs: Turning vision into measurable success</h3>
+                        </div>
+                        <img src="assets/images/683d2036c018cbe8e6a00518_blog-arrow.svg" alt="Read more" class="blog-arrow">
+                    </a>
+                </article>
+                <article class="blog-card">
+                    <a href="#" class="blog-link">
+                        <img src="assets/images/6842cdf86dab0092b0494e83_blog-image-003.webp" alt="5 Growth strategies every modern business should know" class="blog-image">
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-category">Marketing</span>
+                                <span class="blog-date">June 20, 2025</span>
+                            </div>
+                            <h3 class="blog-title">5 Growth strategies every modern business should know</h3>
+                        </div>
+                        <img src="assets/images/683d2036c018cbe8e6a00518_blog-arrow.svg" alt="Read more" class="blog-arrow">
+                    </a>
+                </article>
+                <article class="blog-card">
+                    <a href="#" class="blog-link">
+                        <img src="assets/images/6842ce1149a8de496b560ce4_blog-image-004.webp" alt="Digital transformation for service-based businesses" class="blog-image">
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-category">Growth</span>
+                                <span class="blog-date">June 20, 2025</span>
+                            </div>
+                            <h3 class="blog-title">Digital transformation for service-based businesses</h3>
+                        </div>
+                        <img src="assets/images/683d2036c018cbe8e6a00518_blog-arrow.svg" alt="Read more" class="blog-arrow">
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- CTA Section -->
+    <!-- <section id="contact" class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2 class="cta-title">Let's build something that moves your business forward</h2>
+                    <div class="cta-experts">
+                        <div class="experts-text">
+                            <span class="experts-label">Talk to our experts</span>
+                            <img src="assets/icons/683d273f534204f62c0f48cb_plus-icon.svg" alt="Plus icon" class="plus-icon">
+                        </div>
+                        <div class="experts-avatars">
+                            <div class="avatar">
+                                <img src="assets/images/683d2d05d00a93e7ae267f3f_e24aa2f05c8041e6c7d2b276720729e6_Stylish Urban Portrait.jpg" alt="Expert 1" class="avatar-img">
+                            </div>
+                            <div class="avatar">
+                                <img src="assets/images/6836e5f5a4694c074d2325de_52291f00d7062ab738d0995727ef25e8_Smiling Asian Woman.jpg" alt="Expert 2" class="avatar-img">
+                            </div>
+                            <div class="avatar">
+                                <img src="assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg" alt="Expert 3" class="avatar-img">
+                            </div>
+                            <div class="avatar">
+                                <img src="assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg" alt="Expert 4" class="avatar-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta-action">
+                    <a href="#" class="btn btn-primary btn-large">
+                        <span class="btn-text">Get started now</span>
+                        <span class="btn-text-hover">Get started now</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <a href="#home" class="footer-logo">
+                            <img src="assets/images/683d93c9574111966c857ce8_footer-logo.svg" alt="Copora Logo">
+                        </a>
+                        <div class="footer-contact">
+                            <h4 class="contact-title">Say hello to us!</h4>
+                            <a href="mailto:hello@example.com" class="contact-email">hello@example.com</a>
+                            <a href="tel:+1234567890" class="contact-phone">+123 456 7890</a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4 class="footer-column-title">Pages</h4>
+                            <div class="footer-links-grid">
+                                <div class="links-group">
+                                    <a href="#home" class="footer-link">Home</a>
+                                    <a href="#" class="footer-link">Home 2</a>
+                                    <a href="#about" class="footer-link">About</a>
+                                    <a href="#" class="footer-link">Service Detail</a>
+                                </div>
+                                <div class="links-group">
+                                    <a href="#case-studies" class="footer-link">Case Studies</a>
+                                    <a href="#blog" class="footer-link">Blog</a>
+                                    <a href="#contact" class="footer-link">Contact</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-column">
+                            <h4 class="footer-column-title">Utility</h4>
+                            <div class="footer-links-grid">
+                                <div class="links-group">
+                                    <a href="#" class="footer-link">Style Guide</a>
+                                    <a href="#" class="footer-link">Instructions</a>
+                                    <a href="#" class="footer-link">Licenses</a>
+                                </div>
+                                <div class="links-group">
+                                    <a href="#" class="footer-link">Changelog</a>
+                                    <a href="#" class="footer-link">Error 404</a>
+                                    <a href="#" class="footer-link">Password Protected</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-newsletter">
+                        <h4 class="newsletter-title">Stay informed.</h4>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter email address" class="newsletter-input" required>
+                            <button type="submit" class="newsletter-button">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-recent-works">
+                    <h4 class="recent-works-title">Recent works</h4>
+                    <div class="recent-works-grid">
+                        <a href="#" class="recent-work-item">
+                            <img src="assets/images/6842de3a16b95b45bdf1990d_case-study-01.webp" alt="Recent work 1" class="recent-work-image">
+                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="recent-work-arrow">
+                        </a>
+                        <a href="#" class="recent-work-item">
+                            <img src="assets/images/6846697030a081054c45c913_case-study-02.webp" alt="Recent work 2" class="recent-work-image">
+                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="recent-work-arrow">
+                        </a>
+                        <a href="#" class="recent-work-item">
+                            <img src="assets/images/684673370f4f0c823cd9e2e8_case-study-03.webp" alt="Recent work 3" class="recent-work-image">
+                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="recent-work-arrow">
+                        </a>
+                        <a href="#" class="recent-work-item">
+                            <img src="assets/images/6852a45fec5c928ff53c7150_case-study-04.webp" alt="Recent work 4" class="recent-work-image">
+                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="recent-work-arrow">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/" class="social-link">
+                        <img src="assets/icons/682eb96f62a81d664ea5253b_99aeb9cadc4027f13a9f8c64a73729ed_facebook.svg" alt="Facebook" class="social-icon">
+                    </a>
+                    <a href="https://www.instagram.com/" class="social-link">
+                        <img src="assets/icons/682eb96f62a81d664ea524cf_79d504e95605676dcdc62eb376426c90_instagram.svg" alt="Instagram" class="social-icon">
+                    </a>
+                    <a href="https://in.linkedin.com/" class="social-link">
+                        <img src="assets/icons/682eb96f62a81d664ea524df_f6064f30ebfbad78aefda8115a908970_twitter.svg" alt="LinkedIn" class="social-icon">
+                    </a>
+                </div>
+                <div class="footer-credits">
+                    <p>Designed by <a href="https://webestica.com/" class="credit-link">Webestica</a>, Powered by <a href="https://webflow.com/" class="credit-link">Webflow</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
