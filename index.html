@@ -551,18 +551,44 @@
             let DPR = Math.max(1, window.devicePixelRatio || 1);
             let width, height, currentScale;
 
+            // function resizeCanvas() {
+            //     DPR = Math.max(1, window.devicePixelRatio || 1);
+            //     canvas.width = Math.round(window.innerWidth * DPR);
+            //     canvas.height = Math.round(window.innerHeight * DPR);
+            //     canvas.style.width = window.innerWidth + 'px';
+            //     canvas.style.height = window.innerHeight + 'px';
+            //     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+            //     width = canvas.width / DPR;
+            //     height = canvas.height / DPR;
+            //     currentScale = Math.min(width, height) / 2.2;
+            //     projection.translate([width / 2, height / 2]).scale(currentScale);
+            // }
+
             function resizeCanvas() {
-                DPR = Math.max(1, window.devicePixelRatio || 1);
-                canvas.width = Math.round(window.innerWidth * DPR);
-                canvas.height = Math.round(window.innerHeight * DPR);
-                canvas.style.width = window.innerWidth + 'px';
-                canvas.style.height = window.innerHeight + 'px';
-                ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-                width = canvas.width / DPR;
-                height = canvas.height / DPR;
-                currentScale = Math.min(width, height) / 2.2;
-                projection.translate([width / 2, height / 2]).scale(currentScale);
-            }
+  DPR = Math.max(1, window.devicePixelRatio || 1);
+
+  // Use the #globe container size instead of window
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const containerWidth = rect.width;
+  const containerHeight = rect.height;
+
+  canvas.width = Math.round(containerWidth * DPR);
+  canvas.height = Math.round(containerHeight * DPR);
+  canvas.style.width = containerWidth + "px";
+  canvas.style.height = containerHeight + "px";
+
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+  width = containerWidth;
+  height = containerHeight;
+
+  // Scale relative to container
+  currentScale = Math.min(width, height) / 2.2;
+
+  projection
+    .translate([width / 2, height / 2])
+    .scale(currentScale);
+}
 
             const projection = d3.geoOrthographic().scale(200).translate([window.innerWidth / 2, window.innerHeight / 2]);
             const path = d3.geoPath(projection).context(ctx);
@@ -691,12 +717,12 @@
                 [0, 1], // Delhi to Nairobi
                 [1, 4], // Nairobi to Dubai  
                 [4, 2], // Dubai to Kuala Lumpur
-                [2, 3], // Kuala Lumpur to Washington DC
+                // [2, 3], // Kuala Lumpur to Washington DC
                 [3, 0], // Washington DC to Delhi
                 [0, 4], // Delhi to Dubai (direct)
                 [2, 4], // Kuala Lumpur to Dubai (direct)
                 [3, 1], // Washington DC to Nairobi (direct)
-                [3, 2], // Washington DC to Kuala Lumpur (direct)
+                // [3, 2], // Washington DC to Kuala Lumpur (direct)
             ];
 
             const colors = [
@@ -812,16 +838,16 @@
                 ctx.beginPath();
                 path({ type: 'Sphere' });
                 const gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, currentScale);
-                gradient.addColorStop(0, "rgba(240, 248, 255, 0.9)");
-                gradient.addColorStop(0.7, "rgba(200, 230, 255, 0.7)");
-                gradient.addColorStop(1, "rgba(150, 200, 240, 0.5)");
+                gradient.addColorStop(0, "rgba(150, 200, 240)");
+                gradient.addColorStop(0.7, "rgba(150, 200, 240)");
+                gradient.addColorStop(1, "rgba(150, 200, 240)");
                 ctx.fillStyle = gradient;
                 ctx.fill();
 
                 // Globe outline with stronger effect for white background
                 ctx.shadowBlur = 25;
-                ctx.shadowColor = "rgba(0, 100, 200, 0.4)";
-                ctx.strokeStyle = "rgba(0, 100, 200, 0.8)";
+                ctx.shadowColor = "rgba(0, 100, 200)";
+                ctx.strokeStyle = "rgba(0, 100, 200)";
                 ctx.lineWidth = 2.5;
                 ctx.stroke();
                 ctx.shadowBlur = 0;
@@ -846,7 +872,7 @@
                             path(c);
                             ctx.globalAlpha = countryVisibility.fade * 0.9;
                             ctx.setLineDash([1, 2]);
-                            ctx.strokeStyle = "rgba(0, 50, 100, 0.6)";
+                            ctx.strokeStyle = "rgba(0, 50, 100)";
                             ctx.lineWidth = 0.8;
                             ctx.stroke();
                             ctx.setLineDash([]);
