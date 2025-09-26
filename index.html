@@ -531,7 +531,7 @@
 
           <!-- Globe Embed (above hero) -->
           <section class="globe-embed">
-              <!-- <div class="controls">
+            <!-- <div class="controls">
         <button class="control-btn" id="toggleRotation">Pause Rotation</button>
         <button class="control-btn" id="resetView">Reset View</button>
     </div> -->
@@ -542,73 +542,67 @@
           <script src="https://d3js.org/d3.v7.min.js"></script>
           <script src="https://unpkg.com/topojson-client@3"></script>
           <script>
-        (async function() {
-            const canvas = document.getElementById('globe');
-            const ctx = canvas.getContext('2d');
-            // const toggleRotationBtn = document.getElementById('toggleRotation');
-            // const resetViewBtn = document.getElementById('resetView');
-            
-            let DPR = Math.max(1, window.devicePixelRatio || 1);
-            let width, height, currentScale;
+            (async function () {
+              const canvas = document.getElementById("globe");
+              const ctx = canvas.getContext("2d");
 
-            // function resizeCanvas() {
-            //     DPR = Math.max(1, window.devicePixelRatio || 1);
-            //     canvas.width = Math.round(window.innerWidth * DPR);
-            //     canvas.height = Math.round(window.innerHeight * DPR);
-            //     canvas.style.width = window.innerWidth + 'px';
-            //     canvas.style.height = window.innerHeight + 'px';
-            //     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-            //     width = canvas.width / DPR;
-            //     height = canvas.height / DPR;
-            //     currentScale = Math.min(width, height) / 2.2;
-            //     projection.translate([width / 2, height / 2]).scale(currentScale);
-            // }
+              let DPR = Math.max(1, window.devicePixelRatio || 1);
+              let width, height, currentScale;
 
-            function resizeCanvas() {
-  DPR = Math.max(1, window.devicePixelRatio || 1);
 
-  // Use the #globe container size instead of window
-  const rect = canvas.parentElement.getBoundingClientRect();
-  const containerWidth = rect.width;
-  const containerHeight = rect.height;
+              function resizeCanvas() {
+                DPR = Math.max(1, window.devicePixelRatio || 1);
 
-  canvas.width = Math.round(containerWidth * DPR);
-  canvas.height = Math.round(containerHeight * DPR);
-  canvas.style.width = containerWidth + "px";
-  canvas.style.height = containerHeight + "px";
+                // Use the #globe container size instead of window
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const containerWidth = rect.width;
+                const containerHeight = rect.height;
 
-  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+                canvas.width = Math.round(containerWidth * DPR);
+                canvas.height = Math.round(containerHeight * DPR);
+                canvas.style.width = containerWidth + "px";
+                canvas.style.height = containerHeight + "px";
 
-  width = containerWidth;
-  height = containerHeight;
+                ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
-  // Scale relative to container
-  currentScale = Math.min(width, height) / 2.2;
+                width = containerWidth;
+                height = containerHeight;
 
-  projection
-    .translate([width / 2, height / 2])
-    .scale(currentScale);
-}
+                // Scale relative to container
+                currentScale = Math.min(width, height) / 2.2;
 
-            const projection = d3.geoOrthographic().scale(200).translate([window.innerWidth / 2, window.innerHeight / 2]);
-            const path = d3.geoPath(projection).context(ctx);
+                projection
+                  .translate([width / 2, height / 2])
+                  .scale(currentScale);
+              }
 
-            // Load world data
-            let world, countries;
-            try {
-                world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
-                countries = topojson.feature(world, world.objects.countries).features;
-            } catch (error) {
-                console.error('Failed to load globe data:', error);
+              const projection = d3
+                .geoOrthographic()
+                .scale(200)
+                .translate([window.innerWidth / 2, window.innerHeight / 2]);
+              const path = d3.geoPath(projection).context(ctx);
+
+              // Load world data
+              let world, countries;
+              try {
+                world = await d3.json(
+                  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
+                );
+                countries = topojson.feature(
+                  world,
+                  world.objects.countries
+                ).features;
+              } catch (error) {
+                console.error("Failed to load globe data:", error);
                 countries = [];
-            }
+              }
 
-            // Enhanced dotted pattern for white background
-            function makeDotPattern() {
-                const off = document.createElement('canvas');
+              // Enhanced dotted pattern for white background
+              function makeDotPattern() {
+                const off = document.createElement("canvas");
                 off.width = 12 * DPR;
                 off.height = 12 * DPR;
-                const octx = off.getContext('2d');
+                const octx = off.getContext("2d");
                 octx.scale(DPR, DPR);
 
                 // Create a more sophisticated dot pattern with darker colors for white background
@@ -622,32 +616,35 @@
                 octx.fillStyle = "rgba(50, 50, 100, 0.2)";
                 octx.fill();
 
-                return ctx.createPattern(off, 'repeat');
-            }
-            const dotPattern = makeDotPattern();
+                return ctx.createPattern(off, "repeat");
+              }
+              const dotPattern = makeDotPattern();
 
-            // Enhanced rotation & zoom
-            let rotation = [0, 0], lastMouse = null, isDragging = false;
-            let rotationVelocity = [0, 0];
-            let autoRotate = true;
+              // Enhanced rotation & zoom
+              let rotation = [0, 0],
+                lastMouse = null,
+                isDragging = false;
+              let rotationVelocity = [0, 0];
+              let autoRotate = true;
 
-            function clampScale(s) {
+              function clampScale(s) {
                 return Math.max(60, Math.min(s, Math.min(width, height) * 4));
-            }
+              }
 
-            canvas.addEventListener('mousedown', e => {
+              canvas.addEventListener("mousedown", (e) => {
                 isDragging = true;
                 autoRotate = false;
                 // toggleRotationBtn.textContent = 'Start Rotation';
                 lastMouse = [e.clientX, e.clientY];
                 rotationVelocity = [0, 0];
-                window.addEventListener('mousemove', move);
-                window.addEventListener('mouseup', up);
-            });
+                window.addEventListener("mousemove", move);
+                window.addEventListener("mouseup", up);
+              });
 
-            function move(e) {
+              function move(e) {
                 if (!isDragging) return;
-                const dx = e.clientX - lastMouse[0], dy = e.clientY - lastMouse[1];
+                const dx = e.clientX - lastMouse[0],
+                  dy = e.clientY - lastMouse[1];
                 rotationVelocity[0] = dx * 0.5;
                 rotationVelocity[1] = -dy * 0.5;
                 lastMouse = [e.clientX, e.clientY];
@@ -655,67 +652,55 @@
                 rotation[1] -= dy * 0.5;
                 rotation[1] = Math.max(-90, Math.min(90, rotation[1]));
                 projection.rotate([rotation[0], rotation[1], 0]);
-            }
+              }
 
-            function up() {
+              function up() {
                 isDragging = false;
                 setTimeout(() => {
-                    if (!isDragging) {
-                        autoRotate = true;
-                        // toggleRotationBtn.textContent = 'Pause Rotation';
-                    }
+                  if (!isDragging) {
+                    autoRotate = true;
+                    // toggleRotationBtn.textContent = 'Pause Rotation';
+                  }
                 }, 3000);
-                window.removeEventListener('mousemove', move);
-                window.removeEventListener('mouseup', up);
-            }
+                window.removeEventListener("mousemove", move);
+                window.removeEventListener("mouseup", up);
+              }
 
-            canvas.addEventListener('wheel', e => {
-                e.preventDefault();
-                const factor = Math.exp(-e.deltaY * 0.001);
-                currentScale = clampScale(currentScale * factor);
-                projection.scale(currentScale);
-                autoRotate = false;
-                // toggleRotationBtn.textContent = 'Start Rotation';
-                setTimeout(() => {
+              canvas.addEventListener(
+                "wheel",
+                (e) => {
+                  e.preventDefault();
+                  const factor = Math.exp(-e.deltaY * 0.001);
+                  currentScale = clampScale(currentScale * factor);
+                  projection.scale(currentScale);
+                  autoRotate = false;
+                  // toggleRotationBtn.textContent = 'Start Rotation';
+                  setTimeout(() => {
                     if (!isDragging) {
-                        autoRotate = true;
-                        // toggleRotationBtn.textContent = 'Pause Rotation';
+                      autoRotate = true;
+                      // toggleRotationBtn.textContent = 'Pause Rotation';
                     }
-                }, 2000);
-            }, { passive: false });
+                  }, 2000);
+                },
+                { passive: false }
+              );
 
-            // Toggle auto-rotation
-            // toggleRotationBtn.addEventListener('click', () => {
-            //     autoRotate = !autoRotate;
-            //     toggleRotationBtn.textContent = autoRotate ? 'Pause Rotation' : 'Start Rotation';
-            // });
+              window.addEventListener("resize", resizeCanvas);
+              resizeCanvas();
 
-            // Reset view
-            // resetViewBtn.addEventListener('click', () => {
-            //     rotation = [0, 0];
-            //     rotationVelocity = [0, 0];
-            //     currentScale = Math.min(width, height) / 2.2;
-            //     projection.rotate([0, 0, 0]).scale(currentScale);
-            //     autoRotate = true;
-            //     // toggleRotationBtn.textContent = 'Pause Rotation';
-            // });
+              // Enhanced airline routes with more realistic coordinates
+              const places = [
+                { name: "Bangalore, India", coord: [77.5946, 12.9716] },
+                { name: "Nairobi, Kenya", coord: [36.8219, -1.2921] },
+                { name: "Kuala Lumpur, Malaysia", coord: [101.6869, 3.139] },
+                { name: "Washington DC, USA", coord: [-77.0369, 38.9072] },
+                { name: "Dubai, UAE", coord: [55.2708, 25.2048] },
+              ];
 
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            // Enhanced airline routes with more realistic coordinates
-            const places = [
-                { name: 'Bangalore, India', coord: [77.5946, 12.9716] },
-                { name: 'Nairobi, Kenya', coord: [36.8219, -1.2921] },
-                { name: 'Kuala Lumpur, Malaysia', coord: [101.6869, 3.1390] },
-                { name: 'Washington DC, USA', coord: [-77.0369, 38.9072] },
-                { name: 'Dubai, UAE', coord: [55.2708, 25.2048] },
-            ];
-
-            // Create more interesting route connections
-            const routeConnections = [
+              // Create more interesting route connections
+              const routeConnections = [
                 [0, 1], // Delhi to Nairobi
-                [1, 4], // Nairobi to Dubai  
+                [1, 4], // Nairobi to Dubai
                 [4, 2], // Dubai to Kuala Lumpur
                 // [2, 3], // Kuala Lumpur to Washington DC
                 [3, 0], // Washington DC to Delhi
@@ -723,85 +708,108 @@
                 [2, 4], // Kuala Lumpur to Dubai (direct)
                 [3, 1], // Washington DC to Nairobi (direct)
                 // [3, 2], // Washington DC to Kuala Lumpur (direct)
-            ];
+              ];
 
-            const colors = [
-                "#e74c3c", "#3498db", "#2ecc71", "#f39c12",
-                "#9b59b6", "#1abc9c", "#d35400", "#34495e",
-                "#e67e22", "#27ae60", "#8e44ad", "#c0392b"
-            ];
+              const colors = [
+                "#e74c3c",
+                "#3498db",
+                "#2ecc71",
+                "#f39c12",
+                "#9b59b6",
+                "#1abc9c",
+                "#d35400",
+                "#34495e",
+                "#e67e22",
+                "#27ae60",
+                "#8e44ad",
+                "#c0392b",
+              ];
 
-            // Function to create proper great-circle arcs
-            function createGreatCircleArc(from, to) {
+              // Function to create proper great-circle arcs
+              function createGreatCircleArc(from, to, altitude = 0.15) {
                 const fromCoord = from.coord;
                 const toCoord = to.coord;
-                
+
                 // Convert coordinates to radians
-                const λ1 = fromCoord[0] * Math.PI / 180;
-                const φ1 = fromCoord[1] * Math.PI / 180;
-                const λ2 = toCoord[0] * Math.PI / 180;
-                const φ2 = toCoord[1] * Math.PI / 180;
-                
-                // Calculate the great circle intermediate points
+                const λ1 = (fromCoord[0] * Math.PI) / 180;
+                const φ1 = (fromCoord[1] * Math.PI) / 180;
+                const λ2 = (toCoord[0] * Math.PI) / 180;
+                const φ2 = (toCoord[1] * Math.PI) / 180;
+
                 const arcPoints = [];
                 const steps = 50;
-                
-                for (let i = 0; i <= steps; i++) {
-                    const t = i / steps;
-                    
-                    // Spherical interpolation (slerp)
-                    const Δλ = λ2 - λ1;
-                    const Δφ = φ2 - φ1;
-                    
-                    // Calculate angular distance
-                    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-                             Math.cos(φ1) * Math.cos(φ2) *
-                             Math.sin(Δλ/2) * Math.sin(Δλ/2);
-                    const δ = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-                    
-                    if (δ === 0) {
-                        arcPoints.push([fromCoord[0], fromCoord[1]]);
-                        continue;
-                    }
-                    
-                    const A = Math.sin((1-t)*δ) / Math.sin(δ);
-                    const B = Math.sin(t*δ) / Math.sin(δ);
-                    
-                    const x = A * Math.cos(φ1) * Math.cos(λ1) + B * Math.cos(φ2) * Math.cos(λ2);
-                    const y = A * Math.cos(φ1) * Math.sin(λ1) + B * Math.cos(φ2) * Math.sin(λ2);
-                    const z = A * Math.sin(φ1) + B * Math.sin(φ2);
-                    
-                    const φ = Math.atan2(z, Math.sqrt(x*x + y*y));
-                    const λ = Math.atan2(y, x);
-                    
-                    arcPoints.push([λ * 180 / Math.PI, φ * 180 / Math.PI]);
-                }
-                
-                return arcPoints;
-            }
 
-            const routes = routeConnections.map((conn, idx) => {
+                for (let i = 0; i <= steps; i++) {
+                  const t = i / steps;
+
+                  const Δλ = λ2 - λ1;
+                  const Δφ = φ2 - φ1;
+
+                  // Haversine angular distance
+                  const a =
+                    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                    Math.cos(φ1) *
+                      Math.cos(φ2) *
+                      Math.sin(Δλ / 2) *
+                      Math.sin(Δλ / 2);
+                  const δ = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+                  if (δ === 0) {
+                    arcPoints.push([fromCoord[0], fromCoord[1]]);
+                    continue;
+                  }
+
+                  const A = Math.sin((1 - t) * δ) / Math.sin(δ);
+                  const B = Math.sin(t * δ) / Math.sin(δ);
+
+                  let x =
+                    A * Math.cos(φ1) * Math.cos(λ1) +
+                    B * Math.cos(φ2) * Math.cos(λ2);
+                  let y =
+                    A * Math.cos(φ1) * Math.sin(λ1) +
+                    B * Math.cos(φ2) * Math.sin(λ2);
+                  let z = A * Math.sin(φ1) + B * Math.sin(φ2);
+
+                  // 🔑 Push outward: scale vector by (1 + altitude * curve)
+                  // Curve peaks at t=0.5, goes back to 1 at endpoints
+                  const curve = Math.sin(Math.PI * t);
+                  const scale = 1 + altitude * curve;
+
+                  x *= scale;
+                  y *= scale;
+                  z *= scale;
+
+                  const φ = Math.atan2(z, Math.sqrt(x * x + y * y));
+                  const λ = Math.atan2(y, x);
+
+                  arcPoints.push([(λ * 180) / Math.PI, (φ * 180) / Math.PI]);
+                }
+
+                return arcPoints;
+              }
+
+              const routes = routeConnections.map((conn, idx) => {
                 const from = places[conn[0]];
                 const to = places[conn[1]];
-                const arcPoints = createGreatCircleArc(from, to);
-                
-                return {
-                    from,
-                    to,
-                    arcPoints,
-                    color: colors[idx % colors.length],
-                    offset: idx * 0.4,
-                    phaseOffset: Math.random() * Math.PI * 2,
-                    speed: 0.3 + Math.random() * 0.4,
-                    intensity: 0.8 + Math.random() * 0.4
-                };
-            });
+                const arcPoints = createGreatCircleArc(from, to,0.5);
 
-            // Enhanced visibility checking
-            function getVisibility([lon, lat]) {
+                return {
+                  from,
+                  to,
+                  arcPoints,
+                  color: colors[idx % colors.length],
+                  offset: idx * 0.4,
+                  phaseOffset: Math.random() * Math.PI * 2,
+                  speed: 0.3 + Math.random() * 0.4,
+                  intensity: 0.8 + Math.random() * 0.4,
+                };
+              });
+
+              // Enhanced visibility checking
+              function getVisibility([lon, lat]) {
                 const rot = projection.rotate();
-                const λ = (lon + rot[0]) * Math.PI / 180;
-                const φ = (lat + rot[1]) * Math.PI / 180;
+                const λ = ((lon + rot[0]) * Math.PI) / 180;
+                const φ = ((lat + rot[1]) * Math.PI) / 180;
 
                 // Calculate the dot product to determine visibility
                 const cosλ = Math.cos(λ);
@@ -809,38 +817,45 @@
                 const visibility = Math.cos(φ) * Math.cos(λ);
 
                 return {
-                    visible: visibility > 0.1,
-                    fade: Math.max(0, Math.min(1, (visibility + 0.3) * 1.5))
+                  visible: visibility > 0.1,
+                  fade: Math.max(0, Math.min(1, (visibility + 0.3) * 1.5)),
                 };
-            }
+              }
 
-            // Enhanced drawing with dynamic effects for white background
-            function draw(time) {
+              // Enhanced drawing with dynamic effects for white background
+              function draw(time) {
                 ctx.clearRect(0, 0, width, height);
 
                 // Auto-rotation when not being manipulated
                 if (autoRotate && !isDragging) {
-                    rotation[0] += 0.1;
-                    projection.rotate([rotation[0], rotation[1], 0]);
+                  rotation[0] += 0.1;
+                  projection.rotate([rotation[0], rotation[1], 0]);
                 }
 
                 // Apply momentum when dragging stops
                 if (!isDragging && !autoRotate) {
-                    rotationVelocity[0] *= 0.95;
-                    rotationVelocity[1] *= 0.95;
-                    rotation[0] += rotationVelocity[0] * 0.1;
-                    rotation[1] += rotationVelocity[1] * 0.1;
-                    rotation[1] = Math.max(-90, Math.min(90, rotation[1]));
-                    projection.rotate([rotation[0], rotation[1], 0]);
+                  rotationVelocity[0] *= 0.95;
+                  rotationVelocity[1] *= 0.95;
+                  rotation[0] += rotationVelocity[0] * 0.1;
+                  rotation[1] += rotationVelocity[1] * 0.1;
+                  rotation[1] = Math.max(-90, Math.min(90, rotation[1]));
+                  projection.rotate([rotation[0], rotation[1], 0]);
                 }
 
                 // Enhanced globe background for white background
                 ctx.beginPath();
-                path({ type: 'Sphere' });
-                const gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, currentScale);
-                gradient.addColorStop(0, "rgba(150, 200, 240)");
+                path({ type: "Sphere" });
+                const gradient = ctx.createRadialGradient(
+                  width / 2,
+                  height / 2,
+                  0,
+                  width / 2,
+                  height / 2,
+                  currentScale
+                );
+                gradient.addColorStop(0, "#0c8ced");
                 gradient.addColorStop(0.7, "rgba(150, 200, 240)");
-                gradient.addColorStop(1, "rgba(150, 200, 240)");
+                gradient.addColorStop(1, "#0c8ced");
                 ctx.fillStyle = gradient;
                 ctx.fill();
 
@@ -854,213 +869,244 @@
 
                 // Enhanced countries rendering
                 if (countries.length > 0) {
-                    countries.forEach(c => {
-                        const countryVisibility = getVisibility(d3.geoCentroid(c));
-                        if (countryVisibility.visible) {
-                            // Country fill with pattern
-                            ctx.save();
-                            ctx.globalAlpha = countryVisibility.fade * 0.7;
-                            ctx.beginPath();
-                            path(c);
-                            ctx.clip();
-                            ctx.fillStyle = dotPattern;
-                            ctx.fillRect(0, 0, width, height);
-                            ctx.restore();
+                  countries.forEach((c) => {
+                    const countryVisibility = getVisibility(d3.geoCentroid(c));
+                    if (countryVisibility.visible) {
+                      // Country fill with pattern
+                      ctx.save();
+                      ctx.globalAlpha = countryVisibility.fade * 0.7;
+                      ctx.beginPath();
+                      path(c);
+                      ctx.clip();
+                      ctx.fillStyle = dotPattern;
+                      ctx.fillRect(0, 0, width, height);
+                      ctx.restore();
 
-                            // Country borders - darker for white background
-                            ctx.beginPath();
-                            path(c);
-                            ctx.globalAlpha = countryVisibility.fade * 0.9;
-                            ctx.setLineDash([1, 2]);
-                            ctx.strokeStyle = "rgba(0, 50, 100)";
-                            ctx.lineWidth = 0.8;
-                            ctx.stroke();
-                            ctx.setLineDash([]);
-                            ctx.globalAlpha = 1;
-                        }
-                    });
+                      // Country borders - darker for white background
+                      ctx.beginPath();
+                      path(c);
+                      ctx.globalAlpha = countryVisibility.fade * 0.9;
+                      ctx.setLineDash([1, 2]);
+                      ctx.strokeStyle = "rgba(0, 50, 100)";
+                      ctx.lineWidth = 0.8;
+                      ctx.stroke();
+                      ctx.setLineDash([]);
+                      ctx.globalAlpha = 1;
+                    }
+                  });
                 }
 
                 const now = (time || 0) * 0.001;
 
                 // Enhanced route animation with better visibility on white background
                 routes.forEach((rt, routeIdx) => {
-                    const routePhase = now * rt.speed + rt.phaseOffset;
+                  const routePhase = now * rt.speed + rt.phaseOffset;
 
-                    // Dynamic visibility based on route endpoints
-                    const fromVis = getVisibility(rt.from.coord);
-                    const toVis = getVisibility(rt.to.coord);
-                    const routeVisibility = Math.max(fromVis.fade, toVis.fade) * 0.8;
+                  // Dynamic visibility based on route endpoints
+                  const fromVis = getVisibility(rt.from.coord);
+                  const toVis = getVisibility(rt.to.coord);
+                  const routeVisibility =
+                    Math.max(fromVis.fade, toVis.fade) * 0.8;
 
-                    // Skip if route is completely hidden
-                    if (routeVisibility < 0.1) return;
+                  // Skip if route is completely hidden
+                  if (routeVisibility < 0.1) return;
 
-                    // Create route segments from arc points
-                    const routePoints = [];
-                    let visibleSegments = [];
+                  // Create route segments from arc points
+                  const routePoints = [];
+                  let visibleSegments = [];
 
-                    for (let i = 0; i < rt.arcPoints.length; i++) {
-                        const coord = rt.arcPoints[i];
-                        const vis = getVisibility(coord);
-                        const screenPoint = projection(coord);
+                  for (let i = 0; i < rt.arcPoints.length; i++) {
+                    const coord = rt.arcPoints[i];
+                    const vis = getVisibility(coord);
+                    const screenPoint = projection(coord);
 
-                        routePoints.push({
-                            coord,
-                            screen: screenPoint,
-                            visible: vis.visible,
-                            fade: vis.fade
-                        });
+                    routePoints.push({
+                      coord,
+                      screen: screenPoint,
+                      visible: vis.visible,
+                      fade: vis.fade,
+                    });
+                  }
+
+                  // Group visible segments
+                  let currentSegment = [];
+                  routePoints.forEach((point, i) => {
+                    if (point.visible && point.fade > 0.2) {
+                      currentSegment.push(point);
+                    } else {
+                      if (currentSegment.length > 1) {
+                        visibleSegments.push([...currentSegment]);
+                      }
+                      currentSegment = [];
+                    }
+                  });
+                  if (currentSegment.length > 1) {
+                    visibleSegments.push(currentSegment);
+                  }
+
+                  // Animated visibility with pulsing effect
+                  const pulsePhase =
+                    Math.sin(routePhase * 2 + routeIdx) * 0.5 + 0.5;
+                  const visibilityPulse =
+                    Math.sin(routePhase * 1.5) * 0.3 + 0.7;
+                  const shouldShow =
+                    Math.sin(routePhase * 0.8 + routeIdx) > -0.3;
+
+                  if (!shouldShow) return;
+
+                  // Draw visible route segments
+                  visibleSegments.forEach((segment) => {
+                    if (segment.length < 2) return;
+
+                    // Draw trail effect
+                    const trailCount = 4;
+                    for (let trail = 0; trail < trailCount; trail++) {
+                      const trailOffset = (routePhase + trail * 0.25) % 1;
+                      const trailAlpha =
+                        (1 - trail / trailCount) *
+                        routeVisibility *
+                        visibilityPulse;
+
+                      ctx.beginPath();
+                      ctx.moveTo(segment[0].screen[0], segment[0].screen[1]);
+
+                      for (let i = 1; i < segment.length; i++) {
+                        ctx.lineTo(segment[i].screen[0], segment[i].screen[1]);
+                      }
+
+                      ctx.globalAlpha = trailAlpha * 0.8;
+                      ctx.strokeStyle = rt.color;
+                      ctx.lineWidth = 3 - trail * 0.4;
+                      ctx.shadowBlur = 10;
+                      ctx.shadowColor = rt.color;
+                      ctx.stroke();
+                      ctx.shadowBlur = 0;
                     }
 
-                    // Group visible segments
-                    let currentSegment = [];
-                    routePoints.forEach((point, i) => {
-                        if (point.visible && point.fade > 0.2) {
-                            currentSegment.push(point);
-                        } else {
-                            if (currentSegment.length > 1) {
-                                visibleSegments.push([...currentSegment]);
-                            }
-                            currentSegment = [];
-                        }
-                    });
-                    if (currentSegment.length > 1) {
-                        visibleSegments.push(currentSegment);
+                    // Animated particles along the route
+                    const particleCount = 3;
+                    for (let p = 0; p < particleCount; p++) {
+                      const particleOffset = (routePhase * 2 + p * 0.33) % 1;
+                      const particleIndex = Math.floor(
+                        particleOffset * (segment.length - 1)
+                      );
+                      const localT =
+                        (particleOffset * (segment.length - 1)) % 1;
+
+                      if (particleIndex < segment.length - 1) {
+                        const curr = segment[particleIndex];
+                        const next = segment[particleIndex + 1];
+
+                        // Interpolate position
+                        const x =
+                          curr.screen[0] +
+                          (next.screen[0] - curr.screen[0]) * localT;
+                        const y =
+                          curr.screen[1] +
+                          (next.screen[1] - curr.screen[1]) * localT;
+
+                        // Dynamic particle size and brightness
+                        const particlePulse =
+                          Math.sin(routePhase * 4 + p * 2) * 0.3 + 0.7;
+                        const particleSize =
+                          (3.5 + Math.sin(routePhase * 3 + p) * 1.5) *
+                          particlePulse;
+
+                        ctx.save();
+                        ctx.globalAlpha = routeVisibility * particlePulse;
+
+                        // Glowing particle effect
+                        const gradient = ctx.createRadialGradient(
+                          x,
+                          y,
+                          0,
+                          x,
+                          y,
+                          particleSize * 2.5
+                        );
+                        gradient.addColorStop(0, rt.color);
+                        gradient.addColorStop(0.5, rt.color + "a0");
+                        gradient.addColorStop(1, rt.color + "00");
+
+                        ctx.fillStyle = gradient;
+                        ctx.beginPath();
+                        ctx.arc(x, y, particleSize * 2.5, 0, 2 * Math.PI);
+                        ctx.fill();
+
+                        // Core particle
+                        ctx.fillStyle = rt.color;
+                        ctx.beginPath();
+                        ctx.arc(x, y, particleSize * 0.8, 0, 2 * Math.PI);
+                        ctx.fill();
+
+                        ctx.restore();
+                      }
                     }
+                  });
 
-                    // Animated visibility with pulsing effect
-                    const pulsePhase = Math.sin(routePhase * 2 + routeIdx) * 0.5 + 0.5;
-                    const visibilityPulse = Math.sin(routePhase * 1.5) * 0.3 + 0.7;
-                    const shouldShow = Math.sin(routePhase * 0.8 + routeIdx) > -0.3;
-
-                    if (!shouldShow) return;
-
-                    // Draw visible route segments
-                    visibleSegments.forEach(segment => {
-                        if (segment.length < 2) return;
-
-                        // Draw trail effect
-                        const trailCount = 4;
-                        for (let trail = 0; trail < trailCount; trail++) {
-                            const trailOffset = (routePhase + trail * 0.25) % 1;
-                            const trailAlpha = (1 - trail / trailCount) * routeVisibility * visibilityPulse;
-
-                            ctx.beginPath();
-                            ctx.moveTo(segment[0].screen[0], segment[0].screen[1]);
-
-                            for (let i = 1; i < segment.length; i++) {
-                                ctx.lineTo(segment[i].screen[0], segment[i].screen[1]);
-                            }
-
-                            ctx.globalAlpha = trailAlpha * 0.8;
-                            ctx.strokeStyle = rt.color;
-                            ctx.lineWidth = 3 - trail * 0.4;
-                            ctx.shadowBlur = 10;
-                            ctx.shadowColor = rt.color;
-                            ctx.stroke();
-                            ctx.shadowBlur = 0;
-                        }
-
-                        // Animated particles along the route
-                        const particleCount = 3;
-                        for (let p = 0; p < particleCount; p++) {
-                            const particleOffset = (routePhase * 2 + p * 0.33) % 1;
-                            const particleIndex = Math.floor(particleOffset * (segment.length - 1));
-                            const localT = (particleOffset * (segment.length - 1)) % 1;
-
-                            if (particleIndex < segment.length - 1) {
-                                const curr = segment[particleIndex];
-                                const next = segment[particleIndex + 1];
-
-                                // Interpolate position
-                                const x = curr.screen[0] + (next.screen[0] - curr.screen[0]) * localT;
-                                const y = curr.screen[1] + (next.screen[1] - curr.screen[1]) * localT;
-
-                                // Dynamic particle size and brightness
-                                const particlePulse = Math.sin(routePhase * 4 + p * 2) * 0.3 + 0.7;
-                                const particleSize = (3.5 + Math.sin(routePhase * 3 + p) * 1.5) * particlePulse;
-
-                                ctx.save();
-                                ctx.globalAlpha = routeVisibility * particlePulse;
-
-                                // Glowing particle effect
-                                const gradient = ctx.createRadialGradient(x, y, 0, x, y, particleSize * 2.5);
-                                gradient.addColorStop(0, rt.color);
-                                gradient.addColorStop(0.5, rt.color + 'a0');
-                                gradient.addColorStop(1, rt.color + '00');
-
-                                ctx.fillStyle = gradient;
-                                ctx.beginPath();
-                                ctx.arc(x, y, particleSize * 2.5, 0, 2 * Math.PI);
-                                ctx.fill();
-
-                                // Core particle
-                                ctx.fillStyle = rt.color;
-                                ctx.beginPath();
-                                ctx.arc(x, y, particleSize * 0.8, 0, 2 * Math.PI);
-                                ctx.fill();
-
-                                ctx.restore();
-                            }
-                        }
-                    });
-
-                    ctx.globalAlpha = 1;
+                  ctx.globalAlpha = 1;
                 });
 
                 // Enhanced city markers for white background
                 places.forEach((place, i) => {
-                    const vis = getVisibility(place.coord);
-                    if (!vis.visible || vis.fade < 0.3) return;
+                  const vis = getVisibility(place.coord);
+                  if (!vis.visible || vis.fade < 0.3) return;
 
-                    const pos = projection(place.coord);
-                    const markerPulse = Math.sin(now * 2 + i) * 0.3 + 0.7;
+                  const pos = projection(place.coord);
+                  const markerPulse = Math.sin(now * 2 + i) * 0.3 + 0.7;
 
-                    ctx.save();
-                    ctx.globalAlpha = vis.fade * markerPulse;
+                  ctx.save();
+                  ctx.globalAlpha = vis.fade * markerPulse;
 
-                    // City glow - stronger for white background
-                    const cityGradient = ctx.createRadialGradient(pos[0], pos[1], 0, pos[0], pos[1], 20);
-                    cityGradient.addColorStop(0, colors[i] + 'ff');
-                    cityGradient.addColorStop(0.2, colors[i] + 'c0');
-                    cityGradient.addColorStop(1, colors[i] + '00');
+                  // City glow - stronger for white background
+                  const cityGradient = ctx.createRadialGradient(
+                    pos[0],
+                    pos[1],
+                    0,
+                    pos[0],
+                    pos[1],
+                    20
+                  );
+                  cityGradient.addColorStop(0, colors[i] + "ff");
+                  cityGradient.addColorStop(0.2, colors[i] + "c0");
+                  cityGradient.addColorStop(1, colors[i] + "00");
 
-                    ctx.fillStyle = cityGradient;
-                    ctx.beginPath();
-                    ctx.arc(pos[0], pos[1], 20, 0, 2 * Math.PI);
-                    ctx.fill();
+                  ctx.fillStyle = cityGradient;
+                  ctx.beginPath();
+                  ctx.arc(pos[0], pos[1], 20, 0, 2 * Math.PI);
+                  ctx.fill();
 
-                    // City marker with outline for better visibility
-                    ctx.fillStyle = colors[i];
-                    ctx.beginPath();
-                    ctx.arc(pos[0], pos[1], 5 * markerPulse, 0, 2 * Math.PI);
-                    ctx.fill();
+                  // City marker with outline for better visibility
+                  ctx.fillStyle = colors[i];
+                  ctx.beginPath();
+                  ctx.arc(pos[0], pos[1], 5 * markerPulse, 0, 2 * Math.PI);
+                  ctx.fill();
 
-                    // Add a subtle outline to the marker
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-                    ctx.lineWidth = 1.5;
-                    ctx.stroke();
+                  // Add a subtle outline to the marker
+                  ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+                  ctx.lineWidth = 1.5;
+                  ctx.stroke();
 
-                    // City name (when zoomed in)
-                    if (currentScale > 150) {
-                        ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-                        ctx.font = 'bold 12px Arial';
-                        ctx.textAlign = 'center';
-                        ctx.fillText(place.name.split(',')[0], pos[0], pos[1] - 25);
-                    }
+                  // City name (when zoomed in)
+                  if (currentScale > 150) {
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.9)";
+                    ctx.font = "bold 12px Arial";
+                    ctx.textAlign = "center";
+                    ctx.fillText(place.name.split(",")[0], pos[0], pos[1] - 25);
+                  }
 
-                    ctx.restore();
+                  ctx.restore();
                 });
-            }
+              }
 
-            function loop(t) {
+              function loop(t) {
                 draw(t);
                 requestAnimationFrame(loop);
-            }
+              }
 
-            loop();
-        })();
-       </script>
+              loop();
+            })();
+          </script>
           <!-- <script>
       const ORANGE = '#ff8a00';
       const OFF_WHITE = '#b3b3b3';
