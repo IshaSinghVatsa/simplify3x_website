@@ -532,216 +532,213 @@
 
           <!-- Globe Embed (above hero) -->
           <section class="globe-embed">
-            <!-- <div class="controls">
-        <button class="control-btn" id="toggleRotation">Pause Rotation</button>
-        <button class="control-btn" id="resetView">Reset View</button>
-    </div> -->
             <div>
               <canvas id="globe"></canvas>
             </div>
           </section>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-     <script>
-        // Global variables
-        let canvas, context, width, height;
-        let projection, path;
-        let world, countries;
-        let rotation = [0, 0];
-        let autoRotate = true;
-        let nodes = [];
-        let connections = [];
-        let animationId;
-        let starPattern = null;
+          <script>
+            // Global variables
+            let canvas, context, width, height;
+            let projection, path;
+            let world, countries;
+            let rotation = [0, 0];
+            let autoRotate = true;
+            let nodes = [];
+            let connections = [];
+            let animationId;
+            let starPattern = null;
 
-        // Network configuration
-        const maxConnections = 10;
-        const places = [
-            { name: "Bangalore, India", coord: [77.5946, 12.9716] },
-            { name: "Nairobi, Kenya", coord: [36.8219, -1.2921] },
-            { name: "Kuala Lumpur, Malaysia", coord: [101.6869, 3.139] },
-            { name: "Washington DC, USA", coord: [-77.0369, 38.9072] },
-            { name: "Dubai, UAE", coord: [55.2708, 25.2048] },
-        ];
+            // Network configuration
+            const maxConnections = 10;
+            const places = [
+              { name: "Bangalore, India", coord: [77.5946, 12.9716] },
+              { name: "Nairobi, Kenya", coord: [36.8219, -1.2921] },
+              { name: "Kuala Lumpur, Malaysia", coord: [101.6869, 3.139] },
+              { name: "Washington DC, USA", coord: [-77.0369, 38.9072] },
+              { name: "Dubai, UAE", coord: [55.2708, 25.2048] },
+            ];
 
-        // Initialize the globe
-        async function init() {
-            setupCanvas();
-            createStarPattern();
-            await loadWorldData();
-            generateNodes();
-            setupInteraction();
-            animate();
-        }
+            // Initialize the globe
+            async function init() {
+              setupCanvas();
+              createStarPattern();
+              await loadWorldData();
+              generateNodes();
+              setupInteraction();
+              animate();
+            }
 
-        function setupCanvas() {
-            canvas = d3.select("#globe").node();
-            context = canvas.getContext("2d");
+            function setupCanvas() {
+              canvas = d3.select("#globe").node();
+              context = canvas.getContext("2d");
 
-            const size = Math.min(window.innerWidth, window.innerHeight) * 0.9;
-            width = height = size;
+              const size =
+                Math.min(window.innerWidth, window.innerHeight) * 0.9;
+              width = height = size;
 
-            canvas.width = width * 1.2 ; // Retina display support
-            canvas.height = height * 1.2;
-            canvas.style.width = width + "px";
-            canvas.style.height = height + "px";
-            context.scale(2, 2);
+              canvas.width = width * 1.2; // Retina display support
+              canvas.height = height * 1.2;
+              canvas.style.width = width + "px";
+              canvas.style.height = height + "px";
+              context.scale(2, 2);
 
-            // Setup D3 projection
-            projection = d3
+              // Setup D3 projection
+              projection = d3
                 .geoOrthographic()
                 .scale(width / 2.2)
                 .translate([width / 2, height / 2]);
 
-            path = d3.geoPath(projection, context);
-        }
+              path = d3.geoPath(projection, context);
+            }
 
-        function createStarPattern() {
-            // Create an offscreen canvas for the star pattern
-            const patternCanvas = document.createElement('canvas');
-            const patternContext = patternCanvas.getContext('2d');
-            patternCanvas.width = 20;
-            patternCanvas.height = 20;
-            
-            // Clear with transparent background
-            patternContext.clearRect(0, 0, 20, 20);
-            
-            // Draw white stars on transparent background
-            patternContext.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            
-            // Draw small stars
-            for (let i = 0; i < 15; i++) {
+            function createStarPattern() {
+              // Create an offscreen canvas for the star pattern
+              const patternCanvas = document.createElement("canvas");
+              const patternContext = patternCanvas.getContext("2d");
+              patternCanvas.width = 20;
+              patternCanvas.height = 20;
+
+              // Clear with transparent backgroun
+              patternContext.clearRect(0, 0, 20, 20);
+
+              // Draw white stars on transparent background
+              patternContext.fillStyle = "rgba(255, 255, 255, 0.6)";
+
+              // Draw small stars
+              for (let i = 0; i < 15; i++) {
                 const x = Math.random() * 20;
                 const y = Math.random() * 20;
                 const size = 0.3 + Math.random() * 0.5;
-                
+
                 patternContext.beginPath();
                 patternContext.arc(x, y, size, 0, Math.PI * 2);
                 patternContext.fill();
-            }
-            
-            // Draw a few larger stars
-            for (let i = 0; i < 3; i++) {
+              }
+
+              // Draw a few larger stars
+              for (let i = 0; i < 3; i++) {
                 const x = Math.random() * 20;
                 const y = Math.random() * 20;
                 const size = 0.8 + Math.random() * 0.7;
-                
+
                 patternContext.beginPath();
                 patternContext.arc(x, y, size, 0, Math.PI * 2);
                 patternContext.fill();
-            }
-            
-            // Create pattern from the canvas
-            starPattern = context.createPattern(patternCanvas, 'repeat');
-        }
+              }
 
-        async function loadWorldData() {
-            try {
+              // Create pattern from the canvas
+              starPattern = context.createPattern(patternCanvas, "repeat");
+            }
+
+            async function loadWorldData() {
+              try {
                 const worldData = await d3.json(
-                    "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
+                  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
                 );
                 world = worldData;
                 countries = topojson.feature(
-                    worldData,
-                    worldData.objects.countries
+                  worldData,
+                  worldData.objects.countries
                 );
-            } catch (error) {
+              } catch (error) {
                 console.log("Using fallback world data");
                 createFallbackWorld();
+              }
             }
-        }
 
-        function createFallbackWorld() {
-            // Create a simple grid pattern for the globe
-            const features = [];
-            for (let lat = -80; lat <= 80; lat += 20) {
+            function createFallbackWorld() {
+              // Create a simple grid pattern for the globe
+              const features = [];
+              for (let lat = -80; lat <= 80; lat += 20) {
                 for (let lng = -180; lng <= 180; lng += 20) {
-                    features.push({
-                        type: "Feature",
-                        geometry: {
-                            type: "Point",
-                            coordinates: [lng, lat],
-                        },
-                    });
+                  features.push({
+                    type: "Feature",
+                    geometry: {
+                      type: "Point",
+                      coordinates: [lng, lat],
+                    },
+                  });
                 }
+              }
+              countries = { type: "FeatureCollection", features };
             }
-            countries = { type: "FeatureCollection", features };
-        }
 
-        function generateNodes() {
-            nodes = [];
-            places.forEach((place, i) => {
+            function generateNodes() {
+              nodes = [];
+              places.forEach((place, i) => {
                 nodes.push({
-                    id: i,
-                    name: place.name,
-                    coordinates: place.coord,
-                    color: `hsl(${i * 72 + 180}, 80%, 70%)`, // Evenly distributed hues
-                    pulse: Math.random() * Math.PI * 2,
+                  id: i,
+                  name: place.name,
+                  coordinates: place.coord,
+                  color: `hsl(${i * 72 + 180}, 80%, 70%)`, // Evenly distributed hues
+                  pulse: Math.random() * Math.PI * 2,
                 });
-            });
-        }
+              });
+            }
 
-        function setupInteraction() {
-            let isMouseDown = false;
-            let mousePos = [0, 0];
+            function setupInteraction() {
+              let isMouseDown = false;
+              let mousePos = [0, 0];
 
-            canvas.addEventListener("mousedown", (e) => {
+              canvas.addEventListener("mousedown", (e) => {
                 isMouseDown = true;
                 autoRotate = false;
                 mousePos = [e.clientX, e.clientY];
-            });
+              });
 
-            canvas.addEventListener("mousemove", (e) => {
+              canvas.addEventListener("mousemove", (e) => {
                 if (isMouseDown) {
-                    const deltaX = e.clientX - mousePos[0];
-                    const deltaY = e.clientY - mousePos[1];
-                    rotation[0] += deltaX * 0.5;
-                    rotation[1] = Math.max(
-                        -90,
-                        Math.min(90, rotation[1] - deltaY * 0.5)
-                    );
-                    mousePos = [e.clientX, e.clientY];
+                  const deltaX = e.clientX - mousePos[0];
+                  const deltaY = e.clientY - mousePos[1];
+                  rotation[0] += deltaX * 0.5;
+                  rotation[1] = Math.max(
+                    -90,
+                    Math.min(90, rotation[1] - deltaY * 0.5)
+                  );
+                  mousePos = [e.clientX, e.clientY];
                 }
-            });
+              });
 
-            canvas.addEventListener("mouseup", () => {
+              canvas.addEventListener("mouseup", () => {
                 isMouseDown = false;
                 setTimeout(() => {
-                    autoRotate = true;
+                  autoRotate = true;
                 }, 3000); // Resume auto-rotate after 3s
-            });
+              });
 
-            canvas.addEventListener("mouseleave", () => {
+              canvas.addEventListener("mouseleave", () => {
                 isMouseDown = false;
-            });
+              });
 
-            // Handle window resize
-            window.addEventListener("resize", () => {
+              // Handle window resize
+              window.addEventListener("resize", () => {
                 setupCanvas();
-            });
+              });
 
-            // Add button event listeners
-            // document.getElementById('toggleRotation').addEventListener('click', function() {
-            //     autoRotate = !autoRotate;
-            //     this.textContent = autoRotate ? 'Pause Rotation' : 'Resume Rotation';
-            // });
+              // Add button event listeners
+              // document.getElementById('toggleRotation').addEventListener('click', function() {
+              //     autoRotate = !autoRotate;
+              //     this.textContent = autoRotate ? 'Pause Rotation' : 'Resume Rotation';
+              // });
 
-            // document.getElementById('addConnection').addEventListener('click', function() {
-            //     createConnection();
-            // });
-        }
+              // document.getElementById('addConnection').addEventListener('click', function() {
+              //     createConnection();
+              // });
+            }
 
-        function createConnection() {
-            if (connections.length >= maxConnections) return;
+            function createConnection() {
+              if (connections.length >= maxConnections) return;
 
-            const source = nodes[Math.floor(Math.random() * nodes.length)];
-            let target;
-            do {
+              const source = nodes[Math.floor(Math.random() * nodes.length)];
+              let target;
+              do {
                 target = nodes[Math.floor(Math.random() * nodes.length)];
-            } while (target === source);
+              } while (target === source);
 
-            const hue = Math.random() * 360;
-            connections.push({
+              const hue = Math.random() * 360;
+              connections.push({
                 source,
                 target,
                 progress: 0,
@@ -750,264 +747,264 @@
                 opacity: 1,
                 lineProgress: 0, // New property for line drawing animation
                 id: Date.now() + Math.random(),
-            });
-        }
-
-        function updateConnections() {
-            // Create new connections randomly
-            if (Math.random() < 0.1 && connections.length < maxConnections) {
-                createConnection();
+              });
             }
 
-            // Update existing connections
-            connections.forEach((conn, index) => {
+            function updateConnections() {
+              // Create new connections randomly
+              if (Math.random() < 0.1 && connections.length < maxConnections) {
+                createConnection();
+              }
+
+              // Update existing connections
+              connections.forEach((conn, index) => {
                 // First phase: draw the line from source to target (line grows smoothly)
                 if (conn.lineProgress < 1) {
-                    conn.lineProgress += conn.speed * 2; // Line draws at steady pace
-                    if (conn.lineProgress > 1) conn.lineProgress = 1;
+                  conn.lineProgress += conn.speed * 2; // Line draws at steady pace
+                  if (conn.lineProgress > 1) conn.lineProgress = 1;
                 }
 
                 // Second phase: move the dot along the line (starts when line is mostly drawn)
                 if (conn.lineProgress > 0.7) {
-                    conn.progress += conn.speed;
+                  conn.progress += conn.speed;
                 }
 
                 // Remove connection when dot reaches the end and line fades
                 if (conn.progress >= 1.2) {
-                    conn.opacity -= 0.015;
-                    if (conn.opacity <= 0) {
-                        connections.splice(index, 1);
-                    }
+                  conn.opacity -= 0.015;
+                  if (conn.opacity <= 0) {
+                    connections.splice(index, 1);
+                  }
                 }
-            });
-        }
-
-        function drawGlobe() {
-            context.clearRect(0, 0, width, height);
-
-            // Auto-rotate (slower)
-            if (autoRotate) {
-                rotation[0] += 0.05;
+              });
             }
 
-            projection.rotate(rotation);
+            function drawGlobe() {
+              context.clearRect(0, 0, width, height);
 
-            // Draw ocean with gradient
-            const gradient = context.createRadialGradient(
+              // Auto-rotate (slower)
+              if (autoRotate) {
+                rotation[0] += 0.05;
+              }
+
+              projection.rotate(rotation);
+
+              // Draw ocean with gradient
+              const gradient = context.createRadialGradient(
                 width / 2,
                 height / 2,
                 0,
                 width / 2,
                 height / 2,
                 width / 2
-            );
-            gradient.addColorStop(0, "#006994");
-            gradient.addColorStop(1, "#003366");
+              );
+              gradient.addColorStop(0, "rgba(0, 105, 148, 0.1)");
+              gradient.addColorStop(1, "rgba(0, 51, 102, 0.2)");
 
-            context.beginPath();
-            path({ type: "Sphere" });
-            context.fillStyle = gradient;
-            context.fill();
+              context.beginPath();
+              path({ type: "Sphere" });
+              context.fillStyle = gradient;
+              context.fill();
 
-            // Draw wireframe grid
-            drawWireframe();
+              // Draw wireframe grid
+              drawWireframe();
 
-            // Draw countries with star pattern (no borders)
-            if (countries) {
+              // Draw countries with star pattern (no borders)
+              if (countries) {
                 context.beginPath();
                 path(countries);
                 context.fillStyle = starPattern;
                 context.fill();
-                
+
                 // No borders drawn - removed border drawing code
+              }
+
+              // Draw nodes
+              drawNodes();
+
+              // Draw connections
+              drawConnections();
             }
 
-            // Draw nodes
-            drawNodes();
-
-            // Draw connections
-            drawConnections();
-        }
-
-        function drawWireframe() {
-            // Draw latitude lines
-            for (let lat = -80; lat <= 80; lat += 20) {
+            function drawWireframe() {
+              // Draw latitude lines
+              for (let lat = -80; lat <= 80; lat += 20) {
                 context.beginPath();
                 const line = d3.geoCircle().center([0, lat]).radius(0.1)();
 
                 // Create longitude line
                 const coords = [];
                 for (let lng = -180; lng <= 180; lng += 5) {
-                    coords.push([lng, lat]);
+                  coords.push([lng, lat]);
                 }
 
                 path({
-                    type: "LineString",
-                    coordinates: coords,
+                  type: "LineString",
+                  coordinates: coords,
                 });
 
                 context.strokeStyle = "rgba(0, 150, 255, 0.2)";
                 context.lineWidth = 0.3;
                 context.stroke();
-            }
+              }
 
-            // Draw longitude lines
-            for (let lng = -180; lng <= 180; lng += 30) {
+              // Draw longitude lines
+              for (let lng = -180; lng <= 180; lng += 30) {
                 context.beginPath();
                 const coords = [];
                 for (let lat = -90; lat <= 90; lat += 5) {
-                    coords.push([lng, lat]);
+                  coords.push([lng, lat]);
                 }
 
                 path({
-                    type: "LineString",
-                    coordinates: coords,
+                  type: "LineString",
+                  coordinates: coords,
                 });
 
                 context.strokeStyle = "rgba(0, 150, 255, 0.2)";
                 context.lineWidth = 0.3;
                 context.stroke();
+              }
             }
-        }
 
-        function drawNodes() {
-            nodes.forEach((node) => {
+            function drawNodes() {
+              nodes.forEach((node) => {
                 const pos = projection(node.coordinates);
                 if (pos && isVisible(node.coordinates)) {
-                    // Pulsing effect
-                    node.pulse += 0.1;
-                    const pulseSize = 2 + Math.sin(node.pulse) * 0.5;
+                  // Pulsing effect
+                  node.pulse += 0.1;
+                  const pulseSize = 2 + Math.sin(node.pulse) * 0.5;
 
-                    // Glow effect
-                    const gradient = context.createRadialGradient(
-                        pos[0],
-                        pos[1],
-                        0,
-                        pos[0],
-                        pos[1],
-                        pulseSize * 3
-                    );
-                    gradient.addColorStop(0, node.color);
-                    gradient.addColorStop(0.3, node.color.replace("70%", "50%"));
-                    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+                  // Glow effect
+                  const gradient = context.createRadialGradient(
+                    pos[0],
+                    pos[1],
+                    0,
+                    pos[0],
+                    pos[1],
+                    pulseSize * 3
+                  );
+                  gradient.addColorStop(0, node.color);
+                  gradient.addColorStop(0.3, node.color.replace("70%", "50%"));
+                  gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
-                    context.beginPath();
-                    context.arc(pos[0], pos[1], pulseSize * 3, 0, 2 * Math.PI);
-                    context.fillStyle = gradient;
-                    context.fill();
+                  context.beginPath();
+                  context.arc(pos[0], pos[1], pulseSize * 3, 0, 2 * Math.PI);
+                  context.fillStyle = gradient;
+                  context.fill();
 
-                    // Core dot with city name on hover
-                    context.beginPath();
-                    context.arc(pos[0], pos[1], pulseSize, 0, 2 * Math.PI);
-                    context.fillStyle = node.color;
-                    context.fill();
+                  // Core dot with city name on hover
+                  context.beginPath();
+                  context.arc(pos[0], pos[1], pulseSize, 0, 2 * Math.PI);
+                  context.fillStyle = node.color;
+                  context.fill();
 
-                    // Draw city name
-                    context.fillStyle = "rgba(255, 255, 255, 0.8)";
-                    context.font = "10px Arial";
-                    context.textAlign = "center";
-                    context.fillText(node.name, pos[0], pos[1] - pulseSize - 8);
+                  // Draw city name
+                  context.fillStyle = "rgba(255, 255, 255, 0.8)";
+                  context.font = "10px Arial";
+                  context.textAlign = "center";
+                  context.fillText(node.name, pos[0], pos[1] - pulseSize - 8);
                 }
-            });
-        }
+              });
+            }
 
-        function drawConnections() {
-            connections.forEach((conn) => {
+            function drawConnections() {
+              connections.forEach((conn) => {
                 const sourcePos = projection(conn.source.coordinates);
                 const targetPos = projection(conn.target.coordinates);
 
                 if (
-                    sourcePos &&
-                    targetPos &&
-                    isVisible(conn.source.coordinates) &&
-                    isVisible(conn.target.coordinates)
+                  sourcePos &&
+                  targetPos &&
+                  isVisible(conn.source.coordinates) &&
+                  isVisible(conn.target.coordinates)
                 ) {
-                    // Draw animated line (grows from source to target)
-                    drawAnimatedArc(
-                        sourcePos,
-                        targetPos,
-                        conn.color,
-                        conn.opacity,
-                        conn.lineProgress
+                  // Draw animated line (grows from source to target)
+                  drawAnimatedArc(
+                    sourcePos,
+                    targetPos,
+                    conn.color,
+                    conn.opacity,
+                    conn.lineProgress
+                  );
+
+                  // Draw moving dot (only when line progress is sufficient and dot hasn't finished)
+                  if (conn.lineProgress > 0.3 && conn.progress <= 1) {
+                    const dotPos = interpolateArc(
+                      sourcePos,
+                      targetPos,
+                      conn.progress
                     );
+                    if (dotPos) {
+                      const gradient = context.createRadialGradient(
+                        dotPos[0],
+                        dotPos[1],
+                        0,
+                        dotPos[0],
+                        dotPos[1],
+                        6
+                      );
+                      gradient.addColorStop(0, conn.color);
+                      gradient.addColorStop(
+                        0.5,
+                        conn.color.replace("60%", "40%")
+                      );
+                      gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
-                    // Draw moving dot (only when line progress is sufficient and dot hasn't finished)
-                    if (conn.lineProgress > 0.3 && conn.progress <= 1) {
-                        const dotPos = interpolateArc(
-                            sourcePos,
-                            targetPos,
-                            conn.progress
-                        );
-                        if (dotPos) {
-                            const gradient = context.createRadialGradient(
-                                dotPos[0],
-                                dotPos[1],
-                                0,
-                                dotPos[0],
-                                dotPos[1],
-                                6
-                            );
-                            gradient.addColorStop(0, conn.color);
-                            gradient.addColorStop(
-                                0.5,
-                                conn.color.replace("60%", "40%")
-                            );
-                            gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+                      context.globalAlpha = conn.opacity;
+                      context.beginPath();
+                      context.arc(dotPos[0], dotPos[1], 4, 0, 2 * Math.PI);
+                      context.fillStyle = gradient;
+                      context.fill();
 
-                            context.globalAlpha = conn.opacity;
-                            context.beginPath();
-                            context.arc(dotPos[0], dotPos[1], 4, 0, 2 * Math.PI);
-                            context.fillStyle = gradient;
-                            context.fill();
-
-                            // Add a bright core
-                            context.beginPath();
-                            context.arc(dotPos[0], dotPos[1], 2, 0, 2 * Math.PI);
-                            context.fillStyle = "white";
-                            context.fill();
-                            context.globalAlpha = 1;
-                        }
+                      // Add a bright core
+                      context.beginPath();
+                      context.arc(dotPos[0], dotPos[1], 2, 0, 2 * Math.PI);
+                      context.fillStyle = "white";
+                      context.fill();
+                      context.globalAlpha = 1;
                     }
+                  }
                 }
-            });
-        }
+              });
+            }
 
-        function drawAnimatedArc(start, end, color, opacity, lineProgress) {
-            const midX = (start[0] + end[0]) / 2;
-            const midY = (start[1] + end[1]) / 2;
-            const distance = Math.sqrt(
+            function drawAnimatedArc(start, end, color, opacity, lineProgress) {
+              const midX = (start[0] + end[0]) / 2;
+              const midY = (start[1] + end[1]) / 2;
+              const distance = Math.sqrt(
                 Math.pow(end[0] - start[0], 2) + Math.pow(end[1] - start[1], 2)
-            );
-            const offset = distance * 0.2;
+              );
+              const offset = distance * 0.2;
 
-            const controlX = midX;
-            const controlY = midY - offset;
+              const controlX = midX;
+              const controlY = midY - offset;
 
-            // Draw the line growing from start point to current progress
-            context.globalAlpha = opacity * 0.8;
+              // Draw the line growing from start point to current progress
+              context.globalAlpha = opacity * 0.8;
 
-            // Create path segments to draw progressively
-            const segments = 50; // Number of segments for smooth growth
-            const segmentsToRender = Math.floor(segments * lineProgress);
+              // Create path segments to draw progressively
+              const segments = 50; // Number of segments for smooth growth
+              const segmentsToRender = Math.floor(segments * lineProgress);
 
-            if (segmentsToRender > 0) {
+              if (segmentsToRender > 0) {
                 context.beginPath();
                 context.moveTo(start[0], start[1]);
 
                 for (let i = 1; i <= segmentsToRender; i++) {
-                    const t = i / segments;
-                    const point = interpolateArc(start, end, t);
-                    context.lineTo(point[0], point[1]);
+                  const t = i / segments;
+                  const point = interpolateArc(start, end, t);
+                  context.lineTo(point[0], point[1]);
                 }
 
                 // If we're between segments, draw partial segment
                 if (lineProgress < 1) {
-                    const remainder = segments * lineProgress - segmentsToRender;
-                    if (remainder > 0) {
-                        const nextT = (segmentsToRender + remainder) / segments;
-                        const nextPoint = interpolateArc(start, end, nextT);
-                        context.lineTo(nextPoint[0], nextPoint[1]);
-                    }
+                  const remainder = segments * lineProgress - segmentsToRender;
+                  if (remainder > 0) {
+                    const nextT = (segmentsToRender + remainder) / segments;
+                    const nextPoint = interpolateArc(start, end, nextT);
+                    context.lineTo(nextPoint[0], nextPoint[1]);
+                  }
                 }
 
                 context.strokeStyle = color;
@@ -1018,52 +1015,52 @@
                 context.globalAlpha = opacity * 0.3;
                 context.lineWidth = 4;
                 context.stroke();
+              }
+
+              context.globalAlpha = 1;
             }
 
-            context.globalAlpha = 1;
-        }
-
-        function interpolateArc(start, end, t) {
-            const midX = (start[0] + end[0]) / 2;
-            const midY = (start[1] + end[1]) / 2;
-            const distance = Math.sqrt(
+            function interpolateArc(start, end, t) {
+              const midX = (start[0] + end[0]) / 2;
+              const midY = (start[1] + end[1]) / 2;
+              const distance = Math.sqrt(
                 Math.pow(end[0] - start[0], 2) + Math.pow(end[1] - start[1], 2)
-            );
-            const offset = distance * 0.2;
+              );
+              const offset = distance * 0.2;
 
-            const controlX = midX;
-            const controlY = midY - offset;
+              const controlX = midX;
+              const controlY = midY - offset;
 
-            // Quadratic Bézier curve interpolation
-            const x =
+              // Quadratic Bézier curve interpolation
+              const x =
                 Math.pow(1 - t, 2) * start[0] +
                 2 * (1 - t) * t * controlX +
                 Math.pow(t, 2) * end[0];
-            const y =
+              const y =
                 Math.pow(1 - t, 2) * start[1] +
                 2 * (1 - t) * t * controlY +
                 Math.pow(t, 2) * end[1];
 
-            return [x, y];
-        }
+              return [x, y];
+            }
 
-        function isVisible(coordinates) {
-            const distance = d3.geoDistance(
+            function isVisible(coordinates) {
+              const distance = d3.geoDistance(
                 coordinates,
                 projection.invert([width / 2, height / 2])
-            );
-            return distance <= Math.PI / 2;
-        }
+              );
+              return distance <= Math.PI / 2;
+            }
 
-        function animate() {
-            updateConnections();
-            drawGlobe();
-            animationId = requestAnimationFrame(animate);
-        }
+            function animate() {
+              updateConnections();
+              drawGlobe();
+              animationId = requestAnimationFrame(animate);
+            }
 
-        // Initialize when page loads
-        init();
-    </script>
+            // Initialize when page loads
+            init();
+          </script>
 
           <!-- <script>
       const ORANGE = '#ff8a00';
