@@ -1,26 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Copora - Driving business growth through expert strategy</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/three@0.151.3/build/three.min.js"></script>
     <script src="https://unpkg.com/globe.gl@^2.32.0/dist/globe.gl.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
     <script src="https://unpkg.com/d3-geo@3"></script>
     <style>
-        .globe-embed { background:#ffffff; padding:0px 0; }
-        #globe { width:615px; height:615px; margin:0 auto; position:relative; }
-        #globe canvas { width:100% !important; height:100% !important; display:block; }
-        .globe-pin { position:absolute; transform: translate(-50%, -100%); pointer-events:auto; }
-        .globe-pin svg { width:22px; height:22px; display:block; filter: drop-shadow(0 0 4px rgba(0,0,0,.6)); }
+        .globe-embed {
+            background: #0e1220;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #globe {
+            width: 1200px;
+            height: 1200px;
+            margin-left: auto;
+            margin-right: -28vw;
+            position: relative;
+        }
+
+        #globe canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+        }
+
+        .globe-pin {
+            position: absolute;
+            transform: translate(-50%, -100%);
+            pointer-events: auto;
+        }
+
+        .globe-pin svg {
+            width: 22px;
+            height: 22px;
+            display: block;
+            filter: drop-shadow(0 0 4px rgba(0, 0, 0, .6));
+        }
     </style>
-    
+
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -31,61 +62,54 @@
                         <img src="assets/images/Logo.jpg" alt="Copora Logo">
                     </a>
                 </div>
-              <div class="header-actions">
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li class="dropdown">
-                            <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">What we offer</button>
-                            <div class="dropdown-menu" role="menu">
-                                <div class="dropdown-col">
-                                 
-                                    <a href="#" class="dropdown-item">Hire3x</a>
-                                    <a href="#" class="dropdown-item">SimplifyQA</a>
-                                    <a href="#" class="dropdown-item">Bominso</a>
-                                    <a href="#" class="dropdown-item">Custom Solutions</a>  
-                                    <a href="#" class="dropdown-item">Walnut</a>
-                                    <a href="#" class="dropdown-item">Simplify Foods</a>
-                                    <a href="#" class="dropdown-item">DevOps Arc</a>
-                                    
-                                </div>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Who we are</button>
-                            <div class="dropdown-menu" role="menu">
-                                <div class="dropdown-col">
-                                   
-                                    <a href="#about" class="dropdown-item">About Us</a>
-                                    <a href="#blog" class="dropdown-item">Insights</a>
-                                    <a href="#" class="dropdown-item">Life @ Simplify3x</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Industires</button>
-                            <div class="dropdown-menu" role="menu">
-                                <div class="dropdown-col">
-                                    <a href="#case-studies" class="dropdown-item">Tech</a>
-                                    <a href="#case-studies" class="dropdown-item">Health</a>
-                                    <a href="#case-studies" class="dropdown-item">Lifestyle</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li><a href="#case-studies" class="nav-link">Customer Stories </a></li>
-                    </ul>
-                </nav>
                 <div class="header-actions">
-                  
-                    <a href="#contact" class="btn btn-primary">
-                        <span class="btn-text">Contact now</span>
-                        <span class="btn-text-hover">Contact now</span>
-                    </a>
+                    <nav class="nav">
+                        <ul class="nav-list">
+                            <li class="dropdown">
+                                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true"
+                                    aria-expanded="false">What we offer</button>
+                                <div class="dropdown-menu" role="menu">
+                                    <div class="dropdown-col">
+
+                                        <a href="#" class="dropdown-item">Hire3x</a>
+                                        <a href="#" class="dropdown-item">SimplifyQA</a>
+                                        <a href="#" class="dropdown-item">Bominso</a>
+                                        <a href="#" class="dropdown-item">Custom Solutions</a>
+                                        <a href="#" class="dropdown-item">Walnut</a>
+                                        <a href="#" class="dropdown-item">Simplify Foods</a>
+                                        <a href="#" class="dropdown-item">DevOps Arc</a>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown">
+                                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true"
+                                    aria-expanded="false">Who we are</button>
+                                <div class="dropdown-menu" role="menu">
+                                    <div class="dropdown-col">
+
+                                        <a href="about.html" class="dropdown-item">About Us</a>
+                                        <a href="insights.html" class="dropdown-item">Insights</a>
+                                        <a href="#" class="dropdown-item">Life @ Simplify3x</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li><a href="#case-studies" class="nav-link">Customer Stories </a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+
+                        <a href="#contact" class="btn btn-primary">
+                            <span class="btn-text">Contact now</span>
+                            <span class="btn-text-hover">Contact now</span>
+                        </a>
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
     </header>
-   
+
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -93,7 +117,7 @@
             <source src="assets/images/background-1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video> -->
-        <img src="assets/images/image (4).png" alt="" class="hero-video">
+        <img src="assets/images/rotating-mesh.svg" alt="" class="hero-video">
         <!-- <img src="assets/images/dots-2.png" alt="" class="hero-video-2"> -->
         <div class="container">
             <div class="hero-content">
@@ -105,7 +129,7 @@
                                 <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
                                 <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
                             </a>
-                            <a href="#lets-talk-button" class="btn btn-primary">
+                            <a href="#lets-talk-button" class="btn btn-secondary btn-secondary-text">
                                 <span class="btn-text ">REQUEST A DEMO</span>
                                 <span class="btn-text-hover">REQUEST A DEMO</span>
                             </a>
@@ -119,9 +143,11 @@
                         </div>
                         <div class="hero-testimonial">
                             <div class="testimonial-content">
-                                <p class="testimonial-text">"The consultants helped us shape a sustainable HR strategy that emphasized performance, retention, and employee well-being."</p>
+                                <p class="testimonial-text">"The consultants helped us shape a sustainable HR strategy
+                                    that emphasized performance, retention, and employee well-being."</p>
                                 <div class="testimonial-author">
-                                    <img src="assets/images/68314ec582b2956a9125402e_hero-image-02.jpg" alt="Sofia Grant" class="author-image">
+                                    <img src="assets/images/68314ec582b2956a9125402e_hero-image-02.jpg"
+                                        alt="Sofia Grant" class="author-image">
                                     <div class="author-info">
                                         <span class="author-name">Sofia Grant</span>
                                         <span class="author-title">Director of Strategy</span>
@@ -138,12 +164,12 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
 
     <!-- Clients Section -->
-  
+
     <section class="clients">
         <div class="container">
             <div class="clients-content">
@@ -154,33 +180,46 @@
                 </div>
                 <div class="clients-logos">
                     <div class="logo-scroll">
-                        <img src="assets/images/684d4d3179d5b07d8c356553_09-dark.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/6831785571146b4274e8f472_client-01.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/6831785513d9bcc07197e8f1_client-02.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/68317855a7c08c07852cf939_client-03.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/6831785505b847e698f99d36_client-04.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/683178637427f0c59b4f5e3f_client-05.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/684d4d3179d5b07d8c356553_09-dark.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/6831785571146b4274e8f472_client-01.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/6831785513d9bcc07197e8f1_client-02.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/68317855a7c08c07852cf939_client-03.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/6831785505b847e698f99d36_client-04.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/683178637427f0c59b4f5e3f_client-05.svg" alt="Client Logo"
+                            class="client-logo">
                         <!-- Duplicate for seamless scroll -->
-                        <img src="assets/images/684d4d3179d5b07d8c356553_09-dark.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/6831785571146b4274e8f472_client-01.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/6831785513d9bcc07197e8f1_client-02.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/68317855a7c08c07852cf939_client-03.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/6831785505b847e698f99d36_client-04.svg" alt="Client Logo" class="client-logo">
-                        <img src="assets/images/683178637427f0c59b4f5e3f_client-05.svg" alt="Client Logo" class="client-logo">
+                        <img src="assets/images/684d4d3179d5b07d8c356553_09-dark.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/6831785571146b4274e8f472_client-01.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/6831785513d9bcc07197e8f1_client-02.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/68317855a7c08c07852cf939_client-03.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/6831785505b847e698f99d36_client-04.svg" alt="Client Logo"
+                            class="client-logo">
+                        <img src="assets/images/683178637427f0c59b4f5e3f_client-05.svg" alt="Client Logo"
+                            class="client-logo">
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-       
+
     </section>
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <div class="services-header">
-              
+
                 <h2 class="section-title-2">Innovation at Core</h2>
-                <p class="section-description color-black">Empowering enterprises with technology built for tomorrow.</p>
+                <p class="section-description color-black">Empowering enterprises with technology built for tomorrow.
+                </p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -226,258 +265,282 @@
             </div>
         </div>
     </section>
-    
-<div id="ecosystem" class="stats">
-    <div class="container">
-        <div class="section-title-2 text-center" >OUR ECOSYSTEM</div>
-    <div class="orbit-container">
-        <button class="center-btn">Simplify3x</button>
-        <div class="orbit">
-          <div class="orbit-card pos-0">
-            <div class="orbit-card-inner">
-              <div class="orbit-flip">
-                <div class="orbit-card-face orbit-front">
-                  <div class="orbit-title">SIMPLIFYQA</div>
-                  <div class="orbit-description">Strategic technology consulting services</div>
-                </div>
-                <div class="orbit-card-face orbit-back">
-                  <div class="orbit-title">More</div>
-                  <div>Discovery, Roadmaps</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="orbit-card pos-60">
-            <div class="orbit-card-inner">
-              <div class="orbit-flip">
-                <div class="orbit-card-face orbit-front">
-                  <div class="orbit-title">HIRE3X</div>
-                  <div class="orbit-description">AI-powered solutions for intelligent automation</div>
-                </div>
-                <div class="orbit-card-face orbit-back">
-                  <div class="orbit-title">More</div>
-                  <div>Cloud, SaaS</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="orbit-card pos-120">
-            <div class="orbit-card-inner">
-              <div class="orbit-flip">
-                <div class="orbit-card-face orbit-front">
-                  <div class="orbit-title">DEVOPS ARC</div>
-                  <div class="orbit-description">Cloud infrastructure made simple and scalable</div>
-                </div>
-                <div class="orbit-card-face orbit-back">
-                  <div class="orbit-title">More</div>
-                  <div>Bootcamps</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="orbit-card pos-180">
-            <div class="orbit-card-inner">
-              <div class="orbit-flip">
-                <div class="orbit-card-face orbit-front">
-                  <div class="orbit-title">WALNUT</div>
-                  <div class="orbit-description">Advanced data analytics and insights platform</div>
-                </div>
-                <div class="orbit-card-face orbit-back">
-                  <div class="orbit-title">More</div>
-                  <div>PoCs, Pilots</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="orbit-card pos-240">
-            <div class="orbit-card-inner">
-              <div class="orbit-flip">
-                <div class="orbit-card-face orbit-front">
-                  <div class="orbit-title">BOMINSO</div>
-                  <div class="orbit-description">Cross-platform mobile app development</div>
-                </div>
-                <div class="orbit-card-face orbit-back">
-                  <div class="orbit-title">More</div>
-                  <div>ISVs, GSIs</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="orbit-card pos-300">
-            <div class="orbit-card-inner">
-              <div class="orbit-flip">
-                <div class="orbit-card-face orbit-front">
-                  <div class="orbit-title">SIMPLIFY FOODS</div>
-                  <div class="orbit-description">Enterprise-grade security and compliance</div>
-                </div>
-                <div class="orbit-card-face orbit-back">
-                  <div class="orbit-title">More</div>
-                  <div>Events, OSS</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="orbit-card pos-309">
-            <div class="orbit-card-inner">
-              <div class="orbit-flip">
-                <div class="orbit-card-face orbit-front">
-                  <div class="orbit-title">CUSTOM SOLUTIONS</div>
-                  <div class="orbit-description">Streamlined development and deployment</div>
-                </div>
-                <div class="orbit-card-face orbit-back">
-                  <div class="orbit-title">More</div>
-                  <div>SLAs, Enablement</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <div id="lets-talk" class="talk-box">
-        <div>
-            Let's discuss your business goals - schedule a demo now
-          </div>
-          <a id="lets-talk-button" href="#contact" class="btn btn-primary">
-            <span class="btn-text ">LET'S TALK</span>
-        </a>
-    </div>
-    </div>
-</div>
-<section class="purpose">
-    <div class="container">
-        <div class="purpose-content">
-           <div>
-            <div class="section-title-2">Our Purpose</div>
-            <div class="purpose-description">Empowering business worldwide with innovative technology solutions that <br/> drive sustainable growth and success.</div>
 
-            <div class="purpose-cards">
-                <div class="purpose-card">
-                    <div class="purpose-card-number">200+</div>
-                    <div class="purpose-card-text">Employees</div>
-                </div>
-                <div class="purpose-card">
-                    <div class="purpose-card-number">15+</div>
-                    <div class="purpose-card-text">Offices Wprldwide</div>
-                </div>
-               
-            </div>
-            <div class="purpose-cards">
-              
-                <div class="purpose-card">
-                    <div class="purpose-card-number">50+</div>
-                    <div class="purpose-card-text">Countires Served</div>
-                </div>
-                <div class="purpose-card">
-                    <div class="purpose-card-number">1000+</div>
-                    <div class="purpose-card-text">Happy Clients</div>
-                </div>
-            </div>
-           </div>
-
-            <!-- Globe Embed (above hero) -->
-    <section class="globe-embed">
+    <div id="ecosystem" class="stats">
         <div class="container">
-            <div id="globe"></div>
+            <div class="section-title-2 text-center">Our Ecosystem</div>
+            <div class="orbit-container">
+                <button class="center-btn">Simplify3x</button>
+                <div class="orbit">
+                    <div class="orbit-card pos-0">
+                        <div class="orbit-card-inner">
+                            <div class="orbit-flip">
+                                <div class="orbit-card-face orbit-front">
+                                    <div class="orbit-title">SIMPLIFYQA</div>
+                                    <div class="orbit-description">Strategic technology consulting services</div>
+                                </div>
+                                <div class="orbit-card-face orbit-back">
+                                    <div class="orbit-title">More</div>
+                                    <div>Discovery, Roadmaps</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orbit-card pos-60">
+                        <div class="orbit-card-inner">
+                            <div class="orbit-flip">
+                                <div class="orbit-card-face orbit-front">
+                                    <div class="orbit-title">HIRE3X</div>
+                                    <div class="orbit-description">AI-powered solutions for intelligent automation</div>
+                                </div>
+                                <div class="orbit-card-face orbit-back">
+                                    <div class="orbit-title">More</div>
+                                    <div>Cloud, SaaS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orbit-card pos-120">
+                        <div class="orbit-card-inner">
+                            <div class="orbit-flip">
+                                <div class="orbit-card-face orbit-front">
+                                    <div class="orbit-title">DEVOPS ARC</div>
+                                    <div class="orbit-description">Cloud infrastructure made simple and scalable</div>
+                                </div>
+                                <div class="orbit-card-face orbit-back">
+                                    <div class="orbit-title">More</div>
+                                    <div>Bootcamps</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orbit-card pos-180">
+                        <div class="orbit-card-inner">
+                            <div class="orbit-flip">
+                                <div class="orbit-card-face orbit-front">
+                                    <div class="orbit-title">WALNUT</div>
+                                    <div class="orbit-description">Advanced data analytics and insights platform</div>
+                                </div>
+                                <div class="orbit-card-face orbit-back">
+                                    <div class="orbit-title">More</div>
+                                    <div>PoCs, Pilots</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orbit-card pos-240">
+                        <div class="orbit-card-inner">
+                            <div class="orbit-flip">
+                                <div class="orbit-card-face orbit-front">
+                                    <div class="orbit-title">BOMINSO</div>
+                                    <div class="orbit-description">Cross-platform mobile app development</div>
+                                </div>
+                                <div class="orbit-card-face orbit-back">
+                                    <div class="orbit-title">More</div>
+                                    <div>ISVs, GSIs</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orbit-card pos-300">
+                        <div class="orbit-card-inner">
+                            <div class="orbit-flip">
+                                <div class="orbit-card-face orbit-front">
+                                    <div class="orbit-title">SIMPLIFY FOODS</div>
+                                    <div class="orbit-description">Enterprise-grade security and compliance</div>
+                                </div>
+                                <div class="orbit-card-face orbit-back">
+                                    <div class="orbit-title">More</div>
+                                    <div>Events, OSS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orbit-card pos-309">
+                        <div class="orbit-card-inner">
+                            <div class="orbit-flip">
+                                <div class="orbit-card-face orbit-front">
+                                    <div class="orbit-title">CUSTOM SOLUTIONS</div>
+                                    <div class="orbit-description">Streamlined development and deployment</div>
+                                </div>
+                                <div class="orbit-card-face orbit-back">
+                                    <div class="orbit-title">More</div>
+                                    <div>SLAs, Enablement</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="lets-talk" class="talk-box">
+                <div>
+                    Let's discuss your business goals - schedule a demo now
+                </div>
+                <a id="lets-talk-button" href="#contact" class="btn btn-primary">
+                    <span class="btn-text ">LET'S TALK</span>
+                </a>
+            </div>
         </div>
-    </section>
-    <script>
-      const ORANGE = '#ff8a00';
-      const OFF_WHITE = '#b3b3b3';
-      const BG = '#ffffff';
+    </div>
+    <section class="purpose">
+        <div class="container">
+            <div class="purpose-content">
+                <div class="purpose-content-text">
+                    <div class="section-title-2">Global Presence</div>
+                    <div class="purpose-description">Enabling the Future of Digital Transformation</div>
 
-      const el = document.getElementById('globe');
-      if (el && typeof Globe === 'function') {
-        const world = Globe()
-          .width(777).height(777)
-          .backgroundColor(BG)
-          .showAtmosphere(true)
-          .atmosphereColor(ORANGE)
-          .atmosphereAltitude(0.25)
-          .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-          (el);
 
-        // Land-only dots: sample a grid and keep only points on land polygons
-        (async () => {
-          try {
-            const topo = await fetch('https://unpkg.com/world-atlas@2/land-110m.json').then(r => r.json());
-            const land = topojson.feature(topo, topo.objects.land); // GeoJSON
-            const step = 1.3; // denser dots
-            const points = [];
-            for (let lat = -85; lat <= 85; lat += step) {
-              for (let lng = -180; lng < 180; lng += step) {
-                if (d3.geoContains(land, [lng, lat])) {
-                  points.push({ lat, lng, alt: 0.003, w: Math.random() });
-                }
-              }
-            }
-            world
-              .pointsData(points)
-              .pointAltitude('alt')
-              .pointRadius(0.0075)
-              .pointColor(d => d.w < 0.22 ? OFF_WHITE : ORANGE);
-          } catch (e) {
-            console.error('Land dots load failed', e);
-          }
-        })();
 
-        const INDIA    = { lat: 12.9716, lng: 77.5946 };
-        const MALAYSIA = { lat: 3.1390,  lng: 101.6869 };
-        const KENYA    = { lat: -1.2921, lng: 36.8219 };
-        const USA      = { lat: 37.7749, lng: -122.4194 };
-        const DUBAI    = { lat: 25.2048, lng: 55.2708 };
-        const LONDON   = { lat: 51.5074, lng: -0.1278 };
+                    <div>
+                        We deliver advanced technology solutions and innovative products that empower organizations
+                        worldwide. With a strong global presence, our teams collaborate across regions to provide
+                        scalable, secure, and efficient services. Each year, we support enterprises of all sizes in
+                        achieving operational excellence and driving sustainable growth through technology.
+                    </div>
+                     <!-- 2x2 Stats Grid -->
+                     <div class="presence-stats">
+                        <div class="presence-grid">
+                            <div class="presence-stat">
+                                <div class="presence-number">500M+</div>
+                                <div class="presence-text">API requests per day, peaking at 13,000 requests a second.</div>
+                            </div>
+                            <div class="presence-stat">
+                                <div class="presence-number">99.999%</div>
+                                <div class="presence-text">historical uptime for Stripe services.</div>
+                            </div>
+                            <div class="presence-stat">
+                                <div class="presence-number">47+</div>
+                                <div class="presence-text">countries with local acquiring.</div>
+                            </div>
+                            <div class="presence-stat">
+                                <div class="presence-number">135+</div>
+                                <div class="presence-text">currencies and payment methods supported.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        // Sequential routes: India → Malaysia → USA → Dubai → Kenya
-        const sequenceSegments = [
-          { startLat: INDIA.lat,    startLng: INDIA.lng,    endLat: MALAYSIA.lat, endLng: MALAYSIA.lng },
-          { startLat: MALAYSIA.lat, startLng: MALAYSIA.lng, endLat: USA.lat,      endLng: USA.lng },
-          { startLat: USA.lat,      startLng: USA.lng,      endLat: DUBAI.lat,    endLng: DUBAI.lng },
-          { startLat: DUBAI.lat,    startLng: DUBAI.lng,    endLat: KENYA.lat,    endLng: KENYA.lng }
-        ];
+                <!-- Globe Embed (above hero) -->
+                <section class="globe-embed">
+                    <div class="container">
+                        <div id="globe"></div>
+                    </div>
+                </section>
+                <script>
+                    const ORANGE = '#ff8a00';
+                    const OFF_WHITE = '#86a6c8';
+                    const BG = '#0e1220';
 
-        // Solid base + moving head for each connection
-        const arcs = sequenceSegments.flatMap(s => [
-          { ...s, type: 'base' },
-          { ...s, type: 'head' }
-        ]);
+                    const el = document.getElementById('globe');
+                    if (el && typeof Globe === 'function') {
+                        const world = Globe()
+                            .width(1100).height(1100)
+                            .backgroundColor(BG)
+                            .showAtmosphere(true)
+                            .atmosphereColor(ORANGE)
+                            .atmosphereAltitude(0.25)
+                            .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-dark.jpg')
+                            (el);
 
-        world
-          .arcsData(arcs)
-          .arcColor(() => ORANGE)
-          .arcAltitudeAutoScale(0.6)
-          .arcStroke(d => d.type === 'base' ? 1.2 : 1.6)
-          .arcDashLength(d => d.type === 'base' ? 1 : 0.18)
-          .arcDashGap(d => d.type === 'base' ? 0 : 1)
-          .arcDashInitialGap(d => d.type === 'base' ? 0 : Math.random())
-          .arcDashAnimateTime(d => d.type === 'base' ? 0 : 1800);
+                        // Land-only dots: sample a grid and keep only points on land polygons
+                        (async () => {
+                            try {
+                                const topo = await fetch('https://unpkg.com/world-atlas@2/land-110m.json').then(r => r.json());
+                                const land = topojson.feature(topo, topo.objects.land); // GeoJSON
+                                const step = 1.3; // denser dots
+                                const points = [];
+                                for (let lat = -85; lat <= 85; lat += step) {
+                                    for (let lng = -180; lng < 180; lng += step) {
+                                        if (d3.geoContains(land, [lng, lat])) {
+                                            points.push({ lat, lng, alt: 0.003, w: Math.random() });
+                                        }
+                                    }
+                                }
+                                world
+                                    .pointsData(points)
+                                    .pointAltitude('alt')
+                                    .pointRadius(0.0075)
+                                    .pointColor(d => d.w < 0.22 ? OFF_WHITE : ORANGE);
+                            } catch (e) {
+                                console.error('Land dots load failed', e);
+                            }
+                        })();
 
-        world.controls().autoRotate = true;
-        world.controls().autoRotateSpeed = 0.28;
+                        const INDIA = { lat: 12.9716, lng: 77.5946 };
+                        const MALAYSIA = { lat: 3.1390, lng: 101.6869 };
+                        const KENYA = { lat: -1.2921, lng: 36.8219 };
+                        const USA = { lat: 37.7749, lng: -122.4194 };
+                        const DUBAI = { lat: 25.2048, lng: 55.2708 };
+                        const LONDON = { lat: 51.5074, lng: -0.1278 };
 
-        // HTML pins for five locations
-        const pinSvg = (fill) => `\n<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">\n  <path fill="${fill}" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>\n</svg>`;
+                        // Sequential routes: India → Malaysia → USA → Dubai → Kenya
+                        const sequenceSegments = [
+                            { startLat: INDIA.lat, startLng: INDIA.lng, endLat: MALAYSIA.lat, endLng: MALAYSIA.lng },
+                            { startLat: MALAYSIA.lat, startLng: MALAYSIA.lng, endLat: USA.lat, endLng: USA.lng },
+                            { startLat: USA.lat, startLng: USA.lng, endLat: DUBAI.lat, endLng: DUBAI.lng },
+                            { startLat: DUBAI.lat, startLng: DUBAI.lng, endLat: KENYA.lat, endLng: KENYA.lng }
+                        ];
 
-        const pinData = [
-          { name:'India',    lat:12.9716, lng:77.5946,  color:'#1e90ff' },
-          { name:'Malaysia', lat:3.1390,  lng:101.6869, color:'#1e90ff' },
-          { name:'USA',      lat:37.7749, lng:-122.4194,color:'#ff3b30' },
-          { name:'Dubai',    lat:25.2048, lng:55.2708,  color:'#4cd964' },
-          { name:'Kenya',    lat:-1.2921, lng:36.8219,  color:'#ffffff' }
-        ];
+                        // Solid base + moving head for each connection
+                        const arcs = sequenceSegments.flatMap(s => [
+                            { ...s, type: 'base' },
+                            { ...s, type: 'head' }
+                        ]);
 
-        world
-          .htmlElementsData(pinData)
-          .htmlElement(d => { const el = document.createElement('div'); el.className='globe-pin'; el.innerHTML = pinSvg(d.color); el.title = d.name; return el; })
-          .htmlLat(d => d.lat)
-          .htmlLng(d => d.lng)
-          .htmlAltitude(0.05);
-      }
-    </script>
-           <!-- <div class="purpose-map">
+                        world
+                            .arcsData(arcs)
+                            .arcColor(() => ORANGE)
+                            .arcAltitudeAutoScale(0.6)
+                            .arcStroke(d => d.type === 'base' ? 1.2 : 1.6)
+                            .arcDashLength(d => d.type === 'base' ? 1 : 0.18)
+                            .arcDashGap(d => d.type === 'base' ? 0 : 1)
+                            .arcDashInitialGap(d => d.type === 'base' ? 0 : Math.random())
+                            .arcDashAnimateTime(d => d.type === 'base' ? 0 : 1800);
+
+                        // Cursor-driven rotation
+                        const controls = world.controls();
+                        controls.autoRotate = false;
+                        let target = { x: 0, y: 0 };
+                        el.addEventListener('mousemove', e => {
+                            const r = el.getBoundingClientRect();
+                            const nx = (e.clientX - r.left) / r.width - 0.5;
+                            const ny = (e.clientY - r.top) / r.height - 0.5;
+                            target.y = -nx * 0.8;
+                            target.x = ny * 0.5;
+                        });
+                        (function spin() {
+                            const grp = world.scene().children.find(o => o.type === 'Group');
+                            if (grp) {
+                                grp.rotation.y += (target.y - grp.rotation.y) * 0.05;
+                                grp.rotation.x += (target.x - grp.rotation.x) * 0.05;
+                            }
+                            requestAnimationFrame(spin);
+                        })();
+
+                        // HTML pins for five locations
+                        const pinSvg = (fill) => `\n<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">\n  <path fill="${fill}" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>\n</svg>`;
+
+                        const pinData = [
+                            { name: 'India', lat: 12.9716, lng: 77.5946, color: '#1e90ff' },
+                            { name: 'Malaysia', lat: 3.1390, lng: 101.6869, color: '#1e90ff' },
+                            { name: 'USA', lat: 37.7749, lng: -122.4194, color: '#ff3b30' },
+                            { name: 'Dubai', lat: 25.2048, lng: 55.2708, color: '#4cd964' },
+                            { name: 'Kenya', lat: -1.2921, lng: 36.8219, color: '#ffffff' }
+                        ];
+
+                        world
+                            .htmlElementsData(pinData)
+                            .htmlElement(d => { const el = document.createElement('div'); el.className = 'globe-pin'; el.innerHTML = pinSvg(d.color); el.title = d.name; return el; })
+                            .htmlLat(d => d.lat)
+                            .htmlLng(d => d.lng)
+                            .htmlAltitude(0.05);
+                    }
+                </script>
+                <!-- <div class="purpose-map">
             
             <img src="assets/images/Map.png" alt="Purpose Image">
            </div> -->
-             <!-- <div class="purpose-map">
+                <!-- <div class="purpose-map">
                 
                 <img src="assets/images/Map.png" class="map" alt="World Map" style="width: 100%;">
               
@@ -503,7 +566,7 @@
                     <span class="country-label" style="top: 22px; left: -11px;">Kenya</span>
                   </div>
               </div> -->
-            <!-- <div  class="purpose-title">
+                <!-- <div  class="purpose-title">
                 AWARDS AND RECOGNITIONS
             </div>
             <div class="purpose-awards">
@@ -520,42 +583,42 @@
                     Industry Leader Award
                 </div>
             </div> -->
-            
-        </div>
-    </div>
 
-</section>
-<section class="clients">
-    <div class="container">
-        <div class="clients-content">
-            <div class="client-right-overlay"></div>
-            <div class="client-left-overlay"></div>
-            <div class="clients-text">
-                <span class="clients-title">AWARDS AND RECOGNITIONS</span>
             </div>
-            <div class="clients-logos">
-                <div class="logo-scroll">
-                    <div class="purpose-awards">
-                        <div class="purpose-award">
-                            Best Tech Innovation 2023
-                        </div>
-                        <div class="purpose-award">
-                            Top Employer 2023
-                        </div>
-                        <div class="purpose-award">
-                            Leader in Digital Solutions
-                        </div>
-                        <div class="purpose-award">
-                            Industry Leader Award
+        </div>
+
+    </section>
+    <section class="clients">
+        <div class="container">
+            <div class="clients-content">
+                <div class="client-right-overlay"></div>
+                <div class="client-left-overlay"></div>
+                <div class="clients-text">
+                    <span class="clients-title">AWARDS AND RECOGNITIONS</span>
+                </div>
+                <div class="clients-logos">
+                    <div class="logo-scroll">
+                        <div class="purpose-awards">
+                            <div class="purpose-award">
+                                Best Tech Innovation 2023
+                            </div>
+                            <div class="purpose-award">
+                                Top Employer 2023
+                            </div>
+                            <div class="purpose-award">
+                                Leader in Digital Solutions
+                            </div>
+                            <div class="purpose-award">
+                                Industry Leader Award
+                            </div>
                         </div>
                     </div>
+
                 </div>
-                
             </div>
         </div>
-    </div>
-   
-</section>
+
+    </section>
     <!-- <section class="maps">
         <div class="container">
             <div class="section-title-2 ">We Dominate the entire world sitting in Banglore</div>
@@ -1010,20 +1073,28 @@
                     <h4 class="recent-works-title">Recent works</h4>
                     <div class="recent-works-grid">
                         <a href="#" class="recent-work-item">
-                            <img src="assets/images/6842de3a16b95b45bdf1990d_case-study-01.webp" alt="Recent work 1" class="recent-work-image">
-                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="recent-work-arrow">
+                            <img src="assets/images/6842de3a16b95b45bdf1990d_case-study-01.webp" alt="Recent work 1"
+                                class="recent-work-image">
+                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow"
+                                class="recent-work-arrow">
                         </a>
                         <a href="#" class="recent-work-item">
-                            <img src="assets/images/6846697030a081054c45c913_case-study-02.webp" alt="Recent work 2" class="recent-work-image">
-                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="recent-work-arrow">
+                            <img src="assets/images/6846697030a081054c45c913_case-study-02.webp" alt="Recent work 2"
+                                class="recent-work-image">
+                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow"
+                                class="recent-work-arrow">
                         </a>
                         <a href="#" class="recent-work-item">
-                            <img src="assets/images/684673370f4f0c823cd9e2e8_case-study-03.webp" alt="Recent work 3" class="recent-work-image">
-                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="recent-work-arrow">
+                            <img src="assets/images/684673370f4f0c823cd9e2e8_case-study-03.webp" alt="Recent work 3"
+                                class="recent-work-image">
+                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow"
+                                class="recent-work-arrow">
                         </a>
                         <a href="#" class="recent-work-item">
-                            <img src="assets/images/6852a45fec5c928ff53c7150_case-study-04.webp" alt="Recent work 4" class="recent-work-image">
-                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow" class="recent-work-arrow">
+                            <img src="assets/images/6852a45fec5c928ff53c7150_case-study-04.webp" alt="Recent work 4"
+                                class="recent-work-image">
+                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow"
+                                class="recent-work-arrow">
                         </a>
                     </div>
                 </div>
@@ -1031,17 +1102,21 @@
             <div class="footer-bottom">
                 <div class="footer-social">
                     <a href="https://www.facebook.com/" class="social-link">
-                        <img src="assets/icons/682eb96f62a81d664ea5253b_99aeb9cadc4027f13a9f8c64a73729ed_facebook.svg" alt="Facebook" class="social-icon">
+                        <img src="assets/icons/682eb96f62a81d664ea5253b_99aeb9cadc4027f13a9f8c64a73729ed_facebook.svg"
+                            alt="Facebook" class="social-icon">
                     </a>
                     <a href="https://www.instagram.com/" class="social-link">
-                        <img src="assets/icons/682eb96f62a81d664ea524cf_79d504e95605676dcdc62eb376426c90_instagram.svg" alt="Instagram" class="social-icon">
+                        <img src="assets/icons/682eb96f62a81d664ea524cf_79d504e95605676dcdc62eb376426c90_instagram.svg"
+                            alt="Instagram" class="social-icon">
                     </a>
                     <a href="https://in.linkedin.com/" class="social-link">
-                        <img src="assets/icons/682eb96f62a81d664ea524df_f6064f30ebfbad78aefda8115a908970_twitter.svg" alt="LinkedIn" class="social-icon">
+                        <img src="assets/icons/682eb96f62a81d664ea524df_f6064f30ebfbad78aefda8115a908970_twitter.svg"
+                            alt="LinkedIn" class="social-icon">
                     </a>
                 </div>
                 <div class="footer-credits">
-                    <p>Designed by <a href="https://webestica.com/" class="credit-link">Webestica</a>, Powered by <a href="https://webflow.com/" class="credit-link">Webflow</a></p>
+                    <p>Designed by <a href="https://webestica.com/" class="credit-link">Webestica</a>, Powered by <a
+                            href="https://webflow.com/" class="credit-link">Webflow</a></p>
                 </div>
             </div>
         </div>
@@ -1049,4 +1124,5 @@
 
     <script src="js/script.js"></script>
 </body>
+
 </html>
