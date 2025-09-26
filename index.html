@@ -25,6 +25,7 @@
         height: 615px;
         margin: 0 auto;
         position: relative;
+        margin-top: -10%;
       }
       #globe canvas {
         width: 100% !important;
@@ -489,12 +490,14 @@
           </div>
         </div>
         <div id="lets-talk" class="talk-box">
-          <div class="talk-message">Let's discuss your business goals — schedule a demo now</div>
+          <div class="talk-message">
+            Let's discuss your business goals — schedule a demo now
+          </div>
           <div class="header-content">
             <a id="lets-talk-button" href="#contact" class="btn btn-primary">
               <span class="btn-text">LET'S TALK</span>
             </a>
-            <img src="assets/images/cross.svg" alt="Close" class="talk-close">
+            <img src="assets/images/cross.svg" alt="Close" class="talk-close" />
           </div>
         </div>
       </div>
@@ -504,33 +507,67 @@
         <div class="purpose-content">
           <div>
             <div class="section-title mb-1">Global Presence</div>
-            <div class="section-description">We deliver advanced technology solutions and innovative products that empower organizations worldwide. With a strong global presence, our teams collaborate across regions to provide scalable, secure, and efficient services. Each year, we support enterprises of all sizes in achieving operational excellence and driving sustainable growth through technology.
+            <div class="section-description">
+              We deliver advanced technology solutions and innovative products
+              that empower organizations worldwide. With a strong global
+              presence, our teams collaborate across regions to provide
+              scalable, secure, and efficient services. Each year, we support
+              enterprises of all sizes in achieving operational excellence and
+              driving sustainable growth through technology.
             </div>
 
-             <!-- 2x2 Stats Grid -->
-             <div class="presence-stats">
-                <div class="presence-grid">
-                    <div class="presence-stat">
-                      <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="">
-                        <div class="presence-number">500M+</div>
-                        <div class="presence-text">Class Aptent Taciti Sociosqu<br>Ad Litora Torquent Per<br>Conubia Nostra</div>
-                    </div>
-                    <div class="presence-stat">
-                      <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="">
-                        <div class="presence-number">99.999%</div>
-                        <div class="presence-text">Class Aptent Taciti Sociosqu<br>Ad Litora Torquent Per<br>Conubia Nostra</div>
-                    </div>
-                    <div class="presence-stat">
-                      <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="">
-                        <div class="presence-number">47+</div>
-                        <div class="presence-text">Class Aptent Taciti Sociosqu<br>Ad Litora Torquent Per<br>Conubia Nostra</div>
-                    </div>
-                    <div class="presence-stat">
-                      <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="">
-                        <div class="presence-number">135+</div>
-                        <div class="presence-text">Class Aptent Taciti Sociosqu<br>Ad Litora Torquent Per<br>Conubia Nostra</div>
-                    </div>
+            <!-- 2x2 Stats Grid -->
+            <div class="presence-stats">
+              <div class="presence-grid">
+                <div class="presence-stat">
+                  <img
+                    class="grad-pos"
+                    src="assets/images/or-side-grad.svg"
+                    alt=""
+                  />
+                  <div class="presence-number">500M+</div>
+                  <div class="presence-text">
+                    Class Aptent Taciti Sociosqu<br />Ad Litora Torquent Per<br />Conubia
+                    Nostra
+                  </div>
                 </div>
+                <div class="presence-stat">
+                  <img
+                    class="grad-pos"
+                    src="assets/images/or-side-grad.svg"
+                    alt=""
+                  />
+                  <div class="presence-number">99.999%</div>
+                  <div class="presence-text">
+                    Class Aptent Taciti Sociosqu<br />Ad Litora Torquent Per<br />Conubia
+                    Nostra
+                  </div>
+                </div>
+                <div class="presence-stat">
+                  <img
+                    class="grad-pos"
+                    src="assets/images/or-side-grad.svg"
+                    alt=""
+                  />
+                  <div class="presence-number">47+</div>
+                  <div class="presence-text">
+                    Class Aptent Taciti Sociosqu<br />Ad Litora Torquent Per<br />Conubia
+                    Nostra
+                  </div>
+                </div>
+                <div class="presence-stat">
+                  <img
+                    class="grad-pos"
+                    src="assets/images/or-side-grad.svg"
+                    alt=""
+                  />
+                  <div class="presence-number">135+</div>
+                  <div class="presence-text">
+                    Class Aptent Taciti Sociosqu<br />Ad Litora Torquent Per<br />Conubia
+                    Nostra
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -569,9 +606,50 @@
               setupCanvas();
               createStarPattern();
               await loadWorldData();
+              await loadMarkerImage();
               generateNodes();
               setupInteraction();
               animate();
+            }
+
+            let markerImage = null;
+
+            function loadMarkerImage() {
+              return new Promise((resolve) => {
+                const markerCanvas = document.createElement("canvas");
+                const markerCtx = markerCanvas.getContext("2d");
+                markerCanvas.width = 20;
+                markerCanvas.height = 30;
+
+                // Clear
+                markerCtx.clearRect(0, 0, 20, 30);
+
+                // Pin shape (teardrop)
+                markerCtx.beginPath();
+                markerCtx.moveTo(10, 28); // bottom tip
+                markerCtx.quadraticCurveTo(0, 15, 10, 3);
+                markerCtx.quadraticCurveTo(20, 15, 10, 28);
+                markerCtx.closePath();
+
+                // Fill red
+                markerCtx.fillStyle = "#d23f31";
+                markerCtx.fill();
+
+                // Border
+                markerCtx.lineWidth = 1.5;
+                markerCtx.strokeStyle = "#a82d26";
+                markerCtx.stroke();
+
+                // Inner white circle
+                markerCtx.beginPath();
+                markerCtx.arc(10, 12, 3.5, 0, Math.PI * 2, true);
+                markerCtx.fillStyle = "#ffffff";
+                markerCtx.fill();
+                markerCtx.closePath();
+
+                markerImage = markerCanvas;
+                resolve();
+              });
             }
 
             function setupCanvas() {
@@ -592,7 +670,7 @@
               projection = d3
                 .geoOrthographic()
                 .scale(width / 2.2)
-                .translate([width / 2, height / 2]);
+                .translate([width / 2.2, height / 2]);
 
               path = d3.geoPath(projection, context);
             }
@@ -826,6 +904,10 @@
               // Draw nodes
               drawNodes();
 
+              // Draw orange map markers
+               drawMarkers();
+
+
               // Draw connections
               drawConnections();
             }
@@ -908,6 +990,51 @@
                   context.font = "10px Arial";
                   context.textAlign = "center";
                   context.fillText(node.name, pos[0], pos[1] - pulseSize - 8);
+                }
+              });
+            }
+
+            function drawMarkers() {
+              nodes.forEach((node) => {
+                const pos = projection(node.coordinates);
+                if (pos && isVisible(node.coordinates)) {
+                  const markerWidth = 15;
+                  const markerHeight = 22;
+
+                  // Gentle pulse scale
+                  const pulse =
+                    Math.sin(Date.now() * 0.002 + node.id) * 0.05 + 1;
+                  const currentWidth = markerWidth * pulse;
+                  const currentHeight = markerHeight * pulse;
+
+                  context.save();
+                  context.translate(pos[0], pos[1]);
+                  context.scale(pulse, pulse);
+                  context.drawImage(
+                    markerImage,
+                    -currentWidth / 2,
+                    -currentHeight,
+                    currentWidth,
+                    currentHeight
+                  );
+                  context.restore();
+
+                  // Glow under marker
+                  const gradient = context.createRadialGradient(
+                    pos[0],
+                    pos[1],
+                    0,
+                    pos[0],
+                    pos[1],
+                    15
+                  );
+                  gradient.addColorStop(0, "rgba(255, 152, 0, 0.4)");
+                  gradient.addColorStop(1, "rgba(255, 152, 0, 0)");
+
+                  context.beginPath();
+                  context.arc(pos[0], pos[1], 15, 0, 2 * Math.PI);
+                  context.fillStyle = gradient;
+                  context.fill();
                 }
               });
             }
@@ -1066,7 +1193,6 @@
             init();
           </script>
 
- 
           <!-- <div class="purpose-map">
             
             <img src="assets/images/Map.png" alt="Purpose Image">
