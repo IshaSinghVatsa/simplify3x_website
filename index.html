@@ -92,7 +92,7 @@
                     <div class="dropdown-col">
                       <a href="about.html" class="dropdown-item">About Us</a>
                       <a href="insights.html" class="dropdown-item">Insights</a>
-                      <a href="#" class="dropdown-item">Life @ Simplify3x</a>
+                      <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
                     </div>
                   </div>
                 </li>
@@ -658,8 +658,9 @@
             function createStarPattern() {
               const patternCanvas = document.createElement("canvas");
               const patternContext = patternCanvas.getContext("2d");
-              patternCanvas.width = 20;
-              patternCanvas.height = 20;
+              const SIZE = 18;
+              patternCanvas.width = SIZE;
+              patternCanvas.height = SIZE;
 
               // Clear with transparent background
               patternContext.clearRect(0, 0, 20, 20);

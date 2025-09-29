@@ -1087,6 +1087,8 @@ p {
     }
 }
 
+
+
 .stat-label {
     border-radius: 4px;
     background-color: whitesmoke;
@@ -1257,7 +1259,6 @@ background-color: #0a2540;
     .presence-grid{ grid-template-columns: 1fr; }
 
   }
-}
 
 /* About Section */
 .about {
