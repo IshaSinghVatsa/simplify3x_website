@@ -976,8 +976,8 @@
                 // Now add slight white border
                 context.beginPath();
                 path(countries);
-                context.lineWidth = 0.3;
-                context.strokeStyle = "rgba(255, 255, 255, 0.2)";
+                context.lineWidth = 0.2;
+                context.strokeStyle = "#fff";
                 context.stroke();
 
                 // context.beginPath();
@@ -1142,138 +1142,105 @@
 
             function drawConnections() {
               connections.forEach((conn) => {
-                const sourcePos = projection(conn.source.coordinates);
-                const targetPos = projection(conn.target.coordinates);
+                const sourceCoord = conn.source.coordinates;
+                const targetCoord = conn.target.coordinates;
+                const sourcePos = projection(sourceCoord);
+                const targetPos = projection(targetCoord);
 
-                if (
-                  sourcePos &&
-                  targetPos &&
-                  isVisible(conn.source.coordinates) &&
-                  isVisible(conn.target.coordinates)
-                ) {
-                  // Draw animated line (grows from source to target)
-                  drawAnimatedArc(
-                    sourcePos,
-                    targetPos,
-                    conn.color,
-                    conn.opacity,
-                    conn.lineProgress
-                  );
-
-                  // Draw moving dot (only when line progress is sufficient and dot hasn't finished)
-                  if (conn.lineProgress > 0.3 && conn.progress <= 1) {
-                    const dotPos = interpolateArc(
-                      sourcePos,
-                      targetPos,
-                      conn.progress
+                if (sourcePos && targetPos) {
+                  const visA = isVisible(sourceCoord);
+                  const visB = isVisible(targetCoord);
+                  // Draw the arc only for front-side segments; render if any endpoint is visible
+                  if (visA || visB) {
+                    drawGreatCircleArc(
+                      sourceCoord,
+                      targetCoord,
+                      conn.color,
+                      conn.opacity,
+                      conn.lineProgress
                     );
-                    if (dotPos) {
-                      const gradient = context.createRadialGradient(
-                        dotPos[0],
-                        dotPos[1],
-                        0,
-                        dotPos[0],
-                        dotPos[1],
-                        2
-                      );
-                      gradient.addColorStop(0, conn.color);
-                      gradient.addColorStop(
-                        0.5,
-                        conn.color.replace("60%", "40%")
-                      );
-                      gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
-                      context.globalAlpha = conn.opacity;
-                      context.beginPath();
-                      context.arc(dotPos[0], dotPos[1], 4, 0, 2 * Math.PI);
-                      context.fillStyle = gradient;
-                      context.fill();
+                    // Draw moving dot only if its current position is visible
+                    if (conn.lineProgress > 0.3 && conn.progress <= 1) {
+                      const dot = projectAlongGreatCircle(sourceCoord, targetCoord, conn.progress);
+                      if (dot && isVisible(dot.coord)) {
+                        const dotPos = dot.pos;
+                        const gradient = context.createRadialGradient(
+                          dotPos[0],
+                          dotPos[1],
+                          0,
+                          dotPos[0],
+                          dotPos[1],
+                          0.4
+                        );
+                        gradient.addColorStop(0, conn.color);
+                        gradient.addColorStop(0.5, conn.color.replace("60%", "40%"));
+                        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
-                      // Add a bright core
-                      context.beginPath();
-                      context.arc(dotPos[0], dotPos[1], 2, 0, 2 * Math.PI);
-                      context.fillStyle = "white";
-                      context.fill();
-                      context.globalAlpha = 1;
+                        context.globalAlpha = conn.opacity;
+                        context.beginPath();
+                        context.arc(dotPos[0], dotPos[1], 4, 0, 2 * Math.PI);
+                        context.fillStyle = gradient;
+                        context.fill();
+
+                        context.beginPath();
+                        context.arc(dotPos[0], dotPos[1], 2, 0, 2 * Math.PI);
+                        context.fillStyle = "white";
+                        context.fill();
+                        context.globalAlpha = 1;
+                      }
                     }
                   }
                 }
               });
             }
 
-            function drawAnimatedArc(start, end, color, opacity, lineProgress) {
-              const midX = (start[0] + end[0]) / 2;
-              const midY = (start[1] + end[1]) / 2;
-              const distance = Math.sqrt(
-                Math.pow(end[0] - start[0], 2) + Math.pow(end[1] - start[1], 2)
-              );
-              const offset = distance * 0.2;
-
-              const controlX = midX;
-              const controlY = midY - offset;
-
-              // Draw the line growing from start point to current progress
-              context.globalAlpha = opacity * 0.8;
-
-              // Create path segments to draw progressively
-              const segments = 50; // Number of segments for smooth growth
-              const segmentsToRender = Math.floor(segments * lineProgress);
-
-              if (segmentsToRender > 0) {
-                context.beginPath();
-                context.moveTo(start[0], start[1]);
-
-                for (let i = 1; i <= segmentsToRender; i++) {
-                  const t = i / segments;
-                  const point = interpolateArc(start, end, t);
-                  context.lineTo(point[0], point[1]);
-                }
-
-                // If we're between segments, draw partial segment
-                if (lineProgress < 1) {
-                  const remainder = segments * lineProgress - segmentsToRender;
-                  if (remainder > 0) {
-                    const nextT = (segmentsToRender + remainder) / segments;
-                    const nextPoint = interpolateArc(start, end, nextT);
-                    context.lineTo(nextPoint[0], nextPoint[1]);
-                  }
-                }
-
-                context.strokeStyle = color;
-                context.lineWidth = 1;
-                context.stroke();
-
-                // Add glow effect
-                context.globalAlpha = opacity * 0.3;
-                context.lineWidth = 2;
-                context.stroke();
-              }
-
-              context.globalAlpha = 1;
+            // Project a point along the great-circle path and optionally lift it (for higher arc)
+            function projectAlongGreatCircle(sourceCoord, targetCoord, t) {
+              const interpolate = d3.geoInterpolate(sourceCoord, targetCoord);
+              const coord = interpolate(t);
+              const pos = projection(coord);
+              if (!pos) return null;
+              // Lift arc visually in screen space
+              const ARC_HEIGHT = 60; // px
+              const lift = Math.sin(Math.PI * t) * ARC_HEIGHT;
+              return { coord, pos: [pos[0], pos[1] - lift] };
             }
 
-            function interpolateArc(start, end, t) {
-              const midX = (start[0] + end[0]) / 2;
-              const midY = (start[1] + end[1]) / 2;
-              const distance = Math.sqrt(
-                Math.pow(end[0] - start[0], 2) + Math.pow(end[1] - start[1], 2)
-              );
-              const offset = distance * 0.2;
+            function drawGreatCircleArc(sourceCoord, targetCoord, color, opacity, lineProgress) {
+              const segments = 240;
+              const toRender = Math.max(1, Math.floor(segments * lineProgress));
 
-              const controlX = midX;
-              const controlY = midY - offset;
+              const centerLonLat = projection.invert([width / 2, height / 2]);
+              const fadeMargin = 0.18; // radians (~10deg) to fade at horizon
 
-              // Quadratic Bézier curve interpolation
-              const x =
-                Math.pow(1 - t, 2) * start[0] +
-                2 * (1 - t) * t * controlX +
-                Math.pow(t, 2) * end[0];
-              const y =
-                Math.pow(1 - t, 2) * start[1] +
-                2 * (1 - t) * t * controlY +
-                Math.pow(t, 2) * end[1];
+              let last = projectAlongGreatCircle(sourceCoord, targetCoord, 0);
+              for (let i = 1; i <= toRender; i++) {
+                const t = i / segments;
+                const p = projectAlongGreatCircle(sourceCoord, targetCoord, t);
+                if (!p || !last) { last = p; continue; }
 
-              return [x, y];
+                const dVis = d3.geoDistance(p.coord, centerLonLat);
+                const visible = dVis <= Math.PI / 1.5;
+                if (!visible) break; // stop drawing beyond the horizon so it disappears cleanly
+
+                const fade = Math.max(0, Math.min(1, (Math.PI / 2 - dVis + fadeMargin) / fadeMargin));
+
+                context.beginPath();
+                context.moveTo(last.pos[0], last.pos[1]);
+                context.lineTo(p.pos[0], p.pos[1]);
+                context.strokeStyle = color;
+                context.lineWidth = 1.2;
+                context.globalAlpha = opacity * (0.6 + 0.4 * fade);
+                context.stroke();
+
+                context.lineWidth = 3;
+                context.globalAlpha = (opacity * 0.2) * fade;
+                context.stroke();
+                context.globalAlpha = 1;
+
+                last = p;
+              }
             }
 
             function isVisible(coordinates) {
