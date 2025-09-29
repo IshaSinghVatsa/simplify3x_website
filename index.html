@@ -1208,6 +1208,21 @@
             // Initialize when page loads
             init();
           </script>
+          <script>
+           const talkBox = document.getElementById("lets-talk");
+const closeBtn = document.querySelector(".talk-close");
+
+closeBtn.addEventListener("click", () => {
+  talkBox.classList.add("hide");
+  talkBox.addEventListener(
+    "transitionend",
+    () => {
+      talkBox.style.display = "none";
+    },
+    { once: true }
+  );
+});
+          </script>
 
           <!-- <div class="purpose-map">
             
