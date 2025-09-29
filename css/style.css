@@ -405,7 +405,7 @@ p {
     /* makes it act like background-size: cover */
     z-index: 0;
     /* push it behind content */
-    animation: heroSpinX 30s linear infinite;
+    /* animation: heroSpinX 30s linear infinite; */
     transform-origin: 50% 50%;
 }
 

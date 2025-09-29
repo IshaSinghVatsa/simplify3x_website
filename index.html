@@ -204,74 +204,212 @@
       </div>
     </section>
 
-  <script>
-    // Minimal Three.js procedural mesh background for hero
-    (function () {
-      try {
-        const mount = document.getElementById('hero-canvas');
-        if (!mount) return;
+    <script>
+      (function () {
+        try {
+          const mount = document.getElementById("hero-canvas");
+          console.log("the mount is", mount);
+          if (!mount) return;
 
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(55, mount.clientWidth / mount.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: false });
-        renderer.setPixelRatio(window.devicePixelRatio || 1);
-        renderer.setSize(mount.clientWidth || mount.offsetWidth, mount.clientHeight || mount.offsetHeight);
-        mount.innerHTML = '';
-        mount.appendChild(renderer.domElement);
+          let scene, camera, renderer, particles, particlePositions;
+          let clock = new THREE.Clock();
+          let mouseX = 0,
+            mouseY = 0;
+          let isMouseDown = false;
+          let targetRotationX = -0.3,
+            targetRotationY = 0;
 
-        // Gradient background via CSS overlay from existing .hero rules; keep scene alpha
-        const group = new THREE.Group();
-        scene.add(group);
+          const gridSize = 150;
+          const spacing = 0.4;
+          const waveHeight = 2.5;
+          const waveSpeed = 2.5;
 
-        // Create flowing wireframe plane
-        const width = 28, height = 20, segX = 70, segY = 45;
-        const geo = new THREE.PlaneGeometry(width, height, segX, segY);
-        const mat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.25 });
-        const mesh = new THREE.Mesh(geo, mat);
-        mesh.rotation.x = -Math.PI / 3.4;
-        group.add(mesh);
+          const primaryColor = new THREE.Color("#ff3300");
+          const secondaryColor = new THREE.Color("#ffaa00");
+          const bgColor = "#220000";
 
-        // Subtle dots as Points overlay
-        const pGeo = new THREE.BufferGeometry().setFromPoints(geo.vertices || []);
-        const pMat = new THREE.PointsMaterial({ color: 0x99cfff, size: 0.02, transparent: true, opacity: 0.45 });
-        const points = new THREE.Points(geo, pMat);
-        points.rotation.copy(mesh.rotation);
-        group.add(points);
+          init();
+          console.log("calling animate");
+          animate();
 
-        camera.position.set(0, 5.2, 20);
+          function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(bgColor);
+            scene.fog = new THREE.Fog(bgColor, 15, 40);
 
-        // Animate waves
-        const original = geo.attributes.position.array.slice();
-        let t = 0;
-        function animate() {
-          requestAnimationFrame(animate);
-          t += 0.005;
-          const pos = geo.attributes.position.array;
-          for (let i = 0; i < pos.length; i += 3) {
-            const ix = i / 3 % (segX + 1);
-            const iy = Math.floor(i / 3 / (segX + 1));
-            pos[i + 2] = Math.sin(ix * 0.22 + t) * 0.32 + Math.cos(iy * 0.28 + t * 1.1) * 0.22;
+            camera = new THREE.PerspectiveCamera(
+              60,
+              mount.clientWidth / mount.clientHeight,
+              0.1,
+              100
+            );
+            camera.position.set(18, 18, 18);
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({
+              antialias: true,
+              alpha: true,
+              powerPreference: "high-performance",
+            });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(mount.clientWidth, mount.clientHeight);
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
+
+            mount.innerHTML = ""; // clear old content
+            mount.appendChild(renderer.domElement);
+
+            createParticleSystem();
+
+            window.addEventListener("resize", onWindowResize, false);
+            window.addEventListener("mousemove", onMouseMove, false);
+            window.addEventListener(
+              "mousedown",
+              () => (isMouseDown = true),
+              false
+            );
+            window.addEventListener(
+              "mouseup",
+              () => (isMouseDown = false),
+              false
+            );
+            window.addEventListener("wheel", onMouseWheel, false);
+            window.addEventListener("keydown", onKeyDown, false);
+
+            // ✅ Force first resize adjustment right after setup
+            onWindowResize();
           }
-          geo.attributes.position.needsUpdate = true;
-          group.rotation.z += 0.0006;
-          renderer.render(scene, camera);
-        }
 
-        function onResize() {
-          const rect = mount.getBoundingClientRect();
-          const w = rect.width, h = rect.height > 0 ? rect.height : window.innerHeight * 0.8;
-          renderer.setSize(w, h);
-          camera.aspect = w / h; camera.updateProjectionMatrix();
+          function createParticleSystem() {
+            const geometry = new THREE.BufferGeometry();
+            const positions = [];
+            const colors = [];
+            const sizes = [];
+
+            for (let i = 0; i < gridSize; i++) {
+              for (let j = 0; j < gridSize; j++) {
+                positions.push(
+                  (i - gridSize / 2) * spacing,
+                  0,
+                  (j - gridSize / 2) * spacing
+                );
+
+                const t = Math.random() * 0.7;
+                const color = primaryColor.clone().lerp(secondaryColor, t);
+                colors.push(color.r, color.g, color.b);
+
+                sizes.push(Math.random() * 0.1 + 0.08);
+              }
+            }
+
+            particlePositions = new Float32Array(positions);
+            geometry.setAttribute(
+              "position",
+              new THREE.BufferAttribute(particlePositions, 3)
+            );
+            geometry.setAttribute(
+              "color",
+              new THREE.BufferAttribute(new Float32Array(colors), 3)
+            );
+            geometry.setAttribute(
+              "size",
+              new THREE.BufferAttribute(new Float32Array(sizes), 1)
+            );
+
+            const material = new THREE.PointsMaterial({
+              size: 0.15,
+              vertexColors: true,
+              transparent: true,
+              opacity: 0.9,
+              blending: THREE.AdditiveBlending,
+              sizeAttenuation: true,
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+          }
+
+          function onWindowResize() {
+            const rect = mount.getBoundingClientRect();
+            const w = rect.width || window.innerWidth;
+            const h = rect.height || window.innerHeight;
+
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+          }
+
+          function onMouseMove(event) {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            if (isMouseDown) {
+              targetRotationY += event.movementX * 0.01;
+              targetRotationX += event.movementY * 0.01;
+              targetRotationX = Math.max(
+                -Math.PI / 2,
+                Math.min(Math.PI / 2, targetRotationX)
+              );
+            }
+          }
+
+          function onMouseWheel(event) {
+            camera.position.z += event.deltaY * 0.01;
+            camera.position.z = Math.max(5, Math.min(30, camera.position.z));
+          }
+
+          function onKeyDown(event) {
+            if (event.code === "KeyR") {
+              targetRotationX = -0.3;
+              targetRotationY = 0;
+              camera.position.set(18, 18, 18);
+            }
+          }
+
+          function animate() {
+            requestAnimationFrame(animate);
+
+            const time = clock.getElapsedTime() * waveSpeed;
+
+            let index = 0;
+            for (let i = 0; i < gridSize; i++) {
+              for (let j = 0; j < gridSize; j++) {
+                const x = (i - gridSize / 2) * spacing;
+                const z = (j - gridSize / 2) * spacing;
+
+                const waveValue =
+                  (Math.sin(x * 1.5 + time) * 0.5 +
+                    Math.cos(z * 1.2 + time * 1.3) * 0.3 +
+                    Math.sin((x + z) * 0.7 + time * 0.7) * 0.2) *
+                  waveHeight;
+
+                const mouseInfluence =
+                  1 +
+                  (Math.sin(mouseX * 10) * 0.3 + Math.cos(mouseY * 10) * 0.3);
+
+                particlePositions[index + 1] = waveValue * mouseInfluence;
+                index += 3;
+              }
+            }
+
+            particles.geometry.attributes.position.needsUpdate = true;
+
+            particles.rotation.y +=
+              (targetRotationY - particles.rotation.y) * 0.05;
+            particles.rotation.x +=
+              (targetRotationX - particles.rotation.x) * 0.05;
+
+            const pulse = Math.sin(time * 2) * 0.1 + 0.9;
+            particles.material.size = 0.15 * pulse;
+
+            renderer.render(scene, camera);
+          }
+        } catch (e) {
+          console.warn("Hero particle background disabled:", e);
         }
-        window.addEventListener('resize', onResize);
-        onResize();
-        animate();
-      } catch (e) {
-        // Fail silently if three is not available
-        console.warn('Hero three background disabled:', e);
-      }
-    })();
-  </script>
+      })();
+    </script>
+
     <!-- Clients Section -->
 
     <section class="clients">
@@ -653,7 +791,7 @@
             let canvas, context, width, height;
             let projection, path;
             let world, countries, continent;
-            let rotation = [-101.6869, -3.1390];
+            let rotation = [-101.6869, -3.139];
             let autoRotate = true;
             let nodes = [];
             let connections = [];
