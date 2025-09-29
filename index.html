@@ -92,7 +92,9 @@
                     <div class="dropdown-col">
                       <a href="about.html" class="dropdown-item">About Us</a>
                       <a href="insights.html" class="dropdown-item">Insights</a>
-                      <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
+                      <a href="life.html" class="dropdown-item"
+                        >Life @ Simplify3x</a
+                      >
                     </div>
                   </div>
                 </li>
@@ -584,7 +586,7 @@
             let canvas, context, width, height;
             let projection, path;
             let world, countries, continent;
-            let rotation = [0, 0];
+            let rotation = [-101.6869, -3.1390];
             let autoRotate = true;
             let nodes = [];
             let connections = [];
@@ -649,8 +651,9 @@
               // Setup D3 projection
               projection = d3
                 .geoOrthographic()
-                .scale(width / 2.2)
-                .translate([width / 2.2, height / 2]);
+                .scale(width / 2)
+                .translate([width / 2, height / 2])
+                .clipAngle(90);
 
               path = d3.geoPath(projection, context);
             }
@@ -722,7 +725,8 @@
                   id: i,
                   name: place.name,
                   coordinates: place.coord,
-                  color: `hsl(${i * 72 + 180}, 80%, 70%)`, // Evenly distributed hues
+                  //   color: `hsl(${i * 72 + 180}, 80%, 70%)`, // Evenly distributed hues
+                  color: `#EE7C55`,
                   pulse: Math.random() * Math.PI * 2,
                 });
               });
@@ -791,7 +795,7 @@
                 target,
                 progress: 0,
                 speed: 0.0015, // slower + consistent speed
-                color: `hsl(${hue}, 80%, 60%)`,
+                color: `#00ffff`,
                 opacity: 1,
                 lineProgress: 0,
                 id: Date.now() + Math.random(),
@@ -872,13 +876,15 @@
                 context.stroke();
               }
 
+              drawNodes();
+
+              drawConnections();
+
               drawMarkers();
               // Draw nodes
-              drawNodes();
 
               // Draw orange map markers
               // Draw connections
-              drawConnections();
             }
 
             function drawWireframe() {
@@ -948,6 +954,12 @@
                   context.fillStyle = gradient;
                   context.fill();
 
+                  context.beginPath();
+                  context.arc(pos[0], pos[1], pulseSize * 2.5, 0, 2 * Math.PI);
+                  context.strokeStyle = node.color;
+                  context.lineWidth = 1;
+                  context.stroke();
+
                   // Core dot with city name on hover
                   context.beginPath();
                   context.arc(pos[0], pos[1], pulseSize, 0, 2 * Math.PI);
@@ -987,23 +999,6 @@
                     currentHeight
                   );
                   context.restore();
-
-                  // Glow under marker
-                  const gradient = context.createRadialGradient(
-                    pos[0],
-                    pos[1],
-                    0,
-                    pos[0],
-                    pos[1],
-                    15
-                  );
-                  gradient.addColorStop(0, "rgba(255, 152, 0, 0.4)");
-                  gradient.addColorStop(1, "rgba(255, 152, 0, 0)");
-
-                  context.beginPath();
-                  context.arc(pos[0], pos[1], 15, 0, 2 * Math.PI);
-                  context.fillStyle = gradient;
-                  context.fill();
                 }
               });
             }
@@ -1115,7 +1110,7 @@
                 context.globalAlpha = opacity * (0.6 + 0.4 * fade);
                 context.stroke();
 
-                context.lineWidth = 3;
+                context.lineWidth = 1;
                 context.globalAlpha = opacity * 0.2 * fade;
                 context.stroke();
                 context.globalAlpha = 1;
