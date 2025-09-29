@@ -583,7 +583,7 @@
             // Global variables
             let canvas, context, width, height;
             let projection, path;
-            let world, countries;
+            let world, countries, continent;
             let rotation = [0, 0];
             let autoRotate = true;
             let nodes = [];
@@ -613,44 +613,110 @@
             }
 
             let markerImage = null;
-
             function loadMarkerImage() {
               return new Promise((resolve) => {
-                const markerCanvas = document.createElement("canvas");
-                const markerCtx = markerCanvas.getContext("2d");
-                markerCanvas.width = 20;
-                markerCanvas.height = 30;
+                const img = new Image();
+                img.onload = function () {
+                  markerImage = img;
+                  resolve();
+                };
 
-                // Clear
-                markerCtx.clearRect(0, 0, 20, 30);
-
-                // Pin shape (teardrop)
-                markerCtx.beginPath();
-                markerCtx.moveTo(10, 28); // bottom tip
-                markerCtx.quadraticCurveTo(0, 15, 10, 3);
-                markerCtx.quadraticCurveTo(20, 15, 10, 28);
-                markerCtx.closePath();
-
-                // Fill red
-                markerCtx.fillStyle = "#d23f31";
-                markerCtx.fill();
-
-                // Border
-                markerCtx.lineWidth = 1.5;
-                markerCtx.strokeStyle = "#a82d26";
-                markerCtx.stroke();
-
-                // Inner white circle
-                markerCtx.beginPath();
-                markerCtx.arc(10, 12, 3.5, 0, Math.PI * 2, true);
-                markerCtx.fillStyle = "#ffffff";
-                markerCtx.fill();
-                markerCtx.closePath();
-
-                markerImage = markerCanvas;
-                resolve();
+                // Use your own image here:
+                img.src = "assets/images/location.svg"; // <-- Replace with your image path
               });
             }
+
+            // function loadMarkerImage() {
+            //   return new Promise((resolve) => {
+            //     const markerCanvas = document.createElement("canvas");
+            //     const markerCtx = markerCanvas.getContext("2d");
+            //     markerCanvas.width = 20;
+            //     markerCanvas.height = 30;
+
+            //     // Clear
+            //     markerCtx.clearRect(0, 0, 20, 30);
+
+            //     // Pin shape (teardrop)
+            //     markerCtx.beginPath();
+            //     markerCtx.moveTo(10, 28); // bottom tip
+            //     markerCtx.quadraticCurveTo(0, 15, 10, 3);
+            //     markerCtx.quadraticCurveTo(20, 15, 10, 28);
+            //     markerCtx.closePath();
+
+            //     // Fill red
+            //     markerCtx.fillStyle = "#d23f31";
+            //     markerCtx.fill();
+
+            //     // Border
+            //     markerCtx.lineWidth = 1.5;
+            //     markerCtx.strokeStyle = "#a82d26";
+            //     markerCtx.stroke();
+
+            //     // Inner white circle
+            //     markerCtx.beginPath();
+            //     markerCtx.arc(10, 12, 3.5, 0, Math.PI * 2, true);
+            //     markerCtx.fillStyle = "#ffffff";
+            //     markerCtx.fill();
+            //     markerCtx.closePath();
+
+            //     markerImage = markerCanvas;
+            //     resolve();
+            //   });
+            // }
+
+            // function loadMarkerImage() {
+            //   return new Promise((resolve) => {
+            //     const markerCanvas = document.createElement("canvas");
+            //     const markerCtx = markerCanvas.getContext("2d");
+            //     const w = 24;
+            //     const h = 36;
+
+            //     markerCanvas.width = w;
+            //     markerCanvas.height = h;
+
+            //     // Clear canvas
+            //     markerCtx.clearRect(0, 0, w, h);
+
+            //     // Draw a symmetric teardrop pin using bezier curves
+            //     markerCtx.beginPath();
+            //     markerCtx.moveTo(w / 2, h); // Tip of the pin
+            //     markerCtx.bezierCurveTo(
+            //       w * 0.1,
+            //       h * 0.65,
+            //       w * 0.1,
+            //       h * 0.2,
+            //       w / 2,
+            //       h * 0.1
+            //     );
+            //     markerCtx.bezierCurveTo(
+            //       w * 0.9,
+            //       h * 0.2,
+            //       w * 0.9,
+            //       h * 0.65,
+            //       w / 2,
+            //       h
+            //     );
+            //     markerCtx.closePath();
+
+            //     // Fill main pin
+            //     markerCtx.fillStyle = "#d23f31"; // Red fill
+            //     markerCtx.fill();
+
+            //     // Stroke border
+            //     markerCtx.lineWidth = 1.5;
+            //     markerCtx.strokeStyle = "#a82d26"; // Darker red border
+            //     markerCtx.stroke();
+
+            //     // Inner white circle
+            //     markerCtx.beginPath();
+            //     markerCtx.arc(w / 2, h * 0.35, 4, 0, Math.PI * 2, true);
+            //     markerCtx.fillStyle = "#ffffff";
+            //     markerCtx.fill();
+
+            //     markerImage = markerCanvas;
+            //     resolve();
+            //   });
+            // }
 
             function setupCanvas() {
               canvas = d3.select("#globe").node();
@@ -662,7 +728,7 @@
 
               console.log("window.innwerheight", window.innerHeight);
               if (window.innerHeight < 900) {
-                height=height*1.2;
+                height = height * 1.2;
                 canvas.height = height * 1.5;
                 canvas.width = width * 1.3;
               } else {
@@ -731,6 +797,7 @@
                   worldData,
                   worldData.objects.countries
                 );
+                
               } catch (error) {
                 console.log("Using fallback world data");
                 createFallbackWorld();
@@ -906,14 +973,25 @@
                 context.fill();
 
                 // No borders drawn - removed border drawing code
+                // Now add slight white border
+                context.beginPath();
+                path(countries);
+                context.lineWidth = 0.3;
+                context.strokeStyle = "rgba(255, 255, 255, 0.2)";
+                context.stroke();
+
+                // context.beginPath();
+                // path(continent);
+                // context.lineWidth = 0.5;
+                // context.strokeStyle = "rgba(255, 255, 255, 0.6)";
+                // context.stroke();
               }
 
+              drawMarkers();
               // Draw nodes
               drawNodes();
 
               // Draw orange map markers
-              drawMarkers();
-
               // Draw connections
               drawConnections();
             }
@@ -959,13 +1037,30 @@
               }
             }
 
+            //             function drawNodes() {
+            //   nodes.forEach((node) => {
+            //     const pos = projection(node.coordinates);
+            //     if (pos && isVisible(node.coordinates)) {
+            //       // node.pulse += 0.1; // still update pulse if you use it elsewhere
+
+            //       // Skip drawing pulse glow and core dot
+
+            //       // Optional: still show city name
+            //       context.fillStyle = "rgba(255, 255, 255, 0.8)";
+            //       context.font = "10px Arial";
+            //       context.textAlign = "center";
+            //       context.fillText(node.name, pos[0], pos[1] - 24); // Positioned above marker
+            //     }
+            //   });
+            // }
+
             function drawNodes() {
               nodes.forEach((node) => {
                 const pos = projection(node.coordinates);
                 if (pos && isVisible(node.coordinates)) {
                   // Pulsing effect
                   node.pulse += 0.1;
-                  const pulseSize = 2 + Math.sin(node.pulse) * 0.5;
+                  const pulseSize = 1 + Math.sin(node.pulse) * 0.1;
 
                   // Glow effect
                   const gradient = context.createRadialGradient(
@@ -974,7 +1069,7 @@
                     0,
                     pos[0],
                     pos[1],
-                    pulseSize * 3
+                    pulseSize * 2
                   );
                   gradient.addColorStop(0, node.color);
                   gradient.addColorStop(0.3, node.color.replace("70%", "50%"));
@@ -995,7 +1090,7 @@
                   context.fillStyle = "rgba(255, 255, 255, 0.8)";
                   context.font = "10px Arial";
                   context.textAlign = "center";
-                  context.fillText(node.name, pos[0], pos[1] - pulseSize - 8);
+                  context.fillText(node.name, pos[0], pos[1] + pulseSize + 12);
                 }
               });
             }
@@ -1079,7 +1174,7 @@
                         0,
                         dotPos[0],
                         dotPos[1],
-                        6
+                        2
                       );
                       gradient.addColorStop(0, conn.color);
                       gradient.addColorStop(
@@ -1145,12 +1240,12 @@
                 }
 
                 context.strokeStyle = color;
-                context.lineWidth = 2;
+                context.lineWidth = 1;
                 context.stroke();
 
                 // Add glow effect
                 context.globalAlpha = opacity * 0.3;
-                context.lineWidth = 4;
+                context.lineWidth = 2;
                 context.stroke();
               }
 
