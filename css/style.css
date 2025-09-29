@@ -1123,6 +1123,7 @@ p {
 .purpose {
 background-color: #0a2540;
     padding: 80px 0 0px 0;
+    overflow: auto;
 }
 
 .purpose-content {

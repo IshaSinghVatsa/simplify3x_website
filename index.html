@@ -597,7 +597,7 @@
               { name: "Bangalore, India", coord: [77.5946, 12.9716] },
               { name: "Nairobi, Kenya", coord: [36.8219, -1.2921] },
               { name: "Kuala Lumpur, Malaysia", coord: [101.6869, 3.139] },
-              { name: "Washington DC, USA", coord: [-77.0369, 38.9072] },
+              { name: "Atlanta, USA", coord: [-84.388, 33.749] },
               { name: "Dubai, UAE", coord: [55.2708, 25.2048] },
             ];
 
@@ -625,99 +625,6 @@
                 img.src = "assets/images/location.svg"; // <-- Replace with your image path
               });
             }
-
-            // function loadMarkerImage() {
-            //   return new Promise((resolve) => {
-            //     const markerCanvas = document.createElement("canvas");
-            //     const markerCtx = markerCanvas.getContext("2d");
-            //     markerCanvas.width = 20;
-            //     markerCanvas.height = 30;
-
-            //     // Clear
-            //     markerCtx.clearRect(0, 0, 20, 30);
-
-            //     // Pin shape (teardrop)
-            //     markerCtx.beginPath();
-            //     markerCtx.moveTo(10, 28); // bottom tip
-            //     markerCtx.quadraticCurveTo(0, 15, 10, 3);
-            //     markerCtx.quadraticCurveTo(20, 15, 10, 28);
-            //     markerCtx.closePath();
-
-            //     // Fill red
-            //     markerCtx.fillStyle = "#d23f31";
-            //     markerCtx.fill();
-
-            //     // Border
-            //     markerCtx.lineWidth = 1.5;
-            //     markerCtx.strokeStyle = "#a82d26";
-            //     markerCtx.stroke();
-
-            //     // Inner white circle
-            //     markerCtx.beginPath();
-            //     markerCtx.arc(10, 12, 3.5, 0, Math.PI * 2, true);
-            //     markerCtx.fillStyle = "#ffffff";
-            //     markerCtx.fill();
-            //     markerCtx.closePath();
-
-            //     markerImage = markerCanvas;
-            //     resolve();
-            //   });
-            // }
-
-            // function loadMarkerImage() {
-            //   return new Promise((resolve) => {
-            //     const markerCanvas = document.createElement("canvas");
-            //     const markerCtx = markerCanvas.getContext("2d");
-            //     const w = 24;
-            //     const h = 36;
-
-            //     markerCanvas.width = w;
-            //     markerCanvas.height = h;
-
-            //     // Clear canvas
-            //     markerCtx.clearRect(0, 0, w, h);
-
-            //     // Draw a symmetric teardrop pin using bezier curves
-            //     markerCtx.beginPath();
-            //     markerCtx.moveTo(w / 2, h); // Tip of the pin
-            //     markerCtx.bezierCurveTo(
-            //       w * 0.1,
-            //       h * 0.65,
-            //       w * 0.1,
-            //       h * 0.2,
-            //       w / 2,
-            //       h * 0.1
-            //     );
-            //     markerCtx.bezierCurveTo(
-            //       w * 0.9,
-            //       h * 0.2,
-            //       w * 0.9,
-            //       h * 0.65,
-            //       w / 2,
-            //       h
-            //     );
-            //     markerCtx.closePath();
-
-            //     // Fill main pin
-            //     markerCtx.fillStyle = "#d23f31"; // Red fill
-            //     markerCtx.fill();
-
-            //     // Stroke border
-            //     markerCtx.lineWidth = 1.5;
-            //     markerCtx.strokeStyle = "#a82d26"; // Darker red border
-            //     markerCtx.stroke();
-
-            //     // Inner white circle
-            //     markerCtx.beginPath();
-            //     markerCtx.arc(w / 2, h * 0.35, 4, 0, Math.PI * 2, true);
-            //     markerCtx.fillStyle = "#ffffff";
-            //     markerCtx.fill();
-
-            //     markerImage = markerCanvas;
-            //     resolve();
-            //   });
-            // }
-
             function setupCanvas() {
               canvas = d3.select("#globe").node();
               context = canvas.getContext("2d");
@@ -749,32 +656,32 @@
             }
 
             function createStarPattern() {
-              // Diagonal micro-stripe pattern for country fill
               const patternCanvas = document.createElement("canvas");
               const patternContext = patternCanvas.getContext("2d");
               const SIZE = 18;
               patternCanvas.width = SIZE;
               patternCanvas.height = SIZE;
 
-              patternContext.clearRect(0, 0, SIZE, SIZE);
-             
-              patternContext.strokeStyle = "rgba( 0, 105, 148, 0.6)";
-              patternContext.lineWidth = 1.2;
-              patternContext.lineCap = "round";
+              // Clear with transparent background
+              patternContext.clearRect(0, 0, 20, 20);
+              patternContext.fillStyle = "rgba(0, 120, 255, 0.6)";
 
-              const step = 6;
-              for (let y = 2; y < SIZE + step; y += step) {
-                for (let x = -step; x < SIZE + step; x += step) {
+              // PATTERN 5: Grid of Small Stars
+
+              const starSize = 0.6;
+              const spacing = 4;
+
+              for (let x = 2; x < 20; x += spacing) {
+                for (let y = 2; y < 20; y += spacing) {
                   patternContext.beginPath();
-                  patternContext.moveTo(x + 1, y + 3);
-                  patternContext.lineTo(x + 4, y);
-                  patternContext.stroke();
+                  patternContext.arc(x, y, starSize, 0, Math.PI * 2);
+                  patternContext.fill();
                 }
               }
 
+              // Create pattern from the canvas
               starPattern = context.createPattern(patternCanvas, "repeat");
             }
-
             async function loadWorldData() {
               try {
                 const worldData = await d3.json(
@@ -785,7 +692,6 @@
                   worldData,
                   worldData.objects.countries
                 );
-                
               } catch (error) {
                 console.log("Using fallback world data");
                 createFallbackWorld();
@@ -860,16 +766,6 @@
               window.addEventListener("resize", () => {
                 setupCanvas();
               });
-
-              // Add button event listeners
-              // document.getElementById('toggleRotation').addEventListener('click', function() {
-              //     autoRotate = !autoRotate;
-              //     this.textContent = autoRotate ? 'Pause Rotation' : 'Resume Rotation';
-              // });
-
-              // document.getElementById('addConnection').addEventListener('click', function() {
-              //     createConnection();
-              // });
             }
 
             function createConnection() {
@@ -881,19 +777,26 @@
                 target = nodes[Math.floor(Math.random() * nodes.length)];
               } while (target === source);
 
+              // 🔴 Check if a connection already exists (A→B or B→A)
+              const exists = connections.some(
+                (c) =>
+                  (c.source === source && c.target === target) ||
+                  (c.source === target && c.target === source)
+              );
+              if (exists) return; // skip creating duplicate
+
               const hue = Math.random() * 360;
               connections.push({
                 source,
                 target,
                 progress: 0,
-                speed: 0.002 + Math.random() * 0.003, // Even slower for smoother growth
+                speed: 0.0015, // slower + consistent speed
                 color: `hsl(${hue}, 80%, 60%)`,
                 opacity: 1,
-                lineProgress: 0, // New property for line drawing animation
+                lineProgress: 0,
                 id: Date.now() + Math.random(),
               });
             }
-
             function updateConnections() {
               // Create new connections randomly
               if (Math.random() < 0.1 && connections.length < maxConnections) {
@@ -904,7 +807,7 @@
               connections.forEach((conn, index) => {
                 // First phase: draw the line from source to target (line grows smoothly)
                 if (conn.lineProgress < 1) {
-                  conn.lineProgress += conn.speed * 2; // Line draws at steady pace
+                  conn.lineProgress += conn.speed * 1.5; // Line draws at steady pace
                   if (conn.lineProgress > 1) conn.lineProgress = 1;
                 }
 
@@ -967,12 +870,6 @@
                 context.lineWidth = 0.2;
                 context.strokeStyle = "#fff";
                 context.stroke();
-
-                // context.beginPath();
-                // path(continent);
-                // context.lineWidth = 0.5;
-                // context.strokeStyle = "rgba(255, 255, 255, 0.6)";
-                // context.stroke();
               }
 
               drawMarkers();
@@ -1024,23 +921,6 @@
                 context.stroke();
               }
             }
-
-            //             function drawNodes() {
-            //   nodes.forEach((node) => {
-            //     const pos = projection(node.coordinates);
-            //     if (pos && isVisible(node.coordinates)) {
-            //       // node.pulse += 0.1; // still update pulse if you use it elsewhere
-
-            //       // Skip drawing pulse glow and core dot
-
-            //       // Optional: still show city name
-            //       context.fillStyle = "rgba(255, 255, 255, 0.8)";
-            //       context.font = "10px Arial";
-            //       context.textAlign = "center";
-            //       context.fillText(node.name, pos[0], pos[1] - 24); // Positioned above marker
-            //     }
-            //   });
-            // }
 
             function drawNodes() {
               nodes.forEach((node) => {
@@ -1149,35 +1029,36 @@
                     );
 
                     // Draw moving dot only if its current position is visible
-                    if (conn.lineProgress > 0.3 && conn.progress <= 1) {
-                      const dot = projectAlongGreatCircle(sourceCoord, targetCoord, conn.progress);
-                      if (dot && isVisible(dot.coord)) {
-                        const dotPos = dot.pos;
-                        const gradient = context.createRadialGradient(
-                          dotPos[0],
-                          dotPos[1],
-                          0,
-                          dotPos[0],
-                          dotPos[1],
-                          0.4
-                        );
-                        gradient.addColorStop(0, conn.color);
-                        gradient.addColorStop(0.5, conn.color.replace("60%", "40%"));
-                        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+                    //     if (conn.lineProgress > 0.3 && conn.progress <= 1) {
+                    //       const dot = projectAlongGreatCircle(sourceCoord, targetCoord, conn.progress);
+                    //       if (dot && isVisible(dot.coord)) {
+                    //         const dotPos = dot.pos;
+                    //         const gradient = context.createRadialGradient(
+                    //           dotPos[0],
+                    //           dotPos[1],
+                    //           0,
+                    //           dotPos[0],
+                    //           dotPos[1],
+                    //           0.4
+                    //         );
+                    //         gradient.addColorStop(0, conn.color);
+                    //         gradient.addColorStop(0.5, conn.color.replace("60%", "40%"));
+                    //         gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
-                        context.globalAlpha = conn.opacity;
-                        context.beginPath();
-                        context.arc(dotPos[0], dotPos[1], 4, 0, 2 * Math.PI);
-                        context.fillStyle = gradient;
-                        context.fill();
+                    //         context.globalAlpha = conn.opacity;
+                    //         context.beginPath();
+                    //         context.arc(dotPos[0], dotPos[1], 4, 0, 2 * Math.PI);
+                    //         context.fillStyle = gradient;
+                    //         context.fill();
 
-                        context.beginPath();
-                        context.arc(dotPos[0], dotPos[1], 2, 0, 2 * Math.PI);
-                        context.fillStyle = "white";
-                        context.fill();
-                        context.globalAlpha = 1;
-                      }
-                    }
+                    //         context.beginPath();
+                    //         context.arc(dotPos[0], dotPos[1], 2, 0, 2 * Math.PI);
+                    //         context.fillStyle = "white";
+                    //         context.fill();
+                    //         context.globalAlpha = 1;
+                    //       }
+                    //     }
+                    //
                   }
                 }
               });
@@ -1195,7 +1076,13 @@
               return { coord, pos: [pos[0], pos[1] - lift] };
             }
 
-            function drawGreatCircleArc(sourceCoord, targetCoord, color, opacity, lineProgress) {
+            function drawGreatCircleArc(
+              sourceCoord,
+              targetCoord,
+              color,
+              opacity,
+              lineProgress
+            ) {
               const segments = 240;
               const toRender = Math.max(1, Math.floor(segments * lineProgress));
 
@@ -1206,13 +1093,19 @@
               for (let i = 1; i <= toRender; i++) {
                 const t = i / segments;
                 const p = projectAlongGreatCircle(sourceCoord, targetCoord, t);
-                if (!p || !last) { last = p; continue; }
+                if (!p || !last) {
+                  last = p;
+                  continue;
+                }
 
                 const dVis = d3.geoDistance(p.coord, centerLonLat);
                 const visible = dVis <= Math.PI / 1.5;
                 if (!visible) break; // stop drawing beyond the horizon so it disappears cleanly
 
-                const fade = Math.max(0, Math.min(1, (Math.PI / 2 - dVis + fadeMargin) / fadeMargin));
+                const fade = Math.max(
+                  0,
+                  Math.min(1, (Math.PI / 2 - dVis + fadeMargin) / fadeMargin)
+                );
 
                 context.beginPath();
                 context.moveTo(last.pos[0], last.pos[1]);
@@ -1223,7 +1116,7 @@
                 context.stroke();
 
                 context.lineWidth = 3;
-                context.globalAlpha = (opacity * 0.2) * fade;
+                context.globalAlpha = opacity * 0.2 * fade;
                 context.stroke();
                 context.globalAlpha = 1;
 
