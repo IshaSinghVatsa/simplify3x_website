@@ -12,7 +12,6 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/three@0.151.3/build/three.min.js"></script>
-    <script src="https://unpkg.com/globe.gl@^2.32.0/dist/globe.gl.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
     <script src="https://unpkg.com/d3-geo@3"></script>
     <style>
@@ -121,7 +120,7 @@
               </ul>
             </nav>
             <div class="header-actions">
-              <a href="#contact" class="btn btn-primary">
+              <a href="contact.html" class="btn btn-primary">
                 <span class="btn-text">Contact now</span>
                 <span class="btn-text-hover">Contact now</span>
               </a>
@@ -137,7 +136,7 @@
             <source src="assets/images/background-1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video> -->
-      <img src="assets/images/image (4).png" alt="" class="hero-video" />
+      <div id="hero-canvas" class="hero-video"></div>
       <!-- <img src="assets/images/dots-2.png" alt="" class="hero-video-2"> -->
       <div class="container">
         <div class="hero-content">
@@ -203,6 +202,74 @@
       </div>
     </section>
 
+  <script>
+    // Minimal Three.js procedural mesh background for hero
+    (function () {
+      try {
+        const mount = document.getElementById('hero-canvas');
+        if (!mount) return;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(55, mount.clientWidth / mount.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: false });
+        renderer.setPixelRatio(window.devicePixelRatio || 1);
+        renderer.setSize(mount.clientWidth || mount.offsetWidth, mount.clientHeight || mount.offsetHeight);
+        mount.innerHTML = '';
+        mount.appendChild(renderer.domElement);
+
+        // Gradient background via CSS overlay from existing .hero rules; keep scene alpha
+        const group = new THREE.Group();
+        scene.add(group);
+
+        // Create flowing wireframe plane
+        const width = 28, height = 20, segX = 70, segY = 45;
+        const geo = new THREE.PlaneGeometry(width, height, segX, segY);
+        const mat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.25 });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.rotation.x = -Math.PI / 3.4;
+        group.add(mesh);
+
+        // Subtle dots as Points overlay
+        const pGeo = new THREE.BufferGeometry().setFromPoints(geo.vertices || []);
+        const pMat = new THREE.PointsMaterial({ color: 0x99cfff, size: 0.02, transparent: true, opacity: 0.45 });
+        const points = new THREE.Points(geo, pMat);
+        points.rotation.copy(mesh.rotation);
+        group.add(points);
+
+        camera.position.set(0, 5.2, 20);
+
+        // Animate waves
+        const original = geo.attributes.position.array.slice();
+        let t = 0;
+        function animate() {
+          requestAnimationFrame(animate);
+          t += 0.005;
+          const pos = geo.attributes.position.array;
+          for (let i = 0; i < pos.length; i += 3) {
+            const ix = i / 3 % (segX + 1);
+            const iy = Math.floor(i / 3 / (segX + 1));
+            pos[i + 2] = Math.sin(ix * 0.22 + t) * 0.32 + Math.cos(iy * 0.28 + t * 1.1) * 0.22;
+          }
+          geo.attributes.position.needsUpdate = true;
+          group.rotation.z += 0.0006;
+          renderer.render(scene, camera);
+        }
+
+        function onResize() {
+          const rect = mount.getBoundingClientRect();
+          const w = rect.width, h = rect.height > 0 ? rect.height : window.innerHeight * 0.8;
+          renderer.setSize(w, h);
+          camera.aspect = w / h; camera.updateProjectionMatrix();
+        }
+        window.addEventListener('resize', onResize);
+        onResize();
+        animate();
+      } catch (e) {
+        // Fail silently if three is not available
+        console.warn('Hero three background disabled:', e);
+      }
+    })();
+  </script>
     <!-- Clients Section -->
 
     <section class="clients">
