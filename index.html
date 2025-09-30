@@ -339,16 +339,20 @@
             renderer.setSize(w, h);
           }
 
-          function onMouseMove(event) {
+         function onMouseMove(event) {
             mouseX = (event.clientX / window.innerWidth) * 2 - 1;
             mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
             if (isMouseDown) {
-              targetRotationY += event.movementX * 0.01;
-              targetRotationX += event.movementY * 0.01;
+              targetRotationY += event.movementX * 0.002;
+              targetRotationX += event.movementY * 0.002;
               targetRotationX = Math.max(
-                -Math.PI / 2,
-                Math.min(Math.PI / 2, targetRotationX)
+                -0.2,
+                Math.min(0.2, targetRotationX)
+              );
+              targetRotationY = Math.max(
+                -0.2,
+                Math.min(0.2, targetRotationY)
               );
             }
           }
