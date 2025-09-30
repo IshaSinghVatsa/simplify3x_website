@@ -204,215 +204,218 @@
       </div>
     </section>
 
-    <script>
-      (function () {
-        try {
-          const mount = document.getElementById("hero-canvas");
-          console.log("the mount is", mount);
-          if (!mount) return;
+<script>
+  (function () {
+    try {
+      const mount = document.getElementById("hero-canvas"); // Mount container; change the ID if you want to attach canvas elsewhere
+      console.log("the mount is", mount);
+      if (!mount) return; // Stop if no mount is found
 
-          let scene, camera, renderer, particles, particlePositions;
-          let clock = new THREE.Clock();
-          let mouseX = 0,
-            mouseY = 0;
-          let isMouseDown = false;
-          let targetRotationX = 0.3,
-            targetRotationY = 0.2;
+      let scene, camera, renderer, particles, particlePositions; // Core Three.js objects
+      let clock = new THREE.Clock(); // Used to track time for animation
+      let mouseX = 0,
+        mouseY = 0; // Mouse position values
+      let isMouseDown = false; // Mouse click state
+      let targetRotationX = 0.3, // Initial tilt on X-axis; change 0.3 to tilt more/less
+        targetRotationY = 0; // Initial tilt on Y-axis
 
-          const gridSize = 180;
-          const spacing = 0.4;
-          const waveHeight = 2.5;
-          const waveSpeed = 2.5;
+      const gridSize = 150; // Number of particles along each side; increase for denser grid
+      const spacing = 0.4; // Distance between particles; increase for wider spacing
+      const waveHeight = 2.5; // Height of wave peaks; increase for taller waves
+      const waveSpeed = 2.5; // Speed of wave animation; increase for faster ripples
 
-          const primaryColor = new THREE.Color("#ff3300");
-          const secondaryColor = new THREE.Color("#ffaa00");
-          const bgColor = "#220000";
+      const primaryColor = new THREE.Color("#ff3300"); // Starting particle color; change hex for different tone
+      const secondaryColor = new THREE.Color("#ffaa00"); // Blend-to particle color; tweak for gradient effect
+      const bgColor = "#220000"; // Background color; replace hex for different background
 
-          init();
-          console.log("calling animate");
-          animate();
+      init(); // Call initialization
+      console.log("calling animate");
+      animate(); // Start animation loop
 
-          function init() {
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(bgColor);
-            scene.fog = new THREE.Fog(bgColor, 15, 40);
+      function init() {
+        scene = new THREE.Scene(); // Create scene container
+        scene.background = new THREE.Color(bgColor); // Apply background color
+        scene.fog = new THREE.Fog(bgColor, 15, 40); // Add fog effect; adjust 15/40 for start/end distances
 
-            camera = new THREE.PerspectiveCamera(
-              60,
-              mount.clientWidth / mount.clientHeight,
-              0.1,
-              100
-            );
-            camera.position.set(18, 18, 18);
-            camera.lookAt(0, 0, 0);
+        camera = new THREE.PerspectiveCamera(
+          60, // Field of view; decrease for zoom-in, increase for zoom-out
+          mount.clientWidth / mount.clientHeight, // Aspect ratio
+          0.1, // Near clipping plane
+          100 // Far clipping plane
+        );
+        camera.position.set(18, 18, 18); // Camera position; change numbers for angle/distance
+        camera.lookAt(0, 0, 0); // Camera looks at origin
 
-            renderer = new THREE.WebGLRenderer({
-              antialias: true,
-              alpha: true,
-              powerPreference: "high-performance",
-            });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setSize(mount.clientWidth, mount.clientHeight);
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = 1.2;
+        renderer = new THREE.WebGLRenderer({
+          antialias: true, // Smooth edges; set false for performance
+          alpha: true, // Transparent background if needed
+          powerPreference: "high-performance", // Rendering preference
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Control pixel density; force 1 for performance
+        renderer.setSize(mount.clientWidth, mount.clientHeight); // Match container size
+        renderer.toneMapping = THREE.ACESFilmicToneMapping; // HDR tone mapping type
+        renderer.toneMappingExposure = 1.2; // Brightness; increase for lighter render
 
-            mount.innerHTML = ""; // clear old content
-            mount.appendChild(renderer.domElement);
+        mount.innerHTML = ""; // Clear existing canvas
+        mount.appendChild(renderer.domElement); // Add renderer canvas to page
 
-            createParticleSystem();
+        createParticleSystem(); // Create particles
 
-            window.addEventListener("resize", onWindowResize, false);
-            window.addEventListener("mousemove", onMouseMove, false);
-            window.addEventListener(
-              "mousedown",
-              () => (isMouseDown = true),
-              false
-            );
-            window.addEventListener(
-              "mouseup",
-              () => (isMouseDown = false),
-              false
-            );
-            window.addEventListener("wheel", onMouseWheel, false);
-            window.addEventListener("keydown", onKeyDown, false);
+        // Event listeners for interaction
+        window.addEventListener("resize", onWindowResize, false); // Resize handling
+        window.addEventListener("mousemove", onMouseMove, false); // Mouse move for interaction
+        window.addEventListener(
+          "mousedown",
+          () => (isMouseDown = true), // Track mouse down
+          false
+        );
+        window.addEventListener(
+          "mouseup",
+          () => (isMouseDown = false), // Track mouse up
+          false
+        );
+        window.addEventListener("wheel", onMouseWheel, false); // Zoom with wheel
+        window.addEventListener("keydown", onKeyDown, false); // Reset with keyboard
 
-            // ✅ Force first resize adjustment right after setup
-            onWindowResize();
-          }
+        onWindowResize(); // Adjust size at start
+      }
 
-          function createParticleSystem() {
-            const geometry = new THREE.BufferGeometry();
-            const positions = [];
-            const colors = [];
-            const sizes = [];
+      function createParticleSystem() {
+        const geometry = new THREE.BufferGeometry(); // Geometry to hold points
+        const positions = []; // Array for XYZ positions
+        const colors = []; // Array for RGB colors
+        const sizes = []; // Array for point sizes
 
-            for (let i = 0; i < gridSize; i++) {
-              for (let j = 0; j < gridSize; j++) {
-                positions.push(
-                  (i - gridSize / 2) * spacing,
-                  0,
-                  (j - gridSize / 2) * spacing
-                );
-
-                const t = Math.random() * 0.7;
-                const color = primaryColor.clone().lerp(secondaryColor, t);
-                colors.push(color.r, color.g, color.b);
-
-                sizes.push(Math.random() * 0.1 + 0.08);
-              }
-            }
-
-            particlePositions = new Float32Array(positions);
-            geometry.setAttribute(
-              "position",
-              new THREE.BufferAttribute(particlePositions, 3)
-            );
-            geometry.setAttribute(
-              "color",
-              new THREE.BufferAttribute(new Float32Array(colors), 3)
-            );
-            geometry.setAttribute(
-              "size",
-              new THREE.BufferAttribute(new Float32Array(sizes), 1)
+        for (let i = 0; i < gridSize; i++) {
+          for (let j = 0; j < gridSize; j++) {
+            positions.push(
+              (i - gridSize / 2) * spacing, // X position; controlled by spacing/gridSize
+              0, // Y position (height, will animate later)
+              (j - gridSize / 2) * spacing // Z position
             );
 
-            const material = new THREE.PointsMaterial({
-              size: 0.15,
-              vertexColors: true,
-              transparent: true,
-              opacity: 0.9,
-              blending: THREE.AdditiveBlending,
-              sizeAttenuation: true,
-            });
+            const t = Math.random() * 0.7; // Random blend factor for colors
+            const color = primaryColor.clone().lerp(secondaryColor, t); // Mix between primary/secondary colors
+            colors.push(color.r, color.g, color.b); // Add RGB values
 
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
+            sizes.push(Math.random() * 0.1 + 0.08); // Particle size variation
           }
-
-          function onWindowResize() {
-            const rect = mount.getBoundingClientRect();
-            const w = rect.width || window.innerWidth;
-            const h = rect.height || window.innerHeight;
-
-            camera.aspect = w / h;
-            camera.updateProjectionMatrix();
-            renderer.setSize(w, h);
-          }
-
-         function onMouseMove(event) {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-
-            if (isMouseDown) {
-              targetRotationY += event.movementX * 0.002;
-              targetRotationX += event.movementY * 0.002;
-              targetRotationX = Math.max(
-                -0.2,
-                Math.min(0.2, targetRotationX)
-              );
-              targetRotationY = Math.max(
-                -0.2,
-                Math.min(0.2, targetRotationY)
-              );
-            }
-          }
-
-          function onMouseWheel(event) {
-            camera.position.z += event.deltaY * 0.01;
-            camera.position.z = Math.max(5, Math.min(30, camera.position.z));
-          }
-
-          function onKeyDown(event) {
-            if (event.code === "KeyR") {
-              targetRotationX = -0.3;
-              targetRotationY = 0;
-              camera.position.set(18, 18, 18);
-            }
-          }
-
-          function animate() {
-            requestAnimationFrame(animate);
-
-            const time = clock.getElapsedTime() * waveSpeed;
-
-            let index = 0;
-            for (let i = 0; i < gridSize; i++) {
-              for (let j = 0; j < gridSize; j++) {
-                const x = (i - gridSize / 2) * spacing;
-                const z = (j - gridSize / 2) * spacing;
-
-                const waveValue =
-                  (Math.sin(x * 1.5 + time) * 0.5 +
-                    Math.cos(z * 1.2 + time * 1.3) * 0.3 +
-                    Math.sin((x + z) * 0.7 + time * 0.7) * 0.2) *
-                  waveHeight;
-
-                const mouseInfluence =
-                  1 +
-                  (Math.sin(mouseX * 10) * 0.3 + Math.cos(mouseY * 10) * 0.3);
-
-                particlePositions[index + 1] = waveValue * mouseInfluence;
-                index += 3;
-              }
-            }
-
-            particles.geometry.attributes.position.needsUpdate = true;
-
-            particles.rotation.y +=
-              (targetRotationY - particles.rotation.y) * 0.05;
-            particles.rotation.x +=
-              (targetRotationX - particles.rotation.x) * 0.05;
-
-            const pulse = Math.sin(time * 2) * 0.1 + 0.9;
-            particles.material.size = 0.15 * pulse;
-
-            renderer.render(scene, camera);
-          }
-        } catch (e) {
-          console.warn("Hero particle background disabled:", e);
         }
-      })();
-    </script>
+
+        particlePositions = new Float32Array(positions); // Store positions in buffer
+        geometry.setAttribute(
+          "position",
+          new THREE.BufferAttribute(particlePositions, 3)
+        );
+        geometry.setAttribute(
+          "color",
+          new THREE.BufferAttribute(new Float32Array(colors), 3)
+        );
+        geometry.setAttribute(
+          "size",
+          new THREE.BufferAttribute(new Float32Array(sizes), 1)
+        );
+
+        const material = new THREE.PointsMaterial({
+          size: 0.15, // Base particle size; adjust for larger/smaller dots
+          vertexColors: true, // Use per-vertex colors
+          transparent: true, // Allow transparency
+          opacity: 0.9, // Particle opacity
+          blending: THREE.AdditiveBlending, // Glow-like effect; change to NormalBlending for solid
+          sizeAttenuation: true, // Makes particles smaller when farther away
+        });
+
+        particles = new THREE.Points(geometry, material); // Create point cloud
+        scene.add(particles); // Add to scene
+      }
+
+      function onWindowResize() {
+        const rect = mount.getBoundingClientRect(); // Get container size
+        const w = rect.width || window.innerWidth; // Width
+        const h = rect.height || window.innerHeight; // Height
+
+        camera.aspect = w / h; // Update aspect ratio
+        camera.updateProjectionMatrix(); // Apply changes
+        renderer.setSize(w, h); // Resize renderer
+      }
+
+      function onMouseMove(event) {
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1; // Normalized X position
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Normalized Y position
+
+        if (isMouseDown) {
+          targetRotationY += event.movementX * 0.001; // Small horizontal rotation; increase multiplier for faster
+          targetRotationX += event.movementY * 0.001; // Small vertical rotation; increase for faster
+
+          targetRotationX = Math.max(
+            0.2, // Minimum tilt
+            Math.min(0.4, targetRotationX) // Maximum tilt
+          );
+          targetRotationY = Math.max(
+            -0.1, // Min horizontal rotation
+            Math.min(0.1, targetRotationY) // Max horizontal rotation
+          );
+        }
+      }
+
+      function onMouseWheel(event) {
+        camera.position.z += event.deltaY * 0.01; // Zoom in/out; change multiplier for sensitivity
+        camera.position.z = Math.max(5, Math.min(30, camera.position.z)); // Limit zoom range
+      }
+
+      function onKeyDown(event) {
+        if (event.code === "KeyR") {
+          targetRotationX = 0.3; // Reset tilt
+          targetRotationY = 0; // Reset rotation
+          camera.position.set(18, 18, 18); // Reset camera position
+        }
+      }
+
+      function animate() {
+        requestAnimationFrame(animate); // Loop animation
+
+        const time = clock.getElapsedTime() * waveSpeed; // Get time scaled by wave speed
+
+        let index = 0;
+        for (let i = 0; i < gridSize; i++) {
+          for (let j = 0; j < gridSize; j++) {
+            const x = (i - gridSize / 2) * spacing; // X position
+            const z = (j - gridSize / 2) * spacing; // Z position
+
+            const waveValue =
+              (Math.sin(x * 1.5 + time) * 0.5 + // Main wave frequency
+                Math.cos(z * 1.2 + time * 1.3) * 0.3 + // Secondary wave
+                Math.sin((x + z) * 0.7 + time * 0.7) * 0.2) * // Combined wave
+              waveHeight; // Scale wave by height
+
+            const mouseInfluence =
+              (Math.sin(mouseX * 15 + x * 2) * 0.5 + // Mouse-based distortion
+                Math.cos(mouseY * 15 + z * 2) * 0.5) *
+              1.5; // Scale mouse effect
+
+            particlePositions[index + 1] = waveValue + mouseInfluence; // Update Y position (height)
+            index += 3; // Skip to next particle
+          }
+        }
+
+        particles.geometry.attributes.position.needsUpdate = true; // Mark positions for update
+
+        particles.rotation.y +=
+          (targetRotationY - particles.rotation.y) * 0.05; // Smoothly rotate toward target Y
+        particles.rotation.x +=
+          (targetRotationX - particles.rotation.x) * 0.05; // Smoothly rotate toward target X
+
+        const pulse = Math.sin(time * 2) * 0.1 + 0.9; // Pulsing factor for size
+        particles.material.size = 0.15 * pulse; // Apply pulse to particle size
+
+        renderer.render(scene, camera); // Render scene
+      }
+    } catch (e) {
+      console.warn("Hero particle background disabled:", e); // Error handling
+    }
+  })();
+</script>
+
 
     <!-- Clients Section -->
 
