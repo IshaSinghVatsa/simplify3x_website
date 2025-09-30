@@ -301,8 +301,11 @@ document.addEventListener('DOMContentLoaded', initButtonEffects);
 function initScrollToTop() {
     // Create scroll to top button
     const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '↑';
     scrollButton.className = 'scroll-to-top';
+    // Ensure no text content remains
+    scrollButton.textContent = '';
+    scrollButton.setAttribute('aria-label', 'Scroll to top');
+    scrollButton.setAttribute('title', 'Scroll to top');
     scrollButton.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -310,10 +313,9 @@ function initScrollToTop() {
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: #667eea;
-        color: white;
+        background: transparent url('assets/images/scroll.svg') center / cover no-repeat;
         border: none;
-        font-size: 20px;
+        padding: 0;
         cursor: pointer;
         opacity: 0;
         visibility: hidden;

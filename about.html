@@ -69,8 +69,8 @@
     </header>
 
     <!-- About page content -->
-    <main class="about-page">
-        <section class="container">
+    <main class="about-page position-relative">
+        <section class="container ">
             <div>
                 <div class="section-title">Meet Simplify3x</div>
                 <div class="section-description text-justify lh-32px">At Simplify3x, we are passionate about
@@ -94,7 +94,7 @@
                 <div class="number-part-text">Employees Worldwide</div>
             </div>
             <div class="num-vertical-line"></div>
-            <div class="number-part-item office-card">
+            <div class="number-part-item cont-card">
                 <img id="office-icon" src="assets/images/office.svg" alt="Office">
                 <div class="number-part-number">500+</div>
                 <div class="number-part-text">Offices Across Continents</div>
@@ -364,7 +364,7 @@ Every decision we make is guided by our commitment to delivering measurable valu
             }
 
             // Office card
-            const officeCard = document.querySelector('.office-card');
+            const officeCard = document.querySelector('.cont-card');
             if (officeCard) {
                 const officeImg = officeCard.querySelector('#office-icon');
                 const officeNormalSrc = 'assets/images/office.svg';
