@@ -401,11 +401,53 @@ p {
 .hero {
     padding: 120px 0 80px;
     background: #000000;
-    height: 99vh;
-    display: flex;
+    height: 84vh;
+    /* display: flex; */
     align-items: center;
     position: relative;
     overflow: hidden;
+    backface-visibility: hidden;
+
+
+    position: relative;
+    z-index: 1;
+}
+.fade-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    transition: opacity 0.05s linear;
+    z-index: 5;
+  }
+/* Main container for sticky context */
+.main-container {
+  position: relative;
+}
+
+/* Hero wrapper for sticky positioning */
+.hero-wrapper {
+  position: sticky;
+  top: 0;
+  height: 84vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Ensure the page can scroll normally outside hero */
+html, body { overscroll-behavior-y: contain; }
+
+/* overlay to darken on slight scroll */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .hero-video {
@@ -418,21 +460,32 @@ p {
     /* makes it act like background-size: cover */
     z-index: 0;
     /* push it behind content */
-    /* animation: heroSpinX 30s linear infinite; */
-    transform-origin: 50% 50%;
+    pointer-events: none; /* background should not intercept clicks */
 }
 
 .hero-video-2 {
-    height: 400px;
-    width: 815px;
     background-color: #000000;
-    border-radius: 4px;
-
-}
+    z-index: 2;
+    height: 100vh;
+    margin-top: -20vh;
+    margin-bottom: 39vh;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  /* black overlay */
+  .hero-video-2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6); /* dark overlay */
+    z-index: 3; /* sits above video */
+    pointer-events: none;
+  }
 
 .hero-left{
-    display: flex
-;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -451,10 +504,6 @@ p {
 .z-2{
     z-index: 2;
 }
-@keyframes heroSpinX {
-    0%   { transform: rotateX(0deg); }
-    100% { transform: rotateX(360deg); }
-}
 
 .hero-content {
     display: grid;
@@ -462,20 +511,52 @@ p {
     gap: 4rem;
     align-items: center;
     position: relative;
-    z-index: 1; /* keep content above rotating mesh */
+    z-index: 4; /* keep above video container */
 }
 .hero-text .header-actions{
     justify-content: center;
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 80px;
     font-weight: 700;
     color: #fff;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
-    margin-top: 55px;
+    margin-bottom: 3.5rem;
+    margin-top: 125px;
 }
+
+
+/* Clients overlay sitting over the visible video area in hero */
+.hero-clients-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20px;
+    z-index: 3; /* above video (2), below hero text (4) */
+    background: transparent;
+    padding: 10px 0 14px;
+}
+
+.hero-clients-overlay .clients-title {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-clients-overlay .clients-logos {
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hero-clients-overlay .logo-scroll {
+    display: flex;
+    gap: 3rem;
+    animation: scroll 30s linear infinite;
+}
+
+
 
 .hero-description {
     font-size: 1.2rem;
@@ -719,7 +800,9 @@ p {
 /* Clients Section */
 .clients {
     padding: 60px 0 0px 0;
-
+position: relative;
+z-index: 6;
+background-color: #fff;
 }
 
 .clients-content {
@@ -769,7 +852,7 @@ p {
 }
 
 .client-logo {
-    height: 20px;
+    height: 40px;
     opacity: 1;
     transition: opacity 0.3s ease;
     flex-shrink: 0;
@@ -823,6 +906,8 @@ p {
 .services {
     padding: 80px 0 80px 0;
     background-color: #f2f2f2;
+    position: relative;
+    z-index: 6;
 }
 
 .services-header {
@@ -894,8 +979,10 @@ p {
 /* Stats Section */
 .stats {
     padding: 80px 0 0 0;
-    /* background: #FDEFEA; */
+    background: #FDEFEA;
     /* height: 80vh; */
+    position: relative;
+    z-index: 6;
 
 }
 
@@ -1160,6 +1247,8 @@ p {
 background-color: #0a2540;
     padding: 80px 0 0px 0;
     overflow: auto;
+    position: relative;
+    z-index: 6;
 }
 
 .purpose-content {
@@ -1911,6 +2000,8 @@ background-color: #0a2540;
     background: #1a1a1a;
     color: white;
     padding: 60px 0 30px;
+    position: relative;
+    z-index: 6;
 }
 
 .footer-content {

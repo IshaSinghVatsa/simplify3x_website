@@ -424,7 +424,7 @@
 .culture-section{ padding: 60px 0 60px 0; background:#fff; }
 .culture-wrap{ max-width: 900px; margin: 0 auto; text-align: center; }
 .culture-title{ font-size: 48px; font-weight: 800; color:#0f172a; margin-bottom: 14px; }
-.culture-subtitle{ color:#ff6b35; font-weight: 800; font-size: 22px; }
+.culture-subtitle{ color:#ff6b35; font-weight: 600; font-size: 22px; }
 .culture-desc{ margin-top: 22px; font-size: 18px; line-height: 1.8; color:#4b5563;margin-bottom: 0; }
 
 /* Core values split */
