@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     ensureHeroVideoAutoplay();
     initDropdowns();
+    initScrollEffects();
+    initIndustryFilters();
 });
 
 // (Globe code removed by request)
@@ -27,6 +29,36 @@ function initTabs() {
             // Add active class to clicked button and corresponding panel
             button.classList.add('active');
             document.getElementById(targetTab).classList.add('active');
+        });
+    });
+}
+
+// Industry filter functionality for customer stories page
+function initIndustryFilters() {
+    const filterButtons = document.querySelectorAll('.cs-filter-btn');
+    const storyCards = document.querySelectorAll('.cs-story-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetIndustry = button.getAttribute('data-industry');
+            
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('cs-active'));
+            
+            // Add active class to clicked button
+            button.classList.add('cs-active');
+            
+            // Filter story cards
+            storyCards.forEach(card => {
+                const cardIndustry = card.getAttribute('data-industry');
+                
+                if (targetIndustry === 'all' || cardIndustry === targetIndustry) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease-in-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         });
     });
 }
@@ -411,3 +443,126 @@ function initDropdowns() {
         }
     });
 }
+
+// Create black overlay for fade effect
+function createBlackOverlay(heroSection) {
+    const overlay = document.createElement('div');
+    overlay.className = 'black-overlay';
+    overlay.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        z-index: 10;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.1s ease-out;
+    `;
+    heroSection.appendChild(overlay);
+    return overlay;
+}
+
+// Scroll effects for hero section opacity transition
+function initScrollEffects() {
+    const heroSection = document.querySelector('.hero');
+    const heroVideo2 = document.querySelector('.hero-video-2');
+    const clientsSection = document.querySelector('.clients');
+    
+    if (!heroSection || !heroVideo2) {
+        console.warn('Required elements not found for scroll effects');
+        return;
+    }
+
+    function handleScroll() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        
+        // Calculate scroll progress for clients section (fades over 30% of viewport height)
+        const clientsScrollProgress = Math.min(scrollY / (windowHeight * 0.3), 1);
+        
+        // Calculate scroll progress for hero section (fades over 30% of viewport height to match clients)
+        const heroScrollProgress = Math.min(scrollY / (windowHeight * 0.4), 1);
+        
+        // Opacity for the hero content (fades out over 30% of viewport height)
+        const heroContentOpacity = 1 - heroScrollProgress; 
+        // Opacity for the black overlay (fades in over 30% of viewport height)
+        const blackOverlayOpacity = heroScrollProgress;
+
+        // Get the hero content element and fade it out
+        const heroContent = heroSection.querySelector('.hero-content');
+        if (heroContent) {
+            heroContent.style.opacity = heroContentOpacity;
+        }
+        
+        // Get or create the black overlay and fade it in
+        const blackOverlay = heroSection.querySelector('.black-overlay') || createBlackOverlay(heroSection);
+        blackOverlay.style.opacity = blackOverlayOpacity;
+
+        // Fade out clients section as soon as scrolling starts (same timing as hero)
+        if (clientsSection) {
+            const clientsOpacity = 1 - clientsScrollProgress;
+            clientsSection.style.opacity = clientsOpacity;
+        }
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Initial call
+    handleScroll();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const popup = document.getElementById("lets-talk");
+    const section4 = document.querySelector(".show-talk-box");
+    const footer = document.querySelector("footer"); // footer section
+    const closeBtn = popup.querySelector(".talk-close"); // cross button inside popup
+  
+    if (!popup || !section4 || !footer) return;
+  
+    let manuallyClosed = false; // track if user closed popup
+  
+    function togglePopup() {
+      if (manuallyClosed) return; // don't show again if user closed
+  
+      const rect4 = section4.getBoundingClientRect();
+      const rectFooter = footer.getBoundingClientRect();
+      const middle = window.innerHeight / 2;
+  
+      // check if middle of screen is inside section4 OR footer
+      const inSection4 = rect4.top <= middle && rect4.bottom >= middle;
+      const inFooter = rectFooter.top <= window.innerHeight && rectFooter.bottom >= 0;
+  
+      if (inSection4 || inFooter) {
+        popup.classList.add("visible");
+      } else {
+        popup.classList.remove("visible");
+      }
+    }
+  
+    // run initially + on scroll/resize/load
+    window.addEventListener("scroll", togglePopup);
+    window.addEventListener("resize", togglePopup);
+    window.addEventListener("load", togglePopup);
+    togglePopup();
+  
+    // close button handler
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        popup.classList.remove("visible");
+        manuallyClosed = true; // prevent reappearing
+      });
+    }
+  });
+  
+  

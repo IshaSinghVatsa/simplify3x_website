@@ -99,7 +99,9 @@ p {
     transform: translateY(-2px);
     box-shadow: 0 13px 26px #eaae98;
 }
-
+.no-shadow:hover{
+    box-shadow: none;
+}
 .btn-secondary {
     background: transparent;
     color: #EB5D2A;
@@ -218,36 +220,39 @@ p {
     text-align: center;
 }
 .talk-box {
-    background-color: rgba(15, 15, 15, 0.9); /* make it slightly transparent */
     position: fixed;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(20px);
     width: 750px;
-    max-width: 95%;              /* ✅ keep it responsive */
+    max-width: 95%;
+    background-color: rgba(15, 15, 15, 0.9);
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
     border-radius: 8px;
-    padding: 12px 16px;           /* a bit more breathing space */
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4); /* stronger floating effect */
-    backdrop-filter: blur(6px);   /* ✅ glassmorphism effect */
-    z-index: 2000;                /* ✅ ensure it stays above globe canvas */
-}
-
-/* Default state */
-.talk-box {
+    padding: 12px 16px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    z-index: 2000;
+    opacity: 0;                   /* 🔴 hidden by default */
+    pointer-events: none;         /* disable click when hidden */
     transition: all 0.4s ease-in-out;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
   }
   
-  /* Hide state (triggered on cross click) */
-  .talk-box.hide {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px); /* slide down a bit */
+  /* Visible state */
+  .talk-box.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;         /* clickable when visible */
+  }
+  
+  .talk-close {
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
   }
 .section-description {
     font-size: 19px;
@@ -410,6 +415,11 @@ p {
     backface-visibility: hidden;
     z-index: 1;
 }
+
+/* Hero content transitions */
+.hero-content {
+    transition: opacity 0.1s ease-out;
+}
 .fade-overlay {
     position: absolute;
     top: 0;
@@ -462,15 +472,7 @@ html, body { overscroll-behavior-y: contain; }
     overflow: hidden;
   }
   
-  /* black overlay */
-  .hero-video-2::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6); /* dark overlay */
-    z-index: 3; /* sits above video */
-    pointer-events: none;
-  }
+  /* black overlay - now handled by JavaScript for scroll-based fade */
 
 .hero-left{
     display: flex;
@@ -507,7 +509,7 @@ html, body { overscroll-behavior-y: contain; }
 
 .hero-title {
     font-size: 80px;
-    font-weight: 700;
+    font-weight: 600;
     color: #fff;
     line-height: 1.1;
     margin-bottom: 3.5rem;
@@ -794,6 +796,7 @@ z-index: 6;
 background: rgba(0, 0, 0, 0.3);
 width: 100%;
 top: 0;
+transition: opacity 0.3s ease-out; /* Smooth fade transition */
 }
 
 .clients-content {
@@ -2196,6 +2199,12 @@ background-color: #0a2540;
 
 .credit-link:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 1280px) {
+    .hero-title {
+        font-size: 57px;
+    }
 }
 
 /* Responsive Design */
