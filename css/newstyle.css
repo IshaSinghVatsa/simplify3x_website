@@ -122,21 +122,29 @@
     text-align: center;
     width: 100%;
     margin: 0 auto 30px auto;
+    position: sticky;
+    top: 10vh;
 }
+
 
 .purpose-card-2 {
     background: #ffffff;
-    padding: 0;
+    padding: 55px;
     text-align: left;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 107, 53, 0.3);
-    position: relative;
+    position: sticky;
+    top: 20vh; /* Reduced from 20vh to keep closer to heading */
+    transform: translateY(0);
     overflow: hidden;
-    height: 280px;
+    /* height: 580px; */
     display: flex;
-    flex-direction: column;
     border-radius: 15px;
+    width: 100%;
+    max-width: 1100px;
+    /* margin: 0 auto; */
+    margin-bottom: 0; /* Remove bottom margin */
 }
 .purpose-card-2:hover {
     transform: translateY(-5px);
@@ -144,31 +152,35 @@
     border-color: rgba(255, 107, 53, 0.5);
 }
 
-.purpose-card-2 h3 {
-    font-size: 1.3rem;
+.purpose-card-2-content h3 {
+    font-size: 36px;
     font-weight: 700;
-    color: #000000;
-    margin: 20px 20px 10px 20px;
+    color: #eb5d2a;
+    margin: 20px 20px 20px 0px;
     line-height: 1.3;
 }
 
-.purpose-card-2 p {
-    color: #666666;
-    line-height: 1.5;
-    margin: 0 20px 20px 20px;
-    font-size: 0.95rem;
+.purpose-card-2-content p {
+    color: #000;
+    line-height: 1.7;
+    margin: 0 20px 20px 0px;
+    font-size: 20px;
     flex-grow: 1;
+}
+.purpose-card-2-content{
+width: calc(100% - 626px);
 }
 
 .card-image {
-    height: 450px;
-    width: 100%;
+    height: 100%;
+    width: 525px;
     position: relative;
     overflow: hidden;
     top: 0;
     left: 0;
     z-index: 1;
     display: block;
+    border-radius: 20px;
 }
 
 .purpose-image {
@@ -710,7 +722,7 @@ select {
 
 .cs-hero-title {
     font-size: 56px;
-    font-weight: 800;
+    font-weight: 700;
     color: #ffffff;
     margin-bottom: 20px;
     line-height: 1.2;
@@ -719,7 +731,7 @@ select {
 
 .cs-hero-subtitle {
     font-size: 20px;
-    color: #e5e5e5;
+    color: #eb5d2a;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -728,7 +740,6 @@ select {
 .cs-discover-section {
     background-color: #ffffff;
     padding: 100px 0;
-    text-align: center;
 }
 
 .cs-discover-title {
@@ -748,8 +759,8 @@ select {
 }
 
 .cs-discover-description {
-    font-size: 22px;
-    color: #666;
+    font-size: 27px;
+    color: #1c1c1c;
     font-weight: 500;
     line-height: 1.6;
     max-width: 800px;
@@ -1235,3 +1246,9 @@ border: none;
     }
 }
 
+.cs-discover-section-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+}
