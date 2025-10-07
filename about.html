@@ -13,6 +13,192 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
+
+    <!-- Scroll Stack Animation Styles -->
+    <style>
+        /* Override the grid layout for scroll stack */
+        .purpose-div {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0 !important;
+            position: relative;
+            z-index: 2;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px 0 50px 0;
+            /* Reduced top padding */
+            min-height: 100vh;
+            /* Reduced height */
+            align-items: center;
+        }
+
+        /* Initial state - all cards stacked on top of each other */
+        .purpose-card-2:nth-child(1) {
+            z-index: 10;
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .purpose-card-2:nth-child(2) {
+            z-index: 9;
+            transform: scale(0.95) translateY(-20px);
+            opacity: 0.7;
+        }
+
+        .purpose-card-2:nth-child(3) {
+            z-index: 8;
+            transform: scale(0.9) translateY(-40px);
+            opacity: 0.6;
+        }
+
+        .purpose-card-2:nth-child(4) {
+            z-index: 7;
+            transform: scale(0.85) translateY(-60px);
+            opacity: 0.5;
+        }
+
+        .purpose-card-2:nth-child(5) {
+            z-index: 6;
+            transform: scale(0.8) translateY(-80px);
+            opacity: 0.4;
+        }
+
+        .purpose-card-2:nth-child(6) {
+            z-index: 5;
+            transform: scale(0.75) translateY(-100px);
+            opacity: 0.3;
+        }
+
+        /* Active state when card is in focus */
+        .purpose-card-2.active {
+            transform: scale(1) translateY(0) !important;
+            opacity: 1 !important;
+            z-index: 10 !important;
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+            border-color: rgba(255, 107, 53, 0.8);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .purpose-div {
+                padding: 15px 0 30px 0;
+                /* Reduced top padding on mobile */
+                min-height: 80vh;
+            }
+
+            .purpose-card-2 {
+                max-width: 95%;
+                height: 250px;
+                margin-bottom: 0;
+                top: 5vh;
+                /* Even closer to heading on mobile */
+            }
+
+            .purpose-card-2:nth-child(1) {
+                z-index: 10;
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+
+            .purpose-card-2:nth-child(2) {
+                z-index: 9;
+                transform: scale(0.95) translateY(-10px);
+                opacity: 0.7;
+            }
+
+            .purpose-card-2:nth-child(3) {
+                z-index: 8;
+                transform: scale(0.9) translateY(-20px);
+                opacity: 0.6;
+            }
+
+            .purpose-card-2:nth-child(4) {
+                z-index: 7;
+                transform: scale(0.85) translateY(-30px);
+                opacity: 0.5;
+            }
+
+            .purpose-card-2:nth-child(5) {
+                z-index: 6;
+                transform: scale(0.8) translateY(-40px);
+                opacity: 0.4;
+            }
+
+            .purpose-card-2:nth-child(6) {
+                z-index: 5;
+                transform: scale(0.75) translateY(-50px);
+                opacity: 0.3;
+            }
+        }
+
+        
+#cards {
+	list-style: none;
+	padding-left: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(var(--cards), var(--cardHeight));
+	gap: var(--cardMargin);
+	padding-bottom: calc(var(--cards) * var(--cardTopPadding));
+	margin-bottom: var(--cardMargin);
+    width: 100%;
+    justify-self: center;
+}
+
+#card1 {
+	--index: 1;
+}
+#card2 {
+	--index: 2;
+}
+#card3 {
+	--index: 3;
+}
+#card4 {
+	--index: 4;
+}
+#card5 {
+	--index: 5;
+}
+#card6 {
+	--index: 6;
+}
+
+.card {
+	position: sticky;
+	top: 20vh;
+	padding-top: calc(var(--index) * var(--cardTopPadding));
+}
+
+
+.card-body {
+    box-sizing: border-box;
+    padding: 55px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+    height: var(--cardHeight);
+    display: flex
+;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s;
+    border: 1px solid rgba(0, 225, 225, 0.5);
+    background-color: #fff;
+}
+
+.card-body.orange-border {
+    border: 1px solid #ff6b35;
+}
+
+
+:root {
+	--cards: 6;
+	--cardHeight: 400px;
+	--cardTopPadding: 1.5em;
+	--cardMargin: 2vw;
+}
+
+    </style>
 </head>
 
 <body>
@@ -54,7 +240,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="index.html#case-studies" class="nav-link">Customer Stories </a></li>
+                            <li><a href="customer-stories.html" class="nav-link">Customer Stories </a></li>
                         </ul>
                     </nav>
                     <div class="header-actions">
@@ -69,8 +255,8 @@
     </header>
 
     <!-- About page content -->
-    <main class="about-page">
-        <section class="container">
+    <main class="about-page position-relative">
+        <section class="container ">
             <div>
                 <div class="section-title">Meet Simplify3x</div>
                 <div class="section-description text-justify lh-32px">At Simplify3x, we are passionate about
@@ -82,20 +268,20 @@
                     worldwide.</div>
             </div>
             <div class="about-page-video">
-                Introduction Video
+                <video class="about-page-video-content" src="assets/images/new.mp4" autoplay muted loop playsinline></video>
             </div>
         </section>
     </main>
     <main class="number-part">
         <section class="container">
             <div class="number-part-item employee-card">
-                <img id="employee-icon" src="assets/images/employee.svg" alt="Employee">
+                <img id="employee-icon" src="assets/images/Employees o.svg" alt="Employee">
                 <div class="number-part-number">1000+</div>
                 <div class="number-part-text">Employees Worldwide</div>
             </div>
             <div class="num-vertical-line"></div>
-            <div class="number-part-item office-card">
-                <img id="office-icon" src="assets/images/office.svg" alt="Office">
+            <div class="number-part-item cont-card">
+                <img id="office-icon" src="assets/images/office o.svg" alt="Office">
                 <div class="number-part-number">500+</div>
                 <div class="number-part-text">Offices Across Continents</div>
             </div>
@@ -107,78 +293,114 @@
             </div>
             <div class="num-vertical-line"></div>
             <div class="number-part-item project-card">
-                <img id="project-icon" src="assets/images/project.svg" alt="Project">
+                <img id="project-icon" src="assets/images/success o.svg" alt="Project">
                 <div class="number-part-number">90+</div>
                 <div class="number-part-text">Successful Projects</div>
             </div>
     </main>
 
+   
+
     <!-- Image section below number-part -->
     <main class="purpose-part">
         <section class="container">
-            <div class="section-title-2 ">Our Purpose</div>
-            <div class="purpose-div">
-                <article class="purpose-card-2">
-                    <div class="card-image">
-                        <img class="purpose-image" src="assets/images/efficiency.svg" alt="Innovation First">
+            <div class="section-title-2 mb-5">Our Purpose</div>
+            <ul id="cards">
+                <li class="card" id="card1">
+                    <div class="card-body">
+                        <div class="purpose-card-2-content">
+                            <h3>Innovation First</h3>
+                            <p>
+                                We constantly push the boundaries of technology to create smarter, simpler, and more impactful solutions for modern businesses.
+                            </p>
+                        </div>
+                        <div class="card-image">
+                            <img class="purpose-image" src="assets/images/purpose-1.png" alt="Innovation First">
+                        </div>
                     </div>
-                    <h3>Innovation First</h3>
-                    <p>
-                        We continuously push the boundaries of technology to create solutions that anticipate future
-                        needs and challenges.
-                    </p>
-                </article>
-                <article class="purpose-card-2">
-                    <div class="card-image">
-                        <img class="purpose-image" src="assets/images/impact.jpg" alt="Global Impact">
+                </li>
+                <li class="card" id="card2">
+                    <div class="card-body">
+                        <div class="purpose-card-2-content">
+                            <h3>Global Impact</h3>
+                            <p>
+                                Every solution we deliver is designed with a global perspective—bridging innovation with scalability to drive success across industries and continents.
+                            </p>
+                        </div>
+                        <div class="card-image">
+                            <img class="purpose-image" src="assets/images/purpose-2.png" alt="Innovation First">
+                        </div>
                     </div>
-                    <h3>Global Impact</h3>
-                    <p>
-                        
-Every decision we make is guided by our commitment to delivering measurable value and success for our clients.
-                    </p>
-                </article>
-                <article class="purpose-card-2">
-                    <div class="card-image">
-                        <img class="purpose-image" src="assets/images/laptop.jpg" alt="Simplicity">
+                </li>
+                <li class="card" id="card3">
+                    <div class="card-body">
+                        <div class="purpose-card-2-content">
+                            <h3>Simplicity at the Core</h3>
+                            <p>
+                                We transform complex challenges into clear, effective, and elegant solutions that make business growth effortless.
+                            </p>
+                        </div>
+                        <div class="card-image">
+                            <img class="purpose-image" src="assets/images/purpose-3.png" alt="Innovation First">
+                        </div>
                     </div>
-                    <h3>Simplicity</h3>
-                    <p>
-                        We transform complex problems into simple, elegant solutions that are easy to understand, implement, and maintain.
-                    </p>
-                </article>
-                <article class="purpose-card-2">
-                    <div class="card-image">
-                        <img class="purpose-image" src="assets/images/trust.jpg" alt="Excellence">
+                </li>
+                <li class="card" id="card4">
+                    <div class="card-body">
+                        <div class="purpose-card-2-content">
+                            <h3>Excellence Always</h3>
+                            <p>
+                                Our commitment to quality drives everything we do—from strategy to execution—ensuring reliability, trust, and measurable outcomes.
+                            </p>
+                        </div>
+                        <div class="card-image">
+                            <img class="purpose-image" src="assets/images/purpose-4.png" alt="Innovation First">
+                        </div>
                     </div>
-                    <h3>Excellence</h3>
-                    <p>
-                        We maintain the highest standards of quality in everything we do, from product development to customer service.
-                    </p>
-                </article>
-                <article class="purpose-card-2">
-                    <div class="card-image">
-                        <img class="purpose-image" src="assets/images/office-building.svg" alt="Innovation First">
+                </li>
+                <li class="card" id="card5">
+                    <div class="card-body">
+                        <div class="purpose-card-2-content">
+                            <h3>Human-Centric Approach</h3>
+                            <p>
+                                Technology serves people best when it empowers them. We design every product and service with empathy and user experience at its heart.
+                            </p>
+                        </div>
+                        <div class="card-image">
+                            <img class="purpose-image" src="assets/images/purpose-5.png" alt="Innovation First">
+                        </div>
                     </div>
-                    <h3>Innovation First</h3>
-                    <p>
-                        We continuously push the boundaries of technology to create solutions that anticipate future
-                        needs and challenges.
-                    </p>
-                </article>
-                <article class="purpose-card-2">
-                    <div class="card-image">
-                        <img class="purpose-image" src="assets/images/efficiency.svg" alt="Innovation">
+                </li>
+                <li class="card" id="card6">
+                    <div class="card-body">
+                        <div class="purpose-card-2-content">
+                            <h3>Sustainable Progress</h3>
+                            <p>
+                                We believe in innovation that lasts—building scalable, sustainable, and future-ready digital ecosystems that shape long-term business growth.
+                            </p>
+                        </div>
+                        <div class="card-image">
+                            <img class="purpose-image" src="assets/images/purpose-6.png" alt="Innovation First">
+                        </div>
                     </div>
-                    <h3>Innovation</h3>
-                    <p>
-                        We continuously push boundaries and explore new technologies to deliver cutting-edge solutions that set industry standards.
-                    </p>
-                </article>
-            </div>
+                </li>
+            </ul>
         </section>
     </main>
-    <main class="timeline-part">
+
+   
+    <section class="cs-cta-section">
+        <div class="container">
+            <h2 class="section-title">Ready to Write Your Success Story?</h2>
+            <p class="cs-cta-description">Join hundreds of companies that have transformed their business with
+                Simplify3x solutions.</p>
+            <div class="cs-cta-buttons">
+                <button class="cs-btn-primary">Start Your Journey</button>
+                <button class="cs-btn-secondary">Request a Demo</button>
+            </div>
+        </div>
+    </section>
+    <!-- <main class="timeline-part">
         <section>
             <div class="section-title-2">Timeline of Simplify3x Journey</div>
             <div class="timeline-line">
@@ -238,7 +460,7 @@ Every decision we make is guided by our commitment to delivering measurable valu
                 </div>
             </div>
         </section>
-    </main>
+    </main> -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -355,8 +577,8 @@ Every decision we make is guided by our commitment to delivering measurable valu
             const employeeCard = document.querySelector('.employee-card');
             if (employeeCard) {
                 const employeeImg = employeeCard.querySelector('#employee-icon');
-                const employeeNormalSrc = 'assets/images/employee.svg';
-                const employeeHoverSrc = 'assets/images/employee (1).svg';
+                const employeeNormalSrc = 'assets/images/Employees o.svg';
+                const employeeHoverSrc = 'assets/images/Employees bw.svg';
                 const _pre1 = new Image();
                 _pre1.src = employeeHoverSrc;
                 employeeCard.addEventListener('mouseenter', () => { employeeImg.src = employeeHoverSrc; });
@@ -364,11 +586,11 @@ Every decision we make is guided by our commitment to delivering measurable valu
             }
 
             // Office card
-            const officeCard = document.querySelector('.office-card');
+            const officeCard = document.querySelector('.cont-card');
             if (officeCard) {
                 const officeImg = officeCard.querySelector('#office-icon');
-                const officeNormalSrc = 'assets/images/office.svg';
-                const officeHoverSrc = 'assets/images/office-2.svg';
+                const officeNormalSrc = 'assets/images/office o.svg';
+                const officeHoverSrc = 'assets/images/office bw.svg';
                 const _pre2 = new Image();
                 _pre2.src = officeHoverSrc;
                 officeCard.addEventListener('mouseenter', () => { officeImg.src = officeHoverSrc; });
@@ -391,14 +613,203 @@ Every decision we make is guided by our commitment to delivering measurable valu
             const projectCard = document.querySelector('.project-card');
             if (projectCard) {
                 const projectImg = projectCard.querySelector('#project-icon');
-                const projectNormalSrc = 'assets/images/project.svg';
-                const projectHoverSrc = 'assets/images/project-2.svg';
+                const projectNormalSrc = 'assets/images/success o.svg';
+                const projectHoverSrc = 'assets/images/Success bw.svg';
                 const _pre4 = new Image();
                 _pre4.src = projectHoverSrc;
                 projectCard.addEventListener('mouseenter', () => { projectImg.src = projectHoverSrc; });
                 projectCard.addEventListener('mouseleave', () => { projectImg.src = projectNormalSrc; });
             }
         })();
+
+        // Scroll Stack Animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.purpose-card-2');
+            const container = document.querySelector('.purpose-div');
+
+            if (!cards.length || !container) return;
+
+            let currentActiveIndex = 0;
+            let isScrolling = false;
+
+            // Initialize first card as active (index 0)
+            if (cards.length > 0) {
+                cards[0].classList.add('active');
+                currentActiveIndex = 0;
+            }
+
+            // Function to update card positions based on scroll
+            function updateCardPositions() {
+                if (isScrolling) return;
+
+                const containerRect = container.getBoundingClientRect();
+                const containerTop = containerRect.top;
+                const windowHeight = window.innerHeight;
+
+                // Start transition when container is closer to viewport
+                const triggerPoint = windowHeight * 0.9; // Start when container is 90% visible
+                const scrollStart = Math.max(0, triggerPoint - containerTop);
+                const scrollRange = windowHeight * 1.5; // Reduced scroll range
+
+                // Always keep the first card (topmost) active
+                const newActiveIndex = 0;
+
+                if (newActiveIndex !== currentActiveIndex) {
+                    currentActiveIndex = newActiveIndex;
+
+                    // Remove active class from all cards
+                    cards.forEach(card => card.classList.remove('active'));
+
+                    // Add active class to first card only
+                    if (cards[0]) {
+                        cards[0].classList.add('active');
+                    }
+                }
+
+                // Update card positions for smooth stacking effect
+                // Always use first card as reference point
+                cards.forEach((card, index) => {
+                    const distance = index; // Distance from first card (index 0)
+
+                    if (distance === 0) {
+                        // First card - always active
+                        card.style.transform = 'scale(1) translateY(0)';
+                        card.style.opacity = '1';
+                        card.style.zIndex = '10';
+                    } else if (distance === 1) {
+                        // Second card
+                        const scale = 0.95;
+                        const translateY = -20;
+                        const opacity = 0.7;
+                        const zIndex = 9;
+
+                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+                        card.style.opacity = opacity;
+                        card.style.zIndex = zIndex;
+                    } else if (distance === 2) {
+                        // Third card
+                        const scale = 0.9;
+                        const translateY = -40;
+                        const opacity = 0.6;
+                        const zIndex = 8;
+
+                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+                        card.style.opacity = opacity;
+                        card.style.zIndex = zIndex;
+                    } else if (distance === 3) {
+                        // Fourth card
+                        const scale = 0.85;
+                        const translateY = -60;
+                        const opacity = 0.5;
+                        const zIndex = 7;
+
+                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+                        card.style.opacity = opacity;
+                        card.style.zIndex = zIndex;
+                    } else if (distance === 4) {
+                        // Fifth card
+                        const scale = 0.8;
+                        const translateY = -80;
+                        const opacity = 0.4;
+                        const zIndex = 6;
+
+                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+                        card.style.opacity = opacity;
+                        card.style.zIndex = zIndex;
+                    } else {
+                        // Sixth card
+                        const scale = 0.75;
+                        const translateY = -100;
+                        const opacity = 0.3;
+                        const zIndex = 5;
+
+                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+                        card.style.opacity = opacity;
+                        card.style.zIndex = zIndex;
+                    }
+                });
+            }
+
+            // Throttled scroll handler
+            let scrollTimeout;
+            function handleScroll() {
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+
+                scrollTimeout = setTimeout(() => {
+                    updateCardPositions();
+                }, 16); // ~60fps
+            }
+
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Initial call
+            updateCardPositions();
+
+            // Add intersection observer for better performance
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        updateCardPositions();
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '100px 0px'
+            });
+
+            observer.observe(container);
+        });
+
+        // Orange border effect when card reaches 20vh
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.card');
+            const cardBodies = document.querySelectorAll('.card-body');
+            
+            function updateOrangeBorders() {
+                // Remove all orange borders first
+                cardBodies.forEach(body => body.classList.remove('orange-border'));
+                
+                // Check each card to see if it's at 20vh
+                cards.forEach((card, index) => {
+                    const rect = card.getBoundingClientRect();
+                    const cardTop = rect.top;
+                    const viewportHeight = window.innerHeight;
+                    const targetPosition = viewportHeight * 0.2; // 20vh
+                    
+                    // If current card is at or near 20vh, add orange border to next card
+                    if (cardTop <= targetPosition + 50 && cardTop >= targetPosition - 50) {
+                        const nextCardIndex = index + 1;
+                        if (nextCardIndex < cardBodies.length) {
+                            // Add orange border to next card
+                            cardBodies[nextCardIndex].classList.add('orange-border');
+                            
+                            // Ensure current card (nth) has default border (remove orange border if it exists)
+                            cardBodies[index].classList.remove('orange-border');
+                        }
+                    }
+                });
+            }
+            
+            // Throttled scroll handler
+            let scrollTimeout;
+            function handleScroll() {
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+                scrollTimeout = setTimeout(() => {
+                    updateOrangeBorders();
+                }, 16); // ~60fps
+            }
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            
+            // Initial call
+            updateOrangeBorders();
+        });
     </script>
 </body>
 

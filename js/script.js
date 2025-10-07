@@ -3,10 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all interactive elements
     initTabs();
     initSmoothScrolling();
-    initHeaderScroll();
+    // initHeaderScroll();
     initAnimations();
     ensureHeroVideoAutoplay();
     initDropdowns();
+    initScrollEffects();
+    initIndustryFilters();
+    initCustomerStoriesImageFade();
 });
 
 // (Globe code removed by request)
@@ -27,6 +30,36 @@ function initTabs() {
             // Add active class to clicked button and corresponding panel
             button.classList.add('active');
             document.getElementById(targetTab).classList.add('active');
+        });
+    });
+}
+
+// Industry filter functionality for customer stories page
+function initIndustryFilters() {
+    const filterButtons = document.querySelectorAll('.cs-filter-btn');
+    const storyCards = document.querySelectorAll('.cs-story-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetIndustry = button.getAttribute('data-industry');
+            
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('cs-active'));
+            
+            // Add active class to clicked button
+            button.classList.add('cs-active');
+            
+            // Filter story cards
+            storyCards.forEach(card => {
+                const cardIndustry = card.getAttribute('data-industry');
+                
+                if (targetIndustry === 'all' || cardIndustry === targetIndustry) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease-in-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         });
     });
 }
@@ -56,24 +89,24 @@ function initSmoothScrolling() {
 }
 
 // Header scroll effect
-function initHeaderScroll() {
-    const header = document.querySelector('.header');
-    let lastScrollTop = 0;
+// function initHeaderScroll() {
+//     const header = document.querySelector('.header');
+//     let lastScrollTop = 0;
     
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+//     window.addEventListener('scroll', () => {
+//         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        if (scrollTop > 100) {
-            header.style.background = 'rgba(255, 255, 255, 0.98)';
-            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        } else {
-            header.style.background = 'rgba(255, 255, 255, 0.95)';
-            header.style.boxShadow = 'none';
-        }
+//         if (scrollTop > 100) {
+//             header.style.background = 'rgba(255, 255, 255, 0.98)';
+//             header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+//         } else {
+//             header.style.background = 'rgba(255, 255, 255, 0.95)';
+//             header.style.boxShadow = 'none';
+//         }
         
-        lastScrollTop = scrollTop;
-    });
-}
+//         lastScrollTop = scrollTop;
+//     });
+// }
 
 // Intersection Observer for animations
 function initAnimations() {
@@ -301,8 +334,11 @@ document.addEventListener('DOMContentLoaded', initButtonEffects);
 function initScrollToTop() {
     // Create scroll to top button
     const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '↑';
     scrollButton.className = 'scroll-to-top';
+    // Ensure no text content remains
+    scrollButton.textContent = '';
+    scrollButton.setAttribute('aria-label', 'Scroll to top');
+    scrollButton.setAttribute('title', 'Scroll to top');
     scrollButton.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -310,10 +346,9 @@ function initScrollToTop() {
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: #667eea;
-        color: white;
+        background: transparent url('assets/images/scroll.svg') center / cover no-repeat;
         border: none;
-        font-size: 20px;
+        padding: 0;
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
@@ -409,3 +444,177 @@ function initDropdowns() {
         }
     });
 }
+
+// Create black overlay for fade effect
+function createBlackOverlay(heroSection) {
+    const overlay = document.createElement('div');
+    overlay.className = 'black-overlay';
+    overlay.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        z-index: 10;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.1s ease-out;
+    `;
+    heroSection.appendChild(overlay);
+    return overlay;
+}
+
+// Scroll effects for hero section opacity transition
+function initScrollEffects() {
+    const heroSection = document.querySelector('.hero');
+    const heroVideo2 = document.querySelector('.hero-video-2');
+    const clientsSection = document.querySelector('.clients');
+    
+    if (!heroSection || !heroVideo2) {
+        console.warn('Required elements not found for scroll effects');
+        return;
+    }
+
+    function handleScroll() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        
+        // Calculate scroll progress for clients section (fades over 30% of viewport height)
+        const clientsScrollProgress = Math.min(scrollY / (windowHeight * 0.3), 1);
+        
+        // Calculate scroll progress for hero section (fades over 30% of viewport height to match clients)
+        const heroScrollProgress = Math.min(scrollY / (windowHeight * 0.4), 1);
+        
+        // Opacity for the hero content (fades out over 30% of viewport height)
+        const heroContentOpacity = 1 - heroScrollProgress; 
+        // Opacity for the black overlay (fades in over 30% of viewport height)
+        const blackOverlayOpacity = heroScrollProgress;
+
+        // Get the hero content element and fade it out
+        const heroContent = heroSection.querySelector('.hero-content');
+        if (heroContent) {
+            heroContent.style.opacity = heroContentOpacity;
+        }
+        
+        // Get or create the black overlay and fade it in
+        const blackOverlay = heroSection.querySelector('.black-overlay') || createBlackOverlay(heroSection);
+        blackOverlay.style.opacity = blackOverlayOpacity;
+
+        // Fade out clients section as soon as scrolling starts (same timing as hero)
+        if (clientsSection) {
+            const clientsOpacity = 1 - clientsScrollProgress;
+            clientsSection.style.opacity = clientsOpacity;
+        }
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Initial call
+    handleScroll();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const popup = document.getElementById("lets-talk");
+    const section4 = document.querySelector(".show-talk-box");
+    const footer = document.querySelector("footer"); // footer section
+    const closeBtn = popup.querySelector(".talk-close"); // cross button inside popup
+  
+    if (!popup || !section4 || !footer) return;
+  
+    let manuallyClosed = false; // track if user closed popup
+  
+    function togglePopup() {
+      if (manuallyClosed) return; // don't show again if user closed
+  
+      const rect4 = section4.getBoundingClientRect();
+      const rectFooter = footer.getBoundingClientRect();
+      const middle = window.innerHeight / 2;
+  
+      // check if middle of screen is inside section4 OR footer
+      const inSection4 = rect4.top <= middle && rect4.bottom >= middle;
+      const inFooter = rectFooter.top <= window.innerHeight && rectFooter.bottom >= 0;
+  
+      if (inSection4 || inFooter) {
+        popup.classList.add("visible");
+      } else {
+        popup.classList.remove("visible");
+      }
+    }
+  
+    // run initially + on scroll/resize/load
+    window.addEventListener("scroll", togglePopup);
+    window.addEventListener("resize", togglePopup);
+    window.addEventListener("load", togglePopup);
+    togglePopup();
+  
+    // close button handler
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        popup.classList.remove("visible");
+        manuallyClosed = true; // prevent reappearing
+      });
+    }
+  });
+
+// Customer Stories Image Fade Effect
+function initCustomerStoriesImageFade() {
+    const pointerSections = document.querySelectorAll('.cs-pointer-section');
+    const images = document.querySelectorAll('.cs-fade-image');
+    
+    if (pointerSections.length === 0 || images.length === 0) {
+        return; // Exit if elements don't exist
+    }
+    
+    function updateActiveImage() {
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
+        let activeIndex = 0;
+        
+        // Find which section is currently in the center of the viewport
+        pointerSections.forEach((section, index) => {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                activeIndex = index;
+            }
+        });
+        
+        // Update active image
+        images.forEach((image, index) => {
+            if (index === activeIndex) {
+                image.classList.add('cs-active');
+            } else {
+                image.classList.remove('cs-active');
+            }
+        });
+    }
+    
+    // Initial call
+    updateActiveImage();
+    
+    // Add scroll event listener with throttling
+    let ticking = false;
+    function handleScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateActiveImage();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+}
+  
+  

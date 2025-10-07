@@ -99,7 +99,9 @@ p {
     transform: translateY(-2px);
     box-shadow: 0 13px 26px #eaae98;
 }
-
+.no-shadow:hover{
+    box-shadow: none;
+}
 .btn-secondary {
     background: transparent;
     color: #EB5D2A;
@@ -207,7 +209,7 @@ p {
 }
 .section-title-2 {
     font-size: 3.4rem;
-    font-weight: 700;
+    font-weight: 650;
     color: #000;
     margin-bottom: 1.5rem;
     line-height: 1.2;
@@ -217,25 +219,41 @@ p {
 .text-center {
     text-align: center;
 }
-
 .talk-box {
-    background-color: #0F0F0F;
     position: fixed;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(20px);
     width: 750px;
+    max-width: 95%;
+    background-color: rgba(15, 15, 15, 0.9);
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
     border-radius: 8px;
-    padding: 10px 10px 10px 20px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-    z-index: 1100;
-}
-
+    padding: 12px 16px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    z-index: 2000;
+    opacity: 0;                   /* 🔴 hidden by default */
+    pointer-events: none;         /* disable click when hidden */
+    transition: all 0.4s ease-in-out;
+  }
+  
+  /* Visible state */
+  .talk-box.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;         /* clickable when visible */
+  }
+  
+  .talk-close {
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
+  }
 .section-description {
     font-size: 19px;
     color: #fff;
@@ -250,6 +268,15 @@ p {
 }
 .color-black{
     color: #000 !important;
+}
+.color-grey{
+    color: #666 !important;
+}
+.color-00ffff{
+    color: #00ffff !important;
+}
+.fs-17{
+    font-size: 17px !important;
 }
 /* Header */
 .header {
@@ -283,12 +310,12 @@ p {
 .nav-link {
     text-decoration: none;
     color: #333;
-    font-weight: 500;
+    font-weight: 400;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #667eea;
+    color: #EB5D2A;
 }
 
 .header-actions {
@@ -368,7 +395,7 @@ p {
 
 .dropdown-item:hover {
     background: #f5f6f8;
-    color: #EB5D2A;
+    color: rgba(0, 225, 225, 0.5);;
 }
 
 .header-actions-2 {
@@ -388,11 +415,48 @@ p {
 .hero {
     padding: 120px 0 80px;
     background: #000000;
-    height: 99vh;
-    display: flex;
+    height: 100vh;
+    /* display: flex; */
     align-items: center;
-    position: relative;
+    position: sticky;
+    top: 0;
     overflow: hidden;
+    backface-visibility: hidden;
+    z-index: 1;
+}
+
+/* Hero content transitions */
+.hero-content {
+    transition: opacity 0.1s ease-out;
+}
+.fade-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    transition: opacity 0.05s linear;
+    z-index: 5;
+  }
+/* Main container for sticky context */
+.main-container {
+  position: relative;
+}
+
+
+/* Ensure the page can scroll normally outside hero */
+html, body { overscroll-behavior-y: contain; }
+
+/* overlay to darken on slight scroll */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .hero-video {
@@ -405,47 +469,96 @@ p {
     /* makes it act like background-size: cover */
     z-index: 0;
     /* push it behind content */
-    /* animation: heroSpinX 30s linear infinite; */
-    transform-origin: 50% 50%;
+    pointer-events: none; /* background should not intercept clicks */
 }
 
 .hero-video-2 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60%;
-    object-fit: cover;
-    /* makes it act like background-size: cover */
-    z-index: -1;
-    /* push it behind content */
+    background-color: #000000;
+    z-index: 2;
+    height: 100vh;
+    position: relative;
+    width: 95%;
+    justify-self: center;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  
+  /* black overlay - now handled by JavaScript for scroll-based fade */
 
+.hero-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .purpose-content-text{
     width: 50%;
 }
-
-@keyframes heroSpinX {
-    0%   { transform: rotateX(0deg); }
-    100% { transform: rotateX(360deg); }
+.h-100{
+    height: 100%;
+}
+.position-relative{
+    position: relative;
+}
+.z-2{
+    z-index: 2;
 }
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1fr;
     gap: 4rem;
     align-items: center;
     position: relative;
-    z-index: 1; /* keep content above rotating mesh */
+    z-index: 4; /* keep above video container */
+}
+.hero-text .header-actions{
+    justify-content: center;
 }
 
 .hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-size: 80px;
+    font-weight: 600;
     color: #fff;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3.5rem;
+    margin-top: 125px;
+    max-width: 1144px;
 }
+
+
+/* Clients overlay sitting over the visible video area in hero */
+.hero-clients-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20px;
+    z-index: 3; /* above video (2), below hero text (4) */
+    background: transparent;
+    padding: 10px 0 14px;
+}
+
+.hero-clients-overlay .clients-title {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-clients-overlay .clients-logos {
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hero-clients-overlay .logo-scroll {
+    display: flex;
+    gap: 3rem;
+    animation: scroll 30s linear infinite;
+}
+
+
 
 .hero-description {
     font-size: 1.2rem;
@@ -688,8 +801,14 @@ p {
 
 /* Clients Section */
 .clients {
-    padding: 60px 0 0px 0;
-
+    padding: 40px 0 40px 0;
+position: absolute;
+z-index: 6;
+/* background-color: #fff; */
+background: rgba(0, 0, 0, 0.3);
+width: 100%;
+top: -7px;
+transition: opacity 0.3s ease-out; /* Smooth fade transition */
 }
 
 .clients-content {
@@ -698,18 +817,18 @@ p {
 }
 
 .clients-title {
-    font-size: 1.5rem;
-    color: #666;
+    font-size: 18px;
+    color: #fff;
     margin-bottom: 2rem;
     font-weight: 700;
 }
 
 .clients-logos {
     overflow: hidden;
-    margin-bottom: 60px;
+    /* margin-bottom: 60px; */
     width: 70%;
     justify-self: center;
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 
 .logo-scroll {
@@ -739,7 +858,7 @@ p {
 }
 
 .client-logo {
-    height: 20px;
+    height: 36px;
     opacity: 1;
     transition: opacity 0.3s ease;
     flex-shrink: 0;
@@ -793,6 +912,8 @@ p {
 .services {
     padding: 80px 0 80px 0;
     background-color: #f2f2f2;
+    position: relative;
+    z-index: 6;
 }
 
 .services-header {
@@ -814,7 +935,7 @@ p {
 
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 13px 26px #eaae98;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
 }
 
 .service-link {
@@ -832,6 +953,11 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image {
+    transform: scale(1.1);
 }
 
 .service-blur {
@@ -864,8 +990,10 @@ p {
 /* Stats Section */
 .stats {
     padding: 80px 0 0 0;
-    /* background: #FDEFEA; */
+    background: #FDEFEA;
     /* height: 80vh; */
+    position: relative;
+    z-index: 6;
 
 }
 
@@ -886,7 +1014,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 60px;
+    /* margin-bottom: 60px; */
 }
 
 /* Center button */
@@ -1130,6 +1258,8 @@ p {
 background-color: #0a2540;
     padding: 80px 0 0px 0;
     overflow: auto;
+    position: relative;
+    z-index: 6;
 }
 
 .purpose-content {
@@ -1881,6 +2011,8 @@ background-color: #0a2540;
     background: #1a1a1a;
     color: white;
     padding: 60px 0 30px;
+    position: relative;
+    z-index: 6;
 }
 
 .footer-content {
@@ -2086,6 +2218,12 @@ background-color: #0a2540;
     text-decoration: underline;
 }
 
+@media (max-width: 1280px) {
+    .hero-title {
+        font-size: 57px;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .container {
@@ -2230,3 +2368,5 @@ background-color: #0a2540;
         grid-template-columns: 1fr;
     }
 }
+
+
