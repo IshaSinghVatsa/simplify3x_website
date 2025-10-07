@@ -481,6 +481,9 @@ html, body { overscroll-behavior-y: contain; }
     justify-self: center;
     border-radius: 24px;
     overflow: hidden;
+    bottom: 155px;
+    transition: width 0.3s ease-out;
+
   }
   
   /* black overlay - now handled by JavaScript for scroll-based fade */
