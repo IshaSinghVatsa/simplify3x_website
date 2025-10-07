@@ -21,7 +21,7 @@
 }
 
 .about-page-video {
-    background-color: #EB5D2A;
+    /* background-color: #EB5D2A; */
     border-radius: 20px;
     height: 400px;
     width: 630px;
@@ -31,10 +31,13 @@
     color: aliceblue;
     font-size: 20px;
     font-weight: 700;
+    z-index: 5;
+    overflow: hidden;
+    border-radius: 8px;
 
 }
 .about-page-video-content{
-    width: 100%;
+
     height: 100%;
 }
 .text-justify {
@@ -191,6 +194,10 @@ width: calc(100% - 626px);
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+}
+
+.card:hover .purpose-image {
+    transform: scale(1.1);
 }
 
 .timeline-part{
@@ -387,7 +394,7 @@ width: calc(100% - 626px);
 .insights-grid .span-2{ grid-column: span 2; }
 .insights-card-meta{ color:#6b7280; }
 .author-row{ display:flex; align-items:center; gap:10px; margin-top:14px; color:#374151; font-weight:600; }
-.author-row .avatar{ width:28px; height:28px; border-radius:50%; background:#ffe6de; color:#ff6b35; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; }
+.author-row .avatar{ width:28px; height:28px; border-radius:50%; background:#ffe6de; color:#eb5d2a; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; }
 
 /* Voices slider */
 .voices{ padding: 60px 0 100px; background:#fff; }
@@ -733,16 +740,16 @@ select {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 900px;
+    max-width: 1178px;
     margin: 0 auto;
 }
 
 .cs-hero-title {
-    font-size: 56px;
-    font-weight: 700;
+    font-size: 68px;
+    font-weight: 650;
     color: #ffffff;
     margin-bottom: 20px;
-    line-height: 1.2;
+    line-height: 1.6;
     letter-spacing: -0.02em;
 }
 
@@ -850,7 +857,7 @@ border: none;
     border-radius: 16px;
     padding: 11px 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 107, 53, 0.3);
+    border: 1px solid rgba(0, 225, 225, 0.5);
     transition: all 0.3s ease;
     position: relative;
 }
@@ -1021,8 +1028,8 @@ border: none;
 }
 
 .cs-logo-item {
-    width: 60px;
-    height: 60px;
+    
+    height: 40px;
     background-color: #f5f5f5;
     border-radius: 12px;
     display: flex;
@@ -1035,6 +1042,18 @@ border: none;
 
 .cs-logo-item:hover {
     transform: scale(1.1);
+}
+
+.cs-logo-item img {
+ 
+    height: 20px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.cs-logo-item:hover img {
+    filter: grayscale(0%);
 }
 
 @keyframes cs-logo-scroll {
@@ -1266,6 +1285,34 @@ border: none;
 .cs-discover-section-content{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     gap: 100px;
+}
+
+/* Image fade transition styles */
+.cs-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.cs-fade-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.cs-fade-image.cs-active {
+    opacity: 1;
+    position: relative;
+}
+
+.cs-pointer-section {
+    scroll-margin-top: 50vh;
 }

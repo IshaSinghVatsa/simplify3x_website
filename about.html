@@ -182,8 +182,12 @@
     justify-content: space-between;
     align-items: center;
     transition: all 0.5s;
-    border: 1px solid #eb5d2a;
+    border: 1px solid rgba(0, 225, 225, 0.5);
     background-color: #fff;
+}
+
+.card-body.orange-border {
+    border: 1px solid #ff6b35;
 }
 
 
@@ -757,6 +761,54 @@
             });
 
             observer.observe(container);
+        });
+
+        // Orange border effect when card reaches 20vh
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.card');
+            const cardBodies = document.querySelectorAll('.card-body');
+            
+            function updateOrangeBorders() {
+                // Remove all orange borders first
+                cardBodies.forEach(body => body.classList.remove('orange-border'));
+                
+                // Check each card to see if it's at 20vh
+                cards.forEach((card, index) => {
+                    const rect = card.getBoundingClientRect();
+                    const cardTop = rect.top;
+                    const viewportHeight = window.innerHeight;
+                    const targetPosition = viewportHeight * 0.2; // 20vh
+                    
+                    // If current card is at or near 20vh, add orange border to next card
+                    if (cardTop <= targetPosition + 50 && cardTop >= targetPosition - 50) {
+                        const nextCardIndex = index + 1;
+                        if (nextCardIndex < cardBodies.length) {
+                            // Add orange border to next card
+                            cardBodies[nextCardIndex].classList.add('orange-border');
+                            
+                            // Ensure current card (nth) has default border (remove orange border if it exists)
+                            cardBodies[index].classList.remove('orange-border');
+                        }
+                    }
+                });
+            }
+            
+            // Throttled scroll handler
+            let scrollTimeout;
+            function handleScroll() {
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+                scrollTimeout = setTimeout(() => {
+                    updateOrangeBorders();
+                }, 16); // ~60fps
+            }
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            
+            // Initial call
+            updateOrangeBorders();
         });
     </script>
 </body>

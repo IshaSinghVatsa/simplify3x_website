@@ -209,7 +209,7 @@ p {
 }
 .section-title-2 {
     font-size: 3.4rem;
-    font-weight: 700;
+    font-weight: 650;
     color: #000;
     margin-bottom: 1.5rem;
     line-height: 1.2;
@@ -269,6 +269,15 @@ p {
 .color-black{
     color: #000 !important;
 }
+.color-grey{
+    color: #666 !important;
+}
+.color-00ffff{
+    color: #00ffff !important;
+}
+.fs-17{
+    font-size: 17px !important;
+}
 /* Header */
 .header {
     position: fixed;
@@ -301,7 +310,7 @@ p {
 .nav-link {
     text-decoration: none;
     color: #333;
-    font-weight: 500;
+    font-weight: 400;
     transition: color 0.3s ease;
 }
 
@@ -386,7 +395,7 @@ p {
 
 .dropdown-item:hover {
     background: #f5f6f8;
-    color: #EB5D2A;
+    color: rgba(0, 225, 225, 0.5);;
 }
 
 .header-actions-2 {
@@ -514,6 +523,7 @@ html, body { overscroll-behavior-y: contain; }
     line-height: 1.1;
     margin-bottom: 3.5rem;
     margin-top: 125px;
+    max-width: 1144px;
 }
 
 
@@ -923,7 +933,7 @@ transition: opacity 0.3s ease-out; /* Smooth fade transition */
 
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 13px 26px #eaae98;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
 }
 
 .service-link {
@@ -941,6 +951,11 @@ transition: opacity 0.3s ease-out; /* Smooth fade transition */
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image {
+    transform: scale(1.1);
 }
 
 .service-blur {

@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initDropdowns();
     initScrollEffects();
     initIndustryFilters();
+    initCustomerStoriesImageFade();
 });
 
 // (Globe code removed by request)
@@ -564,5 +565,56 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+
+// Customer Stories Image Fade Effect
+function initCustomerStoriesImageFade() {
+    const pointerSections = document.querySelectorAll('.cs-pointer-section');
+    const images = document.querySelectorAll('.cs-fade-image');
+    
+    if (pointerSections.length === 0 || images.length === 0) {
+        return; // Exit if elements don't exist
+    }
+    
+    function updateActiveImage() {
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
+        let activeIndex = 0;
+        
+        // Find which section is currently in the center of the viewport
+        pointerSections.forEach((section, index) => {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                activeIndex = index;
+            }
+        });
+        
+        // Update active image
+        images.forEach((image, index) => {
+            if (index === activeIndex) {
+                image.classList.add('cs-active');
+            } else {
+                image.classList.remove('cs-active');
+            }
+        });
+    }
+    
+    // Initial call
+    updateActiveImage();
+    
+    // Add scroll event listener with throttling
+    let ticking = false;
+    function handleScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateActiveImage();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+}
   
   
