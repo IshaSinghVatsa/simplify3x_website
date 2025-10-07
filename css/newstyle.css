@@ -24,7 +24,7 @@
     background-color: #EB5D2A;
     border-radius: 20px;
     height: 400px;
-    width: 500px;
+    width: 630px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,7 +33,10 @@
     font-weight: 700;
 
 }
-
+.about-page-video-content{
+    width: 100%;
+    height: 100%;
+}
 .text-justify {
     text-align: justify;
 }
@@ -500,8 +503,22 @@ width: calc(100% - 626px);
   .lb-grid{ grid-template-columns: 1fr; }
 }
 
-.contact-part{
-    background-color: #000000;
+.contact-part {
+    background-color: #0f0f0f;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-part::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="customer-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23ff6b35" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23customer-grid)"/></svg>');
+    opacity: 0.4;
+    z-index: 1;
 }
 .contact-section{
         padding: 166px 0 88px 0;
@@ -759,8 +776,8 @@ select {
 }
 
 .cs-discover-description {
-    font-size: 27px;
-    color: #1c1c1c;
+    font-size: 24px;
+    color: #666;
     font-weight: 500;
     line-height: 1.6;
     max-width: 800px;
