@@ -472,12 +472,12 @@ html, body { overscroll-behavior-y: contain; }
     pointer-events: none; /* background should not intercept clicks */
 }
 
-.hero-video-2 {
+/* .hero-video-2 {
     background-color: #000000;
     z-index: 2;
     height: 100vh;
     position: relative;
-    width: 95%;
+    width: 85%;
     justify-self: center;
     border-radius: 24px;
     overflow: hidden;
@@ -488,6 +488,39 @@ html, body { overscroll-behavior-y: contain; }
   
   /* black overlay - now handled by JavaScript for scroll-based fade */
 
+.hero-video-2 {
+  background-color: #000;
+  z-index: 2;
+  height: 95vh; /* Start with 95% instead of 100vh */
+  width: 95%;
+  position: relative;
+  justify-self: center;
+  border-radius: 24px;
+  bottom: 155px;
+  overflow: hidden;
+  transition:
+    height 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+    width 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+    border-radius 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+    bottom 0.8s cubic-bezier(0.65, 0, 0.35, 1); /* Added bottom transition */
+}
+
+.hero-video-2 video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); /* Smoother video transition */
+}
+
+/* Fully expanded state on scroll */
+.hero-video-2.expanded {
+  height: 100vh;
+  width: 100%;
+  border-radius: 0;
+  bottom: 0;
+}
+
 .hero-left{
     display: flex;
     flex-direction: column;
@@ -495,6 +528,13 @@ html, body { overscroll-behavior-y: contain; }
     justify-content: space-between;
     height: 100%;
 }
+
+/* .hero-video-2 video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+} */
 
 .purpose-content-text{
     width: 50%;
