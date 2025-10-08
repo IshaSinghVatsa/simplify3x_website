@@ -40,7 +40,11 @@ body {
 
     padding-left: 200px;
 }
-
+.our-container {
+    max-width: 1425px;
+    margin: 0 auto;
+    transition: max-width 0.2s ease, opacity 0.5s ease;
+}
 /* Typography */
 h1,
 h2,
@@ -2391,17 +2395,7 @@ background-color: #0a2540;
         font-size: 1.8rem;
     }
 
-    .locations-list {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .strategy-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-
+ 
     .tab-list {
         flex-wrap: wrap;
         gap: 0.5rem;
@@ -2411,5 +2405,6 @@ background-color: #0a2540;
         grid-template-columns: 1fr;
     }
 }
+
 
 

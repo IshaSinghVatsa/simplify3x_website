@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Copora - Driving business growth through expert strategy</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/newstyle.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -359,217 +360,217 @@
       </section>
     </div>
 
-    <script>
-      (function () {
-        try {
-          const mount = document.getElementById("hero-canvas"); // Mount container; change the ID if you want to attach canvas elsewhere
-          console.log("the mount is", mount);
-          if (!mount) return; // Stop if no mount is found
+<script>
+  (function () {
+    try {
+      const mount = document.getElementById("hero-canvas"); // Mount container; change the ID if you want to attach canvas elsewhere
+      console.log("the mount is", mount);
+      if (!mount) return; // Stop if no mount is found
 
-          let scene, camera, renderer, particles, particlePositions; // Core Three.js objects
-          let clock = new THREE.Clock(); // Used to track time for animation
-          let mouseX = 0,
-            mouseY = 0; // Mouse position values
-          let isMouseDown = false; // Mouse click state
-          let targetRotationX = 0.3, // Initial tilt on X-axis; change 0.3 to tilt more/less
-            targetRotationY = 0; // Initial tilt on Y-axis
+      let scene, camera, renderer, particles, particlePositions; // Core Three.js objects
+      let clock = new THREE.Clock(); // Used to track time for animation
+      let mouseX = 0,
+        mouseY = 0; // Mouse position values
+      let isMouseDown = false; // Mouse click state
+      let targetRotationX = 0.3, // Initial tilt on X-axis; change 0.3 to tilt more/less
+        targetRotationY = 0; // Initial tilt on Y-axis
 
-          const gridSize = 150; // Number of particles along each side; increase for denser grid
-          const spacing = 0.4; // Distance between particles; increase for wider spacing
-          const waveHeight = 2.5; // Height of wave peaks; increase for taller waves
-          const waveSpeed = 2.5; // Speed of wave animation; increase for faster ripples
+      const gridSize = 150; // Number of particles along each side; increase for denser grid
+      const spacing = 0.4; // Distance between particles; increase for wider spacing
+      const waveHeight = 2.5; // Height of wave peaks; increase for taller waves
+      const waveSpeed = 2.5; // Speed of wave animation; increase for faster ripples
 
-          const primaryColor = new THREE.Color("#ff3300"); // Starting particle color; change hex for different tone
-          const secondaryColor = new THREE.Color("#ffaa00"); // Blend-to particle color; tweak for gradient effect
-          const bgColor = "#220000"; // Background color; replace hex for different background
+      const primaryColor = new THREE.Color("#ff3300"); // Starting particle color; change hex for different tone
+      const secondaryColor = new THREE.Color("#ffaa00"); // Blend-to particle color; tweak for gradient effect
+      const bgColor = "#220000"; // Background color; replace hex for different background
 
-          init(); // Call initialization
-          console.log("calling animate");
-          animate(); // Start animation loop
+      init(); // Call initialization
+      console.log("calling animate");
+      animate(); // Start animation loop
 
-          function init() {
-            scene = new THREE.Scene(); // Create scene container
-            scene.background = new THREE.Color(bgColor); // Apply background color
-            scene.fog = new THREE.Fog(bgColor, 15, 40); // Add fog effect; adjust 15/40 for start/end distances
+      function init() {
+        scene = new THREE.Scene(); // Create scene container
+        scene.background = new THREE.Color(bgColor); // Apply background color
+        scene.fog = new THREE.Fog(bgColor, 15, 40); // Add fog effect; adjust 15/40 for start/end distances
 
-            camera = new THREE.PerspectiveCamera(
-              60, // Field of view; decrease for zoom-in, increase for zoom-out
-              mount.clientWidth / mount.clientHeight, // Aspect ratio
-              0.1, // Near clipping plane
-              100 // Far clipping plane
-            );
-            camera.position.set(18, 18, 18); // Camera position; change numbers for angle/distance
-            camera.lookAt(0, 0, 0); // Camera looks at origin
+        camera = new THREE.PerspectiveCamera(
+          60, // Field of view; decrease for zoom-in, increase for zoom-out
+          mount.clientWidth / mount.clientHeight, // Aspect ratio
+          0.1, // Near clipping plane
+          100 // Far clipping plane
+        );
+        camera.position.set(18, 18, 18); // Camera position; change numbers for angle/distance
+        camera.lookAt(0, 0, 0); // Camera looks at origin
 
-            renderer = new THREE.WebGLRenderer({
-              antialias: true, // Smooth edges; set false for performance
-              alpha: true, // Transparent background if needed
-              powerPreference: "high-performance", // Rendering preference
-            });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Control pixel density; force 1 for performance
-            renderer.setSize(mount.clientWidth, mount.clientHeight); // Match container size
-            renderer.toneMapping = THREE.ACESFilmicToneMapping; // HDR tone mapping type
-            renderer.toneMappingExposure = 1.2; // Brightness; increase for lighter render
+        renderer = new THREE.WebGLRenderer({
+          antialias: true, // Smooth edges; set false for performance
+          alpha: true, // Transparent background if needed
+          powerPreference: "high-performance", // Rendering preference
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Control pixel density; force 1 for performance
+        renderer.setSize(mount.clientWidth, mount.clientHeight); // Match container size
+        renderer.toneMapping = THREE.ACESFilmicToneMapping; // HDR tone mapping type
+        renderer.toneMappingExposure = 1.2; // Brightness; increase for lighter render
 
-            mount.innerHTML = ""; // Clear existing canvas
-            mount.appendChild(renderer.domElement); // Add renderer canvas to page
+        mount.innerHTML = ""; // Clear existing canvas
+        mount.appendChild(renderer.domElement); // Add renderer canvas to page
 
-            createParticleSystem(); // Create particles
+        createParticleSystem(); // Create particles
 
-            // Event listeners for interaction
-            window.addEventListener("resize", onWindowResize, false); // Resize handling
-            window.addEventListener("mousemove", onMouseMove, false); // Mouse move for interaction
-            window.addEventListener(
-              "mousedown",
-              () => (isMouseDown = true), // Track mouse down
-              false
-            );
-            window.addEventListener(
-              "mouseup",
-              () => (isMouseDown = false), // Track mouse up
-              false
-            );
-            window.addEventListener("wheel", onMouseWheel, false); // Zoom with wheel
-            window.addEventListener("keydown", onKeyDown, false); // Reset with keyboard
+        // Event listeners for interaction
+        window.addEventListener("resize", onWindowResize, false); // Resize handling
+        window.addEventListener("mousemove", onMouseMove, false); // Mouse move for interaction
+        window.addEventListener(
+          "mousedown",
+          () => (isMouseDown = true), // Track mouse down
+          false
+        );
+        window.addEventListener(
+          "mouseup",
+          () => (isMouseDown = false), // Track mouse up
+          false
+        );
+        window.addEventListener("wheel", onMouseWheel, false); // Zoom with wheel
+        window.addEventListener("keydown", onKeyDown, false); // Reset with keyboard
 
-            onWindowResize(); // Adjust size at start
-          }
+        onWindowResize(); // Adjust size at start
+      }
 
-          function createParticleSystem() {
-            const geometry = new THREE.BufferGeometry(); // Geometry to hold points
-            const positions = []; // Array for XYZ positions
-            const colors = []; // Array for RGB colors
-            const sizes = []; // Array for point sizes
+      function createParticleSystem() {
+        const geometry = new THREE.BufferGeometry(); // Geometry to hold points
+        const positions = []; // Array for XYZ positions
+        const colors = []; // Array for RGB colors
+        const sizes = []; // Array for point sizes
 
-            for (let i = 0; i < gridSize; i++) {
-              for (let j = 0; j < gridSize; j++) {
-                positions.push(
-                  (i - gridSize / 2) * spacing, // X position; controlled by spacing/gridSize
-                  0, // Y position (height, will animate later)
-                  (j - gridSize / 2) * spacing // Z position
-                );
-
-                const t = Math.random() * 0.7; // Random blend factor for colors
-                const color = primaryColor.clone().lerp(secondaryColor, t); // Mix between primary/secondary colors
-                colors.push(color.r, color.g, color.b); // Add RGB values
-
-                sizes.push(Math.random() * 0.1 + 0.08); // Particle size variation
-              }
-            }
-
-            particlePositions = new Float32Array(positions); // Store positions in buffer
-            geometry.setAttribute(
-              "position",
-              new THREE.BufferAttribute(particlePositions, 3)
-            );
-            geometry.setAttribute(
-              "color",
-              new THREE.BufferAttribute(new Float32Array(colors), 3)
-            );
-            geometry.setAttribute(
-              "size",
-              new THREE.BufferAttribute(new Float32Array(sizes), 1)
+        for (let i = 0; i < gridSize; i++) {
+          for (let j = 0; j < gridSize; j++) {
+            positions.push(
+              (i - gridSize / 2) * spacing, // X position; controlled by spacing/gridSize
+              0, // Y position (height, will animate later)
+              (j - gridSize / 2) * spacing // Z position
             );
 
-            const material = new THREE.PointsMaterial({
-              size: 0.15, // Base particle size; adjust for larger/smaller dots
-              vertexColors: true, // Use per-vertex colors
-              transparent: true, // Allow transparency
-              opacity: 0.9, // Particle opacity
-              blending: THREE.AdditiveBlending, // Glow-like effect; change to NormalBlending for solid
-              sizeAttenuation: true, // Makes particles smaller when farther away
-            });
+            const t = Math.random() * 0.7; // Random blend factor for colors
+            const color = primaryColor.clone().lerp(secondaryColor, t); // Mix between primary/secondary colors
+            colors.push(color.r, color.g, color.b); // Add RGB values
 
-            particles = new THREE.Points(geometry, material); // Create point cloud
-            scene.add(particles); // Add to scene
+            sizes.push(Math.random() * 0.1 + 0.08); // Particle size variation
           }
-
-          function onWindowResize() {
-            const rect = mount.getBoundingClientRect(); // Get container size
-            const w = rect.width || window.innerWidth; // Width
-            const h = rect.height || window.innerHeight; // Height
-
-            camera.aspect = w / h; // Update aspect ratio
-            camera.updateProjectionMatrix(); // Apply changes
-            renderer.setSize(w, h); // Resize renderer
-          }
-
-          function onMouseMove(event) {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1; // Normalized X position
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Normalized Y position
-
-            if (isMouseDown) {
-              targetRotationY += event.movementX * 0.001; // Small horizontal rotation; increase multiplier for faster
-              targetRotationX += event.movementY * 0.001; // Small vertical rotation; increase for faster
-
-              targetRotationX = Math.max(
-                0.2, // Minimum tilt
-                Math.min(0.4, targetRotationX) // Maximum tilt
-              );
-              targetRotationY = Math.max(
-                -0.1, // Min horizontal rotation
-                Math.min(0.1, targetRotationY) // Max horizontal rotation
-              );
-            }
-          }
-
-          function onMouseWheel(event) {
-            camera.position.z += event.deltaY * 0.01; // Zoom in/out; change multiplier for sensitivity
-            camera.position.z = Math.max(5, Math.min(30, camera.position.z)); // Limit zoom range
-          }
-
-          function onKeyDown(event) {
-            if (event.code === "KeyR") {
-              targetRotationX = 0.3; // Reset tilt
-              targetRotationY = 0; // Reset rotation
-              camera.position.set(18, 18, 18); // Reset camera position
-            }
-          }
-
-          function animate() {
-            requestAnimationFrame(animate); // Loop animation
-
-            const time = clock.getElapsedTime() * waveSpeed; // Get time scaled by wave speed
-
-            let index = 0;
-            for (let i = 0; i < gridSize; i++) {
-              for (let j = 0; j < gridSize; j++) {
-                const x = (i - gridSize / 2) * spacing; // X position
-                const z = (j - gridSize / 2) * spacing; // Z position
-
-                const waveValue =
-                  (Math.sin(x * 1.5 + time) * 0.5 + // Main wave frequency
-                    Math.cos(z * 1.2 + time * 1.3) * 0.3 + // Secondary wave
-                    Math.sin((x + z) * 0.7 + time * 0.7) * 0.2) * // Combined wave
-                  waveHeight; // Scale wave by height
-
-                const mouseInfluence =
-                  (Math.sin(mouseX * 15 + x * 2) * 0.5 + // Mouse-based distortion
-                    Math.cos(mouseY * 15 + z * 2) * 0.5) *
-                  1.5; // Scale mouse effect
-
-                particlePositions[index + 1] = waveValue + mouseInfluence; // Update Y position (height)
-                index += 3; // Skip to next particle
-              }
-            }
-
-            particles.geometry.attributes.position.needsUpdate = true; // Mark positions for update
-
-            particles.rotation.y +=
-              (targetRotationY - particles.rotation.y) * 0.05; // Smoothly rotate toward target Y
-            particles.rotation.x +=
-              (targetRotationX - particles.rotation.x) * 0.05; // Smoothly rotate toward target X
-
-            const pulse = Math.sin(time * 2) * 0.1 + 0.9; // Pulsing factor for size
-            particles.material.size = 0.15 * pulse; // Apply pulse to particle size
-
-            renderer.render(scene, camera); // Render scene
-          }
-        } catch (e) {
-          console.warn("Hero particle background disabled:", e); // Error handling
         }
-      })();
-    </script>
+
+        particlePositions = new Float32Array(positions); // Store positions in buffer
+        geometry.setAttribute(
+          "position",
+          new THREE.BufferAttribute(particlePositions, 3)
+        );
+        geometry.setAttribute(
+          "color",
+          new THREE.BufferAttribute(new Float32Array(colors), 3)
+        );
+        geometry.setAttribute(
+          "size",
+          new THREE.BufferAttribute(new Float32Array(sizes), 1)
+        );
+
+        const material = new THREE.PointsMaterial({
+          size: 0.15, // Base particle size; adjust for larger/smaller dots
+          vertexColors: true, // Use per-vertex colors
+          transparent: true, // Allow transparency
+          opacity: 0.9, // Particle opacity
+          blending: THREE.AdditiveBlending, // Glow-like effect; change to NormalBlending for solid
+          sizeAttenuation: true, // Makes particles smaller when farther away
+        });
+
+        particles = new THREE.Points(geometry, material); // Create point cloud
+        scene.add(particles); // Add to scene
+      }
+
+      function onWindowResize() {
+        const rect = mount.getBoundingClientRect(); // Get container size
+        const w = rect.width || window.innerWidth; // Width
+        const h = rect.height || window.innerHeight; // Height
+
+        camera.aspect = w / h; // Update aspect ratio
+        camera.updateProjectionMatrix(); // Apply changes
+        renderer.setSize(w, h); // Resize renderer
+      }
+
+      function onMouseMove(event) {
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1; // Normalized X position
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Normalized Y position
+
+        if (isMouseDown) {
+          targetRotationY += event.movementX * 0.001; // Small horizontal rotation; increase multiplier for faster
+          targetRotationX += event.movementY * 0.001; // Small vertical rotation; increase for faster
+
+          targetRotationX = Math.max(
+            0.2, // Minimum tilt
+            Math.min(0.4, targetRotationX) // Maximum tilt
+          );
+          targetRotationY = Math.max(
+            -0.1, // Min horizontal rotation
+            Math.min(0.1, targetRotationY) // Max horizontal rotation
+          );
+        }
+      }
+
+      function onMouseWheel(event) {
+        camera.position.z += event.deltaY * 0.01; // Zoom in/out; change multiplier for sensitivity
+        camera.position.z = Math.max(5, Math.min(30, camera.position.z)); // Limit zoom range
+      }
+
+      function onKeyDown(event) {
+        if (event.code === "KeyR") {
+          targetRotationX = 0.3; // Reset tilt
+          targetRotationY = 0; // Reset rotation
+          camera.position.set(18, 18, 18); // Reset camera position
+        }
+      }
+
+      function animate() {
+        requestAnimationFrame(animate); // Loop animation
+
+        const time = clock.getElapsedTime() * waveSpeed; // Get time scaled by wave speed
+
+        let index = 0;
+        for (let i = 0; i < gridSize; i++) {
+          for (let j = 0; j < gridSize; j++) {
+            const x = (i - gridSize / 2) * spacing; // X position
+            const z = (j - gridSize / 2) * spacing; // Z position
+
+            const waveValue =
+              (Math.sin(x * 1.5 + time) * 0.5 + // Main wave frequency
+                Math.cos(z * 1.2 + time * 1.3) * 0.3 + // Secondary wave
+                Math.sin((x + z) * 0.7 + time * 0.7) * 0.2) * // Combined wave
+              waveHeight; // Scale wave by height
+
+            const mouseInfluence =
+              (Math.sin(mouseX * 15 + x * 2) * 0.5 + // Mouse-based distortion
+                Math.cos(mouseY * 15 + z * 2) * 0.5) *
+              1.5; // Scale mouse effect
+
+            particlePositions[index + 1] = waveValue + mouseInfluence; // Update Y position (height)
+            index += 3; // Skip to next particle
+          }
+        }
+
+        particles.geometry.attributes.position.needsUpdate = true; // Mark positions for update
+
+        particles.rotation.y +=
+          (targetRotationY - particles.rotation.y) * 0.05; // Smoothly rotate toward target Y
+        particles.rotation.x +=
+          (targetRotationX - particles.rotation.x) * 0.05; // Smoothly rotate toward target X
+
+        const pulse = Math.sin(time * 2) * 0.1 + 0.9; // Pulsing factor for size
+        particles.material.size = 0.15 * pulse; // Apply pulse to particle size
+
+        renderer.render(scene, camera); // Render scene
+      }
+    } catch (e) {
+      console.warn("Hero particle background disabled:", e); // Error handling
+    }
+  })();
+</script>
 
     <!-- Clients Section -->
 
@@ -661,8 +662,169 @@
         </div>
       </div>
     </section>
-<section style="background-color: #fff; height: 70vh;position: relative;
-    z-index: 1;"></section>
+    <section class="our-products">
+      <div class="our-container">
+        <div class="section-title-2 text-center">Our Products</div>
+      <section class="our-products-tabs-section">
+        <div class="our-products-tabs">
+          <div class="our-button active" data-tab="0">
+            <img src="assets/images/tab-3.svg" alt="">
+            <div>SimplifyQA</div>
+          </div>
+          <div class="our-line"></div>
+          <div class="our-button" data-tab="1">
+            <img src="assets/images/tab-3.svg" alt="">
+            <div>Bominso</div>
+          </div>
+          <div class="our-line"></div>
+          <div class="our-button" data-tab="2">
+            <img src="assets/images/tab-3.svg" alt="">
+            <div>Hire3x</div>
+          </div>
+          <div class="our-line"></div>
+          <div class="our-button" data-tab="3">
+            <img src="assets/images/tab-3.svg" alt="">
+            <div>DevOpsArc</div>
+          </div>
+          <div class="our-line"></div>
+          <div class="our-button" data-tab="4">
+            <img src="assets/images/tab-3.svg" alt="">
+            <div>Walnut AI</div>
+          </div>
+         </div>
+         
+         <!-- Carousel Container -->
+         <div class="products-carousel">
+           <div class="carousel-container">
+             <div class="carousel-track">
+               <!-- Slide 1: SimplifyQA -->
+               <div class="carousel-slide active" data-slide="0">
+                 <div class="slide-content">
+                   <div class="slide-left">
+                     <div class="slide-info">
+                       <h3 class="slide-title">At Hire3x, we don’t just find jobs—we find the right jobs</h3>
+             
+                       <div class="slide-features">
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Automated testing solutions</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Comprehensive test coverage</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> CI/CD integration</div>
+                       </div>
+                      
+                       <a href="contact.html" class="btn btn-primary">
+                        <span class="btn-text">Explore SimplifyQA</span>
+                      </a>
+                     </div>
+                   </div>
+                   <div class="slide-right">
+                    <img class="img-1" src="assets/images/image-car.svg" alt="">
+                    <img class="img-2" src="assets/images/image-car-2.svg" alt="">
+                    <img class="img-3" src="assets/images/image-car-3.svg" alt="">
+                   </div>
+                 </div>
+               </div>
+               
+               <!-- Slide 2: Bominso -->
+               <div class="carousel-slide" data-slide="1">
+                 <div class="slide-content">
+                   <div class="slide-left">
+                     <div class="slide-info">
+                       <h3 class="slide-title">Bominso transforms data into actionable business intelligence</h3>
+                       <div class="slide-features">
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Real-time analytics</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Custom dashboards</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Predictive insights</div>
+                       </div>
+                       <a href="contact.html" class="btn btn-primary">
+                         <span class="btn-text">Explore Bominso</span>
+                       </a>
+                     </div>
+                   </div>
+                   <div class="slide-right">
+                    <img class="img-1" src="assets/images/image-car.svg" alt="">
+                    <img class="img-2" src="assets/images/image-car-2.svg" alt="">
+                    <img class="img-3" src="assets/images/image-car-3.svg" alt="">
+                   </div>
+                 </div>
+               </div>
+               
+               <!-- Slide 3: Hire3x -->
+               <div class="carousel-slide" data-slide="2">
+                 <div class="slide-content">
+                   <div class="slide-left">
+                     <div class="slide-info">
+                       <h3 class="slide-title">Hire3x revolutionizes recruitment with AI-powered precision</h3>
+                       <div class="slide-features">
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Smart candidate matching</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Streamlined workflow</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Advanced algorithms</div>
+                       </div>
+                       <a href="contact.html" class="btn btn-primary">
+                         <span class="btn-text">Explore Hire3x</span>
+                       </a>
+                     </div>
+                   </div>
+                   <div class="slide-right">
+                    <img class="img-1" src="assets/images/image-car.svg" alt="">
+                    <img class="img-2" src="assets/images/image-car-2.svg" alt="">
+                    <img class="img-3" src="assets/images/image-car-3.svg" alt="">
+                   </div>
+                 </div>
+               </div>
+               
+               <!-- Slide 4: DevOpsArk -->
+               <div class="carousel-slide" data-slide="3">
+                 <div class="slide-content">
+                   <div class="slide-left">
+                     <div class="slide-info">
+                       <h3 class="slide-title">DevOpsArk simplifies cloud infrastructure management</h3>
+                       <div class="slide-features">
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Automated deployment</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Multi-cloud management</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Real-time monitoring</div>
+                       </div>
+                       <a href="contact.html" class="btn btn-primary">
+                         <span class="btn-text">Explore DevOpsArk</span>
+                       </a>
+                     </div>
+                   </div>
+                   <div class="slide-right">
+                    <img class="img-1" src="assets/images/image-car.svg" alt="">
+                    <img class="img-2" src="assets/images/image-car-2.svg" alt="">
+                    <img class="img-3" src="assets/images/image-car-3.svg" alt="">
+                   </div>
+                 </div>
+               </div>
+               
+               <!-- Slide 5: Walnut AI -->
+               <div class="carousel-slide" data-slide="4">
+                 <div class="slide-content">
+                   <div class="slide-left">
+                     <div class="slide-info">
+                       <h3 class="slide-title">Walnut AI delivers intelligent data processing solutions</h3>
+                       <div class="slide-features">
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Advanced ML algorithms</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Natural language processing</div>
+                         <div class="feature-item"><img src="assets/images/ticker.svg" alt=""> Automated insights</div>
+                       </div>
+                       <a href="contact.html" class="btn btn-primary">
+                         <span class="btn-text">Explore Walnut AI</span>
+                       </a>
+                     </div>
+                   </div>
+                   <div class="slide-right">
+                    <img class="img-1" src="assets/images/image-car.svg" alt="">
+                    <img class="img-2" src="assets/images/image-car-2.svg" alt="">
+                    <img class="img-3" src="assets/images/image-car-3.svg" alt="">
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+      </section>
+       
+      </div>
+    </section>
     <!-- <div id="ecosystem" class="stats">
       <div class="container">
         <div class="section-title-2 text-center">OUR ECOSYSTEM</div>
@@ -1433,7 +1595,7 @@
 
             function animate() {
               if (startConnections) {
-                updateConnections();
+              updateConnections();
               }
               drawGlobe();
               animationId = requestAnimationFrame(animate);
