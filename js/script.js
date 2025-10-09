@@ -886,6 +886,9 @@ function initDynamicBorderRadius() {
     console.warn('Required elements not found for dynamic border radius and max-width');
     return;
   }
+  
+  // Track if margin animation has been triggered
+  let marginAnimationTriggered = false;
 
   function updateBorderRadiusAndMaxWidth() {
     const scrollY = window.scrollY;
@@ -946,9 +949,15 @@ function initDynamicBorderRadius() {
     const initialMaxWidth = 1425; // Current max-width from CSS
     const finalMaxWidth = (window.innerWidth - 100); // Full screen width minus 200px
     
+    // Check if margin animation has been triggered (tabs section has animate-in class)
+    const isMarginAnimationTriggered = productsTabsSection.classList.contains('animate-in');
+    
     // Only start width expansion when container is 70% visible
     let widthProgress = 0;
-    if (visibilityPercentage >= 70) {
+    if (isMarginAnimationTriggered) {
+      // If margin animation has been triggered, keep the width at full size
+      widthProgress = 1;
+    } else if (visibilityPercentage >= 70) {
       // Calculate width progress based on how much more visible the section becomes after 70%
       const widthStartVisibility = 70; // Start width expansion at 70% visibility
       const widthEndVisibility = 100; // Complete width expansion at 100% visibility
@@ -989,5 +998,290 @@ function initDynamicBorderRadius() {
 
 // Initialize dynamic border radius when DOM is ready
 document.addEventListener("DOMContentLoaded", initDynamicBorderRadius);
+
+// Products tabs section margin and width animation
+function initProductsTabsMarginAnimation() {
+  const tabsSection = document.querySelector('.our-products-tabs-section');
+  const ourContainer = document.querySelector('.our-container');
+  const ourProductsSection = document.querySelector('.our-products');
+  const innovationSection = document.querySelector('.services'); // Innovation at Core section
+  
+  if (!tabsSection || !ourContainer || !ourProductsSection || !innovationSection) {
+    console.log('Elements not found for margin animation');
+    return;
+  }
+  
+  console.log('Setting up reversible margin and width animation...');
+  
+  // Create intersection observer for the Innovation at Core section
+  const innovationObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        console.log('Innovation at Core section is in view, resetting animation...');
+        
+        // Reset the animation by removing animate-in class
+        tabsSection.classList.remove('animate-in');
+        
+        // Reset width to initial size
+        ourContainer.style.maxWidth = '1425px';
+        ourContainer.style.transition = 'max-width 1s ease';
+        
+        console.log('Animation reset - margin-top restored, width reset to 1425px');
+      }
+    });
+  }, {
+    threshold: 0.3, // Trigger when 30% of Innovation at Core section is visible
+    rootMargin: '0px 0px 0px 0px'
+  });
+  
+  // Create intersection observer for the our-products section
+  const productsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        console.log('Our Products section is 50% visible, removing margin-top and expanding width...');
+        
+        // Add animate-in class for margin-top removal
+        tabsSection.classList.add('animate-in');
+        
+        // Immediately expand width to full screen width
+        const fullWidth = window.innerWidth - 200; // Same as final width from dynamic border radius
+        ourContainer.style.maxWidth = `${fullWidth}px`;
+        ourContainer.style.transition = 'max-width 1s ease'; // Smooth width transition
+        
+        console.log(`Width expanded to: ${fullWidth}px`);
+      }
+    });
+  }, {
+    threshold: 0.5, // Trigger when 50% of the our-products section is visible
+    rootMargin: '0px 0px 0px 0px'
+  });
+  
+  // Start observing both sections
+  innovationObserver.observe(innovationSection);
+  productsObserver.observe(ourProductsSection);
+  console.log('Reversible margin and width animation observer set up');
+}
+
+// Initialize products tabs margin animation when DOM is ready
+document.addEventListener("DOMContentLoaded", initProductsTabsMarginAnimation);
+
+// Customer Stories Text Opacity Animation
+function initCustomerStoriesTextOpacity() {
+  const textSections = document.querySelectorAll('.cs-pointer-section');
+  
+  if (!textSections.length) {
+    console.log('Customer stories text sections not found');
+    return;
+  }
+  
+  console.log('Setting up customer stories text opacity animation...');
+  
+  // Track scroll direction
+  let lastScrollY = window.scrollY;
+  let scrollDirection = 'down';
+  
+  // Update scroll direction
+  function updateScrollDirection() {
+    const currentScrollY = window.scrollY;
+    scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+    lastScrollY = currentScrollY;
+  }
+  
+  // Calculate opacity based on visibility and position
+  function calculateOpacity(element) {
+    const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const elementHeight = rect.height;
+    
+    // Calculate how much of the element is visible
+    const elementTop = rect.top;
+    const elementBottom = rect.bottom;
+    
+    // Calculate visible height
+    const visibleTop = Math.max(0, -elementTop);
+    const visibleBottom = Math.min(elementHeight, windowHeight - elementTop);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+    
+    // Calculate visibility percentage
+    const visibilityPercentage = (visibleHeight / elementHeight) * 100;
+    
+    // Calculate opacity based on visibility
+    // Opacity 1 when 90%+ visible, gradually decrease below 90%
+    let opacity;
+    if (visibilityPercentage >= 90) {
+      opacity = 1;
+    } else {
+      // Gradual decrease from 90% visibility to 0% visibility
+      opacity = Math.max(0, visibilityPercentage / 90);
+    }
+    
+    return {
+      opacity: opacity,
+      visibilityPercentage: visibilityPercentage
+    };
+  }
+  
+  // Update opacity for all text sections
+  function updateAllTextSections() {
+    updateScrollDirection();
+    
+    textSections.forEach((section, index) => {
+      const result = calculateOpacity(section);
+      
+      // Apply different transition durations based on scroll direction
+      const transitionDuration = scrollDirection === 'up' ? '1.5s' : '0.7s';
+      section.style.transition = `opacity ${transitionDuration} ease`;
+      section.style.opacity = result.opacity;
+      
+      console.log(`Text section ${index + 1} - visibility: ${result.visibilityPercentage.toFixed(1)}%, opacity: ${result.opacity.toFixed(2)}, scroll: ${scrollDirection}, transition: ${transitionDuration}`);
+    });
+  }
+  
+  // Use scroll event for real-time updates in both directions
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateAllTextSections();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  
+  // Add scroll event listener
+  window.addEventListener('scroll', onScroll, { passive: true });
+  
+  // Initial update
+  updateAllTextSections();
+  
+  console.log('Customer stories text opacity animation set up with bidirectional scroll support');
+}
+
+// Initialize customer stories text opacity animation when DOM is ready
+document.addEventListener("DOMContentLoaded", initCustomerStoriesTextOpacity);
+
+// Our Service Section Text Opacity Animation
+function initOurServiceTextOpacity() {
+  const textSections = document.querySelectorAll('.os-pointer-section');
+  const videos = document.querySelectorAll('.os-fade-video');
+  
+  if (!textSections.length || !videos.length) {
+    console.log('Our service text sections or videos not found');
+    return;
+  }
+  
+  console.log('Setting up our service text opacity animation...');
+  
+  // Track scroll direction
+  let lastScrollY = window.scrollY;
+  let scrollDirection = 'down';
+  
+  // Update scroll direction
+  function updateScrollDirection() {
+    const currentScrollY = window.scrollY;
+    scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+    lastScrollY = currentScrollY;
+  }
+  
+  // Calculate opacity based on visibility and position
+  function calculateOpacity(element) {
+    const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const elementHeight = rect.height;
+    
+    // Calculate how much of the element is visible
+    const elementTop = rect.top;
+    const elementBottom = rect.bottom;
+    
+    // Calculate visible height
+    const visibleTop = Math.max(0, -elementTop);
+    const visibleBottom = Math.min(elementHeight, windowHeight - elementTop);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+    
+    // Calculate visibility percentage
+    const visibilityPercentage = (visibleHeight / elementHeight) * 100;
+    
+    // Calculate opacity based on visibility
+    // Opacity 1 when 90%+ visible, gradually decrease below 90%
+    let opacity;
+    if (visibilityPercentage >= 90) {
+      opacity = 1;
+    } else {
+      // Gradual decrease from 90% visibility to 0% visibility
+      opacity = Math.max(0, visibilityPercentage / 90);
+    }
+    
+    return {
+      opacity: opacity,
+      visibilityPercentage: visibilityPercentage
+    };
+  }
+  
+  // Update video visibility based on text section visibility
+  function updateVideoVisibility() {
+    let mostVisibleIndex = 0;
+    let maxVisibility = 0;
+    
+    textSections.forEach((section, index) => {
+      const result = calculateOpacity(section);
+      if (result.visibilityPercentage > maxVisibility) {
+        maxVisibility = result.visibilityPercentage;
+        mostVisibleIndex = index;
+      }
+    });
+    
+    // Update video visibility
+    videos.forEach((video, index) => {
+      if (index === mostVisibleIndex && maxVisibility > 30) {
+        video.classList.add('os-active');
+      } else {
+        video.classList.remove('os-active');
+      }
+    });
+  }
+  
+  // Update opacity for all text sections
+  function updateAllTextSections() {
+    updateScrollDirection();
+    
+    textSections.forEach((section, index) => {
+      const result = calculateOpacity(section);
+      
+      // Apply different transition durations based on scroll direction
+      const transitionDuration = scrollDirection === 'up' ? '1s' : '0.7s';
+      section.style.transition = `opacity ${transitionDuration} ease`;
+      section.style.opacity = result.opacity;
+      
+      console.log(`Our Service text section ${index + 1} - visibility: ${result.visibilityPercentage.toFixed(1)}%, opacity: ${result.opacity.toFixed(2)}, scroll: ${scrollDirection}, transition: ${transitionDuration}`);
+    });
+    
+    // Update video visibility
+    updateVideoVisibility();
+  }
+  
+  // Use scroll event for real-time updates in both directions
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateAllTextSections();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  
+  // Add scroll event listener
+  window.addEventListener('scroll', onScroll, { passive: true });
+  
+  // Initial update
+  updateAllTextSections();
+  
+  console.log('Our service text opacity animation set up with bidirectional scroll support and video switching');
+}
+
+// Initialize our service text opacity animation when DOM is ready
+document.addEventListener("DOMContentLoaded", initOurServiceTextOpacity);
 
 

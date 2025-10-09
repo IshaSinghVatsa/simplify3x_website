@@ -1360,7 +1360,12 @@ color: #fafbff;
     background-color: #FEF5F2;
     border-radius: 40px;
     padding-top: 40px;
-    transition: border-radius 0.5s ease;
+    transition: border-radius 0.5s ease, margin-top 0.8s ease;
+    margin-top: 400px;
+}
+
+.our-products-tabs-section.animate-in {
+    margin-top: 0;
 }
 .products-carousel {
     position: relative;
@@ -1488,6 +1493,142 @@ color: #fafbff;
 }
 
 
+
+/* Customer Stories Text Opacity Animation */
+.cs-pointer-section {
+    opacity: 0;
+    /* Transition duration is now controlled dynamically by JavaScript */
+}
+
+/* Our Service Section Styles */
+.our-service {
+    padding: 80px 0;
+    background-color: #fff;
+    position: relative;
+    z-index: 6;
+
+}
+.our-service .section-title-2{
+    background-color: #ffffff;
+    position: sticky;
+    z-index: 5;
+    top: 0px;
+    height: 200px;
+    display: flex
+;
+    align-items: end;
+    justify-content: center;
+}
+.os-discover-section-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    min-height: 100vh;
+}
+
+.os-pointer-section {
+    opacity: 0;
+    /* Transition duration is now controlled dynamically by JavaScript */
+}
+
+.os-category-tag {
+    display: inline-block;
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.os-main-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.os-discover-description {
+    font-size: 1.1rem;
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.os-demo-button {
+    background-color: #ff6b35;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.os-demo-button:hover {
+    background-color: #e55a2b;
+    transform: translateY(-2px);
+}
+
+.os-video-container {
+    position: relative;
+    width: 100%;
+    height: 436px;
+    border-radius: 20px;
+    overflow: hidden;
+    /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); */
+}
+
+.os-fade-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.os-fade-video.os-active {
+    opacity: 1;
+}
+
+/* Mobile Responsive for Our Service Section */
+@media (max-width: 768px) {
+    .os-discover-section-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .os-video-container {
+        height: 300px;
+    }
+    
+    .os-pointer-section {
+        padding-top: 40px !important;
+        height: auto !important;
+    }
+    
+    .os-main-heading {
+        font-size: 2rem;
+    }
+    
+    .os-category-tag {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    .os-demo-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
