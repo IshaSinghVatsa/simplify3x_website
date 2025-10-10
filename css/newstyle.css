@@ -1360,8 +1360,8 @@ color: #fafbff;
     background-color: #FEF5F2;
     border-radius: 40px;
     padding-top: 40px;
-    transition: border-radius 0.5s ease, margin-top 0.8s ease;
-    margin-top: 400px;
+    transition: border-radius 0.5s ease, margin-top 1s ease;
+    margin-top: 300px;
 }
 
 .our-products-tabs-section.animate-in {
@@ -1510,10 +1510,10 @@ color: #fafbff;
 }
 .our-service .section-title-2{
     background-color: #ffffff;
-    position: sticky;
+    /* position: sticky; */
     z-index: 5;
     top: 0px;
-    height: 200px;
+    /* height: 200px; */
     display: flex
 ;
     align-items: end;
@@ -1669,5 +1669,9 @@ color: #fafbff;
     .slide-description {
         font-size: 1rem;
     }
+    
+}
+.new-section{
+    background-color: #0056b3;
     
 }

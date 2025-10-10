@@ -448,6 +448,18 @@ function initDropdowns() {
       dropdowns.forEach((d) => d.classList.remove("open"));
     }
   });
+
+  // close on scroll
+  let scrollTimeout;
+  window.addEventListener("scroll", () => {
+    // Clear existing timeout
+    clearTimeout(scrollTimeout);
+    
+    // Set a small delay to avoid closing immediately on scroll start
+    scrollTimeout = setTimeout(() => {
+      dropdowns.forEach((d) => d.classList.remove("open"));
+    }, 100);
+  }, { passive: true });
 }
 
 // Create black overlay for fade effect
@@ -636,27 +648,35 @@ document.addEventListener("DOMContentLoaded", initScrollEffects);
 
 document.addEventListener("DOMContentLoaded", () => {
   const popup = document.getElementById("lets-talk");
-  const section4 = document.querySelector(".show-talk-box");
+  const showTalkBoxSections = document.querySelectorAll(".show-talk-box");
   const footer = document.querySelector("footer"); // footer section
   const closeBtn = popup.querySelector(".talk-close"); // cross button inside popup
 
-  if (!popup || !section4 || !footer) return;
+  if (!popup || !showTalkBoxSections.length || !footer) return;
 
   let manuallyClosed = false; // track if user closed popup
 
   function togglePopup() {
     if (manuallyClosed) return; // don't show again if user closed
 
-    const rect4 = section4.getBoundingClientRect();
     const rectFooter = footer.getBoundingClientRect();
     const middle = window.innerHeight / 2;
 
-    // check if middle of screen is inside section4 OR footer
-    const inSection4 = rect4.top <= middle && rect4.bottom >= middle;
+    // check if middle of screen is inside any show-talk-box section OR footer
+    let inAnyShowTalkBoxSection = false;
+    
+    showTalkBoxSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const inSection = rect.top <= middle && rect.bottom >= middle;
+      if (inSection) {
+        inAnyShowTalkBoxSection = true;
+      }
+    });
+    
     const inFooter =
       rectFooter.top <= window.innerHeight && rectFooter.bottom >= 0;
 
-    if (inSection4 || inFooter) {
+    if (inAnyShowTalkBoxSection || inFooter) {
       popup.classList.add("visible");
     } else {
       popup.classList.remove("visible");
@@ -1015,8 +1035,8 @@ function initProductsTabsMarginAnimation() {
   
   // Create intersection observer for the Innovation at Core section
   const innovationObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
         console.log('Innovation at Core section is in view, resetting animation...');
         
         // Reset the animation by removing animate-in class
@@ -1026,7 +1046,10 @@ function initProductsTabsMarginAnimation() {
         ourContainer.style.maxWidth = '1425px';
         ourContainer.style.transition = 'max-width 1s ease';
         
-        console.log('Animation reset - margin-top restored, width reset to 1425px');
+        // Reset opacity to initial value (let dynamic border radius function handle it)
+        ourContainer.style.opacity = '';
+        
+        console.log('Animation reset - margin-top restored, width reset to 1425px, opacity reset');
       }
     });
   }, {
@@ -1036,23 +1059,26 @@ function initProductsTabsMarginAnimation() {
   
   // Create intersection observer for the our-products section
   const productsObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        console.log('Our Products section is 50% visible, removing margin-top and expanding width...');
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+        console.log('Our Products section is 30% visible, removing margin-top and expanding width...');
         
         // Add animate-in class for margin-top removal
         tabsSection.classList.add('animate-in');
+        
+        // Set parent container opacity to 1
+        ourContainer.style.opacity = '1';
         
         // Immediately expand width to full screen width
         const fullWidth = window.innerWidth - 200; // Same as final width from dynamic border radius
         ourContainer.style.maxWidth = `${fullWidth}px`;
         ourContainer.style.transition = 'max-width 1s ease'; // Smooth width transition
         
-        console.log(`Width expanded to: ${fullWidth}px`);
+        console.log(`Width expanded to: ${fullWidth}px, opacity set to 1`);
       }
     });
   }, {
-    threshold: 0.5, // Trigger when 50% of the our-products section is visible
+    threshold: 0.3, // Trigger when 30% of the our-products section is visible
     rootMargin: '0px 0px 0px 0px'
   });
   
@@ -1283,5 +1309,95 @@ function initOurServiceTextOpacity() {
 
 // Initialize our service text opacity animation when DOM is ready
 document.addEventListener("DOMContentLoaded", initOurServiceTextOpacity);
+
+// Glass effect header scroll handler
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector('.header');
+  
+  if (!header) return;
+  
+  function handleScroll() {
+    const scrollY = window.scrollY;
+    
+    // Get the third section (services section)
+    const servicesSection = document.querySelector('.services');
+    
+    if (servicesSection) {
+      const servicesSectionTop = servicesSection.offsetTop;
+      const headerHeight = header.offsetHeight;
+      
+      // Check if header bottom touches services section top
+      // Header bottom position = scrollY + headerHeight
+      const headerBottom = scrollY + headerHeight;
+      
+      if (headerBottom >= (servicesSectionTop - 50)) {
+        header.classList.add('glass-effect');
+      } else {
+        header.classList.remove('glass-effect');
+      }
+    }
+    
+    // Enhanced glass effect when scrolled within glass sections
+    if (header.classList.contains('glass-effect')) {
+      if (scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
+  
+  // Add scroll event listener
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Initial check
+  handleScroll();
+});
+
+// Card Carousel Effect
+(function() {
+  const cards = document.querySelectorAll(".carousel .card");
+  if (cards.length === 0) return;
+
+  const positions = [
+    {x:-320, scale:0.7, opacity:0.5, z:1},  // far left
+    {x:-160, scale:0.85, opacity:0.7, z:2}, // left
+    {x:0, scale:1, opacity:1, z:3},         // center
+    {x:160, scale:0.85, opacity:0.7, z:2},  // right
+    {x:320, scale:0.7, opacity:0.5, z:1}    // far right
+  ];
+
+  let order = [0,1,2,3,4]; // initial order
+
+  function updateCards() {
+    for(let i=0;i<cards.length;i++){
+      const pos = positions[i];
+      const card = cards[order[i]];
+      gsap.to(card, {
+        x: pos.x,
+        scale: pos.scale,
+        opacity: pos.opacity,
+        zIndex: pos.z,
+        duration:0.8,
+        ease:"power2.out"
+      });
+    }
+  }
+
+  // Rotate clockwise
+  function rotateClockwise() {
+    order.unshift(order.pop()); // move last element to front
+    updateCards();
+  }
+
+  // Initial layout
+  updateCards();
+
+  // Auto rotate every 3 seconds
+  setInterval(rotateClockwise, 3000);
+})();
+
 
 

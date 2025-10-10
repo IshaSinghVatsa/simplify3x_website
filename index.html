@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/three@0.151.3/build/three.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
     <script src="https://unpkg.com/d3-geo@3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <style>
       .globe-embed {
         background: #0a2540;
@@ -49,11 +50,11 @@
 
     <!-- Header -->
     <header class="header">
-      <div class="container">
+      <div>
         <div class="header-content">
           <div class="logo">
             <a href="#home">
-              <img src="assets/images/Logo.jpg" alt="Copora Logo" />
+              <img src="assets/images/simp3x.svg" alt="Copora Logo" />
             </a>
           </div>
           <div class="header-actions">
@@ -68,6 +69,7 @@
                   >
                     What we offer
                   </button>
+                 
                   <div class="dropdown-menu" role="menu">
                     <div class="dropdown-col">
                       <a href="#" class="dropdown-item">Hire3x</a>
@@ -108,7 +110,6 @@
             <div class="header-actions">
               <a href="contact.html" class="btn btn-primary">
                 <span class="btn-text">Contact now</span>
-                <span class="btn-text-hover">Contact now</span>
               </a>
             </div>
           </div>
@@ -129,20 +130,21 @@
   </div>
     <!-- Hero Section -->
     <section id="home" class="hero">
+      <!-- <div class="hero-blur"></div> -->
       <!-- <video autoplay muted loop playsinline webkit-playsinline preload="auto" class="hero-video">
             <source src="assets/images/background-1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video> -->
-      <div id="hero-canvas" class="hero-video"></div>
+     
       <!-- <img src="assets/images/dots-2.png" alt="" class="hero-video-2"> -->
-      <div class="container h-100">
+      <div class="hero-container">
         <div class="hero-content h-100">
           <div class="hero-left">
             <div class="hero-text">
-              <h1 class="hero-title text-center">
-                Turning complex problems into simple solutions for lasting
-                growth
+              <h1 class="hero-title">
+                Turning complex problems into simple solutions
               </h1>
+              <h5>Empowering enterprises with technology built for tomorrow.</h5>
               <div class="header-actions">
                 <a href="#ecosystem" class="btn btn-primary no-shadow">
                   <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
@@ -156,210 +158,46 @@
             </div>
           
           </div>
-          <!-- <div class="hero-right">
-            <div class="hero-images">
-              <div class="hero-main-image">
-                <img
-                  src="assets/images/front-girl.jpg"
-                  alt="Business consultation"
-                />
-              </div>
-              <div class="hero-testimonial">
-                <div class="testimonial-content">
-                  <p class="testimonial-text">
-                    "The consultants helped us shape a sustainable HR strategy
-                    that emphasized performance, retention, and employee
-                    well-being."
-                  </p>
-                  <div class="testimonial-author">
-                    <img
-                      src="assets/images/68314ec582b2956a9125402e_hero-image-02.jpg"
-                      alt="Sofia Grant"
-                      class="author-image"
-                    />
-                    <div class="author-info">
-                      <span class="author-name">Sofia Grant</span>
-                      <span class="author-title">Director of Strategy</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="hero-growth-card">
-                  <div class="growth-text">
-                    <span class="growth-title">Our Case Studies</span>
-                  </div>
-                  <img
-                    src="assets/images/laptop.jpg"
-                    alt="Business growth"
-                    class="growth-image"
-                  />
-                </div>
-              </div>
-            </div>
-          </div> -->
+        
         </div>
       </div>
-    </section>
-    <div class="hero-video-2">
-      <video style="width: 100%; height: 100%;object-fit: cover;" src="assets/images/new.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
-      <section class="clients">
-        <div class="container">
-          <div class="clients-content">
-            <!-- <div class="client-right-overlay"></div>
-            <div class="client-left-overlay"></div> -->
-            <div class="clients-text">
-              <span class="clients-title">CLIENTS WHO TRUST US</span>
-            </div>
-            <div class="clients-logos">
-              <div class="logo-scroll">
-                <img
-                  src="assets/images/comp-1.svg"
-                  alt="Client Logo"
-                  class="client-logo"
-                />
-                <img
-                  src="assets/images/comp-2.svg"
-                  alt="Client Logo"
-                  class="client-logo"
-                />
-                <img
-                  src="assets/images/comp-3.svg"
-                  alt="Client Logo"
-                  class="client-logo"
-                />
-                <img
-                  src="assets/images/comp-4.svg"
-                  alt="Client Logo"
-                  class="client-logo"
-                />
-                <img
-                  src="assets/images/comp-5.svg"
-                  alt="Client Logo"
-                  class="client-logo"
-                />
-                <img
-                  src="assets/images/comp-6.svg"
-                  alt="Client Logo"
-                  class="client-logo"
-                />
-                <img
-                src="assets/images/comp-7.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-8.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-9.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-10.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-11.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-12.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-                <!-- Duplicate for seamless scroll -->
-                <img
-                  src="assets/images/comp-13.svg"
-                  alt="Client Logo"
-                  class="client-logo"
-                />
-                <img
-                  src="assets/images/comp-14.svg"
-                  alt="Client Logo"
-                  class="client-logo"
-                />
-                <img
-                src="assets/images/comp-1.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-2.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-3.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-4.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-5.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-6.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-              src="assets/images/comp-7.svg"
-              alt="Client Logo"
-              class="client-logo"
-            />
-            <img
-              src="assets/images/comp-8.svg"
-              alt="Client Logo"
-              class="client-logo"
-            />
-            <img
-              src="assets/images/comp-9.svg"
-              alt="Client Logo"
-              class="client-logo"
-            />
-            <img
-              src="assets/images/comp-10.svg"
-              alt="Client Logo"
-              class="client-logo"
-            />
-            <img
-              src="assets/images/comp-11.svg"
-              alt="Client Logo"
-              class="client-logo"
-            />
-            <img
-              src="assets/images/comp-12.svg"
-              alt="Client Logo"
-              class="client-logo"
-            />
-              <!-- Duplicate for seamless scroll -->
-              <img
-                src="assets/images/comp-13.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
-              <img
-                src="assets/images/comp-14.svg"
-                alt="Client Logo"
-                class="client-logo"
-              />
+     <div class="hero-right-spline">
+      <!-- <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
+<spline-viewer class="hero-spline" url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer> -->
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
+<spline-viewer url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
+     </div>
+     <section class="clients">
+      <div class="container">
+        <div class="clients-content">
+          <!-- <div class="client-right-overlay"></div>
+          <div class="client-left-overlay"></div> -->
+          <div class="clients-text">
+            <span class="clients-title">CLIENTS WHO TRUST US</span>
+          </div>
+          <div class="clients-logos">
+            <div class="logo-scroll">
+              <div class="purpose-awards">
+                <div class="purpose-award"><img src="assets/images/comp-1.svg" alt="Award 1"></div>
+                <div class="purpose-award"><img src="assets/images/comp-2.svg" alt="Award 2"></div>
+                <div class="purpose-award"><img src="assets/images/comp-3.svg" alt="Award 3"></div>
+                <div class="purpose-award"><img src="assets/images/comp-4.svg" alt="Award 4"></div>
+                <div class="purpose-award"><img src="assets/images/comp-5.svg" alt="Award 5"></div>
+                <div class="purpose-award"><img src="assets/images/comp-6.svg" alt="Award 6"></div>
+                <div class="purpose-award"><img src="assets/images/comp-7.svg" alt="Award 7"></div>
+                <div class="purpose-award"><img src="assets/images/comp-8.svg" alt="Award 8"></div>
+                <div class="purpose-award"><img src="assets/images/comp-9.svg" alt="Award 9"></div>
+                <div class="purpose-award"><img src="assets/images/comp-10.svg" alt="Award 10"></div>
+                <div class="purpose-award"><img src="assets/images/comp-11.svg" alt="Award 11"></div>
+                <div class="purpose-award"><img src="assets/images/comp-12.svg" alt="Award 12"></div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
-
+      </div>
+    </section>
+    </section>
+    
 <script>
   (function () {
     try {
@@ -579,10 +417,8 @@
     <section id="services" class="services">
       <div class="container">
         <div class="services-header">
-          <h2 class="section-title-2">Innovation at Core</h2>
-          <p class="section-description color-grey">
-            Empowering enterprises with technology built for tomorrow.
-          </p>
+          <h2 class="section-title-2 mb-10">Innovation at Core</h2>
+         <p class="section-description text-left" style="color: #414141;">Empowering enterprises with technology built for tomorrow.</p>
         </div>
         <div class="services-grid">
           <div class="service-card">
@@ -599,7 +435,7 @@
               />
               <div class="service-title">
                 <div class="service-title-1">Future Ready</div>
-                <div>
+                <div class="service-title-subhead">
                   Preparing enterprises with solutions built for tomorrow.
                 </div>
               </div>
@@ -619,7 +455,7 @@
               />
               <div class="service-title">
                 <div class="service-title-1">Trustworthy</div>
-                <div>Technology you can rely on, every step of the way.</div>
+                <div class="service-title-subhead">Technology you can rely on, every step of the way.</div>
               </div>
             </a>
           </div>
@@ -637,7 +473,7 @@
               />
               <div class="service-title">
                 <div class="service-title-1">Inclusive</div>
-                <div>An ecosystem that empowers everyone to grow.</div>
+                <div class="service-title-subhead">An ecosystem that empowers everyone to grow.</div>
               </div>
             </a>
           </div>
@@ -655,14 +491,103 @@
               />
               <div class="service-title">
                 <div class="service-title-1">Impact Driven</div>
-                <div>Simplifying complexity to deliver real results.</div>
+                <div class="service-title-subhead">Simplifying complexity to deliver real results.</div>
               </div>
             </a>
           </div>
         </div>
       </div>
     </section>
-    <section class="our-products">
+    
+    <!-- Card Carousel Section -->
+    <section class="carousel-section">
+      <div class="container">
+        <div class="carousel">
+          <div class="card">
+            <div class="card-header">
+              <div class="avatar">AM</div>
+              <div class="candidate-info">
+                <h4>Aarav Mehta</h4>
+                <p>aarav.mehta@email.com</p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="match-badge">10% Match</div>
+              <div class="card-actions">
+                <button class="action-btn">👁</button>
+                <button class="action-btn">⋯</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="avatar">SR</div>
+              <div class="candidate-info">
+                <h4>Sneha Reddy</h4>
+                <p>sneha.reddy@email.com</p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="match-badge">80% Match</div>
+              <div class="card-actions">
+                <button class="action-btn">👁</button>
+                <button class="action-btn">⋯</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="avatar">PS</div>
+              <div class="candidate-info">
+                <h4>Priya Shah</h4>
+                <p>priya.shah@email.com</p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="match-badge">90% Match</div>
+              <div class="card-actions">
+                <button class="action-btn">👁</button>
+                <button class="action-btn">⋯</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="avatar">IG</div>
+              <div class="candidate-info">
+                <h4>Isha Gupta</h4>
+                <p>isha.gupta@email.com</p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="match-badge">90% Match</div>
+              <div class="card-actions">
+                <button class="action-btn">👁</button>
+                <button class="action-btn">⋯</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="avatar">AD</div>
+              <div class="candidate-info">
+                <h4>Alan D'Souza</h4>
+                <p>alan.dsouza@email.com</p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="match-badge">90% Match</div>
+              <div class="card-actions">
+                <button class="action-btn">👁</button>
+                <button class="action-btn">⋯</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="our-products show-talk-box">
       <div class="our-container">
         <div class="section-title-2 text-center">Our Products</div>
       <section class="our-products-tabs-section">
@@ -825,7 +750,7 @@
        
       </div>
     </section>
-    <section class="our-service">
+    <section class="our-service show-talk-box">
       <div class="container">
         <h2 class="section-title-2 text-center">Our Services</h2>
         <div class="os-discover-section-content">
