@@ -131,73 +131,165 @@
             }
         }
 
-        
-#cards {
-	list-style: none;
-	padding-left: 0;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(var(--cards), var(--cardHeight));
-	gap: var(--cardMargin);
-	padding-bottom: calc(var(--cards) * var(--cardTopPadding));
-	margin-bottom: var(--cardMargin);
-    width: 100%;
-    justify-self: center;
-}
 
-#card1 {
-	--index: 1;
-}
-#card2 {
-	--index: 2;
-}
-#card3 {
-	--index: 3;
-}
-#card4 {
-	--index: 4;
-}
-#card5 {
-	--index: 5;
-}
-#card6 {
-	--index: 6;
-}
+        #cards {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(var(--cards), var(--cardHeight));
+            gap: var(--cardMargin);
+            padding-bottom: calc(var(--cards) * var(--cardTopPadding));
+            margin-bottom: var(--cardMargin);
+            width: 100%;
+            justify-self: center;
+        }
 
-.card {
-	position: sticky;
-	top: 20vh;
-	padding-top: calc(var(--index) * var(--cardTopPadding));
-}
+        #card1 {
+            --index: 1;
+        }
+
+        #card2 {
+            --index: 2;
+        }
+
+        #card3 {
+            --index: 3;
+        }
 
 
-.card-body {
-    box-sizing: border-box;
-    padding: 55px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
-    height: var(--cardHeight);
-    display: flex
-;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.5s;
-    border: 1px solid rgba(0, 225, 225, 0.5);
-    background-color: #fff;
-}
-
-.card-body.orange-border {
-    border: 1px solid #ff6b35;
-}
+        .card {
+            position: sticky;
+            top: 20vh;
+            padding-top: calc(var(--index) * var(--cardTopPadding));
+        }
 
 
-:root {
-	--cards: 6;
-	--cardHeight: 400px;
-	--cardTopPadding: 1.5em;
-	--cardMargin: 2vw;
-}
+        .card-body {
+            box-sizing: border-box;
+            padding: 55px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+            height: var(--cardHeight);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s;
+            border: 1px solid rgba(0, 225, 225, 0.5);
+            background-color: #fff;
+        }
 
+        .card-body.orange-border {
+            border: 1px solid #ff6b35;
+        }
+
+
+        :root {
+            --cards: 3;
+            --cardHeight: 400px;
+            --cardTopPadding: 1.5em;
+            --cardMargin: 2vw;
+        }
+
+        /* Publications Marquee Styles */
+        .publications-marquee {
+            width: 100%;
+            margin: 60px 0 80px 0;
+            overflow: hidden;
+        }
+
+        .marquee-row {
+            display: flex;
+            overflow: hidden;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .marquee-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 32px;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        /* Top Row - Scroll Left */
+        .marquee-left .marquee-content {
+            animation: scrollLeft 40s linear infinite;
+        }
+
+        /* Bottom Row - Scroll Right */
+        .marquee-right .marquee-content {
+            animation: scrollRight 40s linear infinite;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            width: 180px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .marquee-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(0) invert(1);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .marquee-item:hover img {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1) invert(0);
+        }
+
+        /* Animations */
+        @keyframes scrollLeft {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes scrollRight {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .marquee-item {
+                width: 140px;
+                height: 80px;
+                padding: 15px;
+            }
+
+            .marquee-content {
+                gap: 20px;
+            }
+
+            .publications-marquee {
+                margin: 40px 0 60px 0;
+            }
+        }
     </style>
 </head>
 
@@ -256,19 +348,15 @@
 
     <!-- About page content -->
     <main class="about-page position-relative">
+        <!-- Background Video -->
+        <video class="about-page-bg-video" src="assets/images/about.mp4" autoplay muted loop playsinline></video>
+
         <section class="container ">
             <div>
                 <div class="section-title">Meet Simplify3x</div>
                 <div class="section-description text-justify lh-32px">At Simplify3x, we are passionate about
                     transforming complex business challenges into simple, elegant solutions that drive real growth.
-                    Founded on the principle that technology should empower rather than complicate, we've built a global
-                    ecosystem of innovative products and services that help businesses scale efficiently and
-                    sustainably. Our team of experts combines deep technical knowledge with a genuine understanding of
-                    business needs, ensuring that every solution we deliver creates lasting value for our clients
-                    worldwide.</div>
-            </div>
-            <div class="about-page-video">
-                <video class="about-page-video-content" src="assets/images/new.mp4" autoplay muted loop playsinline></video>
+                    Founded on the principle that technology should empower rather than complicate.</div>
             </div>
         </section>
     </main>
@@ -299,19 +387,123 @@
             </div>
     </main>
 
-   
+    <section id="services" class="services">
+        <div class="container">
+            <div class="services-header">
+                <h2 class="section-title-2 mb-10 text-center">Our Purpose</h2>
+                <p class="section-description text-center" style="color: #414141;">Empowering enterprises with
+                    technology built
+                    for tomorrow.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <a href="#" class="service-link">
+                        <img src="assets/images/fuutre-r.jpg" alt="Business strategy" class="service-image" />
+                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
+                        <div class="service-title">
+                            <div class="service-title-1">Future Ready</div>
+                            <div class="service-title-subhead">
+                                Preparing enterprises with solutions built for tomorrow.
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="#" class="service-link">
+                        <img src="assets/images/trust.jpg" alt="Process optimization" class="service-image" />
+                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
+                        <div class="service-title">
+                            <div class="service-title-1">Trustworthy</div>
+                            <div class="service-title-subhead">Technology you can rely on, every step of the way.</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="#" class="service-link">
+                        <img src="assets/images/inclusivity.jpg" alt="Financial advisory" class="service-image" />
+                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
+                        <div class="service-title">
+                            <div class="service-title-1">Inclusive</div>
+                            <div class="service-title-subhead">An ecosystem that empowers everyone to grow.</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="#" class="service-link">
+                        <img src="assets/images/impact.jpg" alt="Market research" class="service-image" />
+                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
+                        <div class="service-title">
+                            <div class="service-title-1">Impact Driven</div>
+                            <div class="service-title-subhead">Simplifying complexity to deliver real results.</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Image section below number-part -->
     <main class="purpose-part">
         <section class="container">
-            <div class="section-title-2 mb-5">Our Purpose</div>
+            <div class="section-title mb-5">Publications and Mentions</div>
+
+            <!-- Marquee Section -->
+            <div class="publications-marquee">
+                <!-- Top Row - Moving Left -->
+                <div class="marquee-row marquee-left">
+                    <div class="marquee-content">
+                        <div class="marquee-item"><img src="assets/images/comp-1.svg" alt="Publication 1"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-2.svg" alt="Publication 2"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-3.svg" alt="Publication 3"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-4.svg" alt="Publication 4"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-5.svg" alt="Publication 5"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-6.svg" alt="Publication 6"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-7.svg" alt="Publication 7"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-8.svg" alt="Publication 8"></div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="marquee-item"><img src="assets/images/comp-1.svg" alt="Publication 1"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-2.svg" alt="Publication 2"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-3.svg" alt="Publication 3"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-4.svg" alt="Publication 4"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-5.svg" alt="Publication 5"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-6.svg" alt="Publication 6"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-7.svg" alt="Publication 7"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-8.svg" alt="Publication 8"></div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row - Moving Right -->
+                <div class="marquee-row marquee-right">
+                    <div class="marquee-content">
+                        <div class="marquee-item"><img src="assets/images/comp-9.svg" alt="Publication 9"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-10.svg" alt="Publication 10"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-11.svg" alt="Publication 11"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-12.svg" alt="Publication 12"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-1.svg" alt="Publication 1"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-2.svg" alt="Publication 2"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-3.svg" alt="Publication 3"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-4.svg" alt="Publication 4"></div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="marquee-item"><img src="assets/images/comp-9.svg" alt="Publication 9"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-10.svg" alt="Publication 10"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-11.svg" alt="Publication 11"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-12.svg" alt="Publication 12"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-1.svg" alt="Publication 1"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-2.svg" alt="Publication 2"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-3.svg" alt="Publication 3"></div>
+                        <div class="marquee-item"><img src="assets/images/comp-4.svg" alt="Publication 4"></div>
+                    </div>
+                </div>
+            </div>
+
             <ul id="cards">
                 <li class="card" id="card1">
                     <div class="card-body">
                         <div class="purpose-card-2-content">
-                            <h3>Innovation First</h3>
+                            <h3>Forbes</h3>
                             <p>
-                                We constantly push the boundaries of technology to create smarter, simpler, and more impactful solutions for modern businesses.
+                                We constantly push the boundaries of technology to create smarter, simpler, and more
+                                impactful solutions for modern businesses.
                             </p>
                         </div>
                         <div class="card-image">
@@ -322,9 +514,10 @@
                 <li class="card" id="card2">
                     <div class="card-body">
                         <div class="purpose-card-2-content">
-                            <h3>Global Impact</h3>
+                            <h3>Gartner</h3>
                             <p>
-                                Every solution we deliver is designed with a global perspective—bridging innovation with scalability to drive success across industries and continents.
+                                Every solution we deliver is designed with a global perspective—bridging innovation with
+                                scalability to drive success across industries and continents.
                             </p>
                         </div>
                         <div class="card-image">
@@ -335,9 +528,10 @@
                 <li class="card" id="card3">
                     <div class="card-body">
                         <div class="purpose-card-2-content">
-                            <h3>Simplicity at the Core</h3>
+                            <h3>Times Now</h3>
                             <p>
-                                We transform complex challenges into clear, effective, and elegant solutions that make business growth effortless.
+                                We transform complex challenges into clear, effective, and elegant solutions that make
+                                business growth effortless.
                             </p>
                         </div>
                         <div class="card-image">
@@ -345,50 +539,12 @@
                         </div>
                     </div>
                 </li>
-                <li class="card" id="card4">
-                    <div class="card-body">
-                        <div class="purpose-card-2-content">
-                            <h3>Excellence Always</h3>
-                            <p>
-                                Our commitment to quality drives everything we do—from strategy to execution—ensuring reliability, trust, and measurable outcomes.
-                            </p>
-                        </div>
-                        <div class="card-image">
-                            <img class="purpose-image" src="assets/images/purpose-4.png" alt="Innovation First">
-                        </div>
-                    </div>
-                </li>
-                <li class="card" id="card5">
-                    <div class="card-body">
-                        <div class="purpose-card-2-content">
-                            <h3>Human-Centric Approach</h3>
-                            <p>
-                                Technology serves people best when it empowers them. We design every product and service with empathy and user experience at its heart.
-                            </p>
-                        </div>
-                        <div class="card-image">
-                            <img class="purpose-image" src="assets/images/purpose-5.png" alt="Innovation First">
-                        </div>
-                    </div>
-                </li>
-                <li class="card" id="card6">
-                    <div class="card-body">
-                        <div class="purpose-card-2-content">
-                            <h3>Sustainable Progress</h3>
-                            <p>
-                                We believe in innovation that lasts—building scalable, sustainable, and future-ready digital ecosystems that shape long-term business growth.
-                            </p>
-                        </div>
-                        <div class="card-image">
-                            <img class="purpose-image" src="assets/images/purpose-6.png" alt="Innovation First">
-                        </div>
-                    </div>
-                </li>
+
             </ul>
         </section>
     </main>
 
-   
+
     <section class="cs-cta-section">
         <div class="container">
             <h2 class="section-title">Ready to Write Your Success Story?</h2>
@@ -462,12 +618,16 @@
         </section>
     </main> -->
     <footer class="footer">
-        <div class="container">
+        <img style="    position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px; z-index: 1;" src="assets/images/footer-grad.png" alt="Copora Logo">
+        <div style="position: relative; z-index: 2;" class="container">
             <div class="footer-content">
                 <div class="footer-main">
                     <div class="footer-brand">
                         <a href="#home" class="footer-logo">
-                            <img src="assets/images/683d93c9574111966c857ce8_footer-logo.svg" alt="Copora Logo">
+                            <img src="assets/images/simp3x.svg" alt="Copora Logo">
                         </a>
                         <div class="footer-contact">
                             <h4 class="contact-title">Say hello to us!</h4>
@@ -481,68 +641,29 @@
                             <div class="footer-links-grid">
                                 <div class="links-group">
                                     <a href="#home" class="footer-link">Home</a>
-                                    <a href="#" class="footer-link">Home 2</a>
-                                    <a href="#about" class="footer-link">About</a>
-                                    <a href="#" class="footer-link">Service Detail</a>
+                                    <a href="#" class="footer-link">About Us</a>
+                                    <a href="#about" class="footer-link">Insights</a>
+                                    <a href="#" class="footer-link">Life @ Simplify3x</a>
+                                    <a href="#" class="footer-link">Customer Stories</a>
+                                    <a href="#" class="footer-link">Custom Solutions</a>
                                 </div>
-                                <div class="links-group">
-                                    <a href="#case-studies" class="footer-link">Case Studies</a>
-                                    <a href="#blog" class="footer-link">Blog</a>
-                                    <a href="#contact" class="footer-link">Contact</a>
-                                </div>
+
                             </div>
                         </div>
                         <div class="footer-column">
-                            <h4 class="footer-column-title">Utility</h4>
+                            <h4 class="footer-column-title">Companies</h4>
                             <div class="footer-links-grid">
                                 <div class="links-group">
-                                    <a href="#" class="footer-link">Style Guide</a>
-                                    <a href="#" class="footer-link">Instructions</a>
-                                    <a href="#" class="footer-link">Licenses</a>
+                                    <a href="#home" class="footer-link">SimplifyQA</a>
+                                    <a href="#" class="footer-link">Hire3x</a>
+                                    <a href="#about" class="footer-link">Walnut</a>
+                                    <a href="#" class="footer-link">DevOps Arc</a>
+                                    <a href="#" class="footer-link">Bominso</a>
                                 </div>
-                                <div class="links-group">
-                                    <a href="#" class="footer-link">Changelog</a>
-                                    <a href="#" class="footer-link">Error 404</a>
-                                    <a href="#" class="footer-link">Password Protected</a>
-                                </div>
+
                             </div>
                         </div>
-                    </div>
-                    <div class="footer-newsletter">
-                        <h4 class="newsletter-title">Stay informed.</h4>
-                        <form class="newsletter-form">
-                            <input type="email" placeholder="Enter email address" class="newsletter-input" required>
-                            <button type="submit" class="newsletter-button">Subscribe</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="footer-recent-works">
-                    <h4 class="recent-works-title">Recent works</h4>
-                    <div class="recent-works-grid">
-                        <a href="#" class="recent-work-item">
-                            <img src="assets/images/6842de3a16b95b45bdf1990d_case-study-01.webp" alt="Recent work 1"
-                                class="recent-work-image">
-                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow"
-                                class="recent-work-arrow">
-                        </a>
-                        <a href="#" class="recent-work-item">
-                            <img src="assets/images/6846697030a081054c45c913_case-study-02.webp" alt="Recent work 2"
-                                class="recent-work-image">
-                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow"
-                                class="recent-work-arrow">
-                        </a>
-                        <a href="#" class="recent-work-item">
-                            <img src="assets/images/684673370f4f0c823cd9e2e8_case-study-03.webp" alt="Recent work 3"
-                                class="recent-work-image">
-                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow"
-                                class="recent-work-arrow">
-                        </a>
-                        <a href="#" class="recent-work-item">
-                            <img src="assets/images/6852a45fec5c928ff53c7150_case-study-04.webp" alt="Recent work 4"
-                                class="recent-work-image">
-                            <img src="assets/icons/68358e0ea4d690c4aa10c3a6_button-arrow.svg" alt="Arrow"
-                                class="recent-work-arrow">
-                        </a>
+                        
                     </div>
                 </div>
             </div>
@@ -767,32 +888,32 @@
         document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.card');
             const cardBodies = document.querySelectorAll('.card-body');
-            
+
             function updateOrangeBorders() {
                 // Remove all orange borders first
                 cardBodies.forEach(body => body.classList.remove('orange-border'));
-                
+
                 // Check each card to see if it's at 20vh
                 cards.forEach((card, index) => {
                     const rect = card.getBoundingClientRect();
                     const cardTop = rect.top;
                     const viewportHeight = window.innerHeight;
                     const targetPosition = viewportHeight * 0.2; // 20vh
-                    
+
                     // If current card is at or near 20vh, add orange border to next card
                     if (cardTop <= targetPosition + 50 && cardTop >= targetPosition - 50) {
                         const nextCardIndex = index + 1;
                         if (nextCardIndex < cardBodies.length) {
                             // Add orange border to next card
                             cardBodies[nextCardIndex].classList.add('orange-border');
-                            
+
                             // Ensure current card (nth) has default border (remove orange border if it exists)
                             cardBodies[index].classList.remove('orange-border');
                         }
                     }
                 });
             }
-            
+
             // Throttled scroll handler
             let scrollTimeout;
             function handleScroll() {
@@ -803,10 +924,10 @@
                     updateOrangeBorders();
                 }, 16); // ~60fps
             }
-            
+
             // Add scroll event listener
             window.addEventListener('scroll', handleScroll, { passive: true });
-            
+
             // Initial call
             updateOrangeBorders();
         });

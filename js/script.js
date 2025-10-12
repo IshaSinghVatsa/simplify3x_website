@@ -1313,91 +1313,467 @@ document.addEventListener("DOMContentLoaded", initOurServiceTextOpacity);
 // Glass effect header scroll handler
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector('.header');
-  
-  if (!header) return;
-  
-  function handleScroll() {
-    const scrollY = window.scrollY;
-    
-    // Get the third section (services section)
-    const servicesSection = document.querySelector('.services');
-    
-    if (servicesSection) {
-      const servicesSectionTop = servicesSection.offsetTop;
-      const headerHeight = header.offsetHeight;
-      
-      // Check if header bottom touches services section top
-      // Header bottom position = scrollY + headerHeight
-      const headerBottom = scrollY + headerHeight;
-      
-      if (headerBottom >= (servicesSectionTop - 50)) {
-        header.classList.add('glass-effect');
-      } else {
-        header.classList.remove('glass-effect');
-      }
-    }
-    
-    // Enhanced glass effect when scrolled within glass sections
-    if (header.classList.contains('glass-effect')) {
-      if (scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    } else {
-      header.classList.remove('scrolled');
-    }
-  }
-  
-  // Add scroll event listener
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  
-  // Initial check
-  handleScroll();
-});
+  const sections = document.querySelectorAll('section');
+  if(!header || !sections.length) return;
 
-// Card Carousel Effect
-(function() {
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const scrollDirection = scrollY > lastScrollY ? 'down' : 'up';
+    lastScrollY = scrollY;
+
+    // Determine current section
+    let currentSectionIndex = 0;
+    sections.forEach((sec, idx) => {
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 0 + header.offsetHeight/2){
+        currentSectionIndex = idx;
+      }
+    });
+
+    // Apply styles based on section
+    if(currentSectionIndex === 0){
+      header.classList.add('glass');
+      header.classList.remove('solid');
+    } else {
+      header.classList.add('solid');
+      header.classList.remove('glass');
+    }
+
+    // Show/hide header based on scroll direction
+    if(scrollDirection === 'down' && currentSectionIndex > 0){
+      header.classList.add('hidden');
+    } else if(scrollDirection === 'up'){
+      header.classList.remove('hidden');
+    }
+
+  }, { passive: true });
+});
+  
+
+
+// Card Carousel + Sticky Scroll Rotation
+document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".carousel .card");
-  if (cards.length === 0) return;
+  const tabs = document.querySelectorAll(".carousel-tab");
+  const section = document.querySelector(".carousel-section");
+  if (!cards.length || !section) return;
+
+  const order = [0, 1, 2, 3, 4];
+  let currentIndex = 2;
+  let scrollLocked = false;
+  let rotationsDone = 0;
+  const totalRotations = 5;
+  let isAnimating = false;
+  let carouselUsed = false;
 
   const positions = [
-    {x:-320, scale:0.7, opacity:0.5, z:1},  // far left
-    {x:-160, scale:0.85, opacity:0.7, z:2}, // left
-    {x:0, scale:1, opacity:1, z:3},         // center
-    {x:160, scale:0.85, opacity:0.7, z:2},  // right
-    {x:320, scale:0.7, opacity:0.5, z:1}    // far right
+    { x: -320, scale: 0.7, opacity: 0.4, z: 1 },
+    { x: -160, scale: 0.85, opacity: 0.7, z: 2 },
+    { x: 0, scale: 1, opacity: 1, z: 3 },
+    { x: 160, scale: 0.85, opacity: 0.7, z: 2 },
+    { x: 320, scale: 0.7, opacity: 0.4, z: 1 },
   ];
 
-  let order = [0,1,2,3,4]; // initial order
-
   function updateCards() {
-    for(let i=0;i<cards.length;i++){
-      const pos = positions[i];
-      const card = cards[order[i]];
+    cards.forEach((card, i) => {
+      const pos = order.indexOf(i);
+      const p = positions[pos];
+  
+      // Animate position, scale, opacity, zIndex
       gsap.to(card, {
-        x: pos.x,
-        scale: pos.scale,
-        opacity: pos.opacity,
-        zIndex: pos.z,
-        duration:0.8,
-        ease:"power2.out"
+        x: p.x,
+        scale: p.scale,
+        opacity: p.opacity,
+        zIndex: p.z,
+        duration: 0.6,
+        ease: "power2.out",
       });
+  
+      // Blur logic: only center card is sharp
+      if(pos === 2){
+        card.classList.remove('blur');
+      } else {
+        card.classList.add('blur');
+      }
+    });
+  }
+
+  function updateTabs(activeIndex) {
+    tabs.forEach((tab, i) => {
+      // Remove any previous active-* classes
+      tab.classList.forEach(cls => {
+        if(cls.startsWith("active-")) tab.classList.remove(cls);
+      });
+      // Add the new active class for this tab
+      if(i === activeIndex) tab.classList.add(`active-${i}`);
+    });
+  }
+
+// --- Improved Scroll Lock ---
+function lockScrollAtSection(section) {
+  scrollLocked = true;
+  document.body.style.overflow = "hidden";
+
+  const targetTop = window.scrollY + section.getBoundingClientRect().top;
+
+  // Smoothly align section to exact top
+  gsap.to(window, {
+    scrollTo: { y: targetTop },
+    duration: 0.4,
+    ease: "power2.out",
+    onComplete: () => {
+      // Ensure it's exactly locked
+      window.scrollTo({ top: targetTop });
+    }
+  });
+}
+
+  function rotateOnce(forward = true) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    if (forward) {
+      order.unshift(order.pop());
+      rotationsDone++;
+    } else {
+      order.push(order.shift());
+      rotationsDone = Math.max(0, rotationsDone - 1);
+    }
+
+    updateCards();
+    currentIndex = order[2];
+    updateTabs(currentIndex);
+
+    gsap.delayedCall(0.7, () => {
+      isAnimating = false;
+      // Unlock scroll if done
+      if (rotationsDone >= totalRotations && scrollLocked) {
+        scrollLocked = false;
+        document.body.style.overflow = "";
+        carouselUsed = true;
+      }
+    });
+  }
+
+  // Tab click
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => {
+      while (currentIndex !== i) {
+        order.unshift(order.pop());
+        currentIndex = order[2];
+      }
+      updateCards();
+      updateTabs(i);
+      rotationsDone = 0;
+      
+      // Unlock scroll when tab is clicked
+      if (scrollLocked) {
+        scrollLocked = false;
+        document.body.style.overflow = "";
+        carouselUsed = true; // Prevent re-locking
+      }
+    });
+  });
+
+// Scroll detect for locking carousel at exact top
+window.addEventListener("scroll", () => {
+  if (carouselUsed || scrollLocked) return;
+
+  const sectionRect = section.getBoundingClientRect();
+  const sectionTop = sectionRect.top;
+
+  // Trigger lock *as soon as* the section enters the top 15% of the viewport
+  if (sectionTop <= window.innerHeight * 0.15 && sectionTop > -50) {
+    lockScrollAtSection(section);
+  }
+});
+
+  // Wheel control while locked
+  let lastWheelTime = 0;
+  const wheelCooldown = 200; // milliseconds
+  
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      if (!scrollLocked) return;
+      e.preventDefault();
+  
+      const now = Date.now();
+      if (now - lastWheelTime < wheelCooldown) return; // skip if too soon
+      lastWheelTime = now;
+  
+      if (e.deltaY > 0 && rotationsDone < totalRotations) {
+        // Scrolling down - rotate forward
+        rotateOnce(true);
+      } else if (e.deltaY < 0 && rotationsDone > 0) {
+        // Scrolling up - rotate backward
+        rotateOnce(false);
+      } else if (e.deltaY < 0 && rotationsDone === 0) {
+        // Scrolling up at the beginning - unlock scroll
+        scrollLocked = false;
+        document.body.style.overflow = "";
+      }
+    },
+    { passive: false }
+  );
+
+  // Initial render
+  updateCards();
+  updateTabs(currentIndex);
+});
+
+const folder = document.getElementById("folder");
+
+if (folder) {
+  folder.addEventListener("click", () => {
+    folder.classList.toggle("open");
+  });
+}
+
+// ============================================
+// SCROLL-SYNCED FOLDER TEXT SECTION
+// ============================================
+(function() {
+  const textBlocks = document.querySelectorAll('.text-block');
+  const scrollFolder = document.querySelector('.scroll-folder');
+  const folderSection = document.querySelector('.folder-text-section');
+  
+  if (!textBlocks.length || !scrollFolder || !folderSection) return;
+
+  // Helper function to darken color
+  function darkenColor(hex, percent) {
+    let color = hex.startsWith('#') ? hex.slice(1) : hex;
+    if (color.length === 3) {
+      color = color.split('').map(c => c + c).join('');
+    }
+    const num = parseInt(color, 16);
+    let r = (num >> 16) & 0xff;
+    let g = (num >> 8) & 0xff;
+    let b = num & 0xff;
+    r = Math.max(0, Math.min(255, Math.floor(r * (1 - percent))));
+    g = Math.max(0, Math.min(255, Math.floor(g * (1 - percent))));
+    b = Math.max(0, Math.min(255, Math.floor(b * (1 - percent))));
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+  }
+
+  // Set folder colors
+  const folderColor = '#FF6B35';
+  const folderBackColor = darkenColor(folderColor, 0.08);
+  const paper1 = darkenColor('#ffffff', 0.1);
+  const paper2 = darkenColor('#ffffff', 0.05);
+  const paper3 = '#ffffff';
+
+  const folderBack = scrollFolder.querySelector('.folder__back');
+  folderBack.style.setProperty('--folder-color', folderColor);
+  folderBack.style.setProperty('--folder-back-color', folderBackColor);
+  folderBack.style.background = folderBackColor;
+  
+  scrollFolder.querySelectorAll('.folder__front').forEach(front => {
+    front.style.background = folderColor;
+  });
+
+  const papers = scrollFolder.querySelectorAll('.paper');
+  const insidePapers = scrollFolder.querySelectorAll('.inside-paper');
+  
+  papers.forEach((paper, index) => {
+    if (index === 0) paper.style.background = paper1;
+    if (index === 1) paper.style.background = paper2;
+    if (index === 2) paper.style.background = paper3;
+  });
+
+  // Set initial closed state
+  scrollFolder.classList.add('closed');
+
+  function updateFolderAnimation() {
+    const scrollPosition = window.scrollY + window.innerHeight / 2;
+    let activeIndex = -1;
+    let progress = 0;
+
+    // Find which text block is active
+    textBlocks.forEach((block, index) => {
+      const rect = block.getBoundingClientRect();
+      const blockTop = rect.top + window.scrollY;
+      const blockBottom = blockTop + rect.height;
+
+      if (scrollPosition >= blockTop && scrollPosition <= blockBottom) {
+        activeIndex = index;
+        // Calculate progress within this block (0 to 1)
+        progress = (scrollPosition - blockTop) / (blockBottom - blockTop);
+        
+        // Add active class to text
+        block.classList.add('active');
+      } else {
+        block.classList.remove('active');
+      }
+    });
+
+    // Update folder state based on active block and progress
+    if (activeIndex >= 0) {
+      const paperCount = parseInt(textBlocks[activeIndex].dataset.papers);
+      const paperType = textBlocks[activeIndex].dataset.paperType;
+      
+      // Add data attribute to folder for CSS targeting
+      scrollFolder.setAttribute('data-paper-count', paperCount);
+      scrollFolder.setAttribute('data-paper-type', paperType || 'multiple');
+      
+      // Control paper visibility based on paper type
+      if (paperType === 'hire') {
+        // Show only hire paper (paper-4) and inside papers
+        papers.forEach((paper, index) => {
+          if (paper.classList.contains('paper-hire')) {
+            paper.classList.remove('hidden');
+          } else {
+            paper.classList.add('hidden');
+          }
+        });
+        // Show inside papers
+        insidePapers.forEach(p => p.classList.remove('hidden'));
+      } else if (paperType === 'qa') {
+        // Show only QA paper (paper-1) and inside papers
+        papers.forEach((paper, index) => {
+          if (index === 0) {
+            paper.classList.remove('hidden');
+          } else {
+            paper.classList.add('hidden');
+          }
+        });
+        // Show inside papers
+        insidePapers.forEach(p => p.classList.remove('hidden'));
+      } else {
+        // Show first 3 papers (default multiple cards)
+        papers.forEach((paper, index) => {
+          if (index < 3) {
+            paper.classList.remove('hidden');
+          } else {
+            paper.classList.add('hidden');
+          }
+        });
+        // Hide inside papers
+        insidePapers.forEach(p => p.classList.add('hidden'));
+      }
+
+      // Folder animation states based on scroll progress
+      if (progress < 0.2) {
+        // Closed state
+        scrollFolder.classList.remove('peek', 'open');
+        scrollFolder.classList.add('closed');
+      } else if (progress < 0.3) {
+        // Peek state
+        scrollFolder.classList.remove('closed', 'open');
+        scrollFolder.classList.add('peek');
+      } else {
+        // Open/Fan state
+        scrollFolder.classList.remove('closed', 'peek');
+        scrollFolder.classList.add('open');
+      }
+    } else {
+      // No active block - default to closed
+      scrollFolder.classList.remove('peek', 'open');
+      scrollFolder.classList.add('closed');
     }
   }
 
-  // Rotate clockwise
-  function rotateClockwise() {
-    order.unshift(order.pop()); // move last element to front
-    updateCards();
+  // Throttled scroll handler
+  let ticking = false;
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateFolderAnimation();
+        ticking = false;
+      });
+      ticking = true;
+    }
   }
 
-  // Initial layout
-  updateCards();
-
-  // Auto rotate every 3 seconds
-  setInterval(rotateClockwise, 3000);
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Initial update
+  updateFolderAnimation();
 })();
 
+// ============================================
+// FOLDER ANIMATION
+// ============================================
+(function() {
+  const folders = document.querySelectorAll('.folder');
+  
+  if (folders.length === 0) return;
 
+  // Helper function to darken color
+  function darkenColor(hex, percent) {
+    let color = hex.startsWith('#') ? hex.slice(1) : hex;
+    if (color.length === 3) {
+      color = color.split('').map(c => c + c).join('');
+    }
+    const num = parseInt(color, 16);
+    let r = (num >> 16) & 0xff;
+    let g = (num >> 8) & 0xff;
+    let b = num & 0xff;
+    r = Math.max(0, Math.min(255, Math.floor(r * (1 - percent))));
+    g = Math.max(0, Math.min(255, Math.floor(g * (1 - percent))));
+    b = Math.max(0, Math.min(255, Math.floor(b * (1 - percent))));
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+  }
 
+  // Initialize each folder
+  folders.forEach((folder) => {
+    const container = folder.closest('.folder-container');
+    const color = container?.dataset.color || '#fb6630';
+    const folderBackColor = darkenColor(color, 0.1);
+    const paper1 = darkenColor('#fcfcfc', 0.01);
+    const paper2 = darkenColor('#fcfcfc', 0.01);
+    const paper3 = '#ffffff';
+
+    // Set CSS variables
+    const folderBack = folder.querySelector('.folder__back');
+    folderBack.style.setProperty('--folder-color', color);
+    folderBack.style.setProperty('--folder-back-color', folderBackColor);
+    folderBack.style.setProperty('--paper-1', paper1);
+    folderBack.style.setProperty('--paper-2', paper2);
+    folderBack.style.setProperty('--paper-3', paper3);
+
+    // Apply colors to elements
+    folderBack.style.background = folderBackColor;
+    const afterElement = folderBack;
+    afterElement.style.setProperty('--folder-back-color', folderBackColor);
+    
+    folder.querySelectorAll('.folder__front').forEach(front => {
+      front.style.background = color;
+    });
+
+    const papers = folder.querySelectorAll('.paper');
+    papers.forEach((paper, index) => {
+      if (index === 0) paper.style.background = paper1;
+      if (index === 1) paper.style.background = paper2;
+      if (index === 2) paper.style.background = paper3;
+    });
+
+    // Toggle open/close on click
+    folder.addEventListener('click', () => {
+      folder.classList.toggle('open');
+    });
+
+    // Magnetic effect on papers when open
+    papers.forEach((paper, index) => {
+      paper.addEventListener('mousemove', (e) => {
+        if (!folder.classList.contains('open')) return;
+        
+        const rect = paper.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const offsetX = (e.clientX - centerX) * 0.15;
+        const offsetY = (e.clientY - centerY) * 0.15;
+        
+        paper.style.setProperty('--magnet-x', `${offsetX}px`);
+        paper.style.setProperty('--magnet-y', `${offsetY}px`);
+      });
+
+      paper.addEventListener('mouseleave', () => {
+        paper.style.setProperty('--magnet-x', '0px');
+        paper.style.setProperty('--magnet-y', '0px');
+      });
+    });
+  });
+})();
