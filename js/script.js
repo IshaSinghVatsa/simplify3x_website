@@ -730,6 +730,7 @@ function initCustomerStoriesImageFade() {
 }
 
 // Products Carousel Functionality
+// Products Carousel Initialization
 function initProductsCarousel() {
   const slides = document.querySelectorAll('.carousel-slide');
   const tabs = document.querySelectorAll('.our-button');
@@ -772,10 +773,10 @@ function initProductsCarousel() {
   // Function to start auto-slide
   function startAutoSlide() {
     if (!isAutoSlideFrozen) {
-      console.log('Starting auto-slide'); // Debug log
+      console.log('Starting auto-slide');
       autoSlideInterval = setInterval(nextSlide, slideInterval);
     } else {
-      console.log('Auto-slide is frozen - not starting'); // Debug log
+      console.log('Auto-slide is frozen - not starting');
     }
   }
 
@@ -786,7 +787,7 @@ function initProductsCarousel() {
 
   // Function to freeze auto-slide permanently
   function freezeAutoSlide() {
-    console.log('Auto-slide frozen permanently'); // Debug log
+    console.log('Auto-slide frozen permanently');
     isAutoSlideFrozen = true;
     stopAutoSlide();
   }
@@ -794,8 +795,8 @@ function initProductsCarousel() {
   // Add click event listeners to tabs
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', (e) => {
-      e.preventDefault(); // Prevent any default behavior
-      console.log(`Tab ${index} clicked - freezing auto-slide`); // Debug log
+      e.preventDefault();
+      console.log(`Tab ${index} clicked - freezing auto-slide`);
       showSlide(index);
       freezeAutoSlide(); // Freeze auto-slide permanently when tab is clicked
     });
@@ -831,10 +832,10 @@ function initProductsCarousel() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       prevSlide();
-      freezeAutoSlide(); // Freeze auto-slide when using keyboard navigation
+      freezeAutoSlide();
     } else if (e.key === 'ArrowRight') {
       nextSlide();
-      freezeAutoSlide(); // Freeze auto-slide when using keyboard navigation
+      freezeAutoSlide();
     }
   });
 
@@ -863,7 +864,7 @@ function initProductsCarousel() {
         // Swipe right - previous slide
         prevSlide();
       }
-      freezeAutoSlide(); // Freeze auto-slide when using touch/swipe navigation
+      freezeAutoSlide();
     }
   }
 
@@ -875,6 +876,195 @@ function initProductsCarousel() {
 
 // Initialize carousel when DOM is ready
 document.addEventListener("DOMContentLoaded", initProductsCarousel);
+
+// Dynamic Border Radius, Max-Width, and Opacity for Products Section
+function initDynamicBorderRadius() {
+  const productsTabsSection = document.querySelector('.our-products-tabs-section');
+  const ourContainer = document.querySelector('.our-container');
+  const header = document.querySelector('.header');
+  
+  if (!productsTabsSection || !ourContainer || !header) {
+    console.warn('Required elements not found for dynamic border radius and max-width');
+    return;
+  }
+  
+  // Track if margin animation has been triggered
+  let marginAnimationTriggered = false;
+
+  function updateBorderRadiusAndMaxWidth() {
+    const scrollY = window.scrollY;
+    const headerHeight = header.offsetHeight;
+    const productsSection = document.querySelector('.our-products');
+    
+    if (!productsSection) return;
+    
+    const productsSectionTop = productsSection.offsetTop;
+    const productsSectionHeight = productsSection.offsetHeight;
+    const windowHeight = window.innerHeight;
+    
+    // Calculate when the products section starts coming into view
+    const sectionStart = productsSectionTop - window.innerHeight;
+    const sectionEnd = productsSectionTop + productsSectionHeight;
+    
+    // Calculate the distance from the header
+    const distanceFromHeader = productsSectionTop - scrollY - headerHeight;
+    
+    // Define the transition range (when to start changing border radius and max-width)
+    const transitionStart = 600; // Start transition when 600px away from header
+    const transitionEnd = 0; // Complete transition when touching header
+    
+    // Calculate the progress (0 to 1)
+    let progress = 0;
+    if (distanceFromHeader <= transitionStart && distanceFromHeader >= transitionEnd) {
+      progress = (transitionStart - distanceFromHeader) / (transitionStart - transitionEnd);
+    } else if (distanceFromHeader < transitionEnd) {
+      progress = 1; // Fully transitioned
+    }
+    
+    // Clamp progress between 0 and 1
+    progress = Math.max(0, Math.min(1, progress));
+    
+    // Calculate new border radius (80px to 40px)
+    const initialRadius = 80;
+    const finalRadius = 40;
+    const newRadius = initialRadius - (progress * (initialRadius - finalRadius));
+    
+    // Calculate opacity based on visibility
+    const sectionBottom = productsSectionTop + productsSectionHeight;
+    const viewportTop = scrollY;
+    const viewportBottom = scrollY + windowHeight;
+    
+    // Calculate how much of the section is visible
+    const visibleTop = Math.max(productsSectionTop, viewportTop);
+    const visibleBottom = Math.min(sectionBottom, viewportBottom);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+    const visibilityPercentage = (visibleHeight / productsSectionHeight) * 100;
+    
+    // Calculate opacity (30% when 30% visible, 100% when 50% visible)
+    const minOpacity = 0.3;
+    const maxOpacity = 1.0;
+    const opacityProgress = Math.max(0, Math.min(1, (visibilityPercentage - 30) / (50 - 30)));
+    const newOpacity = minOpacity + (opacityProgress * (maxOpacity - minOpacity));
+    
+    // Calculate new max-width (1425px to full width)
+    const initialMaxWidth = 1425;
+    const finalMaxWidth = (window.innerWidth - 100);
+    
+    // Check if margin animation has been triggered
+    const isMarginAnimationTriggered = productsTabsSection.classList.contains('animate-in');
+    
+    // Only start width expansion when container is 70% visible
+    let widthProgress = 0;
+    if (isMarginAnimationTriggered) {
+      widthProgress = 1;
+    } else if (visibilityPercentage >= 70) {
+      const widthStartVisibility = 70;
+      const widthEndVisibility = 100;
+      const widthVisibilityProgress = Math.max(0, Math.min(1, (visibilityPercentage - widthStartVisibility) / (widthEndVisibility - widthStartVisibility)));
+      widthProgress = Math.pow(widthVisibilityProgress, 0.5);
+    }
+    
+    const newMaxWidth = initialMaxWidth + (widthProgress * (finalMaxWidth - initialMaxWidth));
+    
+    // Apply the new border radius, max-width, and opacity
+    productsTabsSection.style.borderRadius = `${newRadius}px`;
+    ourContainer.style.maxWidth = `${newMaxWidth}px`;
+    ourContainer.style.opacity = newOpacity;
+  }
+
+  // Throttled scroll handler
+  let ticking = false;
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateBorderRadiusAndMaxWidth();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  // Add scroll event listener
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Initial call
+  updateBorderRadiusAndMaxWidth();
+}
+
+// Initialize dynamic border radius when DOM is ready
+document.addEventListener("DOMContentLoaded", initDynamicBorderRadius);
+
+// Products tabs section margin and width animation
+function initProductsTabsMarginAnimation() {
+  const tabsSection = document.querySelector('.our-products-tabs-section');
+  const ourContainer = document.querySelector('.our-container');
+  const ourProductsSection = document.querySelector('.our-products');
+  const innovationSection = document.querySelector('.services'); // Innovation at Core section
+  
+  if (!tabsSection || !ourContainer || !ourProductsSection || !innovationSection) {
+    console.log('Elements not found for margin animation');
+    return;
+  }
+  
+  console.log('Setting up reversible margin and width animation...');
+  
+  // Create intersection observer for the Innovation at Core section
+  const innovationObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+        console.log('Innovation at Core section is in view, resetting animation...');
+        
+        // Reset the animation
+        tabsSection.classList.remove('animate-in');
+        
+        // Reset width to initial size
+        ourContainer.style.maxWidth = '1425px';
+        ourContainer.style.transition = 'max-width 1s ease';
+        
+        // Reset opacity
+        ourContainer.style.opacity = '';
+        
+        console.log('Animation reset');
+      }
+    });
+  }, {
+    threshold: 0.3,
+    rootMargin: '0px 0px 0px 0px'
+  });
+  
+  // Create intersection observer for the our-products section
+  const productsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+        console.log('Our Products section is 30% visible, removing margin-top and expanding width...');
+        
+        // Add animate-in class for margin-top removal
+        tabsSection.classList.add('animate-in');
+        
+        // Set parent container opacity to 1
+        ourContainer.style.opacity = '1';
+        
+        // Expand width to full screen width
+        const fullWidth = window.innerWidth - 200;
+        ourContainer.style.maxWidth = `${fullWidth}px`;
+        ourContainer.style.transition = 'max-width 1s ease';
+        
+        console.log(`Width expanded to: ${fullWidth}px, opacity set to 1`);
+      }
+    });
+  }, {
+    threshold: 0.3,
+    rootMargin: '0px 0px 0px 0px'
+  });
+  
+  // Start observing both sections
+  innovationObserver.observe(innovationSection);
+  productsObserver.observe(ourProductsSection);
+  console.log('Reversible margin and width animation observer set up');
+}
+
+// Initialize products tabs margin animation when DOM is ready
+document.addEventListener("DOMContentLoaded", initProductsTabsMarginAnimation);
 
 // Dynamic Border Radius, Max-Width, and Opacity for Products Section
 function initDynamicBorderRadius() {

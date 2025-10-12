@@ -1317,56 +1317,62 @@ border: none;
     scroll-margin-top: 50vh;
 }
 
+/* Our Products Section */
 .our-products {
     padding: 80px 0 0px 0;
     background-color: #fff;
-position: relative;
+    position: relative;
     z-index: 6;
 }
-.our-line{
+
+.our-line {
    background-color: #fee9d9;
    width: 2px;
    height: 100px; 
 }
-.our-products-tabs{
+
+.our-products-tabs {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 24px;
 }
-.our-button{
+
+.our-button {
     background: #FEF5F2;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-font-weight: 400;
-font-size: 16px;
-color: #0f0f0f;
-padding: 20px;
-border-radius: 8px;
-width: 133px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #0f0f0f;
+    padding: 20px;
+    border-radius: 8px;
+    width: 133px;
+    cursor: pointer;
 }
-.our-button.active{
+
+.our-button.active {
     background: linear-gradient(180deg, #EB5D2A 0%, #853518 100%);
     font-weight: 700;
     font-size: 16px;
-color: #fafbff;    
-
+    color: #fafbff;    
 }
 
 /* Products Carousel Styles */
-.our-products-tabs-section{
+.our-products-tabs-section {
     background-color: #FEF5F2;
     border-radius: 40px;
     padding-top: 40px;
-    transition: border-radius 0.5s ease, margin-top 0.8s ease;
-    margin-top: 400px;
+    transition: border-radius 0.5s ease, margin-top 1s ease;
+    margin-top: 300px;
 }
 
 .our-products-tabs-section.animate-in {
     margin-top: 0;
 }
+
 .products-carousel {
     position: relative;
     overflow: hidden;
@@ -1396,12 +1402,13 @@ color: #fafbff;
     opacity: 0;
     transform: translateX(100%);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  
 }
+
 .carousel-slide.prev {
     transform: translateX(-100%);
     opacity: 0;
 }
+
 .carousel-slide.active {
     opacity: 1;
     transform: translateX(0);
@@ -1414,41 +1421,55 @@ color: #fafbff;
     align-items: center;
     max-width: 1385px;
     justify-self: center;
+    gap: 37px;
 }
 
 .slide-left {
-    flex: 1;
-    padding: 60px;
+   flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-   
 }
 
 .slide-right {
     flex: 1;
-    padding: 60px;
+   height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
-.slide-right .img-1{
+
+.slide-right .img-1 {
     position: absolute;
+    /* height: 214px; */
+    right: 5px;
 }
-.slide-right .img-2{
+
+.slide-right .img-2 {
     position: absolute;
-    left: -74px;
-    top: -218px;
+    left: -15px;
+    top: -148px;
+    height: 115px;
 }
-.slide-right .img-3{
+
+.slide-right .img-3 {
     position: absolute;
-    bottom: -237px;
+    bottom: -157px;
+    height: 50px;
+    right: 0px;
 }
+
+.slide-right .img-4 {
+    height: 81%;
+    position: absolute;
+    width: 100%;
+}
+
 .slide-title {
-    font-size: 3rem;
+    font-size: 30px;
     font-weight: 700;
-    color: #2c3e50;
+    color: #0f0f0f;
     margin-bottom: 20px;
     line-height: 1.2;
 }
@@ -1465,8 +1486,8 @@ color: #fafbff;
 }
 
 .slide-features .feature-item {
-    font-size: 1.1rem;
-    color: #495057;
+    font-size: 23px;
+    color: #041527;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -1491,8 +1512,6 @@ color: #fafbff;
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
 }
-
-
 
 /* Customer Stories Text Opacity Animation */
 .cs-pointer-section {

@@ -2064,14 +2064,17 @@ background-color: #0a2540;
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 4rem;
+    grid-template-columns: 1fr;
     margin-bottom: 3rem;
 }
 
+.footer-links{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 .footer-main {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 3rem;
 }
 
