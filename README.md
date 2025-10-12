@@ -34,7 +34,7 @@ copora-website/
 cd copora-website
 python3 server.py
 ```
-Then visit: `http://localhost:12000`
+Then visit: `http://localhost:13000`
 
 ### Option 2: Live Server Extension
 If you're using VS Code, install the "Live Server" extension and right-click on `index.html` to open with Live Server.

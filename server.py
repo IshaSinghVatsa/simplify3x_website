@@ -7,7 +7,7 @@ import sys
 # Change to the directory containing the website files
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-PORT = 12000
+PORT = 13000
 Handler = http.server.SimpleHTTPRequestHandler
 
 # Custom handler to set proper MIME types

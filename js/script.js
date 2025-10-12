@@ -618,3 +618,251 @@ function initCustomerStoriesImageFade() {
 }
   
   
+// Products Carousel Functionality
+function initProductsCarousel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const tabs = document.querySelectorAll('.our-button');
+    let currentSlide = 0;
+    let autoSlideInterval;
+    let isAutoSlideFrozen = false;
+  
+    // Function to show a specific slide
+    function showSlide(slideIndex) {
+      // Remove active class from all slides and tabs
+      slides.forEach(slide => slide.classList.remove('active', 'prev'));
+      tabs.forEach(tab => tab.classList.remove('active'));
+    
+      // Add active class to current slide and tab
+      slides[slideIndex].classList.add('active');
+      tabs[slideIndex].classList.add('active');
+    
+      // After a brief delay, add prev class to the previous slide
+      setTimeout(() => {
+        const prevSlideIndex = slideIndex === 0 ? slides.length - 1 : slideIndex - 1;
+        slides[prevSlideIndex].classList.add('prev');
+      }, 50);
+    }
+  
+    // Function to go to next slide
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+  
+    // Function to start auto-slide
+    function startAutoSlide() {
+      if (!isAutoSlideFrozen) {
+        autoSlideInterval = setInterval(nextSlide, 10000); // 10 seconds
+      }
+    }
+  
+    // Function to stop auto-slide
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+  
+    // Function to freeze auto-slide
+    function freezeAutoSlide() {
+      isAutoSlideFrozen = true;
+      stopAutoSlide();
+    }
+  
+    // Add click event listeners to tabs
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent any default behavior
+        console.log(`Tab ${index} clicked - freezing auto-slide`); // Debug log
+        currentSlide = index;
+        showSlide(currentSlide);
+        freezeAutoSlide(); // Freeze auto-slide when user clicks
+      });
+    });
+  
+    // Pause auto-slide on hover (only if not frozen)
+    const carousel = document.querySelector('.products-carousel');
+    if (carousel) {
+      carousel.addEventListener('mouseenter', stopAutoSlide);
+      carousel.addEventListener('mouseleave', () => {
+        if (!isAutoSlideFrozen) {
+          startAutoSlide();
+        }
+      });
+    }
+  
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        currentSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+        showSlide(currentSlide);
+        freezeAutoSlide();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+        freezeAutoSlide();
+      }
+    });
+  
+    // Touch/Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+  
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+  
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+  
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+  
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          // Swipe left - next slide
+          nextSlide();
+        } else {
+          // Swipe right - previous slide
+          currentSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+          showSlide(currentSlide);
+        }
+        freezeAutoSlide();
+      }
+    };
+  
+    // Initialize the carousel
+    showSlide(0);
+    startAutoSlide();
+  }
+  
+  // Dynamic Border Radius, Max-Width, and Opacity for Products Section
+  function initDynamicBorderRadius() {
+    const productsTabsSection = document.querySelector('.our-products-tabs-section');
+    const ourContainer = document.querySelector('.our-container');
+    const header = document.querySelector('.header');
+    
+    if (!productsTabsSection || !ourContainer || !header) {
+      console.warn('Required elements not found for dynamic border radius and max-width');
+      return;
+    }
+  
+    function updateBorderRadiusAndMaxWidth() {
+      const scrollY = window.scrollY;
+      const headerHeight = header.offsetHeight;
+      const productsSection = document.querySelector('.our-products');
+      
+      if (!productsSection) return;
+      
+      const productsSectionTop = productsSection.offsetTop;
+      const productsSectionHeight = productsSection.offsetHeight;
+      const windowHeight = window.innerHeight;
+      
+      // Calculate when the products section starts coming into view
+      const sectionStart = productsSectionTop - window.innerHeight;
+      const sectionEnd = productsSectionTop + productsSectionHeight;
+      
+      // Calculate the distance from the header
+      const distanceFromHeader = productsSectionTop - scrollY - headerHeight;
+      
+      // Define the transition range (when to start changing border radius and max-width)
+      const transitionStart = 600; // Start transition when 600px away from header (much earlier)
+      const transitionEnd = 0; // Complete transition when reaching header
+      
+      // Calculate border radius progress
+      const radiusProgress = Math.max(0, Math.min(1, (distanceFromHeader - transitionEnd) / (transitionStart - transitionEnd)));
+      const initialRadius = 80; // Start with larger radius
+      const finalRadius = 40; // End with smaller radius
+      const newRadius = initialRadius - (progress * (initialRadius - finalRadius));
+      
+      // Calculate opacity based on visibility (30% visible = 30% opacity, 100% visible = 100% opacity)
+      const sectionBottom = productsSectionTop + productsSectionHeight;
+      const viewportTop = scrollY;
+      const viewportBottom = scrollY + windowHeight;
+      
+      // Calculate how much of the section is visible
+      const visibleTop = Math.max(productsSectionTop, viewportTop);
+      const visibleBottom = Math.min(sectionBottom, viewportBottom);
+      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+      const visibilityPercentage = (visibleHeight / productsSectionHeight) * 100;
+      
+      // Calculate opacity (30% when 30% visible, 100% when 50% visible)
+      const minOpacity = 0.3; // 30% opacity
+      const maxOpacity = 1.0; // 100% opacity
+      const opacityThreshold = 50; // 50% visibility for full opacity
+      
+      let newOpacity;
+      if (visibilityPercentage < 30) {
+        newOpacity = minOpacity;
+      } else if (visibilityPercentage >= 50) {
+        newOpacity = maxOpacity;
+      } else {
+        // Linear interpolation between 30% and 50% visibility
+        const opacityProgress = (visibilityPercentage - 30) / (50 - 30);
+        newOpacity = minOpacity + (opacityProgress * (maxOpacity - minOpacity));
+      }
+      
+      // Calculate max-width animation (starts when container is 70% visible and is faster)
+      const widthThreshold = 70; // Start width animation when 70% visible
+      let newMaxWidth;
+      
+      if (visibilityPercentage < widthThreshold) {
+        newMaxWidth = 1425; // Initial max-width
+      } else {
+        // Fast width animation when 70%+ visible
+        const widthProgress = Math.min(1, (visibilityPercentage - widthThreshold) / (100 - widthThreshold));
+        const initialMaxWidth = 1425;
+        const finalMaxWidth = window.innerWidth - 200;
+        const newMaxWidth = initialMaxWidth + (widthProgress * (finalMaxWidth - initialMaxWidth));
+      }
+      
+      // Apply the new border radius, max-width, and opacity
+      productsTabsSection.style.borderRadius = `${newRadius}px`;
+      ourContainer.style.maxWidth = `${newMaxWidth}px`;
+      ourContainer.style.opacity = newOpacity;
+    }
+  
+    // Listen for scroll events
+    window.addEventListener('scroll', updateBorderRadiusAndMaxWidth);
+    window.addEventListener('resize', updateBorderRadiusAndMaxWidth);
+    
+    // Initial call
+    updateBorderRadiusAndMaxWidth();
+  }
+  
+  // Products tabs section margin animation
+  function initProductsTabsMarginAnimation() {
+    const tabsSection = document.querySelector('.our-products-tabs-section');
+    const ourProductsSection = document.querySelector('.our-products');
+    
+    if (!tabsSection || !ourProductsSection) {
+      console.log('Elements not found for margin animation');
+      return;
+    }
+    
+    console.log('Setting up margin animation...');
+    
+    // Create intersection observer for the our-products section
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log('Our Products section is 50% visible, removing margin-top...');
+          tabsSection.classList.add('animate-in');
+        }
+      });
+    }, {
+      threshold: 0.5, // Trigger when 50% of the our-products section is visible
+      rootMargin: '0px 0px 0px 0px'
+    });
+    
+    // Start observing the entire our-products section
+    observer.observe(ourProductsSection);
+    console.log('Margin animation observer set up');
+  }
+  
+  // Initialize all functions when DOM is ready
+  document.addEventListener("DOMContentLoaded", function() {
+    initProductsCarousel();
+    initDynamicBorderRadius();
+    initProductsTabsMarginAnimation();
+  });
