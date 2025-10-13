@@ -646,67 +646,56 @@ document.addEventListener("DOMContentLoaded", initScrollEffects);
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", initScrollEffects);
 
-// Folder gradient fade-in effect
+// Folder dots visibility control
 document.addEventListener("DOMContentLoaded", () => {
   const folderSection = document.querySelector(".folder-text-section");
-  const folderGradient = document.getElementById("folder-gradient");
-  const sectionHeading = folderSection?.querySelector(".section-title-2");
+  const folderDots = document.getElementById("folder-dots");
+  const nextSection = folderSection?.nextElementSibling; // Get the next section (Global Presence)
   
-  if (!folderSection || !folderGradient || !sectionHeading) return;
+  if (!folderSection || !folderDots) return;
   
-  let isHiding = false;
-  
-  function updateGradientVisibility() {
-    const headingRect = sectionHeading.getBoundingClientRect();
+  function updateDotsVisibility() {
     const sectionRect = folderSection.getBoundingClientRect();
-    const headingTop = headingRect.top;
-    const sectionBottom = sectionRect.bottom;
     const windowHeight = window.innerHeight;
     
-    // Threshold for showing (less than 0 means scrolled past top)
-    const showThreshold = -2; // Start showing when heading is 20px past the top
+    const sectionTop = sectionRect.top;
+    const sectionBottom = sectionRect.bottom;
     
-    // Hide gradient if heading has moved below the top of screen
-    if (headingTop > 0) {
-      // Heading has left the top - fade out smoothly
-      if (!isHiding && folderGradient.style.display === "block") {
-        isHiding = true;
-        folderGradient.style.opacity = 0;
-        // Set display none after transition completes
-        setTimeout(() => {
-          if (isHiding) {
-            folderGradient.style.display = "none";
-            isHiding = false;
-          }
-        }, 500); // Match the transition duration
+    // Define fade-in distance (when section is this many pixels from top, start fading in)
+    const fadeStartDistance = windowHeight * 0.3; // Start fading when 30% from top
+    const fadeEndDistance = 100; // Fully visible when 100px from top
+    
+    // Check if next section is approaching
+    let nextSectionOpacity = 1;
+    if (nextSection) {
+      const nextSectionRect = nextSection.getBoundingClientRect();
+      const nextSectionTop = nextSectionRect.top;
+      const fadeOutStartDistance = windowHeight * 0.8; // Start fading out when next section is 80% down
+      
+      if (nextSectionTop < fadeOutStartDistance) {
+        // Next section is approaching - fade out
+        const fadeOutProgress = (fadeOutStartDistance - nextSectionTop) / (fadeOutStartDistance - 0);
+        nextSectionOpacity = 1 - Math.min(Math.max(fadeOutProgress, 0), 1);
       }
-      return;
     }
     
-    // Show gradient when heading is at or past the threshold and section is still in view
-    if (headingTop <= showThreshold && sectionBottom > 0) {
-      // Heading is past threshold and section still visible
-      isHiding = false;
-      folderGradient.style.display = "block";
-      
-      // Calculate opacity based on how far past the threshold the heading has scrolled
-      const scrolledPastThreshold = Math.abs(headingTop - showThreshold);
-      const fadeDistance = windowHeight * 0.2; // Fade in over 20% of viewport height
-      const opacity = Math.min(scrolledPastThreshold / fadeDistance, 1);
-      
-      folderGradient.style.opacity = opacity;
-    } else if (headingTop > showThreshold) {
-      // Between top and threshold - fade out
-      if (!isHiding && folderGradient.style.display === "block") {
-        isHiding = true;
-        folderGradient.style.opacity = 0;
-        setTimeout(() => {
-          if (isHiding) {
-            folderGradient.style.display = "none";
-            isHiding = false;
-          }
-        }, 500);
+    // Check if section is in viewport
+    if (sectionBottom > 0) {
+      if (sectionTop <= fadeEndDistance) {
+        // Section has reached the top - visible (but may fade out if next section approaches)
+        folderDots.style.opacity = nextSectionOpacity;
+      } else if (sectionTop <= fadeStartDistance) {
+        // Section is approaching the top - fade in gradually
+        const fadeProgress = (fadeStartDistance - sectionTop) / (fadeStartDistance - fadeEndDistance);
+        const opacity = Math.min(Math.max(fadeProgress, 0), 1) * nextSectionOpacity;
+        folderDots.style.opacity = opacity;
+      } else {
+        // Section is still below the fade start point - hidden
+        folderDots.style.opacity = "0";
       }
+    } else {
+      // Section is completely above viewport - hidden
+      folderDots.style.opacity = "0";
     }
   }
   
@@ -715,7 +704,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", () => {
     if (!ticking) {
       requestAnimationFrame(() => {
-        updateGradientVisibility();
+        updateDotsVisibility();
         ticking = false;
       });
       ticking = true;
@@ -723,7 +712,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: true });
   
   // Initial check
-  updateGradientVisibility();
+  updateDotsVisibility();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1249,9 +1238,10 @@ window.addEventListener("scroll", () => {
         // Scrolling up - rotate backward
         rotateOnce(false);
       } else if (e.deltaY < 0 && rotationsDone === 0) {
-        // Scrolling up at the beginning - unlock scroll
+        // Scrolling up at the beginning - unlock scroll and allow scrolling past
         scrollLocked = false;
         document.body.style.overflow = "";
+        carouselUsed = true; // Prevent re-locking when scrolling back down
       }
     },
     { passive: false }

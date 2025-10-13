@@ -37,6 +37,34 @@ body {
     background-color: #fff;
 }
 
+/* Gradient Heading Class */
+.gradient-heading {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 47.7393px;
+    line-height: 58px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(78.51deg, #FF7440 -5.96%, #000000 91.8%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+.gradient-description {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #414141;
+    margin: 0;
+    flex: 1;
+    max-width: 700px;
+    padding-left: 20px;
+    border-left: 1px solid #c7c7c7;
+}
 .container {
     max-width: 1425px;
     margin: 0 auto;
@@ -117,7 +145,7 @@ p {
     left: 0;
     width: 0;
     height: 100%;
-    background: black;
+    background: #181818;
     transition: width 0.3s ease;
     z-index: 1;
     transform-origin: left;
@@ -1060,7 +1088,7 @@ body::-webkit-scrollbar {
 
 .clients-title {
     font-size: 18px;
-    color: #fff;
+    color: #d5d5d5;
     margin-bottom: 2rem;
     font-weight: 700;
 }
@@ -2285,16 +2313,16 @@ body::-webkit-scrollbar {
 .footer-content {
     display: grid;
     grid-template-columns: 1fr;
-    margin-bottom: 3rem;
 }
 .footer-links{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 .footer-main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+        grid-template-columns: 0.6fr 1.4fr;
+        gap: 0;
+        margin-bottom: 30px;
 }
 
 .footer-logo img {
@@ -2622,7 +2650,7 @@ body::-webkit-scrollbar {
     color: #333;
     font-family: 'Inter', sans-serif;
     transition: all 0.8s ease;
-    border: 1px solid #000;
+    border: 1px solid #FFA88B;
 }
 
 /* Make back four cards orange with no content (cards with z-index 1 and 2) */
