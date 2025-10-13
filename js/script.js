@@ -1018,8 +1018,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const section = document.querySelector(".carousel-section");
   if (!cards.length || !section) return;
 
-  const order = [0, 1, 2, 3, 4];
-  let currentIndex = 2;
+  const order = [3, 4, 0, 1, 2];
+  let currentIndex = 0;
   let scrollLocked = false;
   let rotationsDone = 0;
   const totalRotations = 5;

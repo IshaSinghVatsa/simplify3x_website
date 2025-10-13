@@ -1225,7 +1225,9 @@ body::-webkit-scrollbar {
     font-weight: 600;
     margin-bottom: 1px;
 }
-
+.fs-24{
+    font-size: 24px !important;
+}
 .service-title {
 
     color: #fff;
@@ -2604,11 +2606,13 @@ body::-webkit-scrollbar {
     justify-content: center;
  
 }
-
+.align-items-start{
+    align-items: start !important;
+}
 .carousel .card {
     position: absolute;
     width: 928px;
-    height: 652px;
+    height: 580px;
     border-radius: 30px;
     background: #fef5f2;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
