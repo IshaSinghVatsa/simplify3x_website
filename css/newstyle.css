@@ -1697,7 +1697,7 @@ color: #fafbff;
    ============================================ */
 
 .folder-text-section {
-  padding: 100px 0;
+  padding: 100px 0 0 0;
   background: #f9f9f9;
   min-height: 200vh;
   position: relative;

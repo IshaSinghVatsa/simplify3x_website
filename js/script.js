@@ -646,6 +646,86 @@ document.addEventListener("DOMContentLoaded", initScrollEffects);
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", initScrollEffects);
 
+// Folder gradient fade-in effect
+document.addEventListener("DOMContentLoaded", () => {
+  const folderSection = document.querySelector(".folder-text-section");
+  const folderGradient = document.getElementById("folder-gradient");
+  const sectionHeading = folderSection?.querySelector(".section-title-2");
+  
+  if (!folderSection || !folderGradient || !sectionHeading) return;
+  
+  let isHiding = false;
+  
+  function updateGradientVisibility() {
+    const headingRect = sectionHeading.getBoundingClientRect();
+    const sectionRect = folderSection.getBoundingClientRect();
+    const headingTop = headingRect.top;
+    const sectionBottom = sectionRect.bottom;
+    const windowHeight = window.innerHeight;
+    
+    // Threshold for showing (less than 0 means scrolled past top)
+    const showThreshold = -2; // Start showing when heading is 20px past the top
+    
+    // Hide gradient if heading has moved below the top of screen
+    if (headingTop > 0) {
+      // Heading has left the top - fade out smoothly
+      if (!isHiding && folderGradient.style.display === "block") {
+        isHiding = true;
+        folderGradient.style.opacity = 0;
+        // Set display none after transition completes
+        setTimeout(() => {
+          if (isHiding) {
+            folderGradient.style.display = "none";
+            isHiding = false;
+          }
+        }, 500); // Match the transition duration
+      }
+      return;
+    }
+    
+    // Show gradient when heading is at or past the threshold and section is still in view
+    if (headingTop <= showThreshold && sectionBottom > 0) {
+      // Heading is past threshold and section still visible
+      isHiding = false;
+      folderGradient.style.display = "block";
+      
+      // Calculate opacity based on how far past the threshold the heading has scrolled
+      const scrolledPastThreshold = Math.abs(headingTop - showThreshold);
+      const fadeDistance = windowHeight * 0.2; // Fade in over 20% of viewport height
+      const opacity = Math.min(scrolledPastThreshold / fadeDistance, 1);
+      
+      folderGradient.style.opacity = opacity;
+    } else if (headingTop > showThreshold) {
+      // Between top and threshold - fade out
+      if (!isHiding && folderGradient.style.display === "block") {
+        isHiding = true;
+        folderGradient.style.opacity = 0;
+        setTimeout(() => {
+          if (isHiding) {
+            folderGradient.style.display = "none";
+            isHiding = false;
+          }
+        }, 500);
+      }
+    }
+  }
+  
+  // Use scroll event with throttling
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateGradientVisibility();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+  
+  // Initial check
+  updateGradientVisibility();
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const popup = document.getElementById("lets-talk");
   const showTalkBoxSections = document.querySelectorAll(".show-talk-box");
