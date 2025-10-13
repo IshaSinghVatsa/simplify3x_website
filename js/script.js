@@ -1093,10 +1093,10 @@ function lockScrollAtSection(section) {
     isAnimating = true;
 
     if (forward) {
-      order.unshift(order.pop());
+      order.push(order.shift());
       rotationsDone++;
     } else {
-      order.push(order.shift());
+      order.unshift(order.pop());
       rotationsDone = Math.max(0, rotationsDone - 1);
     }
 
@@ -1119,7 +1119,7 @@ function lockScrollAtSection(section) {
   tabs.forEach((tab, i) => {
     tab.addEventListener("click", () => {
       while (currentIndex !== i) {
-        order.unshift(order.pop());
+        order.push(order.shift());
         currentIndex = order[2];
       }
       updateCards();
