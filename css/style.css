@@ -2070,12 +2070,12 @@ background-color: #0a2540;
 
 .footer-links{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 .footer-main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 0.6fr 1.4fr;
+    margin-bottom: 30px;
 }
 
 .footer-logo img {

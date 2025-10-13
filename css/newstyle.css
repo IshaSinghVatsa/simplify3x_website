@@ -122,14 +122,14 @@
 /* center title inside purpose section */
 .purpose-part{
     padding: 90px 0;
-    background-color: #f2f2f2;
+    background-color: #060606;
+    position: relative;
+    z-index: 7;
 }
 .purpose-part .section-title-2 {
     text-align: center;
     width: 100%;
     margin: 0 auto 30px auto;
-    position: sticky;
-    top: 10vh;
 }
 
 
@@ -1071,6 +1071,7 @@ border: none;
     padding: 100px 0;
     text-align: center;
     position: relative;
+    z-index: 7;
 }
 
 .cs-cta-title {
@@ -1529,10 +1530,7 @@ border: none;
 }
 .our-service .section-title-2{
     background-color: #ffffff;
-    position: sticky;
-    z-index: 5;
-    top: 0px;
-    height: 200px;
+
     display: flex
 ;
     align-items: end;

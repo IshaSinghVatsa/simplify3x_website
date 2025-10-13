@@ -190,6 +190,52 @@
 	--cardMargin: 2vw;
 }
 
+        /* Publications marquee */
+        .logo-marquee-section {
+            margin: 10px 0 40px 0;
+        }
+        .logo-marquee-mask {
+            margin-bottom: 45px;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0), #000 8%, #000 92%, rgba(0,0,0,0));
+                    mask-image: linear-gradient(90deg, rgba(0,0,0,0), #000 8%, #000 92%, rgba(0,0,0,0));
+        }
+        .logo-marquee-row {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+            width: max-content;
+            will-change: transform;
+            animation: marquee-left 28s linear infinite;
+        }
+        .logo-marquee-row.to-right {
+            animation-name: marquee-right;
+        }
+        .logo-marquee-track {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+        .logo-marquee-logo {
+            height: 75px;
+            object-fit: contain;
+            filter: grayscale(1) contrast(1.05);
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+        }
+        .logo-marquee-logo:hover { opacity: 1; }
+        @keyframes marquee-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        @media (max-width: 768px) {
+            .logo-marquee-logo { height: 32px; }
+            .logo-marquee-row, .logo-marquee-track { gap: 32px; }
+        }
     </style>
 </head>
 
@@ -290,12 +336,116 @@
             </div>
     </main>
 
-   
+    <section id="services" class="services" style="position: sticky; top: 80px;z-index: 6;">
+        <div class="container">
+          <div class="services-header">
+            <h2 class="section-title-2 mb-0" style="text-align: left;">Our Purpose</h2>
+            <p class="section-description color-grey"
+              style="justify-self: unset !important; max-width: 855px;text-align: left;">
+              Shaping a Smarter Tomorrow with Technology
+            </p>
+          </div>
+          <div class="services-grid">
+            <div class="service-card" style="height: 300px;">
+              <a href="#" class="service-link">
+                <img src="assets/images/empower @3x.png" alt="Business strategy" class="service-image" />
+                <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
+                <div class="service-title">
+                  <div class="service-title-1">Empower Businesses</div>
+                  <div>
+                    To help organizations grow faster with smart and simple technology.
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="service-card" style="height: 300px;">
+              <a href="#" class="service-link">
+                <img src="assets/images/innovation@3x.png" alt="Process optimization" class="service-image" />
+                <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
+                <div class="service-title">
+                  <div class="service-title-1">Drive Innovation</div>
+                  <div>To use AI and automation to create impactful products.</div>
+                </div>
+              </a>
+            </div>
+            <div class="service-card" style="height: 300px;">
+              <a href="#" class="service-link">
+                <img src="assets/images/Simplify Complexity 1.jpg" alt="Financial advisory" class="service-image" />
+                <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
+                <div class="service-title">
+                  <div class="service-title-1">Simplify Complexity</div>
+                  <div>To make challenging processes easier, faster, and more efficient.</div>
+                </div>
+              </a>
+            </div>
+            <div class="service-card" style="height: 300px;">
+              <a href="#" class="service-link">
+                <img src="assets/images/partnership@3x.png" alt="Market research" class="service-image" />
+                <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
+                <div class="service-title">
+                  <div class="service-title-1">Build Partnerships</div>
+                  <div>To collaborate with businesses and create long-term value together.</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
     <!-- Image section below number-part -->
     <main class="purpose-part">
         <section class="container">
-            <div class="section-title-2 mb-5">Our Purpose</div>
+            <div class="section-title mb-5 text-center">Publications and Mentions</div>
+            <div class="logo-marquee-section">
+                <div class="logo-marquee-mask">
+                    <div class="logo-marquee-row to-right">
+                        <div class="logo-marquee-track">
+                            <img class="logo-marquee-logo" src="assets/images/forbes.svg" alt="Forbes">
+                            <img class="logo-marquee-logo" src="assets/images/gartner.svg" alt="Gartner">
+                            <img class="logo-marquee-logo" src="assets/images/timesNow.svg" alt="Times Now">
+                            <img class="logo-marquee-logo" src="assets/images/QA.svg" alt="SimplifyQA">
+                            <img class="logo-marquee-logo" src="assets/images/hire3x.svg" alt="Hire3x">
+                            <img class="logo-marquee-logo" src="assets/images/walnut.svg" alt="Walnut">
+                            <img class="logo-marquee-logo" src="assets/images/devopsark.svg" alt="DevOps Arc">
+                            <img class="logo-marquee-logo" src="assets/images/bominso.svg" alt="Bominso">
+                        </div>
+                        <div class="logo-marquee-track">
+                            <img class="logo-marquee-logo" src="assets/images/forbes.svg" alt="Forbes">
+                            <img class="logo-marquee-logo" src="assets/images/gartner.svg" alt="Gartner">
+                            <img class="logo-marquee-logo" src="assets/images/timesNow.svg" alt="Times Now">
+                            <img class="logo-marquee-logo" src="assets/images/QA.svg" alt="SimplifyQA">
+                            <img class="logo-marquee-logo" src="assets/images/hire3x.svg" alt="Hire3x">
+                            <img class="logo-marquee-logo" src="assets/images/walnut.svg" alt="Walnut">
+                            <img class="logo-marquee-logo" src="assets/images/devopsark.svg" alt="DevOps Arc">
+                            <img class="logo-marquee-logo" src="assets/images/bominso.svg" alt="Bominso">
+                        </div>
+                    </div>
+                </div>
+                <div class="logo-marquee-mask">
+                    <div class="logo-marquee-row" style="animation-duration: 32s;">
+                        <div class="logo-marquee-track">
+                            <img class="logo-marquee-logo" src="assets/images/forbes.svg" alt="Forbes">
+                            <img class="logo-marquee-logo" src="assets/images/gartner.svg" alt="Gartner">
+                            <img class="logo-marquee-logo" src="assets/images/timesNow.svg" alt="Times Now">
+                            <img class="logo-marquee-logo" src="assets/images/QA.svg" alt="SimplifyQA">
+                            <img class="logo-marquee-logo" src="assets/images/hire3x.svg" alt="Hire3x">
+                            <img class="logo-marquee-logo" src="assets/images/walnut.svg" alt="Walnut">
+                            <img class="logo-marquee-logo" src="assets/images/devopsark.svg" alt="DevOps Arc">
+                            <img class="logo-marquee-logo" src="assets/images/bominso.svg" alt="Bominso">
+                        </div>
+                        <div class="logo-marquee-track">
+                            <img class="logo-marquee-logo" src="assets/images/forbes.svg" alt="Forbes">
+                            <img class="logo-marquee-logo" src="assets/images/gartner.svg" alt="Gartner">
+                            <img class="logo-marquee-logo" src="assets/images/timesNow.svg" alt="Times Now">
+                            <img class="logo-marquee-logo" src="assets/images/QA.svg" alt="SimplifyQA">
+                            <img class="logo-marquee-logo" src="assets/images/hire3x.svg" alt="Hire3x">
+                            <img class="logo-marquee-logo" src="assets/images/walnut.svg" alt="Walnut">
+                            <img class="logo-marquee-logo" src="assets/images/devopsark.svg" alt="DevOps Arc">
+                            <img class="logo-marquee-logo" src="assets/images/bominso.svg" alt="Bominso">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <ul id="cards">
                 <li class="card" id="card1">
                     <div class="card-body">
@@ -344,11 +494,10 @@
     <section class="cs-cta-section">
         <div class="container">
             <h2 class="section-title">Ready to Write Your Success Story?</h2>
-            <p class="cs-cta-description">Join hundreds of companies that have transformed their business with
-                Simplify3x solutions.</p>
+            <p class="cs-cta-description">Streamline your workflows, optimize efficiency, and empower your organization to maximize performance.</p>
             <div class="cs-cta-buttons">
-                <button class="cs-btn-primary">Start Your Journey</button>
-                <button class="cs-btn-secondary">Request a Demo</button>
+                <button class="cs-btn-primary">Request a Demo</button>
+                <button class="cs-btn-secondary">Explore Our Ecosystem</button>
             </div>
         </div>
     </section>
@@ -459,7 +608,16 @@
     
                             </div>
                         </div>
-                        
+                        <div class="footer-column">
+                            <h4 class="footer-column-title">Support</h4>
+                            <div class="footer-links-grid">
+                                <div class="links-group">
+                                    <a href="#home" class="footer-link">Careers</a>
+                                    <a href="#" class="footer-link">Contact Us</a>
+                                </div>
+    
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
