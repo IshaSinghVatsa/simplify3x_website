@@ -258,11 +258,8 @@ p {
 
 .btn-text {
     display: inline-block;
-    /* needed so transform works */
     font-size: 14px;
-    /* base size */
     transition: transform 0.1s ease;
-    /* smooth scaling */
 }
 
 .btn-text-hover {
@@ -276,7 +273,6 @@ p {
 }
 
 .btn:hover .btn-text {
-    /* transform: translateY(-100%); */
     transform: scale(1.07);
 }
 
@@ -364,18 +360,14 @@ p {
     backdrop-filter: blur(6px);
     z-index: 2000;
     opacity: 0;
-    /* 🔴 hidden by default */
     pointer-events: none;
-    /* disable click when hidden */
     transition: all 0.4s ease-in-out;
 }
 
-/* Visible state */
 .talk-box.visible {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
     pointer-events: auto;
-    /* clickable when visible */
 }
 
 .talk-close {
@@ -1132,7 +1124,6 @@ body::-webkit-scrollbar {
 
 .clients-logos {
     overflow: hidden;
-    /* margin-bottom: 60px; */
     width: 70%;
     justify-self: center;
     margin-top: 1rem;
@@ -1183,7 +1174,6 @@ body::-webkit-scrollbar {
 }
 
 .strategy-growth-section {
-    /* background: #1a1a1a; */
     padding: 2rem 0;
 }
 
