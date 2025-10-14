@@ -188,6 +188,21 @@ p {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     border: 1px solid #EB5D2A;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #EB5D2A;
+    transition: width 0.3s ease;
+    z-index: 1;
+    transform-origin: left;
 }
 
 .btn-secondary.btn-secondary-text {
@@ -199,8 +214,30 @@ p {
 }
 
 .btn-secondary:hover {
-    background: #f8f9fa;
+    /* background: #f8f9fa; */
     transform: translateY(-2px);
+}
+
+.btn-secondary:hover::before {
+    width: 100%;
+    transform-origin: left;
+}
+
+.btn-secondary:not(:hover)::before {
+    width: 0;
+    transition: width 0.3s ease;
+    transform-origin: right;
+}
+
+.btn-secondary .btn-text {
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover .btn-text {
+    color: #ffffff;
+    transform: scale(1.05);
 }
 
 .btn-outline {
