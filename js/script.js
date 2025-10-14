@@ -1068,7 +1068,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   let scrollLocked = false;
   let rotationsDone = 0;
-  const totalRotations = 5;
+  const totalRotations = 4; // 4 rotations to go from QA to Bominso
   let isAnimating = false;
   let carouselUsed = false;
 
@@ -1152,12 +1152,6 @@ function lockScrollAtSection(section) {
 
     gsap.delayedCall(0.7, () => {
       isAnimating = false;
-      // Unlock scroll if done
-      if (rotationsDone >= totalRotations && scrollLocked) {
-        scrollLocked = false;
-        document.body.style.overflow = "";
-        carouselUsed = true;
-      }
     });
   }
 
@@ -1211,6 +1205,11 @@ window.addEventListener("scroll", () => {
       if (e.deltaY > 0 && rotationsDone < totalRotations) {
         // Scrolling down - rotate forward
         rotateOnce(true);
+      } else if (e.deltaY > 0 && rotationsDone >= totalRotations) {
+        // Scrolling down at the end - unlock scroll and allow scrolling past
+        scrollLocked = false;
+        document.body.style.overflow = "";
+        carouselUsed = true; // Prevent re-locking when scrolling back down
       } else if (e.deltaY < 0 && rotationsDone > 0) {
         // Scrolling up - rotate backward
         rotateOnce(false);

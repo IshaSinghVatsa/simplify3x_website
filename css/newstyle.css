@@ -445,16 +445,6 @@ width: calc(100% - 626px);
 .life-hero-title{ font-size: 56px; font-weight: 800; color:#fff; letter-spacing:.3px; }
 .life-hero-subtitle{ color:#e5e5e5; font-size:20px; margin-top: 10px; }
 
-@media (max-width: 920px){
-  .life-hero{ height: 400px; }
-  .life-hero-title{ font-size: 40px; }
-}
-@media (max-width: 560px){
-  .life-hero{ height: 300px; }
-  .life-hero-title{ font-size: 32px; }
-  .life-hero-subtitle{ font-size: 16px; }
-}
-
 /* Culture section */
 .culture-section{ padding: 60px 0 60px 0; background:#fff; }
 .culture-wrap{ max-width: 900px; margin: 0 auto; text-align: center; }
@@ -480,11 +470,6 @@ width: calc(100% - 626px);
 .cv-video-wrap{ border-radius:18px; overflow:hidden; box-shadow:0 18px 60px rgba(0,0,0,0.12); }
 .cv-video{ width:100%; height:580px; object-fit:cover; display:block; }
 
-@media (max-width: 1024px){
-  .cv-grid{ grid-template-columns: 1fr; }
-  .cv-video{ height:360px; }
-}
-
 /* Life beyond work */
 .life-beyond{ padding: 80px 0; background:#f8fafc; }
 .lb-title{ text-align:center; font-size:48px; font-weight:800; color:#0f172a; }
@@ -494,10 +479,6 @@ width: calc(100% - 626px);
 .lb-card{ background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.06); display:flex; flex-direction:column; }
 .lb-video{ width:100%; height:220px; object-fit:cover; display:block; }
 .lb-caption{ padding:12px 14px 16px; text-align:center; color:#111827; font-weight:600; line-height:1.4; }
-
-@media (max-width: 1100px){
-  .lb-grid{ grid-template-columns: repeat(2, 1fr); }
-}
 
 /* Moments marquee */
 .moments-marquee{ padding: 60px 0 90px; background:#fff; }
@@ -517,9 +498,6 @@ width: calc(100% - 626px);
 /* Ensure hero three canvas fills the hero area */
 #hero-canvas{ height:100%; }
 #hero-canvas canvas{ width:100% !important; height:100% !important; display:block; }
-@media (max-width: 600px){
-  .lb-grid{ grid-template-columns: 1fr; }
-}
 
 .contact-part {
     background-color: #0f0f0f;
@@ -591,11 +569,7 @@ width: calc(100% - 626px);
 .fs-22{
     font-size: 22px;
 }
-@media (max-width: 980px){
-  .contact-grid{ grid-template-columns: 1fr; }
-  .offices-grid{ grid-template-columns: 1fr; }
-  .faq-grid{ grid-template-columns: 1fr; }
-}
+
 /* Common input + textarea placeholders */
 input::placeholder,
 textarea::placeholder {
@@ -1137,140 +1111,6 @@ border: none;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .cs-stories-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .cs-clients-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .cs-hero-title {
-        font-size: 48px;
-    }
-    
-    .cs-discover-title {
-        font-size: 40px;
-    }
-    
-    .cs-discover-title-large {
-        font-size: 52px;
-    }
-}
-
-@media (max-width: 768px) {
-    .cs-nav {
-        gap: 20px;
-    }
-    
-    .cs-nav-link {
-        font-size: 14px;
-    }
-    
-    .cs-hero-title {
-        font-size: 40px;
-    }
-    
-    .cs-hero-subtitle {
-        font-size: 18px;
-    }
-    
-    .cs-discover-title {
-        font-size: 32px;
-    }
-    
-    .cs-discover-title-large {
-        font-size: 42px;
-    }
-    
-    .cs-section-title {
-        font-size: 36px;
-    }
-    
-    .cs-stories-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .cs-clients-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .cs-industry-filters {
-        gap: 15px;
-    }
-    
-    .cs-filter-btn {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-    
-    .cs-cta-title {
-        font-size: 36px;
-    }
-    
-    .cs-cta-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .cs-btn-primary,
-    .cs-btn-secondary {
-        width: 200px;
-    }
-}
-
-@media (max-width: 480px) {
-    .cs-logo-text {
-        font-size: 20px;
-    }
-    
-    .cs-nav {
-        gap: 15px;
-    }
-    
-    .cs-nav-link {
-        font-size: 12px;
-    }
-    
-    .cs-hero-title {
-        font-size: 32px;
-    }
-    
-    .cs-hero-subtitle {
-        font-size: 16px;
-    }
-    
-    .cs-discover-title {
-        font-size: 28px;
-    }
-    
-    .cs-discover-title-large {
-        font-size: 36px;
-    }
-    
-    .cs-section-title {
-        font-size: 28px;
-    }
-    
-    .cs-story-card {
-        padding: 20px;
-    }
-    
-    .cs-client-content {
-        padding: 20px;
-    }
-    
-    .cs-cta-title {
-        font-size: 28px;
-    }
-    
-    .cs-cta-description {
-        font-size: 16px;
-    }
-}
-
 /* Animation for story cards */
 @keyframes fadeIn {
     from {
@@ -1615,86 +1455,7 @@ color: #fafbff;
     opacity: 1;
 }
 
-/* Mobile Responsive for Our Service Section */
-@media (max-width: 768px) {
-    .os-discover-section-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .os-video-container {
-        height: 300px;
-    }
-    
-    .os-pointer-section {
-        padding-top: 40px !important;
-        height: auto !important;
-    }
-    
-    .os-main-heading {
-        font-size: 2rem;
-    }
-    
-    .os-category-tag {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-    }
-    
-    .os-demo-button {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-    }
-}
-
 /* Mobile Responsive */
-@media (max-width: 768px) {
-
-    
-    .slide-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .slide-left,
-    .slide-right {
-        flex: none;
-        padding: 40px 30px;
-    }
-    
-    .slide-title {
-        font-size: 2rem;
-    }
-    
-    .slide-description {
-        font-size: 1.2rem;
-    }
-    
-}
-
-@media (max-width: 480px) {
-    
-    .slide-left,
-    .slide-right {
-        padding: 30px 20px;
-    }
-    
-    .slide-title {
-        font-size: 1.8rem;
-    }
-    
-    .slide-description {
-        font-size: 1rem;
-    }
-    
-}
-.new-section{
-    background-color: #0056b3;
-    
-}
-
-/* ============================================
-   SCROLL-SYNCED FOLDER TEXT SECTION
-   ============================================ */
 
 .folder-text-section {
   padding: 100px 0 0 0;
@@ -2197,3 +1958,88 @@ width: 45px;
     font-size: 20px;
     font-weight: 600;
 }
+
+@media (max-width: 1024px){
+    .cv-grid{ grid-template-columns: 1fr; }
+    .cv-video{ height:360px; }
+    .lb-grid{ grid-template-columns: 1fr; }
+     .contact-grid{ grid-template-columns: 1fr; }
+    .offices-grid{ grid-template-columns: 1fr; }
+    .faq-grid{ grid-template-columns: 1fr; }
+      .cs-nav {
+          gap: 20px;
+      }
+      
+      .cs-nav-link {
+          font-size: 14px;
+      }
+      
+      .cs-hero-title {
+          font-size: 40px;
+      }
+      
+      .cs-hero-subtitle {
+          font-size: 18px;
+      }
+      
+      .cs-discover-title {
+          font-size: 32px;
+      }
+      
+      .cs-discover-title-large {
+          font-size: 42px;
+      }
+      
+      .cs-section-title {
+          font-size: 36px;
+      }
+      
+      .cs-stories-grid {
+          grid-template-columns: 1fr;
+      }
+      
+      .cs-clients-grid {
+          grid-template-columns: 1fr;
+      }
+      
+      .cs-industry-filters {
+          gap: 15px;
+      }
+      
+      .cs-filter-btn {
+          padding: 10px 20px;
+          font-size: 14px;
+      }
+      
+      .cs-cta-title {
+          font-size: 36px;
+      }
+      
+      .cs-cta-buttons {
+          flex-direction: column;
+          align-items: center;
+      }
+      
+      .cs-btn-primary,
+      .cs-btn-secondary {
+          width: 200px;
+      }
+          .slide-content {
+          flex-direction: column;
+          text-align: center;
+      }
+      
+      .slide-left,
+      .slide-right {
+          flex: none;
+          padding: 40px 30px;
+      }
+      
+      .slide-title {
+          font-size: 2rem;
+      }
+      
+      .slide-description {
+          font-size: 1.2rem;
+      }
+  }
