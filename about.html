@@ -32,51 +32,6 @@
             align-items: center;
         }
 
-        /* Initial state - all cards stacked on top of each other */
-        .purpose-card-2:nth-child(1) {
-            z-index: 10;
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-
-        .purpose-card-2:nth-child(2) {
-            z-index: 9;
-            transform: scale(0.95) translateY(-20px);
-            opacity: 0.7;
-        }
-
-        .purpose-card-2:nth-child(3) {
-            z-index: 8;
-            transform: scale(0.9) translateY(-40px);
-            opacity: 0.6;
-        }
-
-        .purpose-card-2:nth-child(4) {
-            z-index: 7;
-            transform: scale(0.85) translateY(-60px);
-            opacity: 0.5;
-        }
-
-        .purpose-card-2:nth-child(5) {
-            z-index: 6;
-            transform: scale(0.8) translateY(-80px);
-            opacity: 0.4;
-        }
-
-        .purpose-card-2:nth-child(6) {
-            z-index: 5;
-            transform: scale(0.75) translateY(-100px);
-            opacity: 0.3;
-        }
-
-        /* Active state when card is in focus */
-        .purpose-card-2.active {
-            transform: scale(1) translateY(0) !important;
-            opacity: 1 !important;
-            z-index: 10 !important;
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
-            border-color: rgba(255, 107, 53, 0.8);
-        }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
@@ -86,115 +41,16 @@
                 min-height: 80vh;
             }
 
-            .purpose-card-2 {
-                max-width: 95%;
-                height: 250px;
-                margin-bottom: 0;
-                top: 5vh;
-                /* Even closer to heading on mobile */
-            }
-
-            .purpose-card-2:nth-child(1) {
-                z-index: 10;
-                transform: scale(1) translateY(0);
-                opacity: 1;
-            }
-
-            .purpose-card-2:nth-child(2) {
-                z-index: 9;
-                transform: scale(0.95) translateY(-10px);
-                opacity: 0.7;
-            }
-
-            .purpose-card-2:nth-child(3) {
-                z-index: 8;
-                transform: scale(0.9) translateY(-20px);
-                opacity: 0.6;
-            }
-
-            .purpose-card-2:nth-child(4) {
-                z-index: 7;
-                transform: scale(0.85) translateY(-30px);
-                opacity: 0.5;
-            }
-
-            .purpose-card-2:nth-child(5) {
-                z-index: 6;
-                transform: scale(0.8) translateY(-40px);
-                opacity: 0.4;
-            }
-
-            .purpose-card-2:nth-child(6) {
-                z-index: 5;
-                transform: scale(0.75) translateY(-50px);
-                opacity: 0.3;
-            }
         }
 
 
-        #cards {
-            list-style: none;
-            padding-left: 0;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: repeat(var(--cards), var(--cardHeight));
-            gap: var(--cardMargin);
-            padding-bottom: calc(var(--cards) * var(--cardTopPadding));
-            margin-bottom: var(--cardMargin);
-            width: 100%;
-            justify-self: center;
-        }
-
-        #card1 {
-            --index: 1;
-        }
-
-        #card2 {
-            --index: 2;
-        }
-
-        #card3 {
-            --index: 3;
-        }
 
 
-        .card {
-            position: sticky;
-            top: 20vh;
-            padding-top: calc(var(--index) * var(--cardTopPadding));
-        }
-
-
-        .card-body {
-            box-sizing: border-box;
-            padding: 55px;
-            border-radius: 20px;
-            box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
-            height: var(--cardHeight);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.5s;
-            border: 1px solid rgba(0, 225, 225, 0.5);
-            background-color: #fff;
-        }
-
-        .card-body.orange-border {
-            border: 1px solid #ff6b35;
-        }
-
-
-        :root {
-            --cards: 3;
-            --cardHeight: 400px;
-            --cardTopPadding: 1.5em;
-            --cardMargin: 2vw;
-        }
 
         /* Publications Marquee Styles */
         .publications-marquee {
             width: 100%;
-            margin: 60px 0 80px 0;
+            margin: 120px 0 46px 0;
             overflow: hidden;
         }
 
@@ -253,6 +109,80 @@
             filter: grayscale(0%) brightness(1) invert(0);
         }
 
+        .about-grid-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            background: linear-gradient(134.71deg, #0B0B0B 0%, #1E1E1E 105.13%);
+            border-radius: 28px;
+
+        }
+
+        .about-grid-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            /* filter: grayscale(100%) brightness(0) invert(1); */
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .about-grid-item:hover img {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1) invert(0);
+        }
+
+        .about-grid .one-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .about-grid .two-row {
+            justify-content: center;
+            display: flex;
+            gap: 40px;
+        }
+
+        .about-grid-item.one {
+            height: 350px;
+            flex: 1;
+        }
+
+        .about-grid-item.two {
+            height: 350px;
+            flex: 1;
+        }
+
+        .about-grid-item.three {
+            height: 280px;
+            flex: 1;
+        }
+
+        .about-grid-item.four {
+            height: 280px;
+            flex: 1;
+        }
+
+        .about-grid-item.five {
+            height: 280px;
+            flex: 1;
+        }
+
+        .about-grid-item.three img {
+            width: 197px;
+        }
+
+        .about-grid-item.four img {
+            width: 182px;
+        }
+
+
         /* Animations */
         @keyframes scrollLeft {
             0% {
@@ -288,6 +218,177 @@
 
             .publications-marquee {
                 margin: 40px 0 60px 0;
+            }
+        }
+
+        /* Team Flipping Cards Styles */
+        .team-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(337px, 1fr));
+            gap: 30px;
+
+        }
+
+        .team-card {
+            height: 440px;
+            perspective: 1000px;
+        }
+
+        .team-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .team-card:hover .team-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .team-card-front,
+        .team-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .team-card-front {
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .team-card-back {
+            background: #ff6b35;
+            color: white;
+            transform: rotateY(180deg);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+            text-align: center;
+        }
+
+        .team-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+
+            color: #fff;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .team-card-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 23px;
+            font-weight: 600;
+        }
+
+        .team-card-info p {
+            margin: 0;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .about-vert-line {
+            height: 100px;
+            width: 1px;
+            background-color: #c7c7c7;
+        }
+
+        .team-card-back h3 {
+            margin: 0 0 5px 0;
+            font-size: 23px;
+            font-weight: 600;
+            text-align: left;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .team-card-back .line {
+            background-color: #fff;
+            width: 120px;
+            height: 1px;
+            margin-bottom: 25px;
+        }
+
+        .team-title {
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            text-align: left;
+            color: #fff;
+        }
+
+        .team-description {
+            margin: 0 0 30px 0;
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: left;
+            color: #fff;
+        }
+
+        .team-social {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .team-social a {
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .team-social a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .team-card {
+                height: 350px;
+            }
+
+            .team-card-back {
+                padding: 20px;
+            }
+
+            .team-card-back h3 {
+                font-size: 1.5rem;
+            }
+
+            .team-description {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -353,94 +454,232 @@
         <section class="container ">
             <div>
                 <div class="hero-title">Meet Simplify3x</div>
-                <div class="hero-description text-justify lh-32px">Founded on the principle that technology should empower rather than complicate, we've built a global ecosystem of innovative products and services that help businesses scale efficiently and sustainably.</div>
+                <div class="hero-description text-justify lh-32px">Founded on the principle that technology should
+                    empower rather than complicate, we've built a global ecosystem of innovative products and services
+                    that help businesses scale efficiently and sustainably.</div>
             </div>
         </section>
     </main>
-    <main class="number-part">
-        <section class="container">
-            <div class="number-part-item employee-card">
-                <img id="employee-icon" src="assets/images/Employees o.svg" alt="Employee">
-                <div class="number-part-number">1000+</div>
-                <div class="number-part-text">Employees Worldwide</div>
-            </div>
-            <div class="num-vertical-line"></div>
-            <div class="number-part-item cont-card">
-                <img id="office-icon" src="assets/images/office o.svg" alt="Office">
-                <div class="number-part-number">500+</div>
-                <div class="number-part-text">Offices Across Continents</div>
-            </div>
-            <div class="num-vertical-line"></div>
-            <div class="number-part-item world-card">
-                <img id="world-icon" src="assets/images/world.svg" alt="World">
-                <div class="number-part-number">700+</div>
-                <div class="number-part-text">Countries We Serve</div>
-            </div>
-            <div class="num-vertical-line"></div>
-            <div class="number-part-item project-card">
-                <img id="project-icon" src="assets/images/success o.svg" alt="Project">
-                <div class="number-part-number">90+</div>
-                <div class="number-part-text">Successful Projects</div>
-            </div>
-    </main>
-
-    <section id="services" class="services-2">
+    <div style="padding-block: 60px;">
         <div class="container">
-            <div class="services-header">
-                <h2 class="section-title-2 mb-10 text-center">Our Purpose</h2>
-                <p class="section-description text-center" style="color: #414141;">Shaping a Smarter Tomorrow with Technology</p>
+            <div 
+                style="display: flex; justify-content: space-between; align-items: start; gap: 60px;">
+                <h2 class="gradient-heading" style="margin: 0; flex: 0 0 auto; max-width: 500px;">
+                    Who We Are
+                </h2>
+                <div style="display: flex; align-items: start; gap: 13px;">
+                    <div class="about-vert-line"></div>
+                    <p class="gradient-description" style="border-left:unset;">At Simplify3x, we help businesses solve
+                        complex problems with simple, smart solutions using AI. We offer both products and services, all
+                        working together in one ecosystem to support different business needs ensuring every solution we
+                        provide adds real value and helps our clients grow worldwide.
+                         </p>
+                </div>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <a href="#" class="service-link">
-                        <img src="assets/images/empower @3x.png" alt="Business strategy" class="service-image" />
-                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
-                        <div class="service-title">
-                            <div class="service-title-1 fs-24">Empower Businesses</div>
-                            <div class="service-title-subhead">
-                                To help organizations grow faster with smart and simple technology.
+        </div>
+    </div>
+    <!-- Team Flipping Cards Section -->
+    <section class="team-section">
+        <img style="position: absolute; bottom: 0; right: 0;" src="assets/images/dots-cor.png" alt="">
+        <div class="container">
+            <h2 class="gradient-heading" style="margin-bottom: 70px;">At the Helm of <br /> Our Vision</h2>
+
+            <div class="team-grid">
+                <!-- Card 1 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <!-- Front -->
+                        <div class="team-card-front">
+                            <img src="assets/images/vijay.png" alt="">
+                            <div class="team-card-info">
+                                <h3>Vijay Daniels</h3>
+                                <p>Chief Executive Officer</p>
                             </div>
                         </div>
-                    </a>
-                </div>
-                <div class="service-card">
-                    <a href="#" class="service-link">
-                        <img src="assets/images/innovation@3x.png" alt="Process optimization" class="service-image" />
-                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
-                        <div class="service-title">
-                            <div class="service-title-1 fs-24">Drive Innovation</div>
-                            <div class="service-title-subhead">To use AI and automation to create impactful and future-ready products.</div>
+                        <!-- Back -->
+                        <div class="team-card-back">
+                            <div>
+                                <h3>Vijay Daniels</h3>
+                                <p class="team-title">Chief Executive Officer</p>
+                                <div class="line"></div>
+                                <p class="team-description">He pioneered technology that enables organizations worldwide
+                                    to automate business processes with intelligent software, leading solutions that
+                                    simplify operations, save time, reduce errors, and drive growth.</p>
+                            </div>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <img src="assets/images/linkedin.svg" alt="">
+                                </a>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <a href="#" class="service-link">
-                        <img src="assets/images/3@3x 1.png" alt="Financial advisory" class="service-image" />
-                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
-                        <div class="service-title">
-                            <div class="service-title-1 fs-24">Simplify Complexity</div>
-                            <div class="service-title-subhead">To make challenging processes easier, faster, and more efficient.</div>
+
+                <!-- Card 2 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="assets/images/ravi.png" alt="Bob Smith">
+                            <div class="team-card-info">
+                                <h3>Ravi Reddy</h3>
+                                <p>Chief Strategy Officer</p>
+                            </div>
                         </div>
-                    </a>
+                        <div class="team-card-back">
+                            <div>
+                                <h3>Ravi Reddy</h3>
+                                <p class="team-title">Chief Strategy Officer</p>
+                                <div class="line"></div>
+                                <p class="team-description">He has led global operations and strategy, propelling the
+                                    company’s growth to the next stage. He drives initiatives that align business goals
+                                    with smart, practical solutions, ensuring efficiency, impact, and lasting value for
+                                    clients worldwide.</p>
+                            </div>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <img src="assets/images/linkedin.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <a href="#" class="service-link">
-                        <img src="assets/images/partnership@3x.png" alt="Market research" class="service-image" />
-                        <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
-                        <div class="service-title">
-                            <div class="service-title-1 fs-24">Build Partnerships</div>
-                            <div class="service-title-subhead">To collaborate with businesses and create long-term value together.</div>
+
+                <!-- Card 3 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="assets/images/shrey.png" alt="Carol Davis">
+                            <div class="team-card-info">
+                                <h3>Shreya Gupta</h3>
+                                <p>Chief Product Officer </p>
+                            </div>
                         </div>
-                    </a>
+                        <div class="team-card-back">
+                            <div>
+                                <h3>Shreya Gupta</h3>
+                                <p class="team-title">Chief Product Officer</p>
+                                <div class="line"></div>
+                                <p class="team-description">He has spent the last several years in product leadership
+                                    roles, shaping corporate technologies that drive business efficiency and growth.</p>
+                            </div>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <img src="assets/images/linkedin.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="assets/images/nagraj.png" alt="David Brown">
+                            <div class="team-card-info">
+                                <h3>Nagraj M C</h3>
+                                <p>Chief Quality officer </p>
+                            </div>
+                        </div>
+                        <div class="team-card-back">
+                            <div>
+                                <h3>Nagraj M C</h3>
+                                <p class="team-title">Chief Quality officer </p>
+                                <div class="line"></div>
+                                <p class="team-description">He has led initiatives that enhance quality, improve
+                                    performance, and deliver lasting value for clients worldwide. His efforts foster a
+                                    culture of excellence, accountability, and continuous improvement across the
+                                    organization. </p>
+                            </div>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <img src="assets/images/linkedin.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="assets/images/visakh.png" alt="Emma Wilson">
+                            <div class="team-card-info">
+                                <h3>Visakh S T</h3>
+                                <p>Chief Delivery Officer </p>
+                            </div>
+                        </div>
+                        <div class="team-card-back">
+                            <div>
+                                <h3>Visakh S T</h3>
+                                <p class="team-title">Chief Delivery Officer </p>
+                                <div class="line"></div>
+                                <p class="team-description">He has led initiatives that deliver seamless solutions,
+                                    streamline processes, and create lasting value for clients worldwide. He ensures
+                                    that every project is executed with precision, reliability, and measurable impact.
+                                </p>
+                            </div>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <img src="assets/images/linkedin.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="assets/images/hari.png" alt="Frank Miller">
+                            <div class="team-card-info">
+                                <h3>Haribabu T</h3>
+                                <p>SVP Quality Engineering </p>
+                            </div>
+                        </div>
+                        <div class="team-card-back">
+                            <div>
+                                <h3>Haribabu T</h3>
+                                <p class="team-title">SVP Quality Engineering </p>
+                                <div class="line"></div>
+                                <p class="team-description"> He has been leading the company’s testing services,
+                                    ensuring processes are efficient, reliable, and consistently meet business goals
+                                    delivering lasting value for clients worldwide.</p>
+                            </div>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <img src="assets/images/linkedin.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+
+
+
     <!-- Image section below number-part -->
     <main class="purpose-part">
         <section class="container">
-            <div class="section-title mb-5">Publications and Mentions</div>
+            <div class="section-title text-center" style="margin-bottom: 45px;">Publications and Mentions</div>
+            <div class="about-grid">
+                <div class="one-row">
+                    <div class="about-grid-item one"><img src="assets/images/forbes-txt.svg" alt="Publication 1"></div>
+                    <div class="about-grid-item two"><img src="assets/images/gartner-text.svg" alt="Publication 1">
+                    </div>
+                </div>
+                <div class="two-row">
+                    <div class="about-grid-item three"><img src="assets/images/gartner-text.svg" alt="Publication 1">
+                    </div>
+                    <div class="about-grid-item four"><img src="assets/images/forbes-txt.svg" alt="Publication 1"></div>
+                    <div class="about-grid-item five"><img src="assets/images/times-text.svg" alt="Publication 1"></div>
+                </div>
+            </div>
 
             <!-- Marquee Section -->
             <div class="publications-marquee">
@@ -491,70 +730,51 @@
                 </div>
             </div>
 
-            <ul id="cards">
-                <li class="card" id="card1">
-                    <div class="card-body">
-                        <div class="purpose-card-2-content">
-                            <h3>Forbes</h3>
-                            <p>
-                                We constantly push the boundaries of technology to create smarter, simpler, and more
-                                impactful solutions for modern businesses.
-                            </p>
-                        </div>
-                        <div class="card-image">
-                            <img class="purpose-image" src="assets/images/forbes.svg" alt="Innovation First">
-                        </div>
-                    </div>
-                </li>
-                <li class="card" id="card2">
-                    <div class="card-body">
-                        <div class="purpose-card-2-content">
-                            <h3>Gartner</h3>
-                            <p>
-                                Every solution we deliver is designed with a global perspective—bridging innovation with
-                                scalability to drive success across industries and continents.
-                            </p>
-                        </div>
-                        <div class="card-image">
-                            <img class="purpose-image" src="assets/images/gartner.svg" alt="Innovation First">
-                        </div>
-                    </div>
-                </li>
-                <li class="card" id="card3">
-                    <div class="card-body">
-                        <div class="purpose-card-2-content">
-                            <h3>Times Now</h3>
-                            <p>
-                                We transform complex challenges into clear, effective, and elegant solutions that make
-                                business growth effortless.
-                            </p>
-                        </div>
-                        <div class="card-image">
-                            <img class="purpose-image" src="assets/images/timesNow.svg" alt="Innovation First">
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
         </section>
     </main>
-
+    <main class="number-part">
+        <section class="container">
+            <div class="number-part-item employee-card">
+                <img id="employee-icon" src="assets/images/Employees o.svg" alt="Employee">
+                <div class="number-part-number">1000+</div>
+                <div class="number-part-text">Employees Worldwide</div>
+            </div>
+            <div class="num-vertical-line"></div>
+            <div class="number-part-item cont-card">
+                <img id="office-icon" src="assets/images/office o.svg" alt="Office">
+                <div class="number-part-number">500+</div>
+                <div class="number-part-text">Offices Across Continents</div>
+            </div>
+            <div class="num-vertical-line"></div>
+            <div class="number-part-item world-card">
+                <img id="world-icon" src="assets/images/world.svg" alt="World">
+                <div class="number-part-number">700+</div>
+                <div class="number-part-text">Countries We Serve</div>
+            </div>
+            <div class="num-vertical-line"></div>
+            <div class="number-part-item project-card">
+                <img id="project-icon" src="assets/images/success o.svg" alt="Project">
+                <div class="number-part-number">90+</div>
+                <div class="number-part-text">Successful Projects</div>
+            </div>
+    </main>
 
     <section class="cs-cta-section">
         <div class="container">
             <h2 class="section-title">Get Started with Simplify3x Today</h2>
-            <p class="section-description">Streamline your workflows, optimize efficiency, and empower your organization to maximize performance.</p>
+            <p class="section-description">Streamline your workflows, optimize efficiency, and empower your organization
+                to maximize performance.</p>
             <div class="cs-cta-buttons">
                 <a href="#ecosystem" class="btn btn-primary no-shadow">
                     <span class="btn-text">Request a Demo</span>
                     <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
-                  </a>
-                  <a href="#lets-talk-button" class="btn btn-secondary no-shadow">
+                </a>
+                <a href="#lets-talk-button" class="btn btn-secondary no-shadow">
                     <span class="btn-text">Explore Our Ecosystem</span>
                     <span class="btn-text-hover">REQUEST A DEMO</span>
-                  </a>
+                </a>
             </div>
-           
+
         </div>
     </section>
     <!-- <main class="timeline-part">
@@ -638,45 +858,45 @@
                     </div>
                     <div class="footer-links">
                         <div class="footer-column">
-                          <h4 class="footer-column-title">Pages</h4>
-                          <div class="footer-links-grid">
-                            <div class="links-group">
-                              <a href="#home" class="footer-link">Home</a>
-                              <a href="#" class="footer-link">About Us</a>
-                              <a href="#about" class="footer-link">Insights</a>
-                              <a href="#" class="footer-link">Life @ Simplify3x</a>
-                             
-                              <a href="#" class="footer-link">Customer Stories</a>
-                              <a href="#" class="footer-link">Custom Solutions</a>
-                             
+                            <h4 class="footer-column-title">Pages</h4>
+                            <div class="footer-links-grid">
+                                <div class="links-group">
+                                    <a href="#home" class="footer-link">Home</a>
+                                    <a href="#" class="footer-link">About Us</a>
+                                    <a href="#about" class="footer-link">Insights</a>
+                                    <a href="#" class="footer-link">Life @ Simplify3x</a>
+
+                                    <a href="#" class="footer-link">Customer Stories</a>
+                                    <a href="#" class="footer-link">Custom Solutions</a>
+
+                                </div>
+
                             </div>
-          
-                          </div>
                         </div>
                         <div class="footer-column">
-                          <h4 class="footer-column-title">Companies</h4>
-                          <div class="footer-links-grid">
-                            <div class="links-group">
-                              <a href="#home" class="footer-link">SimplifyQA</a>
-                              <a href="#" class="footer-link">Hire3x</a>
-                              <a href="#about" class="footer-link">Walnut</a>
-                              <a href="#" class="footer-link">DevOps Arc</a>
-                              <a href="#" class="footer-link">Bominso</a>
+                            <h4 class="footer-column-title">Companies</h4>
+                            <div class="footer-links-grid">
+                                <div class="links-group">
+                                    <a href="#home" class="footer-link">SimplifyQA</a>
+                                    <a href="#" class="footer-link">Hire3x</a>
+                                    <a href="#about" class="footer-link">Walnut</a>
+                                    <a href="#" class="footer-link">DevOps Arc</a>
+                                    <a href="#" class="footer-link">Bominso</a>
+                                </div>
+
                             </div>
-          
-                          </div>
                         </div>
                         <div class="footer-column">
-                          <h4 class="footer-column-title">Support</h4>
-                          <div class="footer-links-grid">
-                            <div class="links-group">
-                              <a href="#" class="footer-link">Contact Us</a>
-                              <a href="#" class="footer-link">Careers</a>
+                            <h4 class="footer-column-title">Support</h4>
+                            <div class="footer-links-grid">
+                                <div class="links-group">
+                                    <a href="#" class="footer-link">Contact Us</a>
+                                    <a href="#" class="footer-link">Careers</a>
+                                </div>
+
                             </div>
-          
-                          </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -755,194 +975,6 @@
             }
         })();
 
-        // Scroll Stack Animation
-        document.addEventListener('DOMContentLoaded', function () {
-            const cards = document.querySelectorAll('.purpose-card-2');
-            const container = document.querySelector('.purpose-div');
-
-            if (!cards.length || !container) return;
-
-            let currentActiveIndex = 0;
-            let isScrolling = false;
-
-            // Initialize first card as active (index 0)
-            if (cards.length > 0) {
-                cards[0].classList.add('active');
-                currentActiveIndex = 0;
-            }
-
-            // Function to update card positions based on scroll
-            function updateCardPositions() {
-                if (isScrolling) return;
-
-                const containerRect = container.getBoundingClientRect();
-                const containerTop = containerRect.top;
-                const windowHeight = window.innerHeight;
-
-                // Start transition when container is closer to viewport
-                const triggerPoint = windowHeight * 0.9; // Start when container is 90% visible
-                const scrollStart = Math.max(0, triggerPoint - containerTop);
-                const scrollRange = windowHeight * 1.5; // Reduced scroll range
-
-                // Always keep the first card (topmost) active
-                const newActiveIndex = 0;
-
-                if (newActiveIndex !== currentActiveIndex) {
-                    currentActiveIndex = newActiveIndex;
-
-                    // Remove active class from all cards
-                    cards.forEach(card => card.classList.remove('active'));
-
-                    // Add active class to first card only
-                    if (cards[0]) {
-                        cards[0].classList.add('active');
-                    }
-                }
-
-                // Update card positions for smooth stacking effect
-                // Always use first card as reference point
-                cards.forEach((card, index) => {
-                    const distance = index; // Distance from first card (index 0)
-
-                    if (distance === 0) {
-                        // First card - always active
-                        card.style.transform = 'scale(1) translateY(0)';
-                        card.style.opacity = '1';
-                        card.style.zIndex = '10';
-                    } else if (distance === 1) {
-                        // Second card
-                        const scale = 0.95;
-                        const translateY = -20;
-                        const opacity = 0.7;
-                        const zIndex = 9;
-
-                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-                        card.style.opacity = opacity;
-                        card.style.zIndex = zIndex;
-                    } else if (distance === 2) {
-                        // Third card
-                        const scale = 0.9;
-                        const translateY = -40;
-                        const opacity = 0.6;
-                        const zIndex = 8;
-
-                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-                        card.style.opacity = opacity;
-                        card.style.zIndex = zIndex;
-                    } else if (distance === 3) {
-                        // Fourth card
-                        const scale = 0.85;
-                        const translateY = -60;
-                        const opacity = 0.5;
-                        const zIndex = 7;
-
-                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-                        card.style.opacity = opacity;
-                        card.style.zIndex = zIndex;
-                    } else if (distance === 4) {
-                        // Fifth card
-                        const scale = 0.8;
-                        const translateY = -80;
-                        const opacity = 0.4;
-                        const zIndex = 6;
-
-                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-                        card.style.opacity = opacity;
-                        card.style.zIndex = zIndex;
-                    } else {
-                        // Sixth card
-                        const scale = 0.75;
-                        const translateY = -100;
-                        const opacity = 0.3;
-                        const zIndex = 5;
-
-                        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-                        card.style.opacity = opacity;
-                        card.style.zIndex = zIndex;
-                    }
-                });
-            }
-
-            // Throttled scroll handler
-            let scrollTimeout;
-            function handleScroll() {
-                if (scrollTimeout) {
-                    clearTimeout(scrollTimeout);
-                }
-
-                scrollTimeout = setTimeout(() => {
-                    updateCardPositions();
-                }, 16); // ~60fps
-            }
-
-            // Add scroll event listener
-            window.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Initial call
-            updateCardPositions();
-
-            // Add intersection observer for better performance
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        updateCardPositions();
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '100px 0px'
-            });
-
-            observer.observe(container);
-        });
-
-        // Orange border effect when card reaches 20vh
-        document.addEventListener('DOMContentLoaded', function () {
-            const cards = document.querySelectorAll('.card');
-            const cardBodies = document.querySelectorAll('.card-body');
-
-            function updateOrangeBorders() {
-                // Remove all orange borders first
-                cardBodies.forEach(body => body.classList.remove('orange-border'));
-
-                // Check each card to see if it's at 20vh
-                cards.forEach((card, index) => {
-                    const rect = card.getBoundingClientRect();
-                    const cardTop = rect.top;
-                    const viewportHeight = window.innerHeight;
-                    const targetPosition = viewportHeight * 0.2; // 20vh
-
-                    // If current card is at or near 20vh, add orange border to next card
-                    if (cardTop <= targetPosition + 50 && cardTop >= targetPosition - 50) {
-                        const nextCardIndex = index + 1;
-                        if (nextCardIndex < cardBodies.length) {
-                            // Add orange border to next card
-                            cardBodies[nextCardIndex].classList.add('orange-border');
-
-                            // Ensure current card (nth) has default border (remove orange border if it exists)
-                            cardBodies[index].classList.remove('orange-border');
-                        }
-                    }
-                });
-            }
-
-            // Throttled scroll handler
-            let scrollTimeout;
-            function handleScroll() {
-                if (scrollTimeout) {
-                    clearTimeout(scrollTimeout);
-                }
-                scrollTimeout = setTimeout(() => {
-                    updateOrangeBorders();
-                }, 16); // ~60fps
-            }
-
-            // Add scroll event listener
-            window.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Initial call
-            updateOrangeBorders();
-        });
     </script>
 </body>
 

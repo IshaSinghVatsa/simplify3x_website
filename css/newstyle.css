@@ -86,6 +86,9 @@
     font-size: 3.5rem;
     font-weight: 700;
     color: #EB5D2A;
+
+font-family: 'Oleo Script Swash Caps',sans-serif;
+
 }
 
 .number-part-text {
@@ -130,7 +133,7 @@
 
 /* center title inside purpose section */
 .purpose-part{
-    padding: 90px 0;
+    padding: 120px 0 90px 0;
     background-color: #060606;
     position: relative;
     z-index: 7;
@@ -144,72 +147,6 @@
 }
 
 
-.purpose-card-2 {
-    background: #ffffff;
-    padding: 55px;
-    text-align: left;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 107, 53, 0.3);
-    position: sticky;
-    top: 20vh; /* Reduced from 20vh to keep closer to heading */
-    transform: translateY(0);
-    overflow: hidden;
-    /* height: 580px; */
-    display: flex;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 1100px;
-    /* margin: 0 auto; */
-    margin-bottom: 0; /* Remove bottom margin */
-}
-.purpose-card-2:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(255, 107, 53, 0.2);
-    border-color: rgba(255, 107, 53, 0.5);
-}
-
-.purpose-card-2-content h3 {
-    font-size: 36px;
-    font-weight: 700;
-    color: #eb5d2a;
-    margin: 20px 20px 20px 0px;
-    line-height: 1.3;
-}
-
-.purpose-card-2-content p {
-    color: #000;
-    line-height: 1.7;
-    margin: 0 20px 20px 0px;
-    font-size: 20px;
-    flex-grow: 1;
-}
-.purpose-card-2-content{
-width: calc(100% - 626px);
-}
-
-.card-image {
-    height: 100%;
-    width: 525px;
-    position: relative;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: block;
-    border-radius: 20px;
-}
-
-.purpose-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.card:hover .purpose-image {
-    transform: scale(1.1);
-}
 
 .timeline-part{
     padding: 100px 0 80px 0;

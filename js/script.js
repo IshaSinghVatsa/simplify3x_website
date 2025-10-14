@@ -252,6 +252,148 @@ function animateCounter(element) {
 // Initialize counters when DOM is loaded
 document.addEventListener("DOMContentLoaded", initCounters);
 
+// Counter animation for presence numbers
+function initPresenceCounters() {
+  const presenceNumbers = document.querySelectorAll(".presence-number");
+
+  const observerOptions = {
+    threshold: 0.5,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animatePresenceCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  presenceNumbers.forEach((counter) => {
+    observer.observe(counter);
+  });
+}
+
+function animatePresenceCounter(element) {
+  const target = element.textContent.trim();
+  
+  // Parse the number format
+  let numericValue = 0;
+  let isPercentage = target.includes("%");
+  let isMillion = target.includes("M");
+  let isPlus = target.includes("+");
+  let hasDecimals = target.includes(".");
+  
+  if (hasDecimals) {
+    // For decimals like 99.999%
+    numericValue = parseFloat(target.replace(/[^\d.]/g, ""));
+  } else {
+    // For regular numbers like 500M+, 47+, 135+
+    numericValue = parseInt(target.replace(/[^\d]/g, ""));
+  }
+  
+  let current = 0;
+  const duration = 2000; // 2 seconds
+  const steps = 60;
+  const increment = numericValue / steps;
+  const stepDuration = duration / steps;
+
+  const timer = setInterval(() => {
+    current += increment;
+
+    if (current >= numericValue) {
+      current = numericValue;
+      clearInterval(timer);
+    }
+
+    let displayValue;
+    
+    if (hasDecimals) {
+      displayValue = current.toFixed(3);
+    } else {
+      displayValue = Math.floor(current);
+    }
+
+    // Add suffixes back
+    let finalDisplay = displayValue;
+    if (isMillion) {
+      finalDisplay = displayValue + "M";
+    }
+    if (isPercentage) {
+      finalDisplay = displayValue + "%";
+    }
+    if (isPlus) {
+      finalDisplay = displayValue + "+";
+    }
+
+    element.textContent = finalDisplay;
+  }, stepDuration);
+}
+
+// Initialize presence counters when DOM is loaded
+document.addEventListener("DOMContentLoaded", initPresenceCounters);
+
+// Counter animation for about page numbers
+function initAboutPageCounters() {
+  const aboutNumbers = document.querySelectorAll(".number-part-number");
+
+  const observerOptions = {
+    threshold: 0.5,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateAboutCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  aboutNumbers.forEach((counter) => {
+    observer.observe(counter);
+  });
+}
+
+function animateAboutCounter(element) {
+  const target = element.textContent.trim();
+  
+  // Parse the number format
+  let numericValue = 0;
+  let isPlus = target.includes("+");
+  
+  // For numbers like 1000+, 500+, 700+, 90+
+  numericValue = parseInt(target.replace(/[^\d]/g, ""));
+  
+  let current = 0;
+  const duration = 2000; // 2 seconds
+  const steps = 60;
+  const increment = numericValue / steps;
+  const stepDuration = duration / steps;
+
+  const timer = setInterval(() => {
+    current += increment;
+
+    if (current >= numericValue) {
+      current = numericValue;
+      clearInterval(timer);
+    }
+
+    let displayValue = Math.floor(current);
+
+    // Add plus sign back if needed
+    let finalDisplay = displayValue;
+    if (isPlus) {
+      finalDisplay = displayValue + "+";
+    }
+
+    element.textContent = finalDisplay;
+  }, stepDuration);
+}
+
+// Initialize about page counters when DOM is loaded
+document.addEventListener("DOMContentLoaded", initAboutPageCounters);
+
 // Parallax effect for hero section
 function initParallax() {
   const heroSection = document.querySelector(".hero");
