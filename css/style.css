@@ -59,6 +59,24 @@ body {
     background-clip: text;
     text-fill-color: transparent;
 }
+/* Get in Touch */
+
+.gradient-heading-2 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 73px;
+    line-height: 58px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(29.8deg, #FF7440 14.71%, #FFFFFF 77.66%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    line-height: 85px;
+}
+
 .gradient-description {
     font-family: 'Montserrat';
     font-style: normal;
@@ -1709,7 +1727,9 @@ body::-webkit-scrollbar {
     line-height: 1.4;
     font-weight: 400;
     opacity: 0.9;
+    max-width: 163px;
 }
+
 
 /* About Section */
 .about {

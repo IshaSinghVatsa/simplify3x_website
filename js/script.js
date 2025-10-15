@@ -37,10 +37,72 @@ function initTabs() {
 function initIndustryFilters() {
   const filterButtons = document.querySelectorAll(".cs-filter-btn");
   const storyCards = document.querySelectorAll(".cs-story-card");
+  const showMoreBtn = document.getElementById("showMoreBtn");
+  
+  let currentFilter = "all";
+  let currentPage = 1;
+  const cardsPerPage = 6;
 
+  // Initialize pagination
+  function initPagination() {
+    currentPage = 1;
+    showCardsForCurrentFilter();
+    updateShowMoreButton();
+  }
+
+  // Show cards for current filter and page
+  function showCardsForCurrentFilter() {
+    const filteredCards = Array.from(storyCards).filter(card => {
+      const cardIndustry = card.getAttribute("data-industry");
+      return currentFilter === "all" || cardIndustry === currentFilter;
+    });
+
+    // Hide all cards first
+    storyCards.forEach(card => {
+      card.classList.remove("show");
+    });
+
+    // Show cards for current page
+    const startIndex = 0;
+    const endIndex = currentPage * cardsPerPage;
+    const cardsToShow = filteredCards.slice(startIndex, endIndex);
+
+    cardsToShow.forEach(card => {
+      card.classList.add("show");
+    });
+  }
+
+  // Update show more button state
+  function updateShowMoreButton() {
+    if (!showMoreBtn) return;
+    
+    const filteredCards = Array.from(storyCards).filter(card => {
+      const cardIndustry = card.getAttribute("data-industry");
+      return currentFilter === "all" || cardIndustry === currentFilter;
+    });
+
+    const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+    
+    if (currentPage >= totalPages) {
+      showMoreBtn.style.display = "none";
+    } else {
+      showMoreBtn.style.display = "inline-block";
+    }
+  }
+
+  // Show more button functionality
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener("click", () => {
+      currentPage++;
+      showCardsForCurrentFilter();
+      updateShowMoreButton();
+    });
+  }
+
+  // Filter button functionality
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const targetIndustry = button.getAttribute("data-industry");
+      currentFilter = button.getAttribute("data-industry");
 
       // Remove active class from all buttons
       filterButtons.forEach((btn) => btn.classList.remove("cs-active"));
@@ -48,19 +110,13 @@ function initIndustryFilters() {
       // Add active class to clicked button
       button.classList.add("cs-active");
 
-      // Filter story cards
-      storyCards.forEach((card) => {
-        const cardIndustry = card.getAttribute("data-industry");
-
-        if (targetIndustry === "all" || cardIndustry === targetIndustry) {
-          card.style.display = "block";
-          card.style.animation = "fadeIn 0.5s ease-in-out";
-        } else {
-          card.style.display = "none";
-        }
-      });
+      // Reset pagination and show cards
+      initPagination();
     });
   });
+
+  // Initialize on page load
+  initPagination();
 }
 
 // Smooth scrolling for navigation links
