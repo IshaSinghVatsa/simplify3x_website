@@ -2934,14 +2934,6 @@ body::-webkit-scrollbar {
         grid-template-columns: 1fr;
     }
 
-    .offices-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .faq-grid {
-        grid-template-columns: 1fr;
-    }
-
     .cs-nav {
         gap: 20px;
     }
@@ -3064,7 +3056,33 @@ body::-webkit-scrollbar {
         align-items: end;
         margin-bottom: 70px;
     }
-
+    .purpose-content{
+        flex-direction: column;
+    }
+    .presence-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0px;
+    }
+    .purpose{
+        padding: 40px 15px 0 15px;
+    }
+    .footer-main{
+        grid-template-columns: 1fr;
+    }
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+.footer-contact{
+    margin-bottom: 40px;
+}
+.container {
+    padding: 0 20px;
+    max-width: 100%;
+}
+.folder-animation-wrapper {
+    transform: scale(1.2) !important;
+  }
 }
 @media (min-width: 1024px) {
     .hideinmobile{
@@ -3080,7 +3098,7 @@ body::-webkit-scrollbar {
 
     /* Fix viewport and container issues */
     .container {
-        padding: 0 15px;
+        padding: 0 20px;
         max-width: 100%;
     }
 
@@ -3319,19 +3337,10 @@ body::-webkit-scrollbar {
         justify-content: center;
     }
 
-    /* Purpose section mobile fixes */
-    .purpose {
-        padding: 60px 15px;
-    }
-
     .presence-stats {
         margin-top: 40px;
     }
 
-    .presence-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
 
     /* Globe section mobile fixes */
     .globe-embed {
@@ -3353,11 +3362,6 @@ body::-webkit-scrollbar {
     .footer-content {
         flex-direction: column;
         gap: 40px;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 30px;
     }
 
     .footer-bottom {
@@ -3449,7 +3453,7 @@ body::-webkit-scrollbar {
 
     /* Extra small mobile fixes */
     .container {
-        padding: 0 10px;
+        padding: 0 20px;
     }
 
     .p-container {
@@ -3475,8 +3479,7 @@ body::-webkit-scrollbar {
 
     .services,
     .carousel-section,
-    .folder-text-section,
-    .purpose {
+    .folder-text-section {
         padding: 40px 10px;
     }
 
@@ -3511,7 +3514,7 @@ body::-webkit-scrollbar {
     }
 
     .container {
-        padding: 0 8px;
+        padding: 0 15px;
     }
 
     .hero-title {

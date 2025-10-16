@@ -560,6 +560,56 @@ function initScrollToTop() {
 // Initialize scroll to top
 document.addEventListener("DOMContentLoaded", initScrollToTop);
 
+// ============================================
+// FAQ ACCORDION FUNCTIONALITY
+// ============================================
+function initFAQAccordion() {
+  const faqCards = document.querySelectorAll('.faq-card');
+  
+  if (faqCards.length === 0) return;
+  
+  faqCards.forEach(card => {
+    const answer = card.querySelector('.faq-answer');
+    const chevron = card.querySelector('.faq-chevron');
+    
+    // Set initial state
+    answer.style.maxHeight = '0';
+    chevron.style.transform = 'rotate(0deg)';
+    
+    // Add click functionality for mobile/touch devices
+    card.addEventListener('click', () => {
+      const isOpen = answer.style.maxHeight !== '0px';
+      
+      // Toggle current card only (no closing other cards)
+      if (isOpen) {
+        answer.style.maxHeight = '0';
+        chevron.style.transform = 'rotate(0deg)';
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    });
+    
+    // Add hover functionality for desktop
+    card.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 768) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      if (window.innerWidth > 768) {
+        answer.style.maxHeight = '0';
+        chevron.style.transform = 'rotate(0deg)';
+      }
+    });
+  });
+}
+
+// Initialize FAQ accordion
+document.addEventListener("DOMContentLoaded", initFAQAccordion);
+
 // Ensure hero background video reliably autoplays
 function ensureHeroVideoAutoplay() {
   const video = document.querySelector(".hero-video");
@@ -1484,10 +1534,11 @@ if (folder) {
 // ============================================
 (function() {
   const textBlocks = document.querySelectorAll('.text-block');
-  const scrollFolder = document.querySelector('.scroll-folder');
+  const desktopFolder = document.querySelector('#desktop-scroll-folder');
+  const mobileFolders = document.querySelectorAll('[id^="mobile-scroll-folder-"]');
   const folderSection = document.querySelector('.folder-text-section');
   
-  if (!textBlocks.length || !scrollFolder || !folderSection) return;
+  if (!textBlocks.length || !folderSection) return;
 
   // Helper function to darken color
   function darkenColor(hex, percent) {
@@ -1512,28 +1563,127 @@ if (folder) {
   const paper2 = darkenColor('#ffffff', 0.05);
   const paper3 = '#ffffff';
 
-  const folderBack = scrollFolder.querySelector('.folder__back');
-  folderBack.style.setProperty('--folder-color', folderColor);
-  folderBack.style.setProperty('--folder-back-color', folderBackColor);
-  folderBack.style.background = folderBackColor;
-  
-  scrollFolder.querySelectorAll('.folder__front').forEach(front => {
-    front.style.background = folderColor;
-  });
+  // Initialize folder function
+  function initializeFolder(folder) {
+    if (!folder) return;
+    
+    const folderBack = folder.querySelector('.folder__back');
+    if (folderBack) {
+      folderBack.style.setProperty('--folder-color', folderColor);
+      folderBack.style.setProperty('--folder-back-color', folderBackColor);
+      folderBack.style.background = folderBackColor;
+    }
+    
+    folder.querySelectorAll('.folder__front').forEach(front => {
+      front.style.background = folderColor;
+    });
 
-  const papers = scrollFolder.querySelectorAll('.paper');
-  const insidePapers = scrollFolder.querySelectorAll('.inside-paper');
-  
-  papers.forEach((paper, index) => {
-    if (index === 0) paper.style.background = paper1;
-    if (index === 1) paper.style.background = paper2;
-    if (index === 2) paper.style.background = paper3;
-  });
+    const papers = folder.querySelectorAll('.paper');
+    papers.forEach((paper, index) => {
+      if (index === 0) paper.style.background = paper1;
+      if (index === 1) paper.style.background = paper2;
+      if (index === 2) paper.style.background = paper3;
+    });
 
-  // Set initial closed state
-  scrollFolder.classList.add('closed');
+    // Set initial closed state
+    folder.classList.add('closed');
+  }
 
-  function updateFolderAnimation() {
+  // Initialize all folders
+  if (desktopFolder) initializeFolder(desktopFolder);
+  mobileFolders.forEach(folder => initializeFolder(folder));
+
+  // Update folder animation function
+  function updateFolderAnimation(folder, textBlock, progress) {
+    if (!folder || !textBlock) return;
+
+    const paperCount = parseInt(textBlock.dataset.papers);
+    const paperType = textBlock.dataset.paperType;
+    
+    // Add data attribute to folder for CSS targeting
+    folder.setAttribute('data-paper-count', paperCount);
+    folder.setAttribute('data-paper-type', paperType || 'multiple');
+    
+    const papers = folder.querySelectorAll('.paper');
+    const insidePapers = folder.querySelectorAll('.inside-paper');
+    
+    // Control paper visibility based on paper type
+    if (paperType === 'hire') {
+      // Show only hire paper (paper-4) and inside papers
+      papers.forEach((paper, index) => {
+        if (paper.classList.contains('paper-hire')) {
+          paper.classList.remove('hidden');
+        } else {
+          paper.classList.add('hidden');
+        }
+      });
+      // Show inside papers
+      insidePapers.forEach(p => p.classList.remove('hidden'));
+    } else if (paperType === 'qa') {
+      // Show only QA paper (paper-1) and inside papers
+      papers.forEach((paper, index) => {
+        if (index === 0) {
+          paper.classList.remove('hidden');
+        } else {
+          paper.classList.add('hidden');
+        }
+      });
+      // Show inside papers
+      insidePapers.forEach(p => p.classList.remove('hidden'));
+    } else {
+      // Show first 3 papers (default multiple cards)
+      papers.forEach((paper, index) => {
+        if (index < 3) {
+          paper.classList.remove('hidden');
+        } else {
+          paper.classList.add('hidden');
+        }
+      });
+      // Hide inside papers
+      insidePapers.forEach(p => p.classList.add('hidden'));
+    }
+
+    // Folder animation states based on scroll progress
+    // Check if this is a mobile folder (has mobile-scroll-folder in ID)
+    const isMobileFolder = folder.id && folder.id.includes('mobile-scroll-folder');
+    
+    if (isMobileFolder) {
+      // Mobile folder thresholds: 0-70% closed, 70-90% peek, 90-100% open
+      if (progress < 0.7) {
+        // Closed state (0-70%)
+        folder.classList.remove('peek', 'open');
+        folder.classList.add('closed');
+      } else if (progress < 0.9) {
+        // Peek state (70-90%)
+        folder.classList.remove('closed', 'open');
+        folder.classList.add('peek');
+      } else {
+        // Open/Fan state (90-100%)
+        folder.classList.remove('closed', 'peek');
+        folder.classList.add('open');
+      }
+    } else {
+      // Desktop folder thresholds: 0-20% closed, 20-30% peek, 30-100% open
+      if (progress < 0.2) {
+        // Closed state
+        folder.classList.remove('peek', 'open');
+        folder.classList.add('closed');
+      } else if (progress < 0.3) {
+        // Peek state
+        folder.classList.remove('closed', 'open');
+        folder.classList.add('peek');
+      } else {
+        // Open/Fan state
+        folder.classList.remove('closed', 'peek');
+        folder.classList.add('open');
+      }
+    }
+  }
+
+  // Desktop folder animation
+  function updateDesktopFolderAnimation() {
+    if (!desktopFolder) return;
+    
     const scrollPosition = window.scrollY + window.innerHeight / 2;
     let activeIndex = -1;
     let progress = 0;
@@ -1556,69 +1706,67 @@ if (folder) {
       }
     });
 
-    // Update folder state based on active block and progress
+    // Update desktop folder
     if (activeIndex >= 0) {
-      const paperCount = parseInt(textBlocks[activeIndex].dataset.papers);
-      const paperType = textBlocks[activeIndex].dataset.paperType;
-      
-      // Add data attribute to folder for CSS targeting
-      scrollFolder.setAttribute('data-paper-count', paperCount);
-      scrollFolder.setAttribute('data-paper-type', paperType || 'multiple');
-      
-      // Control paper visibility based on paper type
-      if (paperType === 'hire') {
-        // Show only hire paper (paper-4) and inside papers
-        papers.forEach((paper, index) => {
-          if (paper.classList.contains('paper-hire')) {
-            paper.classList.remove('hidden');
-          } else {
-            paper.classList.add('hidden');
-          }
-        });
-        // Show inside papers
-        insidePapers.forEach(p => p.classList.remove('hidden'));
-      } else if (paperType === 'qa') {
-        // Show only QA paper (paper-1) and inside papers
-        papers.forEach((paper, index) => {
-          if (index === 0) {
-            paper.classList.remove('hidden');
-          } else {
-            paper.classList.add('hidden');
-          }
-        });
-        // Show inside papers
-        insidePapers.forEach(p => p.classList.remove('hidden'));
-      } else {
-        // Show first 3 papers (default multiple cards)
-        papers.forEach((paper, index) => {
-          if (index < 3) {
-            paper.classList.remove('hidden');
-          } else {
-            paper.classList.add('hidden');
-          }
-        });
-        // Hide inside papers
-        insidePapers.forEach(p => p.classList.add('hidden'));
-      }
-
-      // Folder animation states based on scroll progress
-      if (progress < 0.2) {
-        // Closed state
-        scrollFolder.classList.remove('peek', 'open');
-        scrollFolder.classList.add('closed');
-      } else if (progress < 0.3) {
-        // Peek state
-        scrollFolder.classList.remove('closed', 'open');
-        scrollFolder.classList.add('peek');
-      } else {
-        // Open/Fan state
-        scrollFolder.classList.remove('closed', 'peek');
-        scrollFolder.classList.add('open');
-      }
+      updateFolderAnimation(desktopFolder, textBlocks[activeIndex], progress);
     } else {
       // No active block - default to closed
-      scrollFolder.classList.remove('peek', 'open');
-      scrollFolder.classList.add('closed');
+      desktopFolder.classList.remove('peek', 'open');
+      desktopFolder.classList.add('closed');
+    }
+  }
+
+  // Mobile folder animation
+  function updateMobileFolderAnimation() {
+    mobileFolders.forEach((folder, index) => {
+      if (!folder || !textBlocks[index]) return;
+      
+      const textBlock = textBlocks[index];
+      const rect = textBlock.getBoundingClientRect();
+      const blockTop = rect.top + window.scrollY;
+      const blockBottom = blockTop + rect.height;
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      
+      let progress = 0;
+      let isActive = false;
+      let isInViewport = false;
+      
+      // Check if this text block is in viewport
+      if (scrollPosition >= blockTop && scrollPosition <= blockBottom) {
+        isActive = true;
+        progress = (scrollPosition - blockTop) / (blockBottom - blockTop);
+        textBlock.classList.add('active');
+      } else {
+        textBlock.classList.remove('active');
+      }
+      
+      // Check if text block is still visible in viewport (even if not active)
+      const viewportTop = window.scrollY;
+      const viewportBottom = window.scrollY + window.innerHeight;
+      isInViewport = (blockBottom > viewportTop && blockTop < viewportBottom);
+      
+      // Update this specific mobile folder
+      if (isActive) {
+        updateFolderAnimation(folder, textBlock, progress);
+      } else if (isInViewport && folder.classList.contains('open')) {
+        // Text block is in viewport and folder is already open - keep it open
+        folder.classList.remove('closed', 'peek');
+        folder.classList.add('open');
+      } else {
+        // Not in viewport or not open - default to closed
+        folder.classList.remove('peek', 'open');
+        folder.classList.add('closed');
+      }
+    });
+  }
+
+  // Main update function
+  function updateAllFolders() {
+    // Check if we're on desktop or mobile
+    if (window.innerWidth > 1024) {
+      updateDesktopFolderAnimation();
+    } else {
+      updateMobileFolderAnimation();
     }
   }
 
@@ -1627,17 +1775,34 @@ if (folder) {
   function handleScroll() {
     if (!ticking) {
       requestAnimationFrame(() => {
-        updateFolderAnimation();
+        updateAllFolders();
         ticking = false;
       });
       ticking = true;
     }
   }
 
+  // Handle window resize
+  function handleResize() {
+    // Reset all folders to closed state on resize
+    if (desktopFolder) {
+      desktopFolder.classList.remove('peek', 'open');
+      desktopFolder.classList.add('closed');
+    }
+    mobileFolders.forEach(folder => {
+      folder.classList.remove('peek', 'open');
+      folder.classList.add('closed');
+    });
+    
+    // Update after resize
+    setTimeout(updateAllFolders, 100);
+  }
+
   window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleResize, { passive: true });
   
   // Initial update
-  updateFolderAnimation();
+  updateAllFolders();
 })();
 
 // ============================================
