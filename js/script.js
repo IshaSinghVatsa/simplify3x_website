@@ -239,18 +239,7 @@ function showNotification(message, type) {
   }, 3000);
 }
 
-// Mobile menu toggle (if needed)
-function initMobileMenu() {
-  const mobileMenuButton = document.querySelector(".mobile-menu-button");
-  const nav = document.querySelector(".nav");
-
-  if (mobileMenuButton && nav) {
-    mobileMenuButton.addEventListener("click", () => {
-      nav.classList.toggle("nav-open");
-      mobileMenuButton.classList.toggle("menu-open");
-    });
-  }
-}
+// Mobile menu toggle (removed duplicate - using the correct one below)
 
 // Counter animation for stats
 function initCounters() {
@@ -1898,7 +1887,8 @@ function initMobileMenu() {
   
   if (!mobileToggle || !headerActions) return;
   
-  mobileToggle.addEventListener('click', () => {
+  mobileToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
     mobileToggle.classList.toggle('active');
     headerActions.classList.toggle('active');
     
@@ -1922,7 +1912,9 @@ function initMobileMenu() {
   
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
-    if (!headerActions.contains(e.target) && !mobileToggle.contains(e.target)) {
+    if (headerActions.classList.contains('active') && 
+        !headerActions.contains(e.target) && 
+        !mobileToggle.contains(e.target)) {
       mobileToggle.classList.remove('active');
       headerActions.classList.remove('active');
       body.style.overflow = '';
@@ -1931,10 +1923,13 @@ function initMobileMenu() {
   
   // Close mobile menu on escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' && headerActions.classList.contains('active')) {
       mobileToggle.classList.remove('active');
       headerActions.classList.remove('active');
       body.style.overflow = '';
     }
   });
 }
+
+// Initialize mobile menu when DOM is loaded
+document.addEventListener('DOMContentLoaded', initMobileMenu);

@@ -206,19 +206,13 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .marquee-item {
-                width: 140px;
-                height: 80px;
-                padding: 15px;
-            }
+         
 
             .marquee-content {
                 gap: 20px;
             }
 
-            .publications-marquee {
-                margin: 40px 0 60px 0;
-            }
+          
         }
 
         /* Team Flipping Cards Styles */
@@ -239,7 +233,7 @@
             height: 370px;
             perspective: 1000px;
         }
-
+       
         .team-card-inner {
             position: relative;
             width: 100%;
@@ -362,16 +356,7 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .team-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 0 20px;
-            }
-
-            .team-card {
-                height: 350px;
-            }
-
+         
             .team-card-back {
                 padding: 20px;
             }
@@ -398,6 +383,14 @@
                         <img src="assets/images/simp3x.svg" alt="Copora Logo">
                     </a>
                 </div>
+                
+                <!-- Mobile hamburger button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+                
                 <div class="header-actions">
                     <nav class="nav">
                         <ul class="nav-list">
@@ -454,9 +447,9 @@
             </div>
         </section>
     </main>
-    <div style="padding-block: 90px;">
+    <div style="padding-block: 90px;" class="who-we-are">
         <div class="container">
-            <div 
+            <div  class="flex-one"
                 style="display: flex; justify-content: space-between; align-items: start; gap: 60px;">
                 <h2 class="gradient-heading" style="margin: 0; flex: 0 0 auto; max-width: 500px;">
                     Who We Are
@@ -733,19 +726,19 @@
                 <div class="number-part-number">500+</div>
                 <div class="number-part-text text-center">Experts driving innovation and delivering real impact.</div>
             </div>
-            <div class="num-vertical-line"></div>
+            <div class="num-vertical-line hideinmobile"></div>
             <div class="number-part-item cont-card">
                 <img id="office-icon" src="assets/images/office o.svg" alt="Office">
                 <div class="number-part-number">4</div>
                 <div class="number-part-text text-center">A growing global footprint, connecting businesses worldwide.</div>
             </div>
-            <div class="num-vertical-line"></div>
+            <div class="num-vertical-line hideinmobile"></div>
             <div class="number-part-item world-card">
                 <img id="world-icon" src="assets/images/world.svg" alt="World">
                 <div class="number-part-number">100+</div>
                 <div class="number-part-text text-center"> Organizations empowered through smart, simple solutions.</div>
             </div>
-            <div class="num-vertical-line"></div>
+            <div class="num-vertical-line hideinmobile"></div>
             <div class="number-part-item project-card">
                 <img id="project-icon" src="assets/images/success o.svg" alt="Project">
                 <div class="number-part-number">100+</div>
@@ -836,7 +829,7 @@
         <img style="    position: absolute;
         width: 100%;
         height: 100%;
-        top: 0px; z-index: 1;" src="assets/images/footer-grad.png" alt="Copora Logo">
+        top: 0px;left: 0;right: 0; z-index: 1;" src="assets/images/footer-grad.png" alt="Copora Logo">
         <div style="position: relative; z-index: 2;" class="container">
             <div class="footer-content">
                 <div class="footer-main">

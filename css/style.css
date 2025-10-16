@@ -2964,19 +2964,17 @@ body::-webkit-scrollbar {
 
     .cs-stories-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .cs-clients-grid {
         grid-template-columns: 1fr;
     }
 
-    .cs-industry-filters {
-        gap: 15px;
-    }
-
     .cs-filter-btn {
         padding: 10px 20px;
         font-size: 14px;
+        white-space: nowrap;
     }
 
     .cs-cta-title {
@@ -3083,6 +3081,178 @@ body::-webkit-scrollbar {
 .folder-animation-wrapper {
     transform: scale(1.2) !important;
   }
+  .cs-cta-section{
+padding: 60px 0 !important;
+  }
+  .cs-cta-section .header-content{
+    flex-direction: column;
+    gap: 30px !important;
+  }
+  .cs-trusted-section {
+    padding: 30px 0;
+  }
+  .cs-trusted-title{
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+  .cs-logo-item img {
+    height: 22px;
+  }
+  .cs-logo-item {
+    height: 22px;
+  }
+  .cs-success-stories-section{
+    padding: 60px 0;
+  }
+  .section-title-2 {
+    font-size: 2.4rem !important;
+    text-align: left;
+  }
+  .cs-industry-filters{
+    gap: 15px;
+    overflow: auto;
+    width: 100%;
+    justify-content: unset;
+    margin-top: 15px;
+    margin-bottom: 24px;
+    flex-wrap: nowrap;
+  }
+  .cs-discover-section {
+    padding: 60px 0;
+  }
+  .cs-discover-section-content {
+    display: unset;
+    justify-content: space-between;
+    align-items: start;
+    gap: unset;
+}
+.cs-discover-section-content .first{
+    padding-top: 0 !important;
+    height: unset !important;
+}
+.cs-discover-section-content .second{
+    padding-top: 0 !important;
+    height: unset !important;
+}
+.cs-discover-section-content .third{
+    padding-top: 0 !important;
+    height: unset !important;
+}
+.cs-discover-section-content img{
+    width: 100%;
+    height: 237px;
+    border-radius: 17px;
+    margin-block: 25px 60px;
+}
+.cs-discover-description {
+    font-size: 15px;
+}
+.cs-story-icon {
+    display: none;
+}
+.cs-story-quote{
+    font-size: 13px;
+}
+.hero-description {
+    font-size: 14px;
+    line-height: 23px !important;
+}
+.who-we-are{
+    padding-block: 60px !important;
+}
+.about-vert-line{
+    display: none;
+}
+.flex-one{
+    gap: 18px !important;
+    flex-direction: column;
+}
+.team-section {
+    padding-block: 60px !important;
+}
+.team-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    padding: 0 5px;
+}
+.team-card {
+    height: 160px;
+    perspective: 1000px;
+}
+.team-card-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px !important;
+    font-weight: 600;
+}
+.team-card-info p {
+    margin: 0;
+    font-size: 11px !important;
+    color: #fff;
+}
+.team-card-info {
+    padding: unset !important;
+    padding-bottom: 10px !important;
+}
+.team-section .gradient-heading{
+    margin-bottom: 20px !important;
+}
+.purpose-part {
+    padding: 60px 0px 60px 0px;
+}
+.section-title {
+    font-size: 2.5rem;
+}
+.about-grid-item img {
+    max-width: 65% !important;
+}
+.about-grid .one-row{
+    margin-bottom: 20px !important;
+    gap: 20px !important;
+}
+.about-grid .two-row {
+    gap: 20px !important;
+}
+.about-grid-item.two ,.about-grid-item.one{
+    height: 120px !important;
+}
+.about-grid-item.three,.about-grid-item.four,.about-grid-item.five {
+    height: 75px !important;
+}
+.about-grid-item{
+    border-radius: 20px !important
+}
+.marquee-item {
+    width: 140px !important;
+    height: 80px !important;
+    padding: 15px;
+}
+.publications-marquee {
+    margin: 40px 0 0px 0 !important;
+}
+.number-part .container {
+    display: grid
+    ;
+        grid-template-columns: 1fr 1fr !important;
+        align-items: center;
+        gap: 15px !important;
+        padding: 60px 15px 60px 15px !important;
+        justify-content: center;
+}
+.number-part-item {
+    width: unset !important;
+}
+.number-part-number {
+    font-size: 2rem !important;
+}
+.number-part-item img{
+    height: 32px !important;
+}
+.number-part-text {
+    font-size: 0.9rem !important;
+}
+.section-description {
+    font-size: 14px !important;
+}
 }
 @media (min-width: 1024px) {
     .hideinmobile{
@@ -3142,10 +3312,14 @@ body::-webkit-scrollbar {
         align-items: center;
         transition: right 0.3s ease;
         z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
     }
 
     .header-actions.active {
         right: 0;
+        opacity: 1;
+        visibility: visible;
     }
 
     /* Mobile navigation styles */
