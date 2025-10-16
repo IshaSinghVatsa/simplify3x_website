@@ -882,7 +882,7 @@ body::-webkit-scrollbar {
 .hero-text h5 {
     color: #fff;
     font-weight: 400;
-    font-size: 27px;
+    font-size: 25px;
     margin-bottom: 44px;
 }
 
@@ -919,7 +919,7 @@ body::-webkit-scrollbar {
 
 
 .hero-description {
-    font-size: 27px;
+    font-size: 25px;
     color: #fff;
     font-weight: 400;
     margin-bottom: 2rem;

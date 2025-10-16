@@ -82,7 +82,9 @@
     padding: 20px 0;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-
+.fs-70 {
+    font-size: 70px !important;
+}
 .number-part-item:hover {
     box-shadow: 0 13px 26px #eaae98;
     transform: translateY(-4px);
