@@ -1661,29 +1661,6 @@ color: #fafbff;
 }
 
 
-/* Responsive Design for Solutions Page */
-@media (max-width: 1024px) {
-    .solutions-hero-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 40px;
-    }
-    
-    .solutions-hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .solutions-connections-content,
-    .solutions-industry-content {
-        flex-direction: column;
-        gap: 40px;
-    }
-    
-    .solutions-case-studies-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 768px) {
     .solutions-hero {
         padding: 100px 0 60px 0;
@@ -1928,23 +1905,7 @@ height: 45px;
 width: 45px;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .folder-text-content {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-  
-  .folder-sticky-container {
-    position: relative;
-    top: 0;
-    height: 400px;
-  }
-  
-  .text-block {
-    min-height: auto;
-  }
-}
+
 
 @media (max-width: 768px) {
   .text-block-title {
@@ -2153,88 +2114,3 @@ width: 45px;
     font-size: 20px;
     font-weight: 600;
 }
-
-@media (max-width: 1024px){
-    .cv-grid{ grid-template-columns: 1fr; }
-    .cv-video{ height:360px; }
-    .lb-grid{ grid-template-columns: 1fr; }
-     .contact-grid{ grid-template-columns: 1fr; }
-    .offices-grid{ grid-template-columns: 1fr; }
-    .faq-grid{ grid-template-columns: 1fr; }
-      .cs-nav {
-          gap: 20px;
-      }
-      
-      .cs-nav-link {
-          font-size: 14px;
-      }
-      
-      .cs-hero-title {
-          font-size: 40px;
-      }
-      
-      .cs-hero-subtitle {
-          font-size: 18px;
-      }
-      
-      .cs-discover-title {
-          font-size: 32px;
-      }
-      
-      .cs-discover-title-large {
-          font-size: 42px;
-      }
-      
-      .cs-section-title {
-          font-size: 36px;
-      }
-      
-      .cs-stories-grid {
-          grid-template-columns: 1fr;
-      }
-      
-      .cs-clients-grid {
-          grid-template-columns: 1fr;
-      }
-      
-      .cs-industry-filters {
-          gap: 15px;
-      }
-      
-      .cs-filter-btn {
-          padding: 10px 20px;
-          font-size: 14px;
-      }
-      
-      .cs-cta-title {
-          font-size: 36px;
-      }
-      
-      .cs-cta-buttons {
-          flex-direction: column;
-          align-items: center;
-      }
-      
-      .cs-btn-primary,
-      .cs-btn-secondary {
-          width: 200px;
-      }
-          .slide-content {
-          flex-direction: column;
-          text-align: center;
-      }
-      
-      .slide-left,
-      .slide-right {
-          flex: none;
-          padding: 40px 30px;
-      }
-      
-      .slide-title {
-          font-size: 2rem;
-      }
-      
-      .slide-description {
-          font-size: 1.2rem;
-      }
-  }
