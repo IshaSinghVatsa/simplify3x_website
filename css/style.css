@@ -2812,6 +2812,12 @@ body::-webkit-scrollbar {
         padding: 13px;
     }
 
+    #globe{
+        margin-top: -83% !important;
+        margin-right: -5% !important;
+        opacity: 60% !important;
+    }
+
     .service-blur {
         height: 165%;
         object-fit: cover;
