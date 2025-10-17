@@ -463,6 +463,14 @@ p {
     justify-content: space-around;
     width: 30px;
     height: 30px;
+}
+
+/* Hide mobile contact button on desktop */
+.mobile-contact-btn {
+    display: none;
+}
+
+.mobile-menu-toggle {
     background: transparent;
     border: none;
     cursor: pointer;
@@ -3590,6 +3598,7 @@ body::-webkit-scrollbar {
         z-index: 1000;
         opacity: 0;
         visibility: hidden;
+        padding-inline: 30px;
     }
 
     .header-actions.active {
@@ -3608,6 +3617,20 @@ body::-webkit-scrollbar {
         flex-direction: column;
         gap: 2rem;
         align-items: center;
+    }
+
+    /* Mobile contact button */
+    .mobile-contact-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .mobile-contact-btn .btn {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
     }
 
     .nav-link {
