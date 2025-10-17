@@ -2812,7 +2812,7 @@ body::-webkit-scrollbar {
         padding: 13px;
     }
 
-    #globe{
+    #globe {
         margin-top: -83% !important;
         margin-right: -5% !important;
         opacity: 60% !important;
@@ -3048,345 +3048,493 @@ body::-webkit-scrollbar {
     .text-block {
         min-height: auto;
     }
-    .hideinmobile{
+
+    .hideinmobile {
         display: none !important;
     }
-    .hideinlaptop{
+
+    .hideinlaptop {
         display: flex;
     }
-    .folder-animation-wrapper{
+
+    .folder-animation-wrapper {
         justify-content: center;
         height: 188px;
         align-items: end;
         margin-bottom: 70px;
     }
-    .purpose-content{
+
+    .purpose-content {
         flex-direction: column;
     }
+
     .presence-grid {
         grid-template-columns: 1fr 1fr;
         gap: 0px;
     }
-    .purpose{
+
+    .purpose {
         padding: 40px 15px 0 15px;
     }
-    .footer-main{
+
+    .footer-main {
         grid-template-columns: 1fr;
     }
+
     .footer-links {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-.footer-contact{
-    margin-bottom: 40px;
-}
-.container {
-    padding: 0 20px;
-    max-width: 100%;
-}
-.folder-animation-wrapper {
-    transform: scale(1.2) !important;
-  }
-  .cs-cta-section{
-padding: 60px 0 !important;
-  }
-  .cs-cta-section .header-content{
-    flex-direction: column;
-    gap: 30px !important;
-  }
-  .cs-trusted-section {
-    padding: 30px 0;
-  }
-  .cs-trusted-title{
-    font-size: 14px;
-    margin-bottom: 25px;
-  }
-  .cs-logo-item img {
-    height: 22px;
-  }
-  .cs-logo-item {
-    height: 22px;
-  }
-  .cs-success-stories-section{
-    padding: 60px 0;
-  }
-  .section-title-2 {
-    font-size: 2.4rem !important;
-    text-align: left;
-  }
-  .cs-industry-filters{
-    gap: 15px;
-    overflow: auto;
-    width: 100%;
-    justify-content: unset;
-    margin-top: 15px;
-    margin-bottom: 24px;
-    flex-wrap: nowrap;
-  }
-  .cs-discover-section {
-    padding: 60px 0;
-  }
-  .cs-discover-section-content {
-    display: unset;
-    justify-content: space-between;
-    align-items: start;
-    gap: unset;
-}
-.cs-discover-section-content .first{
-    padding-top: 0 !important;
-    height: unset !important;
-}
-.cs-discover-section-content .second{
-    padding-top: 0 !important;
-    height: unset !important;
-}
-.cs-discover-section-content .third{
-    padding-top: 0 !important;
-    height: unset !important;
-}
-.cs-discover-section-content img{
-    width: 100%;
-    height: 237px;
-    border-radius: 17px;
-    margin-block: 25px 60px;
-}
-.cs-discover-description {
-    font-size: 15px;
-}
-.cs-story-icon {
-    display: none;
-}
-.cs-story-quote{
-    font-size: 13px;
-}
-.hero-description {
-    font-size: 14px;
-    line-height: 23px !important;
-}
-.who-we-are{
-    padding-block: 60px !important;
-}
-.about-vert-line{
-    display: none;
-}
-.flex-one{
-    gap: 18px !important;
-    flex-direction: column;
-}
-.team-section {
-    padding-block: 60px !important;
-}
-.team-grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 20px !important;
-    padding: 0 5px;
-}
-.team-card {
-    height: 160px;
-    perspective: 1000px;
-}
-.team-card-info h3 {
-    margin: 0 0 5px 0;
-    font-size: 16px !important;
-    font-weight: 600;
-}
-.team-card-info p {
-    margin: 0;
-    font-size: 11px !important;
-    color: #fff;
-}
-.team-card-info {
-    padding: unset !important;
-    padding-bottom: 10px !important;
-}
-.team-section .gradient-heading{
-    margin-bottom: 20px !important;
-}
-.purpose-part {
-    padding: 60px 0px 60px 0px;
-}
-.section-title {
-    font-size: 2.5rem;
-}
-.about-grid-item img {
-    max-width: 65% !important;
-}
-.about-grid .one-row{
-    margin-bottom: 20px !important;
-    gap: 20px !important;
-}
-.about-grid .two-row {
-    gap: 20px !important;
-}
-.about-grid-item.two ,.about-grid-item.one{
-    height: 120px !important;
-}
-.about-grid-item.three,.about-grid-item.four,.about-grid-item.five {
-    height: 75px !important;
-}
-.about-grid-item{
-    border-radius: 20px !important
-}
-.marquee-item {
-    width: 140px !important;
-    height: 80px !important;
-    padding: 15px;
-}
-.publications-marquee {
-    margin: 40px 0 0px 0 !important;
-}
-.number-part .container {
-    display: grid
-    ;
+
+    .footer-contact {
+        margin-bottom: 40px;
+    }
+
+    .container {
+        padding: 0 20px;
+        max-width: 100%;
+    }
+
+    .folder-animation-wrapper {
+        transform: scale(1.2) !important;
+    }
+
+    .cs-cta-section {
+        padding: 60px 0 !important;
+    }
+
+    .cs-cta-section .header-content {
+        flex-direction: column;
+        gap: 30px !important;
+    }
+
+    .cs-trusted-section {
+        padding: 30px 0;
+    }
+
+    .cs-trusted-title {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .cs-logo-item img {
+        height: 22px;
+    }
+
+    .cs-logo-item {
+        height: 22px;
+    }
+
+    .cs-success-stories-section {
+        padding: 60px 0;
+    }
+
+    .section-title-2 {
+        font-size: 2.4rem !important;
+        text-align: left;
+    }
+
+    .cs-industry-filters {
+        gap: 15px;
+        overflow: auto;
+        width: 100%;
+        justify-content: unset;
+        margin-top: 15px;
+        margin-bottom: 24px;
+        flex-wrap: nowrap;
+    }
+
+    .cs-discover-section {
+        padding: 60px 0;
+    }
+
+    .cs-discover-section-content {
+        display: unset;
+        justify-content: space-between;
+        align-items: start;
+        gap: unset;
+    }
+
+    .cs-discover-section-content .first {
+        padding-top: 0 !important;
+        height: unset !important;
+    }
+
+    .cs-discover-section-content .second {
+        padding-top: 0 !important;
+        height: unset !important;
+    }
+
+    .cs-discover-section-content .third {
+        padding-top: 0 !important;
+        height: unset !important;
+    }
+
+    .cs-discover-section-content img {
+        width: 100%;
+        height: 237px;
+        border-radius: 17px;
+        margin-block: 25px 60px;
+    }
+
+    .cs-discover-description {
+        font-size: 15px;
+    }
+
+    .cs-story-icon {
+        display: none;
+    }
+
+    .cs-story-quote {
+        font-size: 13px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        line-height: 23px !important;
+    }
+
+    .who-we-are {
+        padding-block: 60px !important;
+    }
+
+    .about-vert-line {
+        display: none;
+    }
+
+    .flex-one {
+        gap: 18px !important;
+        flex-direction: column;
+    }
+
+    .team-section {
+        padding-block: 60px !important;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px !important;
+        padding: 0 5px;
+    }
+
+    .team-card {
+        height: 160px;
+        perspective: 1000px;
+    }
+
+    .team-card-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 16px !important;
+        font-weight: 600;
+    }
+
+    .team-card-info p {
+        margin: 0;
+        font-size: 11px !important;
+        color: #fff;
+    }
+
+    .team-card-info {
+        padding: unset !important;
+        padding-bottom: 10px !important;
+    }
+
+    .team-section .gradient-heading {
+        margin-bottom: 20px !important;
+    }
+
+    .purpose-part {
+        padding: 60px 0px 60px 0px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .about-grid-item img {
+        max-width: 65% !important;
+    }
+
+    .about-grid .one-row {
+        margin-bottom: 20px !important;
+        gap: 20px !important;
+    }
+
+    .about-grid .two-row {
+        gap: 20px !important;
+    }
+
+    .about-grid-item.two,
+    .about-grid-item.one {
+        height: 120px !important;
+    }
+
+    .about-grid-item.three,
+    .about-grid-item.four,
+    .about-grid-item.five {
+        height: 75px !important;
+    }
+
+    .about-grid-item {
+        border-radius: 20px !important
+    }
+
+    .marquee-item {
+        width: 140px !important;
+        height: 80px !important;
+        padding: 15px;
+    }
+
+    .publications-marquee {
+        margin: 40px 0 0px 0 !important;
+    }
+
+    .number-part .container {
+        display: grid;
         grid-template-columns: 1fr 1fr !important;
         align-items: center;
         gap: 15px !important;
         padding: 60px 15px 60px 15px !important;
         justify-content: center;
+    }
+
+    .number-part-item {
+        width: unset !important;
+    }
+
+    .number-part-number {
+        font-size: 2rem !important;
+    }
+
+    .number-part-item img {
+        height: 32px !important;
+    }
+
+    .number-part-text {
+        font-size: 0.9rem !important;
+    }
+
+    .section-description {
+        font-size: 14px !important;
+    }
+
+    .culture-section,
+    .core-values,
+    .contact-sections,
+    .offices-section,
+    .voices,
+    .life-beyond,
+    .insights-card-parent,
+    .faq-section {
+        padding: 60px 0 !important;
+    }
+
+    .life-hero {
+        height: 480px !important;
+    }
+
+    .life-part {
+        padding: 100px 0 100px !important;
+    }
+
+    .cv-cards {
+        gap: 15px !important;
+    }
+
+    .cv-card {
+        padding: 15px !important;
+    }
+
+    .cv-emoji {
+        font-size: 20px !important;
+    }
+
+    .cv-card-title {
+        font-size: 16px !important;
+    }
+
+    .cv-card-desc {
+        font-size: 12px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .cv-video {
+        height: 235px !important;
+    }
+
+    .cv-left .culture-subtitle,
+    .voices-header .culture-subtitle {
+        margin-bottom: 30px !important;
+    }
+
+    .voice-card {
+        width: 218px !important;
+        height: 262px !important;
+    }
+
+    .voices-track {
+        gap: 15px !important;
+    }
+
+    .lb-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .main-section .gradient-heading-2.fs-70 {
+        text-align: center !important;
+    }
+
+    .main-section .flex {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px !important;
+
+    }
+
+    .main-section .flex .number-part-item {
+        justify-self: unset !important;
+    }
+
+    .insights-layout {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    .insights-card-featured .img-wrap {
+        height: unset !important;
+    }
+
+    .insights-card-item-content .flex .tag,
+    .date-text,
+    .insights-card-item-content-by {
+        font-size: 12px !important;
+    }
+
+    .insights-card-item-content {
+        padding: 12px !important;
+    }
+
+    .insights-card-item-content-title {
+        font-size: 14px !important;
+    }
+
+    .insights-card-item-content-date {
+        font-size: 12px !important;
+        margin-top: 0px !important;
+    }
+
+    .insights-card-item {
+        display: grid !important;
+        grid-template-columns: 0.9fr 1.1fr;
+        min-height: 220px;
+    }
+
+    .insights-card-item .img-wrap {
+        height: unset !important;
+    }
+
+    .tabs-part .container {
+        justify-content: unset !important;
+    }
+
+    .tabs-bar {
+        padding: 8px 12px !important;
+        gap: 0 !important;
+        width: 100% !important;
+        overflow: auto;
+    }
+
+    .tab-button {
+        white-space: nowrap;
+        font-size: 12px;
+        padding: 12px 15px !important;
+    }
+
+    .tabs-part {
+        padding: 24px 0 !important;
+    }
+
+    .insights-col-right {
+        gap: 15px !important;
+    }
+
+    .insights-grid .span-2 {
+        grid-column: unset !important;
+    }
+
+    .insights-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    .insights-grid-part {
+        padding: 10px 0 60px 0 !important;
+    }
+
+    /* Talk box mobile fixes */
+    .talk-box {
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 15px;
+    }
+
+    .talk-message {
+        font-size: 12px !important;
+        text-align: center;
+    }
+
+    .talk-box .header-content {
+        transform: scale(0.7);
+    }
+
+    .contact-part .gradient-heading-2 {
+        text-align: center;
+    }
+
+    .contact-grid,
+    .form-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .contact-form .header-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .offices-section .one {
+        position: absolute;
+        left: 50px !important;
+        top: 34px !important;
+    }
+    .offices-section .two {
+        position: absolute;
+        right: 104px !important;
+        top: 48px !important;
+    }
+    .offices-section .three {
+        position: absolute;
+        right: 74px !important;
+        top: 72px !important;
+        bottom: unset !important;
+    }
+    .faq-grid {
+        flex-direction: column !important;
+    }
+    .faq-text{
+        font-size: 14px !important;
+    }
+    .faq-answer p {
+        font-size: 11px !important;
+    }
 }
-.number-part-item {
-    width: unset !important;
-}
-.number-part-number {
-    font-size: 2rem !important;
-}
-.number-part-item img{
-    height: 32px !important;
-}
-.number-part-text {
-    font-size: 0.9rem !important;
-}
-.section-description {
-    font-size: 14px !important;
-}
-.culture-section{
-    padding: 60px 0 !important;
-}
-.life-hero{
-    height: 480px !important;
-}
-.life-part{
-    padding: 100px 0 100px !important;
-}
-.core-values{
-    padding: 60px 0 !important;
-}
-.cv-cards {
-    gap: 15px !important;
-}
-.cv-card{
-    padding: 15px !important;
-}
-.cv-emoji{
-    font-size: 20px !important;
-}
-.cv-card-title {
-    font-size: 16px !important;
-}
-.cv-card-desc{
-    font-size: 12px !important;
-    margin-bottom: 0 !important;
-}
-.cv-video{
-    height: 235px !important;
-}
-.cv-left .culture-subtitle ,.voices-header .culture-subtitle{
-    margin-bottom: 30px !important;
-}
-.voices{
-    padding: 60px 0 !important;
-}
-.voice-card {
-    width: 218px !important;
-    height: 262px !important;
-}
-.voices-track {
-    gap: 15px !important;
-}
-.life-beyond,.insights-card-parent {
-    padding: 60px 0 !important;
-}
-.lb-grid {
-    grid-template-columns: 1fr !important;
-}
-.main-section .gradient-heading-2.fs-70{
-    text-align: center !important;
-}
-.main-section .flex {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px !important;
-    
-}
-.main-section .flex .number-part-item{
-    justify-self: unset !important;
-}
-.insights-layout {
-    display: grid;
-    grid-template-columns: 1fr !important;
-    gap: 15px !important;
-}
-.insights-card-featured .img-wrap {
-    height: unset !important;
-}
-.insights-card-item-content .flex .tag,.date-text, .insights-card-item-content-by {
-    font-size: 12px !important;
-}
-.insights-card-item-content {
-    padding: 12px !important;
-}
-.insights-card-item-content-title{
-    font-size: 14px !important;
-}
-.insights-card-item-content-date {
-    font-size: 12px !important;
-    margin-top: 0px !important;
-}
-.insights-card-item {
-    display: grid !important;
-    grid-template-columns: 0.9fr 1.1fr;
-    min-height: 220px;
-}
-.insights-card-item .img-wrap{
-    height: unset !important;
-}
-.tabs-part .container {
-    justify-content: unset !important;
-}
-.tabs-bar {
-    padding: 8px 12px !important;
-    gap: 0 !important;
-    width: 100% !important;
-    overflow: auto;
-}
-.tab-button {
-    white-space: nowrap;
-    font-size: 12px;
-    padding: 12px 15px !important;
-}
-.tabs-part{
-    padding: 24px 0 !important;
-}
-.insights-col-right {
-    gap: 15px !important;
-}
-.insights-grid .span-2 {
-    grid-column: unset !important;
-}
-.insights-grid {
-    display: grid;
-    grid-template-columns: 1fr !important;
-    gap: 15px !important;
-}
-.insights-grid-part{
-    padding: 10px 0 60px 0 !important;
-}
-}
+
 @media (min-width: 1024px) {
-    .hideinmobile{
+    .hideinmobile {
         display: flex;
     }
-    .hideinlaptop{
+
+    .hideinlaptop {
         display: none !important;
     }
 }
@@ -3717,17 +3865,7 @@ padding: 60px 0 !important;
         margin: 0;
     }
 
-    /* Talk box mobile fixes */
-    .talk-box {
-        padding: 15px;
-        margin: 15px;
-        border-radius: 15px;
-    }
 
-    .talk-message {
-        font-size: 14px;
-        text-align: center;
-    }
 }
 
 /* Small Mobile Styles */

@@ -1311,14 +1311,14 @@
                   // First phase: draw the line from source to target (line grows smoothly)
                   if (conn.lineProgress < 1) {
                     const mobile = window.innerWidth < 1024;
-                    conn.lineProgress += mobile ? conn.speed * 15 : conn.speed * 9; // Line draws at steady pace
+                    conn.lineProgress += mobile ? conn.speed * 20 : conn.speed * 9; // Line draws at steady pace
 
                     if (conn.lineProgress > 1) conn.lineProgress = 1;
                   }
 
                   // Second phase: move the dot along the line (starts when line is mostly drawn)
                   if (conn.lineProgress > 0.7) {
-                    conn.progress += conn.speed;
+                    conn.progress += mobile ? conn.speed * 20 : conn.speed;
                   }
 
                   // Remove connection when dot reaches the end and line fades
