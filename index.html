@@ -126,7 +126,7 @@
     </div>
   </header>
   <div class="main-container">
-    <div id="lets-talk" class="talk-box">
+    <div id="lets-talk" class="talk-box hideinmobile">
       <div class="talk-message">
         Let's discuss your business goals — schedule a demo now
       </div>
@@ -143,13 +143,17 @@
         <div class="hero-content h-100">
           <div class="hero-left">
             <div class="hero-text">
-              <h1 class="gradient-heading-2 fs-70">
+              <h1 class="gradient-heading-2 grad-mob fs-70">
                 Turning complex problems into simple solutions
               </h1>
               <h5>
                 Empowering enterprises with AI-driven technology built for
                 tomorrow
               </h5>
+              <a href="#ecosystem" class="btn btn-primary no-shadow">
+                <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
+                <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
+              </a>
               <div class="header-actions">
                 <a href="#ecosystem" class="btn btn-primary no-shadow">
                   <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
@@ -728,11 +732,11 @@
         <div class="folder-text-content">
           <!-- Left: Text sections -->
           <div class="text-sections">
-            <div>
+            <div class="one">
               <div class="text-block" data-papers="3" data-index="0">
                 <span class="text-tag">Development Services</span>
                 <h2 class="text-block-title">Digital Transformation</h2>
-                <p class="text-block-description">
+                <p class="text-block-description hideinmobile">
                   We help businesses adopt digital technology across all
                   aspects of their operations, driving transformative change
                   in how they function and deliver value to customers. By
@@ -743,6 +747,11 @@
                   implementing DevOps practices, and transitioning from
                   monolithic systems to microservices—ensuring agility,
                   efficiency, and innovation at every stage.
+                </p>
+                <p class="text-block-description hideinlaptop">
+                  We help businesses adopt digital technology across all
+                  aspects of their operations, driving transformative change
+                  in how they function and deliver value to customers.
                 </p>
                 <a class="btn btn-primary w217">
                   <span class="btn-text">Explore more</span>
@@ -781,11 +790,11 @@
               </div>
             </div>
 
-            <div>
+            <div class="two">
               <div class="text-block" data-papers="1" data-paper-type="hire" data-index="1">
                 <span class="text-tag">Recruitment & Staffing</span>
                 <h2 class="text-block-title">Global Staffing Solutions</h2>
-                <p class="text-block-description">
+                <p class="text-block-description hideinmobile">
                   We provide scalable offshore operations and specialized
                   staffing services to quickly address talent shortages and
                   resource needs. With access to experts worldwide, businesses
@@ -796,6 +805,11 @@
                   it most. This flexible and targeted approach helps
                   organizations scale confidently and stay ahead of evolving
                   demands.
+                </p>
+                <p class="text-block-description hideinlaptop">
+                  We provide scalable offshore operations and specialized
+                  staffing services to quickly address talent shortages and
+                  resource needs.
                 </p>
                 <a class="btn btn-primary w217">
                   <span class="btn-text">Explore more</span>
@@ -834,11 +848,11 @@
               </div>
             </div>
 
-            <div>
+            <div class="three">
               <div class="text-block" data-papers="1" data-paper-type="qa" data-index="2" style="padding-bottom: 90px">
                 <span class="text-tag">Testing Services</span>
                 <h2 class="text-block-title">Quality Assurance & Testing</h2>
-                <p class="text-block-description">
+                <p class="text-block-description hideinmobile">
                   We offer end-to-end quality assurance to ensure digital
                   solutions perform reliably and align with business goals.
                   Our key capabilities include Test Management, Test Case
@@ -851,42 +865,47 @@
                   businesses to manage, execute, and continuously enhance
                   solution quality throughout the software lifecycle.
                 </p>
+                <p class="text-block-description hideinlaptop">
+                  We offer end-to-end quality assurance to ensure digital
+                  solutions perform reliably and align with business goals.
+                </p>
                 <a class="btn btn-primary w217">
                   <span class="btn-text">Explore more</span>
                 </a>
               </div>
-            </div>
-            <div class="folder-animation-wrapper hideinlaptop">
-              <div class="folder scroll-folder" id="mobile-scroll-folder-2">
-                <div class="folder__back">
-                  <div class="paper paper-1">
-                    <div class="paper-icon">
-                      <img src="assets/images/fan-qa.svg" alt="" />
+              <div class="folder-animation-wrapper hideinlaptop">
+                <div class="folder scroll-folder" id="mobile-scroll-folder-2">
+                  <div class="folder__back">
+                    <div class="paper paper-1">
+                      <div class="paper-icon">
+                        <img src="assets/images/fan-qa.svg" alt="" />
+                      </div>
                     </div>
-                  </div>
-                  <div class="paper paper-2">
-                    <div class="paper-icon">
-                      <img src="assets/images/fan-dev.svg" alt="" />
+                    <div class="paper paper-2">
+                      <div class="paper-icon">
+                        <img src="assets/images/fan-dev.svg" alt="" />
+                      </div>
                     </div>
-                  </div>
-                  <div class="paper paper-3">
-                    <div class="paper-icon">
-                      <img src="assets/images/fan-walnut.svg" alt="" />
+                    <div class="paper paper-3">
+                      <div class="paper-icon">
+                        <img src="assets/images/fan-walnut.svg" alt="" />
+                      </div>
                     </div>
-                  </div>
-                  <div class="paper paper-4 paper-hire">
-                    <div class="paper-icon">
-                      <img src="assets/images/fan-hire.svg" alt="" />
+                    <div class="paper paper-4 paper-hire">
+                      <div class="paper-icon">
+                        <img src="assets/images/fan-hire.svg" alt="" />
+                      </div>
                     </div>
+                    <!-- Inside papers that stay in folder -->
+                    <div class="inside-paper inside-paper-1"></div>
+                    <div class="inside-paper inside-paper-2"></div>
+                    <div class="folder__front"></div>
+                    <div class="folder__front right"></div>
                   </div>
-                  <!-- Inside papers that stay in folder -->
-                  <div class="inside-paper inside-paper-1"></div>
-                  <div class="inside-paper inside-paper-2"></div>
-                  <div class="folder__front"></div>
-                  <div class="folder__front right"></div>
                 </div>
               </div>
             </div>
+           
           </div>
 
           <!-- Right: Sticky folder -->
@@ -1050,6 +1069,24 @@
        
       </div>
     </div> -->
+    <section class="cs-cta-section hideinlaptop">
+      <div class="container">
+        <div class="header-content" style="    gap: 124px;
+      justify-self: anchor-center;">
+          <div class="talk-message-2 hideinmobile">
+            Let's discuss your business goals — schedule a demo now
+          </div>
+          
+          <div class="gradient-heading-2 hideinlaptop fs-70 mb-5" style="justify-content: center;"> Let's discuss your business goals</div>
+          <p class="section-description hideinlaptop">Schedule a demo now</p>
+          <div class="header-content">
+            <a id="lets-talk-button" href="contact.html" class="btn btn-primary no-shadow">
+              <span class="btn-text">Request a Demo</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="purpose show-talk-box">
       <div class="p-container">
         <div class="purpose-content">
