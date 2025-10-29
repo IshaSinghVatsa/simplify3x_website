@@ -72,7 +72,7 @@
     justify-content: center;
 }
 
-.number-part-item {
+.number-part-item,.number-part-item-1 {
     width: 315px;
     display: flex;
     flex-direction: column;
@@ -85,7 +85,7 @@
 .fs-70 {
     font-size: 70px !important;
 }
-.number-part-item:hover {
+.number-part-item:hover,.number-part-item-1:hover {
     box-shadow: 0 13px 26px #eaae98;
     transform: translateY(-4px);
 }
@@ -103,12 +103,6 @@ font-family: 'Oleo Script Swash Caps',sans-serif;
     font-size: 1rem;
     font-weight: 500;
     color: #050505;
-}
-
-.num-vertical-line {
-    width: 1px;
-    height: 80px;
-    background: rgba(0, 0, 0, 0.1);
 }
 
 .about-image-section .container {
@@ -277,7 +271,7 @@ font-family: 'Oleo Script Swash Caps',sans-serif;
 .main-section .flex .number-part-number{
     font-size: 2rem;
 }
-.main-section .flex .number-part-item{
+.main-section .flex .number-part-item-1{
     justify-self: center;
     width: 180px;
     border-radius: 4px;

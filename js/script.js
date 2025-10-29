@@ -1933,3 +1933,112 @@ function initMobileMenu() {
 
 // Initialize mobile menu when DOM is loaded
 document.addEventListener('DOMContentLoaded', initMobileMenu);
+
+// About page: team-section mobile modal (<=1024px)
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth > 1024) return;
+  const grid = document.querySelector('.team-section .team-grid');
+  if (!grid) return;
+  const modal = document.getElementById('teamModal');
+  const tmName = document.getElementById('tmName');
+  const tmRole = document.getElementById('tmRole');
+  const tmDesc = document.getElementById('tmDesc');
+  const tmClose = document.getElementById('tmClose');
+  let lockedScrollY = 0;
+
+  function openModal(data) {
+    if (!modal) return;
+    tmName.textContent = data.name || '';
+    tmRole.textContent = data.role || '';
+    tmDesc.textContent = data.desc || '';
+    modal.classList.add('open');
+    // Lock background scroll (mobile friendly)
+    lockedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.width = '100%';
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('open');
+    // Restore scroll
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, lockedScrollY || 0);
+  }
+
+  grid.querySelectorAll('.team-card').forEach(card => {
+    const img = card.querySelector('.team-card-front img');
+    const name = card.querySelector('.team-card-info h3')?.textContent?.trim();
+    const role = card.querySelector('.team-card-info p')?.textContent?.trim();
+    const desc = card.querySelector('.team-card-back .team-description')?.textContent?.trim();
+
+    card.addEventListener('click', () => {
+      openModal({
+        img: img?.getAttribute('src') || '',
+        name,
+        role,
+        desc,
+      });
+    });
+  });
+
+  tmClose?.addEventListener('click', closeModal);
+  modal?.querySelector('.team-modal-backdrop')?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 1024) closeModal(); });
+});
+
+// Services mobile scroller with range input
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.querySelector('.services .services-grid');
+  const range = document.querySelector('.services .services-range');
+  if (!grid || !range) return;
+
+  // Only activate on <=1024px
+  function active() { return window.innerWidth <= 1024; }
+
+  // Sync range -> scroll
+  function updateScrollFromRange() {
+    if (!active()) return;
+    const maxIndex = Math.max(0, grid.children.length - 1);
+    const index = parseInt(range.value, 10);
+    const target = grid.children[Math.min(index, maxIndex)];
+    if (!target) return;
+    grid.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+  }
+
+  // Sync scroll -> range
+  function updateRangeFromScroll() {
+    if (!active()) return;
+    const cardWidth = grid.children[0]?.offsetWidth || 1;
+    const gap = parseInt(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap || '14', 10);
+    const index = Math.round(grid.scrollLeft / (cardWidth + gap));
+    range.max = Math.max(0, grid.children.length - 1).toString();
+    range.value = Math.min(index, parseInt(range.max, 10)).toString();
+  }
+
+  // Listeners
+  range.addEventListener('input', updateScrollFromRange);
+  grid.addEventListener('scroll', () => {
+    // throttle via rAF
+    if (updateRangeFromScroll._ticking) return;
+    updateRangeFromScroll._ticking = true;
+    requestAnimationFrame(() => {
+      updateRangeFromScroll();
+      updateRangeFromScroll._ticking = false;
+    });
+  }, { passive: true });
+
+  // Resize handler
+  window.addEventListener('resize', () => {
+    range.max = Math.max(0, grid.children.length - 1).toString();
+    updateRangeFromScroll();
+  });
+
+  // Init
+  range.max = Math.max(0, grid.children.length - 1).toString();
+  updateRangeFromScroll();
+});
