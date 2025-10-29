@@ -1375,8 +1375,9 @@
               // Update existing connections
               connections.forEach((conn, index) => {
                 // First phase: draw the line from source to target (line grows smoothly)
+                const mobile = window.innerWidth < 1024;
                 if (conn.lineProgress < 1) {
-                  const mobile = window.innerWidth < 1024;
+                  
                   conn.lineProgress += mobile ? conn.speed * 20 : conn.speed * 9; // Line draws at steady pace
 
                   if (conn.lineProgress > 1) conn.lineProgress = 1;
