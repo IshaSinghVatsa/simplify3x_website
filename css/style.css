@@ -2895,7 +2895,7 @@ body::-webkit-scrollbar {
     }
 
     #globe {
-        margin-top: -83% !important;
+        margin-top: -33% !important;
         margin-right: -5% !important;
         opacity: 60% !important;
     }
@@ -4167,12 +4167,12 @@ body::-webkit-scrollbar {
 
     /* Globe section mobile fixes */
     .globe-embed {
-        padding: 40px 15px;
+        padding: 0px 15px;
     }
 
     #globe {
         width: 100%;
-        max-width: 400px;
+        /* max-width: 400px; */
         height: 400px;
         margin-top: 0;
     }
@@ -4302,8 +4302,9 @@ body::-webkit-scrollbar {
     }
 
     #globe {
-        max-width: 300px;
+        /* max-width: 300px; */
         height: 300px;
+        margin-left: -9%;
     }
 
     .footer {
