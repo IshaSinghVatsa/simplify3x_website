@@ -1953,21 +1953,32 @@ document.addEventListener('DOMContentLoaded', () => {
     tmDesc.textContent = data.desc || '';
     modal.classList.add('open');
     // Lock background scroll (mobile friendly)
-    lockedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${lockedScrollY}px`;
-    document.body.style.width = '100%';
+     // 🔒 Lock scroll properly
+  lockedScrollY = window.scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${lockedScrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+  document.body.style.overflow = 'hidden';
   }
 
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove('open');
-    // Restore scroll
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, lockedScrollY || 0);
-  }
+ function closeModal() {
+  if (!modal) return;
+  modal.classList.remove('open');
+
+  // 🔓 Unlock scroll and restore position exactly
+  const scrollY = lockedScrollY;
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  document.body.style.overflow = '';
+
+  // ✅ Use this to prevent "jumping up"
+  window.scrollTo({ top: scrollY, behavior: 'instant' });
+}
 
   grid.querySelectorAll('.team-card').forEach(card => {
     const img = card.querySelector('.team-card-front img');
