@@ -2987,6 +2987,8 @@ body::-webkit-scrollbar {
 
     .carousel-section .mob-slide {
         padding-inline: 2px !important;
+        flex-shrink: 0;
+        width: 100%;
     }
 
     .carousel-section .mob-carousel {
@@ -3199,6 +3201,7 @@ body::-webkit-scrollbar {
 
     .purpose {
         padding: 40px 15px 0 15px;
+        overflow-x: hidden;
     }
 
     .footer-main {
@@ -3789,6 +3792,7 @@ body::-webkit-scrollbar {
     .hero {
         padding: 100px 15px 50px 15px;
         height: 75vh !important;
+        min-height: 700px;
         width: 100%;
         overflow-x: hidden;
         height: 100vh;
@@ -3828,6 +3832,8 @@ body::-webkit-scrollbar {
 
     .mob-slide {
         padding-inline: 2px;
+        width: 100%;
+        flex-shrink: 0;
     }
 
     .mob-slide img {
@@ -3835,6 +3841,12 @@ body::-webkit-scrollbar {
         height: 215px;
         object-fit: cover;
         border-radius: 0px;
+    }
+    .voice-quote{
+        font-size: 12px !important;
+    }
+    .voice-person{
+        display: none !important;
     }
     .core-values {
         .mob-slide {
@@ -4326,6 +4338,7 @@ body::-webkit-scrollbar {
 
     .gradient-heading {
         font-size: 1.8rem !important;
+        line-height: 40px;
     }
 
     .services {
