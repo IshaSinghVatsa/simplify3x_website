@@ -154,7 +154,7 @@
                 <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
                 <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
               </a>
-              <div class="header-actions">
+              <div class="header-actions hideinmobile">
                 <a href="#ecosystem" class="btn btn-primary no-shadow">
                   <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
                   <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
@@ -170,7 +170,7 @@
       </div>
       <div class="hero-right-spline">
         <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
-        <spline-viewer url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
+        <spline-viewer class="hero-spline" url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
       </div>
       <section class="clients">
         <div class="container">
@@ -230,13 +230,15 @@
 
     <!-- Services Section -->
     <section id="services" class="services">
+      <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt="">
       <div class="container">
-        <div class="services-header" style="
+        <div class="services-header mob-rel" style="
               display: flex;
               justify-content: space-between;
               align-items: center;
               gap: 60px;
               margin-bottom: 60px;
+              z-index: 6;
             ">
           <h2 class="gradient-heading" style="margin: 0; flex: 0 0 auto; max-width: 500px">
             Innovating with Purpose
@@ -297,10 +299,6 @@
             </a>
           </div>
 
-        </div>
-        <!-- Mobile slider control for services scroller -->
-        <div class="services-slider">
-          <input type="range" class="services-range" min="0" max="3" step="1" value="0" aria-label="Scroll services" />
         </div>
       </div>
     </section>
@@ -697,7 +695,7 @@
     </section>
     <!-- Scroll-Synced Folder Section -->
     <section class="folder-text-section show-talk-box">
-      <img src="assets/images/dots.png" alt="" id="folder-dots" style="
+      <img class="hideinmobile" src="assets/images/dots.png" alt="" id="folder-dots" style="
             position: fixed;
             right: 0px;
             bottom: 0px;
@@ -788,9 +786,10 @@
                   </div>
                 </div>
               </div>
-              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center;">
+              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center; z-index: 6;">
                 <span class="btn-text">Explore more</span>
               </a>
+              <img class="mobile-dots" src="assets/images/mobile-dotes.svg" alt="">
             </div>
 
             <div class="two">
@@ -849,9 +848,10 @@
                   </div>
                 </div>
               </div>
-              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center;">
+              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center; z-index: 6;">
                 <span class="btn-text">Explore more</span>
               </a>
+              <img class="mobile-dots" src="assets/images/mobile-dotes.svg" alt="">
             </div>
 
             <div class="three">
@@ -910,9 +910,10 @@
                   </div>
                 </div>
               </div>
-              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center;">
+              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center; z-index: 6;">
                 <span class="btn-text">Explore more</span>
               </a>
+              <img class="mobile-dots" src="assets/images/mobile-dotes.svg" alt="">
             </div>
            
           </div>

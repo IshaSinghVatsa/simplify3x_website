@@ -1173,6 +1173,8 @@ body::-webkit-scrollbar {
     position: absolute;
     bottom: 0;
     z-index: 6;
+    left: 0;
+    right: 0;
     /* background-color: #fff; */
 
     width: 100%;
@@ -1298,7 +1300,7 @@ body::-webkit-scrollbar {
 }
 
 .service-card {
-    border-radius: 25px;
+    border-radius: 16px;
     overflow: hidden;
     height: 326px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1361,7 +1363,7 @@ body::-webkit-scrollbar {
 }
 
 .service-title-subhead {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 /* Stats Section */
@@ -2741,15 +2743,6 @@ body::-webkit-scrollbar {
     margin-bottom: 10px !important;
 }
 
-.hero-spline {
-    width: 240%;
-    height: 240%;
-    position: absolute;
-    top: -380px;
-    left: -559px;
-    zoom: 183%;
-}
-
 .hero-right-spline {
     height: 100%;
 }
@@ -2784,6 +2777,22 @@ body::-webkit-scrollbar {
         scroll-behavior: smooth;
         overflow-x: hidden;
     }
+    .hero-spline {
+              width: 100%;
+        height: 100%;
+        position: absolute;
+        top: -330px;
+        left: 0px;
+        zoom: 47%;
+    }
+    .hero-container {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
+        left: 0px;
+        bottom: unset;
+        top: 55vh;
+    } 
 
     .mt-30 {
         margin-top: 15px !important;
@@ -2808,6 +2817,7 @@ body::-webkit-scrollbar {
             background-color: #fff;
             border-radius: 8px;
             padding: 15px;
+            position: relative;
         }
     }
 
@@ -2852,46 +2862,39 @@ body::-webkit-scrollbar {
 
     .services-grid {
         display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: 100%;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        grid-template-columns: repeat(auto-fit, minmax(335px, 1fr)) !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-flow: row;
+        grid-auto-columns: unset;
+        overflow-x: visible;
+        scroll-snap-type: none;
+        -webkit-overflow-scrolling: auto;
         gap: 14px;
-        padding-bottom: 0px;
+        padding-bottom: 0;
     }
-
     .team-modal-card .line {
         margin-bottom: 20px !important;
     }
 
-    .services-grid::-webkit-scrollbar {
-        height: 6px;
-        background: #f2f2f2;
-    }
-
-    .services-grid::-webkit-scrollbar-thumb {
-        background: #EB5D2A;
-        border-radius: 10px;
-    }
-
-    .services-grid {
-        scrollbar-color: transparent transparent;
-    }
-
+    
     .service-card {
-        height: 335px;
-        scroll-snap-align: start;
+        height: 200px;
     }
 
     .service-title-1 {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .service-title {
         bottom: unset;
         padding: 13px;
+        display: flex
+;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    justify-content: center;
+    gap: 3px;
     }
 
     #globe {
@@ -2901,7 +2904,7 @@ body::-webkit-scrollbar {
     }
 
     .service-blur {
-        height: 165%;
+        height: 280%;
         object-fit: cover;
         transform: rotate(180deg);
     }
@@ -3503,7 +3506,9 @@ body::-webkit-scrollbar {
     .faq-section {
         padding: 40px 0 !important;
     }
-
+.culture-section{
+    overflow: hidden;
+}
     .insights-card-parent {
         padding: 0px 0px !important;
     }
@@ -3522,13 +3527,14 @@ body::-webkit-scrollbar {
 
     .main-container .gradient-heading-2.fs-70,
     .life-part .gradient-heading-2.fs-70 {
-        font-size: 40px !important;
+        font-size: 39px !important;
     }
 
     .hide-spline {
-        right: 26px !important;
-        bottom: 59px !important;
+        right: 2px !important;
+        bottom: 150px !important;
         z-index: 4 !important;
+        width: 100px !important;
     }
 
     .cv-cards {
@@ -3792,14 +3798,10 @@ body::-webkit-scrollbar {
     .hero {
         padding: 100px 15px 50px 15px;
         height: 75vh !important;
-        min-height: 700px;
+        min-height: 800px;
         width: 100%;
         overflow-x: hidden;
         height: 100vh;
-    }
-
-    .services-slider {
-        display: block !important;
     }
 
     .grad-mob {
@@ -3847,6 +3849,25 @@ body::-webkit-scrollbar {
     }
     .voice-person{
         display: none !important;
+    }
+    .mobile-dots{
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        width: 100%;
+    }
+    .mobile-dots-2{
+        position: absolute;
+        top: -17px;
+        right: -55px;
+        width: 111%;
+        transform: rotate(180deg) scaleX(-1);
+    }
+    .mob-rel{
+        position: relative;
+    }
+    .services{
+        position: relative;
     }
     .core-values {
         .mob-slide {
@@ -3898,41 +3919,6 @@ body::-webkit-scrollbar {
         background: #eb5d2a;
     }
     
-    
-    /* Services mobile slider */
-    .services-slider {
-        display: none;
-        margin-top: 12px;
-        width: 45%;
-        justify-self: anchor-center;
-    }
-    
-    .services-range {
-        width: 100%;
-        appearance: none;
-        height: 5px;
-        background: #e0e0e0;
-        border-radius: 999px;
-        outline: none;
-    }
-    
-    .services-range::-webkit-slider-thumb {
-        appearance: none;
-        width: 25%;
-        height: 5px;
-        border-radius: 4px;
-        background: #eb5d2a;
-        border: none;
-    }
-    
-    .services-range::-moz-range-thumb {
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        background: #eb5d2a;
-        border: none;
-    }
-    
 }
 
 
@@ -3943,6 +3929,9 @@ body::-webkit-scrollbar {
 
     .hideinlaptop {
         display: none !important;
+    }
+    .mobile-dots{
+        display: none;
     }
 }
 
@@ -4098,14 +4087,6 @@ body::-webkit-scrollbar {
     }
 
     /* Hero section mobile fixes */
-    .hero-container {
-        padding: 0 15px;
-        width: 100%;
-        max-width: 100%;
-        left: 8px;
-        bottom: unset;
-        top: 179px;
-    }
 
     .hero-content {
         width: 100%;
@@ -4219,7 +4200,7 @@ body::-webkit-scrollbar {
 
     /* Clients section mobile fixes */
     .clients {
-        padding: 40px 15px;
+        padding: 20px 15px;
         overflow-x: hidden;
     }
 

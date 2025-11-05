@@ -39,9 +39,13 @@ function initIndustryFilters() {
   const storyCards = document.querySelectorAll(".cs-story-card");
   const showMoreBtn = document.getElementById("showMoreBtn");
   
+  if (!filterButtons.length || !storyCards.length) return;
+
+  const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
+
   let currentFilter = "all";
   let currentPage = 1;
-  const cardsPerPage = 6;
+  let cardsPerPage = isMobile() ? 3 : 6;
 
   // Initialize pagination
   function initPagination() {
@@ -82,12 +86,7 @@ function initIndustryFilters() {
     });
 
     const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
-    
-    if (currentPage >= totalPages) {
-      showMoreBtn.style.display = "none";
-    } else {
-      showMoreBtn.style.display = "inline-block";
-    }
+    showMoreBtn.style.display = currentPage >= totalPages ? "none" : "inline-block";
   }
 
   // Show more button functionality
@@ -113,6 +112,14 @@ function initIndustryFilters() {
       // Reset pagination and show cards
       initPagination();
     });
+  });
+
+  window.addEventListener("resize", () => {
+    const next = isMobile() ? 3 : 6;
+    if (next !== cardsPerPage) {
+      cardsPerPage = next;
+      initPagination();
+    }
   });
 
   // Initialize on page load
@@ -2002,54 +2009,3 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', () => { if (window.innerWidth > 1024) closeModal(); });
 });
 
-// Services mobile scroller with range input
-document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.querySelector('.services .services-grid');
-  const range = document.querySelector('.services .services-range');
-  if (!grid || !range) return;
-
-  // Only activate on <=1024px
-  function active() { return window.innerWidth <= 1024; }
-
-  // Sync range -> scroll
-  function updateScrollFromRange() {
-    if (!active()) return;
-    const maxIndex = Math.max(0, grid.children.length - 1);
-    const index = parseInt(range.value, 10);
-    const target = grid.children[Math.min(index, maxIndex)];
-    if (!target) return;
-    grid.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
-  }
-
-  // Sync scroll -> range
-  function updateRangeFromScroll() {
-    if (!active()) return;
-    const cardWidth = grid.children[0]?.offsetWidth || 1;
-    const gap = parseInt(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap || '14', 10);
-    const index = Math.round(grid.scrollLeft / (cardWidth + gap));
-    range.max = Math.max(0, grid.children.length - 1).toString();
-    range.value = Math.min(index, parseInt(range.max, 10)).toString();
-  }
-
-  // Listeners
-  range.addEventListener('input', updateScrollFromRange);
-  grid.addEventListener('scroll', () => {
-    // throttle via rAF
-    if (updateRangeFromScroll._ticking) return;
-    updateRangeFromScroll._ticking = true;
-    requestAnimationFrame(() => {
-      updateRangeFromScroll();
-      updateRangeFromScroll._ticking = false;
-    });
-  }, { passive: true });
-
-  // Resize handler
-  window.addEventListener('resize', () => {
-    range.max = Math.max(0, grid.children.length - 1).toString();
-    updateRangeFromScroll();
-  });
-
-  // Init
-  range.max = Math.max(0, grid.children.length - 1).toString();
-  updateRangeFromScroll();
-});
