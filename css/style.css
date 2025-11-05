@@ -370,7 +370,7 @@ p {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
-    width: 750px;
+    width: 850px;
     max-width: 95%;
     background-color: rgba(15, 15, 15, 0.9);
     color: #fff;
@@ -378,8 +378,8 @@ p {
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    border-radius: 8px;
-    padding: 12px 16px;
+    border-radius: 50px;
+    padding: 12px 60px;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(6px);
     z-index: 2000;
@@ -2887,26 +2887,27 @@ body::-webkit-scrollbar {
     .service-title {
         bottom: unset;
         padding: 13px;
-        display: flex
-;
+        display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     height: 100%;
-    justify-content: center;
+    justify-content: end;
     gap: 3px;
     }
 
     #globe {
-        margin-top: -83% !important;
+        /* margin-top: -83% !important; */
         margin-right: -5% !important;
         opacity: 60% !important;
     }
 
     .service-blur {
-        height: 280%;
+        height: 160%;
         object-fit: cover;
-        transform: rotate(180deg);
+        transform: rotate(0deg);
+        top: unset !important;
+        bottom: 0;
     }
 
     .carousel-tabs {
@@ -3238,7 +3239,7 @@ body::-webkit-scrollbar {
     .cs-cta-section .container {
         background-color: #0b0b0b;
         border-radius: 20px;
-        padding-block: 40px;
+        padding-block: 20px;
     }
 
     .cs-cta-section .header-content {
@@ -3527,7 +3528,7 @@ body::-webkit-scrollbar {
 
     .main-container .gradient-heading-2.fs-70,
     .life-part .gradient-heading-2.fs-70 {
-        font-size: 39px !important;
+        font-size: 37px !important;
     }
 
     .hide-spline {
@@ -3877,7 +3878,7 @@ body::-webkit-scrollbar {
         .mob-carousel {
             padding-block: 0;
         }
-    
+  
         .mob-carousel-dots {
             bottom: 8px !important;
         }
@@ -3900,6 +3901,9 @@ body::-webkit-scrollbar {
         bottom: 15px;
         left: 0;
         right: 0;
+    }
+    .carousel-section .mob-carousel-dots{
+        bottom: 3px;
     }
     
     .mob-carousel-dots button {

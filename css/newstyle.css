@@ -940,18 +940,22 @@ border: none;
 .cs-show-more-container {
     text-align: center;
     margin-top: 40px;
+    display: flex;
+    justify-content: center;
 }
 
 .cs-show-more-btn {
-    background: #EB5D2A;
-    color: white;
+    background: #fff;
+    color: #000;
     border: none;
     padding: 16px 32px;
-    border-radius: 8px;
+    border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 16px;
+    font-size: 12px;
+    font-family: "montserrat", sans-serif;
+    box-shadow: 0px 1px 2px 0px #1018280D;
 }
 
 .cs-show-more-btn:hover {
