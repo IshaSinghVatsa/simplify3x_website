@@ -3689,10 +3689,64 @@ body::-webkit-scrollbar {
     }
 
     .mob-slide .small-txt {
-        font-size: 14px;
-        color: #2c2c2c;
-        font-weight: 500;
-        margin-bottom: 5px;
+        height: 36px;
+        border-radius: 4px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        margin-bottom: 10px;
+    }
+
+    .mob-slide .small-txt.one {
+        background:
+        linear-gradient(90deg, rgba(236, 98, 63, 0) -8.06%, rgba(204, 62, 51, 0.5) 123.13%, #AC1A27 188.86%);
+        box-shadow: 0px 0.55px 1.11px 0px #1018281A;
+    }
+    .mob-slide .small-txt.two {
+        background:
+        linear-gradient(270deg, rgba(32, 99, 155, 0.33) 12.46%, rgba(32, 99, 155, 0) 100%);
+        box-shadow: 0px 0.55px 1.11px 0px #1018281A;
+    }
+     .mob-slide .small-txt.three {
+        background: 
+        linear-gradient(270deg, rgba(255, 119, 0, 0.33) 12.46%, rgba(236, 98, 63, 0) 100%);
+        box-shadow: 0px 0.55px 1.11px 0px #1018281A;
+    }
+    .mob-slide .small-txt.four {
+        background:
+        linear-gradient(270deg, rgba(87, 96, 103, 0.2508) -27.71%, rgba(130, 61, 71, 0.1254) 12.84%, rgba(172, 26, 39, 0) 101.32%);
+        box-shadow: 0px 0.55px 1.11px 0px #1018281A;
+    }
+    .mob-slide .small-txt.five {
+        background:
+        linear-gradient(270deg, rgba(78, 35, 59, 0.33) 0%, rgba(78, 35, 59, 0) 100%);        
+        box-shadow: 0px 0.55px 1.11px 0px #1018281A;
+    }
+    .mob-slide .small-txt.one img {
+        height: 70%;
+        width: unset !important;
+        border-radius: unset !important;
+    }
+    .mob-slide .small-txt.two img {
+        height: 53%;
+        width: unset !important;
+        border-radius: unset !important;
+    }
+    .mob-slide .small-txt.three img {
+        height: 80%;
+        width: unset !important;
+        border-radius: unset !important;
+    }
+    .mob-slide .small-txt.four img {
+        height: 44%;
+        width: unset !important;
+        border-radius: unset !important;
+    }
+    .mob-slide .small-txt.five img {
+        height: 78%;
+        width: unset !important;
+        border-radius: unset !important;
     }
 
     .main-section .flex .number-part-item-1 {

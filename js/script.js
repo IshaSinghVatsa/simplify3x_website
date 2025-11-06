@@ -1907,8 +1907,7 @@ function initMobileMenu() {
     }
   });
   
-  // Close mobile menu when clicking on nav links
-  const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+  const navLinks = document.querySelectorAll('.nav-link:not(.dropdown-toggle), .dropdown-item');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       mobileToggle.classList.remove('active');
