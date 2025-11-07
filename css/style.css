@@ -459,19 +459,16 @@ p {
   justify-content: space-around;
   width: 30px;
   height: 30px;
-}
-
-/* Hide mobile contact button on desktop */
-.mobile-contact-btn {
-  display: none;
-}
-
-.mobile-menu-toggle {
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
   z-index: 1001;
+}
+
+/* Hide mobile contact button on desktop */
+.mobile-contact-btn {
+  display: none;
 }
 
 .hamburger-line {
@@ -2818,14 +2815,43 @@ body::-webkit-scrollbar {
   .header {
     padding: 1rem 2rem;
   }
-  .text-block {
-    opacity: 1 !important;
+  .header-actions {
+    position: fixed;
+    top: -13px;
+    right: -100%;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    padding-inline: 30px;
+  }
+    /* Show hamburger button */
+    .mobile-menu-toggle {
+      display: flex;
+    }
+  
+  .header-actions.active {
+    right: -8px;
+    opacity: 1;
+    visibility: visible;
+  }
+  .hero::before {
+    height: 96%;
   }
   .presence-stat {
-    padding: 40px 0 10px 0;
+    padding: 25px 0 10px 16px !important;
     background-color: #0a2540;
   }
-
+  .clients-title {
+    font-size: 14px !important;
+  }
   .nav-list {
     gap: 1.5rem;
   }
@@ -2850,7 +2876,7 @@ body::-webkit-scrollbar {
         max-width: 100%;
         left: 0px;
         bottom: unset;
-        top: 55vh;
+        top: 400px;
     }
 
   html {
@@ -2863,15 +2889,7 @@ body::-webkit-scrollbar {
     position: absolute;
     top: -330px;
     left: 0px;
-    zoom: 47%;
-  }
-  .hero-container {
-    padding: 0 15px;
-    width: 100%;
-    max-width: 100%;
-    left: 0px;
-    bottom: unset;
-    top: 55vh;
+    zoom: 44%;
   }
 
   .mt-30 {
@@ -2970,7 +2988,7 @@ body::-webkit-scrollbar {
 
     .service-title {
         bottom: unset;
-        padding: 13px;
+        padding: 13px 8px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -3059,10 +3077,13 @@ body::-webkit-scrollbar {
     }
 
     .slide-title {
-        font-size: 24px !important;
+        font-size: 22px !important;
+        line-height: 1.5 !important;
         margin-bottom: 15px !important;
     }
-
+.presence-text{
+  font-size: 12px !important;
+}
     .slide-features {
         margin-bottom: 20px !important;
     }
@@ -3268,6 +3289,8 @@ body::-webkit-scrollbar {
     .text-block {
         min-height: auto !important;
         padding: 0 !important;
+        opacity: 1 !important;
+        gap: 16px !important;
     }
 
     .hideinmobile {
@@ -3291,7 +3314,7 @@ body::-webkit-scrollbar {
 
     .presence-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 0px;
+        gap: 45px 0px;
     }
 
     .purpose {
@@ -3712,7 +3735,11 @@ body::-webkit-scrollbar {
         gap: 15px !important;
 
     }
-
+    .text-tag {
+      padding: 3px 16px !important;
+      font-weight: 400 !important;
+    }
+    
     .main-section {
         padding: 110px 0 75px 0 !important;
     }
@@ -3765,27 +3792,27 @@ body::-webkit-scrollbar {
         box-shadow: 0px 0.55px 1.11px 0px #1018281A;
     }
     .mob-slide .small-txt.one img {
-        height: 70%;
+        height: 60%;
         width: unset !important;
         border-radius: unset !important;
     }
     .mob-slide .small-txt.two img {
-        height: 53%;
+        height: 43%;
         width: unset !important;
         border-radius: unset !important;
     }
     .mob-slide .small-txt.three img {
-        height: 80%;
+        height: 70%;
         width: unset !important;
         border-radius: unset !important;
     }
     .mob-slide .small-txt.four img {
-        height: 44%;
+        height: 34%;
         width: unset !important;
         border-radius: unset !important;
     }
     .mob-slide .small-txt.five img {
-        height: 78%;
+        height: 68%;
         width: unset !important;
         border-radius: unset !important;
     }
@@ -3981,7 +4008,7 @@ body::-webkit-scrollbar {
     .hero {
         padding: 100px 15px 50px 15px;
         height: 75vh !important;
-        min-height: 870px;
+        min-height: 840px;
         width: 100%;
         overflow-x: hidden;
         height: 100vh;
@@ -4170,35 +4197,6 @@ body::-webkit-scrollbar {
     height: 35px;
   }
 
-  /* Show hamburger button */
-  .mobile-menu-toggle {
-    display: flex;
-  }
-
-  /* Hide desktop navigation */
-  .header-actions {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: right 0.3s ease;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    padding-inline: 30px;
-  }
-
-  .header-actions.active {
-    right: 0;
-    opacity: 1;
-    visibility: visible;
-  }
 
   /* Mobile navigation styles */
   .nav {
@@ -4334,7 +4332,7 @@ body::-webkit-scrollbar {
   }
 
   .gradient-description {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5;
     padding-left: 0;
     border-left: none;
@@ -4521,7 +4519,7 @@ body::-webkit-scrollbar {
 
   .gradient-heading {
     font-size: 1.8rem !important;
-    line-height: 40px;
+    line-height: 1.5;
   }
 
   .services {
