@@ -75,11 +75,13 @@
           <!-- Mobile Menu Header -->
           <div class="mobile-menu-header">
             <div class="mobile-menu-logo">
-              <a href="#home">
+              <a style="    display: flex
+              ;
+                  margin-top: 10px;" href="#home">
                 <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
               </a>
             </div>
-           
+
           </div>
 
           <!-- Navigation -->
@@ -88,7 +90,8 @@
               <li class="dropdown">
                 <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                   What we offer
-                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"  src="assets/images/sidebar-arrow.svg" alt="">
+                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"
+                    src="assets/images/sidebar-arrow.svg" alt="">
                 </button>
 
                 <div class="dropdown-menu" role="menu">
@@ -105,7 +108,8 @@
               <li class="dropdown">
                 <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                   Who we are
-                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;" src="assets/images/sidebar-arrow.svg" alt="">
+                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;"
+                    src="assets/images/sidebar-arrow.svg" alt="">
                 </button>
                 <div class="dropdown-menu" role="menu">
                   <div class="dropdown-col">
@@ -190,7 +194,8 @@
       </div>
       <div class="hero-right-spline">
         <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
-        <spline-viewer class="hero-spline" url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
+        <spline-viewer class="hero-spline"
+          url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
       </div>
       <section class="clients">
         <div class="container">
@@ -936,7 +941,7 @@
               </a>
               <img class="mobile-dots" src="assets/images/mobile-dotes.svg" alt="">
             </div>
-           
+
           </div>
 
           <!-- Right: Sticky folder -->
@@ -1107,8 +1112,9 @@
           <div class="talk-message-2 hideinmobile">
             Let's discuss your business goals — schedule a demo now
           </div>
-          
-          <div class="gradient-heading-2 hideinlaptop fs-70 mb-2" style="justify-content: center;"> Let's discuss your business goals</div>
+
+          <div class="gradient-heading-2 hideinlaptop fs-70 mb-2" style="justify-content: center;"> Let's discuss your
+            business goals</div>
           <p class="section-description hideinlaptop">Schedule a demo now</p>
           <div class="header-content">
             <a id="lets-talk-button" href="contact.html" class="btn btn-primary no-shadow">
@@ -1445,7 +1451,7 @@
                 // First phase: draw the line from source to target (line grows smoothly)
                 const mobile = window.innerWidth < 1024;
                 if (conn.lineProgress < 1) {
-                  
+
                   conn.lineProgress += mobile ? conn.speed * 20 : conn.speed * 9; // Line draws at steady pace
 
                   if (conn.lineProgress > 1) conn.lineProgress = 1;

@@ -544,6 +544,12 @@ p {
   gap: 1.5rem;
 }
 
+/* Prevent background scroll when menu open */
+html.menu-open,
+body.menu-open {
+  overflow: hidden;
+}
+
 /* Hide mobile menu header and newsletter on desktop */
 .mobile-menu-header,
 .mobile-newsletter {
@@ -642,6 +648,13 @@ p {
 
 .dropdown.open .dropdown-menu {
   display: block;
+}
+
+/* Desktop: open header dropdowns on hover */
+@media (min-width: 1025px) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
 
 .dropdown-col {
@@ -3720,9 +3733,14 @@ body::-webkit-scrollbar {
     }
 
     .cv-card {
+      height: 209px;
         padding: 15px 15px 40px 15px !important;
     }
-
+    .cv-card:hover {
+      transform: unset !important;
+      box-shadow: unset !important;
+      border-color: rgba(0, 225, 225, 0.5) !important;
+  }
     .cv-emoji {
         font-size: 20px !important;
     }
@@ -4381,7 +4399,7 @@ body::-webkit-scrollbar {
   /* Mobile Newsletter Section */
   .mobile-newsletter {
     width: 100%;
-    padding: 30px;
+    padding: 30px 30px 70px 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin-top: auto;
     flex-shrink: 0;

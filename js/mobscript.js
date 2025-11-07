@@ -24,11 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentIndex = index;
       }
   
-      // Optional: Auto-slide per carousel
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        goToSlide(currentIndex);
-      }, 400000);
+      // Removed auto-slide: carousel now only moves by touch or dot click
     });
   });
   

@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCustomerStoriesImageFade();
   initDynamicBorderRadius();
   initMobileMenu();
+  initMobileCarousel();
 });
 
 // Tab functionality for work process section
@@ -1892,18 +1893,40 @@ function initMobileMenu() {
   const headerActions = document.querySelector('.header-actions');
   const mobileMenuClose = document.querySelector('.mobile-menu-close');
   const body = document.body;
+  const html = document.documentElement;
+  let lockedScrollY = 0;
   
   if (!mobileToggle || !headerActions) return;
   
   function closeMenu() {
     mobileToggle.classList.remove('active');
     headerActions.classList.remove('active');
+    // 🔓 Unlock scroll and restore position exactly
+    html.classList.remove('menu-open');
+    body.classList.remove('menu-open');
+    const scrollY = lockedScrollY;
+    body.style.position = '';
+    body.style.top = '';
+    body.style.left = '';
+    body.style.right = '';
+    body.style.width = '';
     body.style.overflow = '';
+    // restore scroll position
+    window.scrollTo({ top: scrollY, behavior: 'instant' });
   }
   
   function openMenu() {
     mobileToggle.classList.add('active');
     headerActions.classList.add('active');
+    // 🔒 Lock scroll properly for mobile
+    lockedScrollY = window.scrollY;
+    html.classList.add('menu-open');
+    body.classList.add('menu-open');
+    body.style.position = 'fixed';
+    body.style.top = `-${lockedScrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
     body.style.overflow = 'hidden';
   }
   
@@ -1950,6 +1973,101 @@ function initMobileMenu() {
 
 // Initialize mobile menu when DOM is loaded
 document.addEventListener('DOMContentLoaded', initMobileMenu);
+
+// Mobile carousel (autoplay + dots + swipe)
+function initMobileCarousel() {
+  if (window.innerWidth > 1024) return; // mobile only
+  const carousel = document.querySelector('.mob-carousel');
+  if (!carousel) return;
+  const track = carousel.querySelector('.mob-carousel-track');
+  const slides = Array.from(carousel.querySelectorAll('.mob-slide'));
+  const dotsContainer = carousel.querySelector('.mob-carousel-dots');
+  if (!track || slides.length === 0 || !dotsContainer) return;
+
+  let current = 0;
+  let autoTimer = null;
+  const AUTO_MS = 1000;
+  let startX = 0;
+  let deltaX = 0;
+  let isDragging = false;
+
+  // Build dots if empty
+  if (dotsContainer.children.length === 0) {
+    slides.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      btn.addEventListener('click', () => goTo(i, true));
+      dotsContainer.appendChild(btn);
+    });
+  }
+  const dots = Array.from(dotsContainer.children);
+
+  function update() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function goTo(index, pause) {
+    current = (index + slides.length) % slides.length;
+    update();
+    if (pause) restartAutoplay();
+  }
+
+  function next() { goTo(current + 1); }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoTimer = setInterval(next, AUTO_MS);
+  }
+
+  function stopAutoplay() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+
+  function restartAutoplay() { stopAutoplay(); startAutoplay(); }
+
+  // Touch/drag swipe
+  function onStart(e) {
+    isDragging = true;
+    startX = (e.touches ? e.touches[0].clientX : e.clientX);
+    deltaX = 0;
+    track.style.transition = 'none';
+    stopAutoplay();
+  }
+  function onMove(e) {
+    if (!isDragging) return;
+    const x = (e.touches ? e.touches[0].clientX : e.clientX);
+    deltaX = x - startX;
+    const percent = (deltaX / track.offsetWidth) * 100;
+    track.style.transform = `translateX(calc(-${current * 100}% + ${percent}%))`;
+  }
+  function onEnd() {
+    if (!isDragging) return;
+    track.style.transition = '';
+    const threshold = track.offsetWidth * 0.15; // 15% swipe
+    if (Math.abs(deltaX) > threshold) {
+      if (deltaX < 0) next(); else goTo(current - 1);
+    } else {
+      update();
+    }
+    isDragging = false;
+    startAutoplay();
+  }
+
+  track.addEventListener('touchstart', onStart, { passive: true });
+  track.addEventListener('touchmove', onMove, { passive: true });
+  track.addEventListener('touchend', onEnd);
+  track.addEventListener('mousedown', onStart);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onEnd);
+
+  // Pause on visibility change to save battery
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAutoplay(); else startAutoplay();
+  });
+
+  // Init
+  update();
+  startAutoplay();
+}
 
 // About page: team-section mobile modal (<=1024px)
 document.addEventListener('DOMContentLoaded', () => {
