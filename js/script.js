@@ -1890,29 +1890,44 @@ if (folder) {
 function initMobileMenu() {
   const mobileToggle = document.querySelector('.mobile-menu-toggle');
   const headerActions = document.querySelector('.header-actions');
+  const mobileMenuClose = document.querySelector('.mobile-menu-close');
   const body = document.body;
   
   if (!mobileToggle || !headerActions) return;
   
+  function closeMenu() {
+    mobileToggle.classList.remove('active');
+    headerActions.classList.remove('active');
+    body.style.overflow = '';
+  }
+  
+  function openMenu() {
+    mobileToggle.classList.add('active');
+    headerActions.classList.add('active');
+    body.style.overflow = 'hidden';
+  }
+  
   mobileToggle.addEventListener('click', (e) => {
     e.stopPropagation();
-    mobileToggle.classList.toggle('active');
-    headerActions.classList.toggle('active');
-    
-    // Prevent body scroll when menu is open
     if (headerActions.classList.contains('active')) {
-      body.style.overflow = 'hidden';
+      closeMenu();
     } else {
-      body.style.overflow = '';
+      openMenu();
     }
   });
+  
+  // Close button handler
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeMenu();
+    });
+  }
   
   const navLinks = document.querySelectorAll('.nav-link:not(.dropdown-toggle), .dropdown-item');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      mobileToggle.classList.remove('active');
-      headerActions.classList.remove('active');
-      body.style.overflow = '';
+      closeMenu();
     });
   });
   
@@ -1921,18 +1936,14 @@ function initMobileMenu() {
     if (headerActions.classList.contains('active') && 
         !headerActions.contains(e.target) && 
         !mobileToggle.contains(e.target)) {
-      mobileToggle.classList.remove('active');
-      headerActions.classList.remove('active');
-      body.style.overflow = '';
+      closeMenu();
     }
   });
   
   // Close mobile menu on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && headerActions.classList.contains('active')) {
-      mobileToggle.classList.remove('active');
-      headerActions.classList.remove('active');
-      body.style.overflow = '';
+      closeMenu();
     }
   });
 }
