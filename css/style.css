@@ -3901,7 +3901,7 @@ body::-webkit-scrollbar {
     .main-section .flex .number-part-number {
         font-size: 1.5rem !important;
     }
-
+    .insights-card-row{height: 100%; }
     .insights-card-featured .img-wrap {
         height: unset !important;
     }

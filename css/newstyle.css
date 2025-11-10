@@ -2242,3 +2242,102 @@ width: 45px;
     font-size: 20px;
     font-weight: 600;
 }
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #030303;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  #loading-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="customer-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23ff6b35" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23customer-grid)"/></svg>');
+    opacity: 0.4;
+    z-index: 1;
+}
+  .loader {
+    height: 50px;
+    aspect-ratio: 3;
+    /* Define 5 colored gradients (red, orange, yellow, green, blue) */
+    --_g1: no-repeat radial-gradient(farthest-side, #ff0000 90%, #0000);
+    --_g2: no-repeat radial-gradient(farthest-side, #ffa500 90%, #0000);
+    --_g3: no-repeat radial-gradient(farthest-side, #ffff00 90%, #0000);
+    --_g4: no-repeat radial-gradient(farthest-side, #00ff00 90%, #0000);
+    --_g5: no-repeat radial-gradient(farthest-side, #0000ff 90%, #0000);
+  
+    background: var(--_g1), var(--_g2), var(--_g3), var(--_g4), var(--_g5);
+    background-size: 16% 50%;
+    animation: load 1.2s infinite linear;
+  }
+  
+  @keyframes load {
+    0% {
+      background-position: 
+        calc(0 * 100% / 4) 50%, 
+        calc(1 * 100% / 4) 50%, 
+        calc(2 * 100% / 4) 50%, 
+        calc(3 * 100% / 4) 50%, 
+        calc(4 * 100% / 4) 50%;
+    }
+    16.67% {
+      background-position: 
+        calc(0 * 100% / 4) 0, 
+        calc(1 * 100% / 4) 50%, 
+        calc(2 * 100% / 4) 50%, 
+        calc(3 * 100% / 4) 50%, 
+        calc(4 * 100% / 4) 50%;
+    }
+    33.33% {
+      background-position: 
+        calc(0 * 100% / 4) 100%, 
+        calc(1 * 100% / 4) 0, 
+        calc(2 * 100% / 4) 50%, 
+        calc(3 * 100% / 4) 50%, 
+        calc(4 * 100% / 4) 50%;
+    }
+    50% {
+      background-position: 
+        calc(0 * 100% / 4) 50%, 
+        calc(1 * 100% / 4) 100%, 
+        calc(2 * 100% / 4) 0, 
+        calc(3 * 100% / 4) 50%, 
+        calc(4 * 100% / 4) 50%;
+    }
+    66.67% {
+      background-position: 
+        calc(0 * 100% / 4) 50%, 
+        calc(1 * 100% / 4) 50%, 
+        calc(2 * 100% / 4) 100%, 
+        calc(3 * 100% / 4) 0, 
+        calc(4 * 100% / 4) 50%;
+    }
+    83.33% {
+      background-position: 
+        calc(0 * 100% / 4) 50%, 
+        calc(1 * 100% / 4) 50%, 
+        calc(2 * 100% / 4) 50%, 
+        calc(3 * 100% / 4) 100%, 
+        calc(4 * 100% / 4) 0;
+    }
+    100% {
+      background-position: 
+        calc(0 * 100% / 4) 50%, 
+        calc(1 * 100% / 4) 50%, 
+        calc(2 * 100% / 4) 50%, 
+        calc(3 * 100% / 4) 50%, 
+        calc(4 * 100% / 4) 50%;
+    }
+  }
+  

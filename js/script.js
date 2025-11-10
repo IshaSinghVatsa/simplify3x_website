@@ -14,6 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
   initMobileCarousel();
 });
 
+// Hide loading screen after all page content (images, scripts, etc.) has loaded
+window.addEventListener('load', function() {
+  const loadingScreen = document.getElementById('loading-screen');
+  if (loadingScreen) {
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 5000); // Keep loading screen for 5s longer after page load
+  }
+});
+
 // Tab functionality for work process section
 function initTabs() {
   const tabButtons = document.querySelectorAll(".tab-button");
