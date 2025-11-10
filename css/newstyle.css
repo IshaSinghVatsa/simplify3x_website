@@ -2271,11 +2271,11 @@ width: 45px;
     height: 50px;
     aspect-ratio: 3;
     /* Define 5 colored gradients (red, orange, yellow, green, blue) */
-    --_g1: no-repeat radial-gradient(farthest-side, #ff0000 90%, #0000);
-    --_g2: no-repeat radial-gradient(farthest-side, #ffa500 90%, #0000);
-    --_g3: no-repeat radial-gradient(farthest-side, #ffff00 90%, #0000);
-    --_g4: no-repeat radial-gradient(farthest-side, #00ff00 90%, #0000);
-    --_g5: no-repeat radial-gradient(farthest-side, #0000ff 90%, #0000);
+    --_g1: no-repeat radial-gradient(farthest-side, #AC1A27, #0000);
+    --_g2: no-repeat radial-gradient(farthest-side, #576067, #0000);
+    --_g3: no-repeat radial-gradient(farthest-side, #68A5FF, #0000);
+    --_g4: no-repeat radial-gradient(farthest-side, #FF7700, #0000);
+    --_g5: no-repeat radial-gradient(farthest-side, #4E233B, #0000);
   
     background: var(--_g1), var(--_g2), var(--_g3), var(--_g4), var(--_g5);
     background-size: 16% 50%;
