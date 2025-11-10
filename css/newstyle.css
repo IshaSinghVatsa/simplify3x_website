@@ -2280,6 +2280,8 @@ width: 45px;
     background: var(--_g1), var(--_g2), var(--_g3), var(--_g4), var(--_g5);
     background-size: 16% 50%;
     animation: load 1.2s infinite linear;
+    position: relative;
+    z-index: 2;
   }
   
   @keyframes load {
