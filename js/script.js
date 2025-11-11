@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCustomerStoriesImageFade();
   initDynamicBorderRadius();
   initMobileMenu();
-  initMobileCarousel();
+  // initMobileCarousel();
 });
 
 // Hide loading screen after all page content (images, scripts, etc.) has loaded
