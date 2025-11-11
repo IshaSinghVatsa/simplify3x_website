@@ -35,6 +35,20 @@ class CustomHandler(Handler):
         print(f"[DEBUG] Referer: {self.headers.get('Referer', 'None')}")
         print("-" * 50)
 
+    def send_error(self, code, message=None, explain=None):
+        if code == 404:
+            self.send_response(404)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            try:
+                with open('404.html', 'rb') as f:
+                    self.wfile.write(f.read())
+                self.wfile.flush()
+            except Exception:
+                self.wfile.write(b"404 Not Found")
+        else:
+            super().send_error(code, message, explain)
+
 try:
     with socketserver.TCPServer(("0.0.0.0", PORT), CustomHandler) as httpd:
         print(f"Server running at http://0.0.0.0:{PORT}/")

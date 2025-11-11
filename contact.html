@@ -32,11 +32,25 @@
         </button>
         
         <div class="header-actions">
+          <!-- Mobile Menu Header -->
+          <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+              <a href="#home">
+                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+              </a>
+            </div>
+           
+          </div>
+
+          <!-- Navigation -->
           <nav class="nav">
             <ul class="nav-list">
               <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">What
-                  we offer</button>
+                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                  What we offer
+                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"  src="assets/images/sidebar-arrow.svg" alt="">
+                </button>
+
                 <div class="dropdown-menu" role="menu">
                   <div class="dropdown-col">
                     <a href="#" class="dropdown-item">SimplifyQA</a>
@@ -49,8 +63,10 @@
                 </div>
               </li>
               <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Who we
-                  are</button>
+                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                  Who we are
+                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;" src="assets/images/sidebar-arrow.svg" alt="">
+                </button>
                 <div class="dropdown-menu" role="menu">
                   <div class="dropdown-col">
                     <a href="about.html" class="dropdown-item">About Us</a>
@@ -59,21 +75,31 @@
                   </div>
                 </div>
               </li>
-              <li><a href="customer-stories.html" class="nav-link">Customer Stories </a></li>
+
+              <li>
+                <a href="customer-stories.html" class="nav-link">
+                  Customer Stories
+                </a>
+              </li>
+
+              <li>
+                <a href="contact.html" class="nav-link">
+                  Contact now
+                </a>
+              </li>
             </ul>
           </nav>
-            <!-- Mobile Contact Button -->
-            <div class="mobile-contact-btn">
-              <a href="contact.html" class="btn btn-primary no-shadow">
-                  <span class="btn-text">Contact now</span>
-                  <span class="btn-text-hover">Contact now</span>
-              </a>
-          </div>
-          <div class="header-actions">
-            <a href="contact.html" class="btn btn-primary no-shadow">
-              <span class="btn-text">Contact now</span>
-              <span class="btn-text-hover">Contact now</span>
-            </a>
+
+          <!-- Newsletter Section -->
+          <div class="mobile-newsletter">
+            <div class="newsletter-text">
+              <div class="gradient-heading-2">Stay Updated</div>
+              <div class="gradient-heading-2">With Our Newsletter</div>
+            </div>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
+              <input type="email" class="newsletter-input" placeholder="Your email" required />
+              <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
           </div>
         </div>
       </div>
@@ -168,7 +194,7 @@
             <div class="form-field"></div>
           </div>
 
-          <div class="header-content" style="margin-top: 20px;">
+          <div class="header-content" style="margin-top: 10px;">
             <label class="form-check"><input type="checkbox"> Subscribe to our newsletter for updates and
               insights</label>
             <a type="submit" class="btn btn-primary form-submit no-shadow"><span class="btn-text">Request
@@ -182,8 +208,8 @@
   <section class="offices-section">
     <div class="container">
       <div class="gradient-heading mb-5">Our Global<br  class="hideinmobile"/> Offices</div>
-      <div style="position: relative;">
-        <img style="width: 95%;justify-self: center;" src="assets/images/map-contact.svg" alt="">
+      <div style="position: relative;" class="contact-map">
+        <img style="width: 95%;justify-self: center;" class="map" src="assets/images/map-contact.svg" alt="">
         <div class="office-card-container-1">
           <div class="office-card pos-1 hideinmobile">
             <div class="office-title">headquarters</div>
@@ -309,7 +335,7 @@
               </div>
             </div>
             <div class="footer-column">
-              <h4 class="footer-column-title">Companies</h4>
+              <h4 class="footer-column-title">Products</h4>
               <div class="footer-links-grid">
                 <div class="links-group">
                   <a href="#home" class="footer-link">SimplifyQA</a>
@@ -355,6 +381,70 @@
   </footer>
 
   <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const map = document.querySelector('.contact-map');
+      if (!map) return;
+
+      const isMobile = () => window.matchMedia('(max-width: 1024px)').matches;
+
+      // Pins
+      const pin1 = map.querySelector('img.one');
+      const pin2 = map.querySelector('img.two');
+      const pin3 = map.querySelector('img.three');
+
+      // Cards
+      const card1 = map.querySelector('.office-card.pos-1');
+      const card2 = map.querySelector('.office-card.pos-2');
+      const card3 = map.querySelector('.office-card.pos-3');
+      const cards = [card1, card2, card3].filter(Boolean);
+
+      function hideAll() {
+        cards.forEach(c => {
+          c.classList.remove('is-visible');
+          c.style.setProperty('display', 'none', 'important');
+        });
+      }
+
+      function toggleCard(card) {
+        if (!isMobile() || !card) return;
+        const isVisible = window.getComputedStyle(card).display !== 'none';
+        hideAll();
+        if (!isVisible) {
+          card.style.setProperty('display', 'flex', 'important');
+          // Force reflow to ensure transition applies after display change
+          void card.offsetWidth;
+          card.classList.add('is-visible');
+        }
+      }
+
+      pin1 && pin1.addEventListener('click', () => toggleCard(card1));
+      pin2 && pin2.addEventListener('click', () => toggleCard(card2));
+      pin3 && pin3.addEventListener('click', () => toggleCard(card3));
+
+      // Ensure hidden on load for mobile
+      if (isMobile()) hideAll();
+
+      // Reset inline styles when switching between mobile/desktop
+      let lastMobile = isMobile();
+      window.addEventListener('resize', () => {
+        const nowMobile = isMobile();
+        if (nowMobile !== lastMobile) {
+          if (!nowMobile) {
+            // Desktop: remove inline overrides and animation class
+            cards.forEach(c => {
+              c.classList.remove('is-visible');
+              c.style.removeProperty('display');
+            });
+          } else {
+            // Mobile: start hidden until a pin is clicked
+            hideAll();
+          }
+          lastMobile = nowMobile;
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

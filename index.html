@@ -54,6 +54,9 @@
 </head>
 
 <body>
+  <div id="loading-screen">
+    <div class="loader"></div>
+  </div>
   <!-- Header -->
   <header class="header">
     <div>
@@ -72,11 +75,26 @@
         </button>
 
         <div class="header-actions">
+          <!-- Mobile Menu Header -->
+          <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+              <a style="    display: flex
+              ;
+                  margin-top: 10px;" href="#home">
+                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Navigation -->
           <nav class="nav">
             <ul class="nav-list">
               <li class="dropdown">
                 <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                   What we offer
+                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"
+                    src="assets/images/sidebar-arrow.svg" alt="">
                 </button>
 
                 <div class="dropdown-menu" role="menu">
@@ -93,6 +111,8 @@
               <li class="dropdown">
                 <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                   Who we are
+                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;"
+                    src="assets/images/sidebar-arrow.svg" alt="">
                 </button>
                 <div class="dropdown-menu" role="menu">
                   <div class="dropdown-col">
@@ -104,22 +124,29 @@
               </li>
 
               <li>
-                <a href="customer-stories.html" class="nav-link">Customer Stories
+                <a href="customer-stories.html" class="nav-link">
+                  Customer Stories
+                </a>
+              </li>
+
+              <li>
+                <a href="contact.html" class="nav-link">
+                  Contact now
                 </a>
               </li>
             </ul>
           </nav>
-          <!-- Mobile Contact Button -->
-          <div class="mobile-contact-btn">
-            <a href="contact.html" class="btn btn-primary no-shadow">
-              <span class="btn-text">Contact now</span>
-              <span class="btn-text-hover">Contact now</span>
-            </a>
-          </div>
-          <div class="header-actions">
-            <a href="contact.html" class="btn btn-primary no-shadow">
-              <span class="btn-text">Contact now</span>
-            </a>
+
+          <!-- Newsletter Section -->
+          <div class="mobile-newsletter">
+            <div class="newsletter-text">
+              <div class="gradient-heading-2">Stay Updated</div>
+              <div class="gradient-heading-2">With Our Newsletter</div>
+            </div>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
+              <input type="email" class="newsletter-input" placeholder="Your email" required />
+              <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
           </div>
         </div>
       </div>
@@ -151,16 +178,16 @@
                 tomorrow
               </h5>
               <a href="#ecosystem" class="btn btn-primary no-shadow hideinlaptop">
-                <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
+                <span class="btn-text">Explore our Ecosystem</span>
                 <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
               </a>
               <div class="header-actions hideinmobile">
                 <a href="#ecosystem" class="btn btn-primary no-shadow">
-                  <span class="btn-text">EXPLORE OUR ECOSYSTEM</span>
+                  <span class="btn-text">Explore our Ecosystem</span>
                   <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
                 </a>
                 <a href="#lets-talk-button" class="btn btn-primary no-shadow">
-                  <span class="btn-text">REQUEST A DEMO</span>
+                  <span class="btn-text">Request a Demo</span>
                   <span class="btn-text-hover">REQUEST A DEMO</span>
                 </a>
               </div>
@@ -170,11 +197,13 @@
       </div>
       <div class="hero-right-spline">
         <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
-        <spline-viewer class="hero-spline" url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
+        <spline-viewer class="hero-spline"
+          url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
       </div>
       <section class="clients">
         <div class="container">
           <div class="clients-content">
+            <div class="client-left-overlay-b"></div>
             <div class="clients-text">
               <span class="clients-title">CLIENTS WHO TRUST US</span>
             </div>
@@ -220,6 +249,7 @@
                 </div>
               </div>
             </div>
+            <div class="client-right-overlay-b"></div>
           </div>
         </div>
       </section>
@@ -227,7 +257,6 @@
     </section>
 
     <!-- Clients Section -->
-
     <!-- Services Section -->
     <section id="services" class="services">
       <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt="">
@@ -246,7 +275,7 @@
           <p class="gradient-description" style="padding-block: 13px">
             We build solutions that solve real challenges and move businesses
             forward. Our focus is on shaping the future with clarity, impact,
-            and confidence.
+            and confidence
           </p>
         </div>
         <div class="services-grid">
@@ -257,7 +286,7 @@
               <div class="service-title">
                 <div class="service-title-1">Future Ready</div>
                 <div class="service-title-subhead">
-                  Preparing enterprises with solutions built for tomorrow.
+                  Preparing enterprises with solutions built for tomorrow
                 </div>
               </div>
             </a>
@@ -269,7 +298,7 @@
               <div class="service-title">
                 <div class="service-title-1">Trustworthy</div>
                 <div class="service-title-subhead">
-                  Technology you can rely on, every step of the way.
+                  Technology you can rely on, every step of the way
                 </div>
               </div>
             </a>
@@ -281,7 +310,7 @@
               <div class="service-title">
                 <div class="service-title-1">Inclusive</div>
                 <div class="service-title-subhead">
-                  An ecosystem that empowers everyone to grow.
+                  An ecosystem that empowers everyone to grow
                 </div>
               </div>
             </a>
@@ -293,7 +322,7 @@
               <div class="service-title">
                 <div class="service-title-1">Impact Driven</div>
                 <div class="service-title-subhead">
-                  Simplifying complexity to deliver real results.
+                  Simplifying complexity to deliver real results
                 </div>
               </div>
             </a>
@@ -337,7 +366,7 @@
           <div class="mob-carousel-track">
             <div class="mob-slide active">
               <div>
-                <div class="small-txt">SimplifyQA</div>
+                <div class="small-txt one"><img src="assets/images/1-qa.svg" alt=""></div>
                 <img src="assets/images/new-img.png" alt="Why customers choose us 1">
                 <div class="slide-info">
                   <h3 class="slide-title">
@@ -348,17 +377,17 @@
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -371,7 +400,7 @@
             </div>
             <div class="mob-slide">
               <div>
-                <div class="small-txt">Hire3x</div>
+                <div class="small-txt two"><img src="assets/images/3-hire.svg" alt=""></div>
                 <img src="assets/images/new-img.png" alt="Why customers choose us 2">
                 <div class="slide-info">
                   <h3 class="slide-title">
@@ -382,17 +411,17 @@
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -404,7 +433,7 @@
             </div>
             <div class="mob-slide">
               <div>
-                <div class="small-txt">Walnut</div>
+                <div class="small-txt three"><img src="assets/images/4-wal.svg" alt=""></div>
                 <img src="assets/images/new-img.png" alt="Why customers choose us 3">
                 <div class="slide-info">
                   <h3 class="slide-title">
@@ -416,17 +445,17 @@
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -438,29 +467,29 @@
             </div>
             <div class="mob-slide">
               <div>
-                <div class="small-txt">DevOps Ark</div>
+                <div class="small-txt four"><img src="assets/images/2-dev.svg" alt=""></div>
                 <img src="assets/images/new-img.png" alt="Why customers choose us 3">
                 <div class="slide-info">
                   <h3 class="slide-title">
                     DevOps Ark drives efficiency, automation, and secure
-                    delivery.
+                    delivery
                   </h3>
 
                   <div class="slide-features">
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -472,7 +501,7 @@
             </div>
             <div class="mob-slide">
               <div>
-                <div class="small-txt">Bominso</div>
+                <div class="small-txt five"><img src="assets/images/5-bom.svg" alt=""></div>
                 <img src="assets/images/new-img.png" alt="Why customers choose us 3">
                 <div class="slide-info">
                   <h3 class="slide-title">
@@ -483,17 +512,17 @@
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -520,17 +549,17 @@
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -556,17 +585,17 @@
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -593,17 +622,17 @@
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -623,24 +652,24 @@
                 <div class="slide-info">
                   <h3 class="slide-title">
                     DevOps Ark drives efficiency, automation, and secure
-                    delivery.
+                    delivery
                   </h3>
 
                   <div class="slide-features">
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -666,17 +695,17 @@
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> Automated
                       testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" />
                       Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
+                      consectetur adipiscing elit
                     </div>
                     <div class="feature-item">
                       <img src="assets/images/ticker.svg" alt="" /> CI/CD
                       integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit.
+                      adipiscing elit
                     </div>
                   </div>
 
@@ -717,7 +746,7 @@
           </h2>
           <p class="gradient-description" style="padding-block: 8px">
             Delivering structured solutions that align with your vision and
-            ensure sustainable success.<br /><span class="culture-subtitle" style="
+            ensure sustainable success<br /><span class="culture-subtitle" style="
                   margin-top: 10px;
                   display: flex;
                   align-items: center;
@@ -806,12 +835,12 @@
                   goals, ensuring the right talent is in place when you need
                   it most. This flexible and targeted approach helps
                   organizations scale confidently and stay ahead of evolving
-                  demands.
+                  demands
                 </p>
                 <p class="text-block-description hideinlaptop">
                   We provide scalable offshore operations and specialized
                   staffing services to quickly address talent shortages and
-                  resource needs.
+                  resource needs
                 </p>
                 <a class="btn btn-primary w217 hideinmobile">
                   <span class="btn-text">Explore more</span>
@@ -864,16 +893,16 @@
                   Our key capabilities include Test Management, Test Case
                   Repository, Custom Quality Metrics, and Optimization,
                   providing a strong foundation for delivering consistent
-                  quality.<br /><br />
+                  quality<br /><br />
                   These capabilities are supported by services such as
                   Product, Integration, Migration, UAT, Automation, and
                   Non-Functional Testing. This structured approach enables
                   businesses to manage, execute, and continuously enhance
-                  solution quality throughout the software lifecycle.
+                  solution quality throughout the software lifecycle
                 </p>
                 <p class="text-block-description hideinlaptop">
                   We offer end-to-end quality assurance to ensure digital
-                  solutions perform reliably and align with business goals.
+                  solutions perform reliably and align with business goals
                 </p>
                 <a class="btn btn-primary w217 hideinmobile">
                   <span class="btn-text">Explore more</span>
@@ -915,7 +944,7 @@
               </a>
               <img class="mobile-dots" src="assets/images/mobile-dotes.svg" alt="">
             </div>
-           
+
           </div>
 
           <!-- Right: Sticky folder -->
@@ -1080,14 +1109,15 @@
       </div>
     </div> -->
     <section class="cs-cta-section hideinlaptop">
-      <div class="container">
+      <div class="cta-container">
         <div class="header-content" style="    gap: 124px;
       justify-self: anchor-center;">
           <div class="talk-message-2 hideinmobile">
             Let's discuss your business goals — schedule a demo now
           </div>
-          
-          <div class="gradient-heading-2 hideinlaptop fs-70 mb-5" style="justify-content: center;"> Let's discuss your business goals</div>
+
+          <div class="gradient-heading-2 hideinlaptop fs-70 mb-2" style="justify-content: center;"> Let's discuss your
+            business goals</div>
           <p class="section-description hideinlaptop">Schedule a demo now</p>
           <div class="header-content">
             <a id="lets-talk-button" href="contact.html" class="btn btn-primary no-shadow">
@@ -1108,7 +1138,7 @@
               presence, our teams collaborate across regions to provide
               scalable, secure, and efficient services. Each year, we support
               enterprises of all sizes in achieving operational excellence and
-              driving sustainable growth through technology.
+              driving sustainable growth through technology
             </div>
 
             <!-- 2x2 Stats Grid -->
@@ -1118,7 +1148,7 @@
                   <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="" />
                   <div class="presence-number">500+</div>
                   <div class="presence-text">
-                    experts driving innovation and delivering real impact.
+                    experts driving innovation and delivering real impact
                   </div>
                 </div>
                 <div class="presence-stat">
@@ -1126,14 +1156,14 @@
                   <div class="presence-number">4</div>
                   <div class="presence-text">
                     A growing global footprint, connecting businesses
-                    worldwide.
+                    worldwide
                   </div>
                 </div>
                 <div class="presence-stat">
                   <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="" />
                   <div class="presence-number">100+</div>
                   <div class="presence-text">
-                    organizations empowered through smart, simple solutions.
+                    organizations empowered through smart, simple solutions
                   </div>
                 </div>
                 <div class="presence-stat">
@@ -1141,7 +1171,7 @@
                   <div class="presence-number">100+</div>
                   <div class="presence-text">
                     Successful Projects delivered with precision, speed, and
-                    excellence.
+                    excellence
                   </div>
                 </div>
               </div>
@@ -1424,7 +1454,7 @@
                 // First phase: draw the line from source to target (line grows smoothly)
                 const mobile = window.innerWidth < 1024;
                 if (conn.lineProgress < 1) {
-                  
+
                   conn.lineProgress += mobile ? conn.speed * 20 : conn.speed * 9; // Line draws at steady pace
 
                   if (conn.lineProgress > 1) conn.lineProgress = 1;
@@ -1875,7 +1905,7 @@
                 </div>
               </div>
               <div class="footer-column">
-                <h4 class="footer-column-title">Companies</h4>
+                <h4 class="footer-column-title">Products</h4>
                 <div class="footer-links-grid">
                   <div class="links-group">
                     <a href="#home" class="footer-link">SimplifyQA</a>

@@ -29,12 +29,25 @@
         </button>
 
         <div class="header-actions">
+          <!-- Mobile Menu Header -->
+          <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+              <a href="#home">
+                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+              </a>
+            </div>
+           
+          </div>
+
+          <!-- Navigation -->
           <nav class="nav">
             <ul class="nav-list">
               <li class="dropdown">
                 <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                   What we offer
+                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"  src="assets/images/sidebar-arrow.svg" alt="">
                 </button>
+
                 <div class="dropdown-menu" role="menu">
                   <div class="dropdown-col">
                     <a href="#" class="dropdown-item">SimplifyQA</a>
@@ -49,6 +62,7 @@
               <li class="dropdown">
                 <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                   Who we are
+                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;" src="assets/images/sidebar-arrow.svg" alt="">
                 </button>
                 <div class="dropdown-menu" role="menu">
                   <div class="dropdown-col">
@@ -60,22 +74,29 @@
               </li>
 
               <li>
-                <a href="customer-stories.html" class="nav-link">Customer Stories </a>
+                <a href="customer-stories.html" class="nav-link">
+                  Customer Stories
+                </a>
+              </li>
+
+              <li>
+                <a href="contact.html" class="nav-link">
+                  Contact now
+                </a>
               </li>
             </ul>
           </nav>
-          <!-- Mobile Contact Button -->
-          <div class="mobile-contact-btn">
-            <a href="contact.html" class="btn btn-primary no-shadow">
-              <span class="btn-text">Contact now</span>
-              <span class="btn-text-hover">Contact now</span>
-            </a>
-          </div>
-          <div class="header-actions">
-            <a href="contact.html" class="btn btn-primary no-shadow">
-              <span class="btn-text">Contact now</span>
-              <span class="btn-text-hover">Contact now</span>
-            </a>
+
+          <!-- Newsletter Section -->
+          <div class="mobile-newsletter">
+            <div class="newsletter-text">
+              <div class="gradient-heading-2">Stay Updated</div>
+              <div class="gradient-heading-2">With Our Newsletter</div>
+            </div>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
+              <input type="email" class="newsletter-input" placeholder="Your email" required />
+              <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
           </div>
         </div>
       </div>
@@ -97,6 +118,7 @@
     <div class="container">
       <h2 class="cs-trusted-title">TRUSTED BY INDUSTRY LEADERS</h2>
       <div class="cs-logos-grid">
+        <div class="client-left-overlay"></div>
         <div class="cs-logos-track">
           <div class="cs-logo-item">
             <img src="assets/images/black-comp-1.svg" alt="Company Logo 1">
@@ -164,6 +186,7 @@
             <img src="assets/images/black-comp-7.svg" alt="Company Logo 7">
           </div>
         </div>
+        <div class="client-right-overlay"></div>
       </div>
     </div>
   </section>
@@ -295,7 +318,7 @@
   </section>
 
   <section class="container">
-    <div class="mob-carousel hideinlaptop cust">
+    <div class="mob-carousel mob-rel hideinlaptop cust">
       <div class="mob-carousel-track">
         <div class="mob-slide active">
           <div>
@@ -415,14 +438,14 @@
 
   <!-- Ready to Write Your Success Story -->
   <section class="cs-cta-section">
-    <div class="container">
+    <div class="cta-container">
       <div class="header-content" style="    gap: 124px;
     justify-self: anchor-center;">
         <div class="talk-message-2 hideinmobile">
           Let's discuss your business goals — schedule a demo now
         </div>
 
-        <div class="gradient-heading-2 hideinlaptop fs-70 mb-5" style="justify-content: center;"> Let's discuss your
+        <div class="gradient-heading-2 hideinlaptop fs-70 mb-2" style="justify-content: center;"> Let's discuss your
           business goals</div>
         <p class="section-description hideinlaptop">Schedule a demo now</p>
         <div class="header-content">
@@ -469,7 +492,7 @@
               </div>
             </div>
             <div class="footer-column">
-              <h4 class="footer-column-title">Companies</h4>
+              <h4 class="footer-column-title">Products</h4>
               <div class="footer-links-grid">
                 <div class="links-group">
                   <a href="#home" class="footer-link">SimplifyQA</a>
