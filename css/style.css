@@ -1691,6 +1691,15 @@ body::-webkit-scrollbar {
   background-color: #0a2540;
 }
 
+.mob-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+.mob-slide {
+  flex: 0 0 100%;
+}
+
+
 .presence-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
