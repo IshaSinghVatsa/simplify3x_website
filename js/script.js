@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Hide loading screen after all page content (images, scripts, etc.) has loaded
 window.addEventListener('load', function () {
   const loadingScreen = document.getElementById('loading-screen');
-  if (!loadingScreen) return;
+  if (loadingScreen) return;
 
   // Check if first visit in sessionStorage
   const isFirstVisit = sessionStorage.getItem('firstVisitDone') !== 'true';
