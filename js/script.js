@@ -15,12 +15,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Hide loading screen after all page content (images, scripts, etc.) has loaded
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
   const loadingScreen = document.getElementById('loading-screen');
-  if (loadingScreen) {
+  if (!loadingScreen) return;
+
+  // Check if first visit in sessionStorage
+  const isFirstVisit = sessionStorage.getItem('firstVisitDone') !== 'true';
+
+  if (isFirstVisit) {
+    // Delay for 5000ms only for first-time visits
     setTimeout(() => {
       loadingScreen.style.display = 'none';
-    }, 5000); // Keep loading screen for 5s longer after page load
+      sessionStorage.setItem('firstVisitDone', 'true');
+    }, 5000);
+  } else {
+    // Hide immediately for other pages
+    loadingScreen.style.display = 'none';
   }
 });
 
@@ -49,7 +59,7 @@ function initIndustryFilters() {
   const filterButtons = document.querySelectorAll(".cs-filter-btn");
   const storyCards = document.querySelectorAll(".cs-story-card");
   const showMoreBtn = document.getElementById("showMoreBtn");
-  
+
   if (!filterButtons.length || !storyCards.length) return;
 
   const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
@@ -90,7 +100,7 @@ function initIndustryFilters() {
   // Update show more button state
   function updateShowMoreButton() {
     if (!showMoreBtn) return;
-    
+
     const filteredCards = Array.from(storyCards).filter(card => {
       const cardIndustry = card.getAttribute("data-industry");
       return currentFilter === "all" || cardIndustry === currentFilter;
@@ -340,14 +350,14 @@ function initPresenceCounters() {
 
 function animatePresenceCounter(element) {
   const target = element.textContent.trim();
-  
+
   // Parse the number format
   let numericValue = 0;
   let isPercentage = target.includes("%");
   let isMillion = target.includes("M");
   let isPlus = target.includes("+");
   let hasDecimals = target.includes(".");
-  
+
   if (hasDecimals) {
     // For decimals like 99.999%
     numericValue = parseFloat(target.replace(/[^\d.]/g, ""));
@@ -355,7 +365,7 @@ function animatePresenceCounter(element) {
     // For regular numbers like 500M+, 47+, 135+
     numericValue = parseInt(target.replace(/[^\d]/g, ""));
   }
-  
+
   let current = 0;
   const duration = 2000; // 2 seconds
   const steps = 60;
@@ -371,7 +381,7 @@ function animatePresenceCounter(element) {
     }
 
     let displayValue;
-    
+
     if (hasDecimals) {
       displayValue = current.toFixed(3);
     } else {
@@ -421,14 +431,14 @@ function initAboutPageCounters() {
 
 function animateAboutCounter(element) {
   const target = element.textContent.trim();
-  
+
   // Parse the number format
   let numericValue = 0;
   let isPlus = target.includes("+");
-  
+
   // For numbers like 1000+, 500+, 700+, 90+
   numericValue = parseInt(target.replace(/[^\d]/g, ""));
-  
+
   let current = 0;
   const duration = 2000; // 2 seconds
   const steps = 60;
@@ -572,21 +582,21 @@ document.addEventListener("DOMContentLoaded", initScrollToTop);
 // ============================================
 function initFAQAccordion() {
   const faqCards = document.querySelectorAll('.faq-card');
-  
+
   if (faqCards.length === 0) return;
-  
+
   faqCards.forEach(card => {
     const answer = card.querySelector('.faq-answer');
     const chevron = card.querySelector('.faq-chevron');
-    
+
     // Set initial state
     answer.style.maxHeight = '0';
     chevron.style.transform = 'rotate(0deg)';
-    
+
     // Add click functionality for mobile/touch devices
     card.addEventListener('click', () => {
       const isOpen = answer.style.maxHeight !== '0px';
-      
+
       // Toggle current card only (no closing other cards)
       if (isOpen) {
         answer.style.maxHeight = '0';
@@ -596,7 +606,7 @@ function initFAQAccordion() {
         chevron.style.transform = 'rotate(180deg)';
       }
     });
-    
+
     // Add hover functionality for desktop
     card.addEventListener('mouseenter', () => {
       if (window.innerWidth > 768) {
@@ -604,7 +614,7 @@ function initFAQAccordion() {
         chevron.style.transform = 'rotate(180deg)';
       }
     });
-    
+
     card.addEventListener('mouseleave', () => {
       if (window.innerWidth > 768) {
         answer.style.maxHeight = '0';
@@ -631,7 +641,7 @@ function ensureHeroVideoAutoplay() {
   const tryPlay = () => {
     const p = video.play();
     if (p && typeof p.then === "function") {
-      p.catch(() => {});
+      p.catch(() => { });
     }
   };
 
@@ -687,7 +697,7 @@ function initDropdowns() {
   window.addEventListener("scroll", () => {
     // Clear existing timeout
     clearTimeout(scrollTimeout);
-    
+
     // Set a small delay to avoid closing immediately on scroll start
     scrollTimeout = setTimeout(() => {
       dropdowns.forEach((d) => d.classList.remove("open"));
@@ -766,11 +776,11 @@ function initScrollEffects() {
     const newRadius = 24 - sizeProgress * 24;
     const newBottom = 155 - sizeProgress * 155;
 
-     heroVideo2.style.borderRadius = `${newRadius}px`;
+    heroVideo2.style.borderRadius = `${newRadius}px`;
     heroVideo2.style.bottom = `${newBottom}px`;
     heroVideo2.style.height = `${newHeight}%`;
     heroVideo2.style.width = `${newWidth}%`;
-   
+
 
     // Smooth video zoom
     const video = heroVideo2.querySelector("video");
@@ -797,61 +807,61 @@ function initScrollEffects() {
       const clientsOpacity = 1 - clientsScrollProgress;
       clientsSection.style.opacity = clientsOpacity;
     }
-}
-//   function handleScroll() {
-//     const scrollY = window.scrollY;
-//     const windowHeight = window.innerHeight;
+  }
+  //   function handleScroll() {
+  //     const scrollY = window.scrollY;
+  //     const windowHeight = window.innerHeight;
 
-//     // ===== HERO FADE =====
-//     const heroScrollProgress = Math.min(scrollY / (windowHeight * 0.4), 1);
-//     const heroContentOpacity = 1 - heroScrollProgress;
-//     const blackOverlayOpacity = heroScrollProgress;
+  //     // ===== HERO FADE =====
+  //     const heroScrollProgress = Math.min(scrollY / (windowHeight * 0.4), 1);
+  //     const heroContentOpacity = 1 - heroScrollProgress;
+  //     const blackOverlayOpacity = heroScrollProgress;
 
-//     const heroContent = heroSection.querySelector(".hero-content");
-//     if (heroContent) heroContent.style.opacity = heroContentOpacity;
+  //     const heroContent = heroSection.querySelector(".hero-content");
+  //     if (heroContent) heroContent.style.opacity = heroContentOpacity;
 
-//     const blackOverlay =
-//       heroSection.querySelector(".black-overlay") ||
-//       createBlackOverlay(heroSection);
-//     blackOverlay.style.opacity = blackOverlayOpacity;
+  //     const blackOverlay =
+  //       heroSection.querySelector(".black-overlay") ||
+  //       createBlackOverlay(heroSection);
+  //     blackOverlay.style.opacity = blackOverlayOpacity;
 
-//     // ===== CLIENTS FADE =====
-//     if (clientsSection) {
-//       const clientsScrollProgress = Math.min(scrollY / (windowHeight * 0.3), 1);
-//       const clientsOpacity = 1 - clientsScrollProgress;
-//       clientsSection.style.opacity = clientsOpacity;
-//     }
+  //     // ===== CLIENTS FADE =====
+  //     if (clientsSection) {
+  //       const clientsScrollProgress = Math.min(scrollY / (windowHeight * 0.3), 1);
+  //       const clientsOpacity = 1 - clientsScrollProgress;
+  //       clientsSection.style.opacity = clientsOpacity;
+  //     }
 
-//     // ===== HERO-VIDEO-2 SMOOTH SCROLL-BASED EXPANSION =====
-//     const maxHeight = 100; // %
-//     const minHeight = 95; // %
-//     const maxWidth = 100; // %
-//     const minWidth = 95; // %
+  //     // ===== HERO-VIDEO-2 SMOOTH SCROLL-BASED EXPANSION =====
+  //     const maxHeight = 100; // %
+  //     const minHeight = 95; // %
+  //     const maxWidth = 100; // %
+  //     const minWidth = 95; // %
 
-//     // Calculate progress (0 → 1)
-//     const sizeProgress = Math.min(scrollY / (windowHeight * 0.4), 1);
+  //     // Calculate progress (0 → 1)
+  //     const sizeProgress = Math.min(scrollY / (windowHeight * 0.4), 1);
 
-//     // Interpolate height, width, and border-radius
-//     const newHeight = minHeight + sizeProgress * (maxHeight - minHeight);
-//     const newWidth = minWidth + sizeProgress * (maxWidth - minWidth);
-//     const newRadius = 24 - sizeProgress * 24; // 24 → 0px
+  //     // Interpolate height, width, and border-radius
+  //     const newHeight = minHeight + sizeProgress * (maxHeight - minHeight);
+  //     const newWidth = minWidth + sizeProgress * (maxWidth - minWidth);
+  //     const newRadius = 24 - sizeProgress * 24; // 24 → 0px
 
-//     heroVideo2.style.height = `${newHeight}%`;
-//     heroVideo2.style.width = `${newWidth}%`;
-//     heroVideo2.style.borderRadius = `${newRadius}px`;
+  //     heroVideo2.style.height = `${newHeight}%`;
+  //     heroVideo2.style.width = `${newWidth}%`;
+  //     heroVideo2.style.borderRadius = `${newRadius}px`;
 
-//     // Smoothly remove bottom offset as video expands
-//     const newBottom = 155 - sizeProgress * 155; // 155px → 0px
-//     heroVideo2.style.bottom = `${newBottom}px`;
+  //     // Smoothly remove bottom offset as video expands
+  //     const newBottom = 155 - sizeProgress * 155; // 155px → 0px
+  //     heroVideo2.style.bottom = `${newBottom}px`;
 
-//     // Smooth video zoom
-//     const video = heroVideo2.querySelector("video");
-//     if (video) {
-//       const scale = 1 + sizeProgress * 0.02; // 1 → 1.05
-//       video.style.transform = `scale(${scale})`;
-//       video.style.transition = "transform 0.1s ease-out";
-//     }
-//   }
+  //     // Smooth video zoom
+  //     const video = heroVideo2.querySelector("video");
+  //     if (video) {
+  //       const scale = 1 + sizeProgress * 0.02; // 1 → 1.05
+  //       video.style.transform = `scale(${scale})`;
+  //       video.style.transition = "transform 0.1s ease-out";
+  //     }
+  //   }
 
   // Smooth scroll listener using requestAnimationFrame
   let ticking = false;
@@ -884,34 +894,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const folderSection = document.querySelector(".folder-text-section");
   const folderDots = document.getElementById("folder-dots");
   const nextSection = folderSection?.nextElementSibling; // Get the next section (Global Presence)
-  
+
   if (!folderSection || !folderDots) return;
-  
+
   function updateDotsVisibility() {
     const sectionRect = folderSection.getBoundingClientRect();
     const windowHeight = window.innerHeight;
-    
+
     const sectionTop = sectionRect.top;
     const sectionBottom = sectionRect.bottom;
-    
+
     // Define fade-in distance (when section is this many pixels from top, start fading in)
     const fadeStartDistance = windowHeight * 0.3; // Start fading when 30% from top
     const fadeEndDistance = 100; // Fully visible when 100px from top
-    
+
     // Check if next section is approaching
     let nextSectionOpacity = 1;
     if (nextSection) {
       const nextSectionRect = nextSection.getBoundingClientRect();
       const nextSectionTop = nextSectionRect.top;
       const fadeOutStartDistance = windowHeight * 0.8; // Start fading out when next section is 80% down
-      
+
       if (nextSectionTop < fadeOutStartDistance) {
         // Next section is approaching - fade out
         const fadeOutProgress = (fadeOutStartDistance - nextSectionTop) / (fadeOutStartDistance - 0);
         nextSectionOpacity = 1 - Math.min(Math.max(fadeOutProgress, 0), 1);
       }
     }
-    
+
     // Check if section is in viewport
     if (sectionBottom > 0) {
       if (sectionTop <= fadeEndDistance) {
@@ -931,7 +941,7 @@ document.addEventListener("DOMContentLoaded", () => {
       folderDots.style.opacity = "0";
     }
   }
-  
+
   // Use scroll event with throttling
   let ticking = false;
   window.addEventListener("scroll", () => {
@@ -943,7 +953,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ticking = true;
     }
   }, { passive: true });
-  
+
   // Initial check
   updateDotsVisibility();
 });
@@ -966,7 +976,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // check if middle of screen is inside any show-talk-box section OR footer
     let inAnyShowTalkBoxSection = false;
-    
+
     showTalkBoxSections.forEach(section => {
       const rect = section.getBoundingClientRect();
       const inSection = rect.top <= middle && rect.bottom >= middle;
@@ -974,7 +984,7 @@ document.addEventListener("DOMContentLoaded", () => {
         inAnyShowTalkBoxSection = true;
       }
     });
-    
+
     const inFooter =
       rectFooter.top <= window.innerHeight && rectFooter.bottom >= 0;
 
@@ -1054,43 +1064,43 @@ function initCustomerStoriesImageFade() {
 // Customer Stories Text Opacity Animation
 function initCustomerStoriesTextOpacity() {
   const textSections = document.querySelectorAll('.cs-pointer-section');
-  
+
   if (!textSections.length) {
     console.log('Customer stories text sections not found');
     return;
   }
-  
+
   console.log('Setting up customer stories text opacity animation...');
-  
+
   // Track scroll direction
   let lastScrollY = window.scrollY;
   let scrollDirection = 'down';
-  
+
   // Update scroll direction
   function updateScrollDirection() {
     const currentScrollY = window.scrollY;
     scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
     lastScrollY = currentScrollY;
   }
-  
+
   // Calculate opacity based on visibility and position
   function calculateOpacity(element) {
     const rect = element.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     const elementHeight = rect.height;
-    
+
     // Calculate how much of the element is visible
     const elementTop = rect.top;
     const elementBottom = rect.bottom;
-    
+
     // Calculate visible height
     const visibleTop = Math.max(0, -elementTop);
     const visibleBottom = Math.min(elementHeight, windowHeight - elementTop);
     const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-    
+
     // Calculate visibility percentage
     const visibilityPercentage = (visibleHeight / elementHeight) * 100;
-    
+
     // Calculate opacity based on visibility
     // Opacity 1 when 90%+ visible, gradually decrease below 90%
     let opacity;
@@ -1100,29 +1110,29 @@ function initCustomerStoriesTextOpacity() {
       // Gradual decrease from 90% visibility to 0% visibility
       opacity = Math.max(0, visibilityPercentage / 90);
     }
-    
+
     return {
       opacity: opacity,
       visibilityPercentage: visibilityPercentage
     };
   }
-  
+
   // Update opacity for all text sections
   function updateAllTextSections() {
     updateScrollDirection();
-    
+
     textSections.forEach((section, index) => {
       const result = calculateOpacity(section);
-      
+
       // Apply different transition durations based on scroll direction
       const transitionDuration = scrollDirection === 'up' ? '1.5s' : '0.7s';
       section.style.transition = `opacity ${transitionDuration} ease`;
       section.style.opacity = result.opacity;
-      
+
       console.log(`Text section ${index + 1} - visibility: ${result.visibilityPercentage.toFixed(1)}%, opacity: ${result.opacity.toFixed(2)}, scroll: ${scrollDirection}, transition: ${transitionDuration}`);
     });
   }
-  
+
   // Use scroll event for real-time updates in both directions
   let ticking = false;
   function onScroll() {
@@ -1134,13 +1144,13 @@ function initCustomerStoriesTextOpacity() {
       ticking = true;
     }
   }
-  
+
   // Add scroll event listener
   window.addEventListener('scroll', onScroll, { passive: true });
-  
+
   // Initial update
   updateAllTextSections();
-  
+
   console.log('Customer stories text opacity animation set up with bidirectional scroll support');
 }
 
@@ -1151,43 +1161,43 @@ document.addEventListener("DOMContentLoaded", initCustomerStoriesTextOpacity);
 function initOurServiceTextOpacity() {
   const textSections = document.querySelectorAll('.os-pointer-section');
   const videos = document.querySelectorAll('.os-fade-video');
-  
+
   if (!textSections.length || !videos.length) {
     console.log('Our service text sections or videos not found');
     return;
   }
-  
+
   console.log('Setting up our service text opacity animation...');
-  
+
   // Track scroll direction
   let lastScrollY = window.scrollY;
   let scrollDirection = 'down';
-  
+
   // Update scroll direction
   function updateScrollDirection() {
     const currentScrollY = window.scrollY;
     scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
     lastScrollY = currentScrollY;
   }
-  
+
   // Calculate opacity based on visibility and position
   function calculateOpacity(element) {
     const rect = element.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     const elementHeight = rect.height;
-    
+
     // Calculate how much of the element is visible
     const elementTop = rect.top;
     const elementBottom = rect.bottom;
-    
+
     // Calculate visible height
     const visibleTop = Math.max(0, -elementTop);
     const visibleBottom = Math.min(elementHeight, windowHeight - elementTop);
     const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-    
+
     // Calculate visibility percentage
     const visibilityPercentage = (visibleHeight / elementHeight) * 100;
-    
+
     // Calculate opacity based on visibility
     // Opacity 1 when 90%+ visible, gradually decrease below 90%
     let opacity;
@@ -1197,18 +1207,18 @@ function initOurServiceTextOpacity() {
       // Gradual decrease from 90% visibility to 0% visibility
       opacity = Math.max(0, visibilityPercentage / 90);
     }
-    
+
     return {
       opacity: opacity,
       visibilityPercentage: visibilityPercentage
     };
   }
-  
+
   // Update video visibility based on text section visibility
   function updateVideoVisibility() {
     let mostVisibleIndex = 0;
     let maxVisibility = 0;
-    
+
     textSections.forEach((section, index) => {
       const result = calculateOpacity(section);
       if (result.visibilityPercentage > maxVisibility) {
@@ -1216,7 +1226,7 @@ function initOurServiceTextOpacity() {
         mostVisibleIndex = index;
       }
     });
-    
+
     // Update video visibility
     videos.forEach((video, index) => {
       if (index === mostVisibleIndex && maxVisibility > 30) {
@@ -1226,26 +1236,26 @@ function initOurServiceTextOpacity() {
       }
     });
   }
-  
+
   // Update opacity for all text sections
   function updateAllTextSections() {
     updateScrollDirection();
-    
+
     textSections.forEach((section, index) => {
       const result = calculateOpacity(section);
-      
+
       // Apply different transition durations based on scroll direction
       const transitionDuration = scrollDirection === 'up' ? '1s' : '0.7s';
       section.style.transition = `opacity ${transitionDuration} ease`;
       section.style.opacity = result.opacity;
-      
+
       console.log(`Our Service text section ${index + 1} - visibility: ${result.visibilityPercentage.toFixed(1)}%, opacity: ${result.opacity.toFixed(2)}, scroll: ${scrollDirection}, transition: ${transitionDuration}`);
     });
-    
+
     // Update video visibility
     updateVideoVisibility();
   }
-  
+
   // Use scroll event for real-time updates in both directions
   let ticking = false;
   function onScroll() {
@@ -1257,13 +1267,13 @@ function initOurServiceTextOpacity() {
       ticking = true;
     }
   }
-  
+
   // Add scroll event listener
   window.addEventListener('scroll', onScroll, { passive: true });
-  
+
   // Initial update
   updateAllTextSections();
-  
+
   console.log('Our service text opacity animation set up with bidirectional scroll support and video switching');
 }
 
@@ -1274,7 +1284,7 @@ document.addEventListener("DOMContentLoaded", initOurServiceTextOpacity);
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector('.header');
   const sections = document.querySelectorAll('section');
-  if(!header || !sections.length) return;
+  if (!header || !sections.length) return;
 
   let lastScrollY = window.scrollY;
 
@@ -1287,13 +1297,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentSectionIndex = 0;
     sections.forEach((sec, idx) => {
       const rect = sec.getBoundingClientRect();
-      if(rect.top <= 0 + header.offsetHeight/2){
+      if (rect.top <= 0 + header.offsetHeight / 2) {
         currentSectionIndex = idx;
       }
     });
 
     // Apply styles based on section
-    if(currentSectionIndex === 0){
+    if (currentSectionIndex === 0) {
       header.classList.add('glass');
       header.classList.remove('solid');
     } else {
@@ -1302,15 +1312,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Show/hide header based on scroll direction
-    if(scrollDirection === 'down' && currentSectionIndex > 0){
+    if (scrollDirection === 'down' && currentSectionIndex > 0) {
       header.classList.add('hidden');
-    } else if(scrollDirection === 'up'){
+    } else if (scrollDirection === 'up') {
       header.classList.remove('hidden');
     }
 
   }, { passive: true });
 });
-  
+
 
 
 // Card Carousel + Sticky Scroll Rotation
@@ -1358,7 +1368,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cards.forEach((card, i) => {
       const pos = order.indexOf(i);
       const p = positions[pos];
-  
+
       // Animate position, scale, opacity, zIndex
       gsap.to(card, {
         x: p.x,
@@ -1368,9 +1378,9 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 0.6,
         ease: "power2.out",
       });
-  
+
       // Blur logic: only center card is sharp
-      if(pos === 2){
+      if (pos === 2) {
         card.classList.remove('blur');
       } else {
         card.classList.add('blur');
@@ -1382,31 +1392,31 @@ document.addEventListener("DOMContentLoaded", () => {
     tabs.forEach((tab, i) => {
       // Remove any previous active-* classes
       tab.classList.forEach(cls => {
-        if(cls.startsWith("active-")) tab.classList.remove(cls);
+        if (cls.startsWith("active-")) tab.classList.remove(cls);
       });
       // Add the new active class for this tab
-      if(i === activeIndex) tab.classList.add(`active-${i}`);
+      if (i === activeIndex) tab.classList.add(`active-${i}`);
     });
   }
 
-// --- Improved Scroll Lock ---
-function lockScrollAtSection(section) {
-  scrollLocked = true;
-  document.body.style.overflow = "hidden";
+  // --- Improved Scroll Lock ---
+  function lockScrollAtSection(section) {
+    scrollLocked = true;
+    document.body.style.overflow = "hidden";
 
-  const targetTop = window.scrollY + section.getBoundingClientRect().top;
+    const targetTop = window.scrollY + section.getBoundingClientRect().top;
 
-  // Smoothly align section to exact top
-  gsap.to(window, {
-    scrollTo: { y: targetTop },
-    duration: 0.4,
-    ease: "power2.out",
-    onComplete: () => {
-      // Ensure it's exactly locked
-      window.scrollTo({ top: targetTop });
-    }
-  });
-}
+    // Smoothly align section to exact top
+    gsap.to(window, {
+      scrollTo: { y: targetTop },
+      duration: 0.4,
+      ease: "power2.out",
+      onComplete: () => {
+        // Ensure it's exactly locked
+        window.scrollTo({ top: targetTop });
+      }
+    });
+  }
 
   function rotateOnce(forward = true) {
     if (isAnimating) return;
@@ -1439,7 +1449,7 @@ function lockScrollAtSection(section) {
       updateCards();
       updateTabs(i);
       rotationsDone = 0;
-      
+
       // Unlock scroll when tab is clicked
       if (scrollLocked) {
         scrollLocked = false;
@@ -1449,33 +1459,33 @@ function lockScrollAtSection(section) {
     });
   });
 
-// Scroll detect for locking carousel at exact top
-window.addEventListener("scroll", () => {
-  if (carouselUsed || scrollLocked) return;
+  // Scroll detect for locking carousel at exact top
+  window.addEventListener("scroll", () => {
+    if (carouselUsed || scrollLocked) return;
 
-  const sectionRect = section.getBoundingClientRect();
-  const sectionTop = sectionRect.top;
+    const sectionRect = section.getBoundingClientRect();
+    const sectionTop = sectionRect.top;
 
-  // Trigger lock *as soon as* the section enters the top 15% of the viewport
-  if (sectionTop <= window.innerHeight * 0.15 && sectionTop > -50) {
-    lockScrollAtSection(section);
-  }
-});
+    // Trigger lock *as soon as* the section enters the top 15% of the viewport
+    if (sectionTop <= window.innerHeight * 0.15 && sectionTop > -50) {
+      lockScrollAtSection(section);
+    }
+  });
 
   // Wheel control while locked
   let lastWheelTime = 0;
   const wheelCooldown = 200; // milliseconds
-  
+
   window.addEventListener(
     "wheel",
     (e) => {
       if (!scrollLocked) return;
       e.preventDefault();
-  
+
       const now = Date.now();
       if (now - lastWheelTime < wheelCooldown) return; // skip if too soon
       lastWheelTime = now;
-  
+
       if (e.deltaY > 0 && rotationsDone < totalRotations) {
         // Scrolling down - rotate forward
         rotateOnce(true);
@@ -1539,12 +1549,12 @@ if (folder) {
 // ============================================
 // SCROLL-SYNCED FOLDER TEXT SECTION
 // ============================================
-(function() {
+(function () {
   const textBlocks = document.querySelectorAll('.text-block');
   const desktopFolder = document.querySelector('#desktop-scroll-folder');
   const mobileFolders = document.querySelectorAll('[id^="mobile-scroll-folder-"]');
   const folderSection = document.querySelector('.folder-text-section');
-  
+
   if (!textBlocks.length || !folderSection) return;
 
   // Helper function to darken color
@@ -1573,14 +1583,14 @@ if (folder) {
   // Initialize folder function
   function initializeFolder(folder) {
     if (!folder) return;
-    
+
     const folderBack = folder.querySelector('.folder__back');
     if (folderBack) {
       folderBack.style.setProperty('--folder-color', folderColor);
       folderBack.style.setProperty('--folder-back-color', folderBackColor);
       folderBack.style.background = folderBackColor;
     }
-    
+
     folder.querySelectorAll('.folder__front').forEach(front => {
       front.style.background = folderColor;
     });
@@ -1606,14 +1616,14 @@ if (folder) {
 
     const paperCount = parseInt(textBlock.dataset.papers);
     const paperType = textBlock.dataset.paperType;
-    
+
     // Add data attribute to folder for CSS targeting
     folder.setAttribute('data-paper-count', paperCount);
     folder.setAttribute('data-paper-type', paperType || 'multiple');
-    
+
     const papers = folder.querySelectorAll('.paper');
     const insidePapers = folder.querySelectorAll('.inside-paper');
-    
+
     // Control paper visibility based on paper type
     if (paperType === 'hire') {
       // Show only hire paper (paper-4) and inside papers
@@ -1653,7 +1663,7 @@ if (folder) {
     // Folder animation states based on scroll progress
     // Check if this is a mobile folder (has mobile-scroll-folder in ID)
     const isMobileFolder = folder.id && folder.id.includes('mobile-scroll-folder');
-    
+
     if (isMobileFolder) {
       // Mobile folder thresholds: 0-70% closed, 70-90% peek, 90-100% open
       if (progress < 0.7) {
@@ -1690,7 +1700,7 @@ if (folder) {
   // Desktop folder animation
   function updateDesktopFolderAnimation() {
     if (!desktopFolder) return;
-    
+
     const scrollPosition = window.scrollY + window.innerHeight / 2;
     let activeIndex = -1;
     let progress = 0;
@@ -1705,7 +1715,7 @@ if (folder) {
         activeIndex = index;
         // Calculate progress within this block (0 to 1)
         progress = (scrollPosition - blockTop) / (blockBottom - blockTop);
-        
+
         // Add active class to text
         block.classList.add('active');
       } else {
@@ -1727,17 +1737,17 @@ if (folder) {
   function updateMobileFolderAnimation() {
     mobileFolders.forEach((folder, index) => {
       if (!folder || !textBlocks[index]) return;
-      
+
       const textBlock = textBlocks[index];
       const rect = textBlock.getBoundingClientRect();
       const blockTop = rect.top + window.scrollY;
       const blockBottom = blockTop + rect.height;
       const scrollPosition = window.scrollY + window.innerHeight / 2;
-      
+
       let progress = 0;
       let isActive = false;
       let isInViewport = false;
-      
+
       // Check if this text block is in viewport
       if (scrollPosition >= blockTop && scrollPosition <= blockBottom) {
         isActive = true;
@@ -1746,12 +1756,12 @@ if (folder) {
       } else {
         textBlock.classList.remove('active');
       }
-      
+
       // Check if text block is still visible in viewport (even if not active)
       const viewportTop = window.scrollY;
       const viewportBottom = window.scrollY + window.innerHeight;
       isInViewport = (blockBottom > viewportTop && blockTop < viewportBottom);
-      
+
       // Update this specific mobile folder
       if (isActive) {
         updateFolderAnimation(folder, textBlock, progress);
@@ -1800,14 +1810,14 @@ if (folder) {
       folder.classList.remove('peek', 'open');
       folder.classList.add('closed');
     });
-    
+
     // Update after resize
     setTimeout(updateAllFolders, 100);
   }
 
   window.addEventListener('scroll', handleScroll, { passive: true });
   window.addEventListener('resize', handleResize, { passive: true });
-  
+
   // Initial update
   updateAllFolders();
 })();
@@ -1815,9 +1825,9 @@ if (folder) {
 // ============================================
 // FOLDER ANIMATION
 // ============================================
-(function() {
+(function () {
   const folders = document.querySelectorAll('.folder');
-  
+
   if (folders.length === 0) return;
 
   // Helper function to darken color
@@ -1857,7 +1867,7 @@ if (folder) {
     folderBack.style.background = folderBackColor;
     const afterElement = folderBack;
     afterElement.style.setProperty('--folder-back-color', folderBackColor);
-    
+
     folder.querySelectorAll('.folder__front').forEach(front => {
       front.style.background = color;
     });
@@ -1878,13 +1888,13 @@ if (folder) {
     papers.forEach((paper, index) => {
       paper.addEventListener('mousemove', (e) => {
         if (!folder.classList.contains('open')) return;
-        
+
         const rect = paper.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         const offsetX = (e.clientX - centerX) * 0.15;
         const offsetY = (e.clientY - centerY) * 0.15;
-        
+
         paper.style.setProperty('--magnet-x', `${offsetX}px`);
         paper.style.setProperty('--magnet-y', `${offsetY}px`);
       });
@@ -1905,9 +1915,9 @@ function initMobileMenu() {
   const body = document.body;
   const html = document.documentElement;
   let lockedScrollY = 0;
-  
+
   if (!mobileToggle || !headerActions) return;
-  
+
   function closeMenu() {
     mobileToggle.classList.remove('active');
     headerActions.classList.remove('active');
@@ -1924,7 +1934,7 @@ function initMobileMenu() {
     // restore scroll position
     window.scrollTo({ top: scrollY, behavior: 'instant' });
   }
-  
+
   function openMenu() {
     mobileToggle.classList.add('active');
     headerActions.classList.add('active');
@@ -1939,7 +1949,7 @@ function initMobileMenu() {
     body.style.width = '100%';
     body.style.overflow = 'hidden';
   }
-  
+
   mobileToggle.addEventListener('click', (e) => {
     e.stopPropagation();
     if (headerActions.classList.contains('active')) {
@@ -1948,7 +1958,7 @@ function initMobileMenu() {
       openMenu();
     }
   });
-  
+
   // Close button handler
   if (mobileMenuClose) {
     mobileMenuClose.addEventListener('click', (e) => {
@@ -1956,23 +1966,23 @@ function initMobileMenu() {
       closeMenu();
     });
   }
-  
+
   const navLinks = document.querySelectorAll('.nav-link:not(.dropdown-toggle), .dropdown-item');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       closeMenu();
     });
   });
-  
+
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
-    if (headerActions.classList.contains('active') && 
-        !headerActions.contains(e.target) && 
-        !mobileToggle.contains(e.target)) {
+    if (headerActions.classList.contains('active') &&
+      !headerActions.contains(e.target) &&
+      !mobileToggle.contains(e.target)) {
       closeMenu();
     }
   });
-  
+
   // Close mobile menu on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && headerActions.classList.contains('active')) {
@@ -2098,32 +2108,32 @@ document.addEventListener('DOMContentLoaded', () => {
     tmDesc.textContent = data.desc || '';
     modal.classList.add('open');
     // Lock background scroll (mobile friendly)
-     // 🔒 Lock scroll properly
-  lockedScrollY = window.scrollY;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${lockedScrollY}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-  document.body.style.width = '100%';
-  document.body.style.overflow = 'hidden';
+    // 🔒 Lock scroll properly
+    lockedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
   }
 
- function closeModal() {
-  if (!modal) return;
-  modal.classList.remove('open');
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('open');
 
-  // 🔓 Unlock scroll and restore position exactly
-  const scrollY = lockedScrollY;
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  document.body.style.width = '';
-  document.body.style.overflow = '';
+    // 🔓 Unlock scroll and restore position exactly
+    const scrollY = lockedScrollY;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
 
-  // ✅ Use this to prevent "jumping up"
-  window.scrollTo({ top: scrollY, behavior: 'instant' });
-}
+    // ✅ Use this to prevent "jumping up"
+    window.scrollTo({ top: scrollY, behavior: 'instant' });
+  }
 
   grid.querySelectorAll('.team-card').forEach(card => {
     const img = card.querySelector('.team-card-front img');

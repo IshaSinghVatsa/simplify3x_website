@@ -4300,7 +4300,7 @@ body::-webkit-scrollbar {
   }
 
   .nav-link {
-    font-size: 22px;
+    font-size: 18px;
     padding: 16px 0;
     display: flex;
     align-items: center;
@@ -4339,7 +4339,7 @@ body::-webkit-scrollbar {
   }
 
   .dropdown-toggle {
-    font-size: 22px;
+    font-size: 18px;
     padding: 16px 0;
     color: #fff !important;
     background: transparent;
@@ -4362,7 +4362,6 @@ body::-webkit-scrollbar {
     backdrop-filter: none;
     border-radius: 0;
     margin-top: 0;
-    margin-left: 20px;
     padding: 0;
     min-width: auto;
     width: calc(100% - 20px);
@@ -4387,10 +4386,10 @@ body::-webkit-scrollbar {
 
   .dropdown-item {
     display: block;
-    padding: 12px 0;
+    padding: 9px 0;
     color: #fff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     font-family: "montserrat", sans-serif;
     font-weight: 400;
     border-bottom: none;
@@ -4420,6 +4419,7 @@ body::-webkit-scrollbar {
 .newsletter-text .gradient-heading-2{
   font-size: 14px !important;
   line-height: 1.9 !important;
+  font-weight: 800 !important;
 }
   .newsletter-title {
     font-size: 16px;
@@ -4470,6 +4470,11 @@ body::-webkit-scrollbar {
     color: #8C8C8C80;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  }
+
+  .newsletter-button:focus {
+    background: #eb5d2a;
+    color: #fff;
   }
 
 

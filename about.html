@@ -307,7 +307,8 @@
             font-family: "Montserrat", sans-serif;
         }
 
-        .team-card-back .line , .team-modal-card .line {
+        .team-card-back .line,
+        .team-modal-card .line {
             background-color: #e48c6c;
             width: 120px;
             height: 1px;
@@ -511,6 +512,9 @@
 </head>
 
 <body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+    </div>
     <!-- Header (copied from index) -->
     <header class="header other-pages">
         <div class="container">
@@ -531,74 +535,78 @@
                 <div class="header-actions">
                     <!-- Mobile Menu Header -->
                     <div class="mobile-menu-header">
-                      <div class="mobile-menu-logo">
-                        <a href="#home">
-                          <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
-                        </a>
-                      </div>
-                     
+                        <div class="mobile-menu-logo">
+                            <a href="#home">
+                                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+                            </a>
+                        </div>
+
                     </div>
-          
+
                     <!-- Navigation -->
                     <nav class="nav">
-                      <ul class="nav-list">
-                        <li class="dropdown">
-                          <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                            What we offer
-                            <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"  src="assets/images/sidebar-arrow.svg" alt="">
-                          </button>
-          
-                          <div class="dropdown-menu" role="menu">
-                            <div class="dropdown-col">
-                              <a href="#" class="dropdown-item">SimplifyQA</a>
-                              <a href="#" class="dropdown-item">Hire3x</a>
-                              <a href="#" class="dropdown-item">Walnut</a>
-                              <a href="#" class="dropdown-item">DevOps Arc</a>
-                              <a href="#" class="dropdown-item">Bominso</a>
-                              <a href="solutions.html" class="dropdown-item">Custom Solutions</a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="dropdown">
-                          <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                            Who we are
-                            <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;" src="assets/images/sidebar-arrow.svg" alt="">
-                          </button>
-                          <div class="dropdown-menu" role="menu">
-                            <div class="dropdown-col">
-                              <a href="about.html" class="dropdown-item">About Us</a>
-                              <a href="insights.html" class="dropdown-item">Insights</a>
-                              <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
-                            </div>
-                          </div>
-                        </li>
-          
-                        <li>
-                          <a href="customer-stories.html" class="nav-link">
-                            Customer Stories
-                          </a>
-                        </li>
-          
-                        <li>
-                          <a href="contact.html" class="nav-link">
-                            Contact now
-                          </a>
-                        </li>
-                      </ul>
+                        <ul class="nav-list">
+                            <li class="dropdown">
+                                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    What we offer
+                                    <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"
+                                        src="assets/images/sidebar-arrow.svg" alt="">
+                                </button>
+
+                                <div class="dropdown-menu" role="menu">
+                                    <div class="dropdown-col">
+                                        <a href="#" class="dropdown-item">SimplifyQA</a>
+                                        <a href="#" class="dropdown-item">Hire3x</a>
+                                        <a href="#" class="dropdown-item">Walnut</a>
+                                        <a href="#" class="dropdown-item">DevOps Arc</a>
+                                        <a href="#" class="dropdown-item">Bominso</a>
+                                        <a href="solutions.html" class="dropdown-item">Custom Solutions</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown">
+                                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Who we are
+                                    <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;"
+                                        src="assets/images/sidebar-arrow.svg" alt="">
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <div class="dropdown-col">
+                                        <a href="about.html" class="dropdown-item">About Us</a>
+                                        <a href="insights.html" class="dropdown-item">Insights</a>
+                                        <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a href="customer-stories.html" class="nav-link">
+                                    Customer Stories
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="contact.html" class="nav-link">
+                                    Contact now
+                                </a>
+                            </li>
+                        </ul>
                     </nav>
-          
+
                     <!-- Newsletter Section -->
                     <div class="mobile-newsletter">
-                      <div class="newsletter-text">
-                        <div class="gradient-heading-2">Stay Updated</div>
-              <div class="gradient-heading-2">With Our Newsletter</div>
-                      </div>
-                      <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
-                        <input type="email" class="newsletter-input" placeholder="Your email" required />
-                        <button type="submit" class="newsletter-button">Subscribe</button>
-                      </form>
+                        <div class="newsletter-text">
+                            <div class="gradient-heading-2">Stay Updated</div>
+                            <div class="gradient-heading-2">With Our Newsletter</div>
+                        </div>
+                        <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
+                            <input type="email" class="newsletter-input" placeholder="Your email" required />
+                            <button type="submit" class="newsletter-button">Subscribe</button>
+                        </form>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </header>
@@ -620,7 +628,8 @@
     <div style="padding-block: 90px;overflow: hidden;" class="who-we-are mob-rel">
         <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt="">
         <div class="container">
-            <div class="flex-one mob-rel" style="display: flex; justify-content: space-between; align-items: start; gap: 60px;">
+            <div class="flex-one mob-rel"
+                style="display: flex; justify-content: space-between; align-items: start; gap: 60px;">
                 <h2 class="gradient-heading" style="margin: 0; flex: 0 0 auto; max-width: 500px;">
                     Who We Are
                 </h2>
@@ -843,8 +852,10 @@
     <!-- Image section below number-part -->
     <main class="purpose-part">
         <section class="container">
-            <div class="section-title text-center hideinmobile" style="margin-bottom: 45px;">Publications and Mentions</div>
-            <div class="gradient-heading-2 hideinlaptop text-center fs-70 mb-5" style="justify-content: center;">Publications and <br/> Mentions</div>
+            <div class="section-title text-center hideinmobile" style="margin-bottom: 45px;">Publications and Mentions
+            </div>
+            <div class="gradient-heading-2 hideinlaptop text-center fs-70 mb-5" style="justify-content: center;">
+                Publications and <br /> Mentions</div>
             <div class="about-grid">
                 <div class="one-row">
                     <div class="about-grid-item one"><img src="assets/images/forbes-txt.svg" alt="Publication 1"></div>
@@ -917,14 +928,16 @@
             <div class="number-part-item employee-card">
                 <img id="employee-icon" src="assets/images/Employees o.svg" alt="Employee">
                 <div class="number-part-number">500+</div>
-                <div class="number-part-text text-center hideinmobile">Experts driving innovation and delivering real impact.</div>
+                <div class="number-part-text text-center hideinmobile">Experts driving innovation and delivering real
+                    impact.</div>
                 <div class="number-part-text text-center hideinlaptop">Employees worldwide</div>
             </div>
             <div class="num-vertical-line"></div>
             <div class="number-part-item cont-card">
                 <img id="office-icon" src="assets/images/office o.svg" alt="Office">
                 <div class="number-part-number">4</div>
-                <div class="number-part-text text-center hideinmobile">A growing global footprint, connecting businesses worldwide.
+                <div class="number-part-text text-center hideinmobile">A growing global footprint, connecting businesses
+                    worldwide.
                 </div>
                 <div class="number-part-text text-center hideinlaptop">Offices Across Continents</div>
             </div>
@@ -936,7 +949,8 @@
             <div class="number-part-item world-card">
                 <img id="world-icon" src="assets/images/world.svg" alt="World">
                 <div class="number-part-number">100+</div>
-                <div class="number-part-text text-center hideinmobile"> Organizations empowered through smart, simple solutions.
+                <div class="number-part-text text-center hideinmobile"> Organizations empowered through smart, simple
+                    solutions.
                 </div>
                 <div class="number-part-text text-center hideinlaptop">Countries we Serve</div>
             </div>
@@ -944,16 +958,19 @@
             <div class="number-part-item project-card">
                 <img id="project-icon" src="assets/images/success o.svg" alt="Project">
                 <div class="number-part-number">100+</div>
-                <div class="number-part-text text-center hideinmobile">Successful Projects delivered with precision, speed, and
+                <div class="number-part-text text-center hideinmobile">Successful Projects delivered with precision,
+                    speed, and
                     excellence.</div>
-                    <div class="number-part-text text-center hideinlaptop">Successful Projects</div>
+                <div class="number-part-text text-center hideinlaptop">Successful Projects</div>
             </div>
     </main>
 
     <section class="cs-cta-section">
         <div class="cta-container">
-            <h2 class="gradient-heading-2 hideinmobile" style="justify-content: center;font-size: 54px;">Get Started with Simplify3x Today</h2>
-            <div class="gradient-heading-2 hideinlaptop fs-70 mb-2" style="justify-content: center;">Get Started with Simplify3x Today</div>
+            <h2 class="gradient-heading-2 hideinmobile" style="justify-content: center;font-size: 54px;">Get Started
+                with Simplify3x Today</h2>
+            <div class="gradient-heading-2 hideinlaptop fs-70 mb-2" style="justify-content: center;">Get Started with
+                Simplify3x Today</div>
             <p class="section-description">Streamline your workflows, optimize efficiency, and empower your organization
                 to maximize performance.</p>
             <div class="cs-cta-buttons">
@@ -1031,7 +1048,7 @@
         </section>
     </main> -->
     <footer class="footer">
-        <img style="    position: absolute;
+        <img class="hideinmobile" style="    position: absolute;
         width: 100%;
         height: 100%;
         top: 0px;left: 0;right: 0; z-index: 1;" src="assets/images/footer-grad.png" alt="Copora Logo">
