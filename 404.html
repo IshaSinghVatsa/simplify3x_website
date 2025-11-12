@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,22 +17,36 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-   
+
     }
+
     .body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-    linear-gradient(rgba(255, 107, 53, 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 107, 53, 0.2) 1px, transparent 1px);
-  background-size: 80px 80px; /* adjust grid size */
-  animation: moveGrid 20s linear infinite;
-    z-index: 1;
-}
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        linear-gradient(rgba(255, 107, 53, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 107, 53, 0.2) 1px, transparent 1px);
+      background-size: 80px 80px;
+      /* adjust grid size */
+      animation: moveGrid 2s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes moveGrid {
+      0% {
+        background-position: 0 0, 0 0;
+      }
+
+      100% {
+        background-position: 80px 80px, 80px 80px;
+        /* move diagonally */
+      }
+    }
+
     h1 {
       font-size: 8rem;
       margin: 0;
@@ -50,8 +65,9 @@
       line-height: 30px;
       position: relative;
       z-index: 3;
-      font-family: "Montserrat",sans-serif;
+      font-family: "Montserrat", sans-serif;
     }
+
     a {
       margin-top: 10px;
       color: #f97316;
@@ -59,41 +75,52 @@
       font-weight: 600;
       font-size: 1.2rem;
     }
-    span{
-        font-size: 300px;
-        font-family: "Montserrat",sans-serif;
-        line-height: 300px;
-    }
-img{
-   height: 100%;
-   animation: bounce 3s ease-in-out infinite;
-}
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-30px); /* how high it moves up */
-  }
-}
-@media (max-width:1028px){
-    span{
-        font-size: 150px;
-        font-family: "Montserrat",sans-serif;
-        line-height: 150px;
-    }   
-    img{
-        height: 45% !important;
+    span {
+      font-size: 300px;
+      font-family: "Montserrat", sans-serif;
+      line-height: 300px;
     }
-}
+
+    img {
+      height: 100%;
+      animation: bounce 3s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-30px);
+        /* how high it moves up */
+      }
+    }
+
+    @media (max-width:1028px) {
+      span {
+        font-size: 150px;
+        font-family: "Montserrat", sans-serif;
+        line-height: 150px;
+      }
+
+      img {
+        height: 45% !important;
+      }
+    }
   </style>
 </head>
-<body class="body">
-<div style="display: flex; height: 220px;gap: 25px;align-items: center;">
- <span>4</span>   <img src="assets/images/404.svg" alt=""> <span>4</span> 
-</div>
 
-  <p>This page no longer exists or has been removed.<br class="hideinmobile">Let's get you <a href="index.html">back</a>.</p>
+<body class="body">
+  <div style="display: flex; height: 220px;gap: 25px;align-items: center;z-index: 3;">
+    <span>4</span> <img src="assets/images/404.svg" alt=""> <span>4</span>
+  </div>
+
+  <p>This page no longer exists or has been removed.<br class="hideinmobile">Let's get you <a
+      href="index.html">back</a>.</p>
 </body>
+
 </html>
