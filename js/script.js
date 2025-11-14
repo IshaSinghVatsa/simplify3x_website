@@ -535,22 +535,37 @@ function initScrollToTop() {
   scrollButton.textContent = "";
   scrollButton.setAttribute("aria-label", "Scroll to top");
   scrollButton.setAttribute("title", "Scroll to top");
-  scrollButton.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: transparent url('assets/images/scroll.svg') center / cover no-repeat;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-    `;
+
+  // Set default styles
+  scrollButton.style.position = "fixed";
+  scrollButton.style.bottom = "30px";
+  scrollButton.style.right = "30px";
+  scrollButton.style.borderRadius = "50%";
+  scrollButton.style.border = "none";
+  scrollButton.style.padding = "0";
+  scrollButton.style.cursor = "pointer";
+  scrollButton.style.opacity = "0";
+  scrollButton.style.visibility = "hidden";
+  scrollButton.style.transition = "all 0.3s ease";
+  scrollButton.style.zIndex = "1000";
+  scrollButton.style.background = "transparent url('assets/images/foot-arrow.svg') center / cover no-repeat";
+
+  // Set width and height based on screen width
+  function setButtonSize() {
+    if (window.matchMedia("(max-width: 1024px)").matches) {
+      scrollButton.style.width = "30px";
+      scrollButton.style.height = "30px";
+    } else {
+      scrollButton.style.width = "50px";
+      scrollButton.style.height = "50px";
+    }
+  }
+
+  // Set initial size
+  setButtonSize();
+
+  // Update size on resize
+  window.addEventListener('resize', setButtonSize);
 
   document.body.appendChild(scrollButton);
 

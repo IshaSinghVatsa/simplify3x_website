@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
     let startX = 0;
     let endX = 0;
-    const autoSlideInterval = 5000; // 2 seconds
+    const autoSlideInterval = 50000; // 2 seconds
 
     // Create dots dynamically
     slides.forEach((_, i) => {

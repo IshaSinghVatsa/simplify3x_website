@@ -56,7 +56,7 @@
 <body>
   <div id="loading-screen" class="load-back">
     <div class="loader"></div>
-    <img style="position: absolute; bottom: 60px;width: 200px;" src="assets/images/black-simp.svg" alt="Copora Logo">
+    <img class="load-logo-wid" style="position: absolute; bottom: 15vh;width: 200px;" src="assets/images/black-simp.svg" alt="Copora Logo">
   </div>
   <!-- Header -->
   <header class="header">
@@ -197,7 +197,11 @@
         </div>
       </div>
       <div class="hero-right-spline">
-        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
+        <!-- <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
+        <spline-viewer class="hero-spline"
+          url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer> -->
+
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.11.2/build/spline-viewer.js"></script>
         <spline-viewer class="hero-spline"
           url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
       </div>
@@ -260,7 +264,7 @@
     <!-- Clients Section -->
     <!-- Services Section -->
     <section id="services" class="services">
-      <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt="">
+      <!-- <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt=""> -->
       <div class="container">
         <div class="services-header mob-rel" style="
               display: flex;
@@ -435,7 +439,7 @@
             <div class="mob-slide">
               <div>
                 <div class="small-txt three"><img src="assets/images/4-wal.svg" alt=""></div>
-                <img src="assets/images/new-img.png" alt="Why customers choose us 3">
+                <img src="assets/images/walnut-screen.png" alt="Why customers choose us 3">
                 <div class="slide-info">
                   <h3 class="slide-title">
                     AI Based tool for turbo charging Application Development
@@ -469,7 +473,7 @@
             <div class="mob-slide">
               <div>
                 <div class="small-txt four"><img src="assets/images/2-dev.svg" alt=""></div>
-                <img src="assets/images/new-img.png" alt="Why customers choose us 3">
+                <img src="assets/images/bominso-screen.png" alt="Why customers choose us 3">
                 <div class="slide-info">
                   <h3 class="slide-title">
                     DevOps Ark drives efficiency, automation, and secure
@@ -503,7 +507,7 @@
             <div class="mob-slide">
               <div>
                 <div class="small-txt five"><img src="assets/images/5-bom.svg" alt=""></div>
-                <img src="assets/images/new-img.png" alt="Why customers choose us 3">
+                <img src="assets/images/devopsark-screen.jpg" alt="Why customers choose us 3">
                 <div class="slide-info">
                   <h3 class="slide-title">
                     At Bominso, we don't just find jobs—we find the right jobs
@@ -643,7 +647,7 @@
                 </div>
               </div>
               <div class="slide-right">
-                <img class="img-4" src="assets/images/car-4.png" alt="" />
+                <img class="img-4" src="assets/images/walnut-screen.svg" alt="" />
               </div>
             </div>
           </div>
@@ -680,7 +684,7 @@
                 </div>
               </div>
               <div class="slide-right">
-                <img class="img-4" src="assets/images/car-4.png" alt="" />
+                <img class="img-4" src="assets/images/devopsark-screen.svg" alt="" />
               </div>
             </div>
           </div>
@@ -716,7 +720,7 @@
                 </div>
               </div>
               <div class="slide-right">
-                <img class="img-4" src="assets/images/car-4.png" alt="" />
+                <img class="img-4" src="assets/images/bominso-screen.svg" alt="" />
               </div>
             </div>
           </div>
@@ -1868,28 +1872,31 @@
 
     <!-- Footer -->
     <footer class="footer show-talk-box">
-      <img class="hideinmobile" style="
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0px;
-            left: 0;
-            right: 0;
-            z-index: 1;
-          " src="assets/images/footer-grad.png" alt="Copora Logo" />
       <div style="position: relative; z-index: 2" class="container">
+
+        <div class="footer-header">
+          <div class="width-1 hideinlaptop">
+            <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
+          </div>
+          <div class="gradient-heading-2">Say hello <br class="hideinmobile" />to us!</div>
+          <div class="flex-1">
+            <img src="assets/images/foot-call.svg" alt="">
+            <div class="text">
+              9898989898
+            </div>
+          </div>
+          <div class="flex-1">
+            <img src="assets/images/foot-mail.svg" alt="">
+            <div class="text">
+              hello@example.com
+            </div>
+          </div>
+          <div class="width-1 hideinmobile">
+            <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
+          </div>
+        </div>
         <div class="footer-content">
           <div class="footer-main">
-            <div class="footer-brand">
-              <a href="#home" class="footer-logo">
-                <img src="assets/images/simp3x.svg" alt="Copora Logo" />
-              </a>
-              <div class="footer-contact">
-                <h4 class="contact-title">Say hello to us!</h4>
-                <a href="mailto:hello@example.com" class="contact-email">hello@example.com</a>
-                <a href="tel:+1234567890" class="contact-phone">+123 456 7890</a>
-              </div>
-            </div>
             <div class="footer-links">
               <div class="footer-column">
                 <h4 class="footer-column-title">Pages</h4>
@@ -1905,7 +1912,7 @@
                   </div>
                 </div>
               </div>
-              <div class="footer-column">
+              <div class="footer-column col-1">
                 <h4 class="footer-column-title">Products</h4>
                 <div class="footer-links-grid">
                   <div class="links-group">
@@ -1917,7 +1924,7 @@
                   </div>
                 </div>
               </div>
-              <div class="footer-column">
+              <div class="footer-column col-2">
                 <h4 class="footer-column-title">Support</h4>
                 <div class="footer-links-grid">
                   <div class="links-group">
@@ -1927,22 +1934,34 @@
                 </div>
               </div>
             </div>
+            <div class="footer-brand hideinlaptop hideinmobile">
+              <div class="laptop-newsletter">
+                <div class="newsletter-text">
+                  <div class="gradient-heading-2">Stay Updated</div>
+                  <div class="gradient-heading-2">With Our Newsletter</div>
+                </div>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); return false;"
+                  style="margin-top: 30px;">
+                  <input type="email" class="newsletter-input" placeholder="Your email" required />
+                  <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="footer-bottom">
-          <div class="footer-social">
-            <a href="https://www.facebook.com/" class="social-link">
-              <img src="assets/icons/682eb96f62a81d664ea5253b_99aeb9cadc4027f13a9f8c64a73729ed_facebook.svg"
-                alt="Facebook" class="social-icon" />
-            </a>
-            <a href="https://www.instagram.com/" class="social-link">
-              <img src="assets/icons/682eb96f62a81d664ea524cf_79d504e95605676dcdc62eb376426c90_instagram.svg"
-                alt="Instagram" class="social-icon" />
-            </a>
-            <a href="https://in.linkedin.com/" class="social-link">
-              <img src="assets/icons/682eb96f62a81d664ea524df_f6064f30ebfbad78aefda8115a908970_twitter.svg"
-                alt="LinkedIn" class="social-icon" />
-            </a>
+
+      </div>
+      <div style="background-color: #151515;padding-bottom: 30px;">
+        <div class="container">
+          <div class=" footer-bottom">
+            <div class="footer-social">
+              <a href="https://www.facebook.com/" class="social-link">
+                <img src="assets/images/foot-insta.svg" alt="Facebook" class="social-icon" />
+              </a>
+              <a href="https://in.linkedin.com/" class="social-link">
+                <img src="assets/images/foot-linked.svg" alt="LinkedIn" class="social-icon" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

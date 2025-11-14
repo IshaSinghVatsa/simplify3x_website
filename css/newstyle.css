@@ -732,7 +732,10 @@
     padding: 90px 0 90px 0;
     background: #fff;
 }
-
+.culture-s-section {
+    padding: 90px 0 90px 0;
+    background: #f9f9f9;
+}
 .culture-wrap {
     max-width: 900px;
     margin: 0 auto;
@@ -962,6 +965,24 @@
     }
 }
 
+.digital-section{
+    background-color: #fff;
+    padding: 90px 0 40px 0;
+}
+.digital-section .mob-slide{
+    height: fit-content;
+    justify-content: center;
+    display: flex;
+}
+.digital-section .text-tag{
+    margin-bottom: 30px;
+}
+.digital-section .btn-primary{
+    margin-top: 30px;
+}
+.digital-section .text-block-title{
+    margin-bottom: 30px;
+}
 /* Ensure hero three canvas fills the hero area */
 #hero-canvas {
     height: 100%;
@@ -2109,9 +2130,10 @@ select option[disabled] {
 }
 
 .slide-right .img-4 {
-    height: 81%;
+    /* height: 81%; */
     position: absolute;
     width: 100%;
+    border-radius: 8px;
 }
 
 .slide-title {
@@ -2963,6 +2985,7 @@ select option[disabled] {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    padding-bottom: 90px;
 }
 
 .load-back-1 {
@@ -3119,4 +3142,32 @@ select option[disabled] {
             38px 19px 0 #1f1e1e,
             19px 19px 0 6px #576067;
     }
+}
+
+.footer-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 2px solid #676767;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+.footer-header .flex-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.footer-header .gradient-heading-2{
+    font-size: 30px !important;
+    line-height: 36px !important;
+}
+.footer-header .flex-1 .text{
+font-weight: 500;
+font-size: 16px;
+color: #d5d5d5;
+}
+.footer-header .width-1{
+    width: 29%;
 }
