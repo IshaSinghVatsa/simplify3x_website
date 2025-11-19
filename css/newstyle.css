@@ -741,10 +741,12 @@
     padding: 90px 0 90px 0;
     background: #fff;
 }
+
 .culture-s-section {
     padding: 90px 0 90px 0;
     background: #f9f9f9;
 }
+
 .culture-wrap {
     max-width: 900px;
     margin: 0 auto;
@@ -974,23 +976,30 @@
     }
 }
 
-.digital-section{
+.digital-section {
     background-color: #f9f9f9;
     padding: 90px 0 60px 0;
 }
-.digital-section .mob-slide{
+
+.digital-section .mob-slide {
     height: fit-content;
     justify-content: center;
     display: flex;
 }
-.digital-section .text-tag{
+
+.digital-section .text-tag {
     margin-bottom: 30px;
 }
-.digital-section .btn-primary{
+
+.digital-section .btn-primary {
     margin-top: 30px;
 }
-.digital-section .text-block-title{
-    margin-bottom: 30px;
+
+.digital-section .text-block-title {
+    margin-bottom: 20px;
+}
+.digital-section .gradient-heading {
+    margin-bottom: 40px !important;
 }
 /* Ensure hero three canvas fills the hero area */
 #hero-canvas {
@@ -1735,6 +1744,203 @@ select option[disabled] {
 .cs-author-role {
     font-size: 14px;
     color: #666666;
+}
+
+/* Solutions Success Stories Section */
+.sol-success-stories-section {
+    background-color: #fff;
+    padding: 90px 0;
+}
+
+.sol-section-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 1.2;
+}
+
+/* Solutions Industry Filters */
+.sol-industry-filters {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    width: fit-content;
+    justify-self: center;
+    padding: 10px 16px;
+    border-radius: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+}
+
+.sol-filter-btn {
+    border: none;
+    font-weight: 700;
+    color: #4b5563;
+    background-color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "montserrat", sans-serif;
+}
+
+.sol-filter-btn.sol-active {
+    background-color: #ee7446 !important;
+    border-color: #ee7446 !important;
+    color: #ffffff;
+}
+
+/* Solutions Stories Grid */
+.sol-stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sol-story-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    position: relative;
+    display: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.sol-story-card.show {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.sol-story-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
+}
+
+.sol-story-icon {
+    padding: 15px;
+}
+
+.sol-story-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+}
+
+.sol-story-card:hover .main-img {
+    transform: scale(1.06);
+}
+
+.sol-story-image .main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    transition: transform .35s ease;
+}
+
+.sol-story-company {
+    font-size: 14px;
+    font-weight: 700;
+    color: #101729;
+    margin-bottom: 5px;
+}
+
+.sol-story-industry {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #4D5562;
+    font-weight: 500;
+}
+
+.sol-story-quote {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #4D5562;
+    margin: 15px 0;
+    font-weight: 500;
+}
+
+.sol-story-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.sol-author-avatar {
+    width: 34px;
+    height: 34px;
+    background-color: #ee7446;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.sol-author-info {
+    flex: 1;
+}
+
+.sol-author-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #101729;
+    margin-bottom: 2px;
+}
+
+.sol-author-role {
+    font-size: 12px;
+    color: #6b6b6b;
+    font-weight: 500;
+}
+
+/* Solutions Show More Button Styles */
+.sol-show-more-container {
+    text-align: center;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.sol-show-more-btn {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+    font-family: "montserrat", sans-serif;
+    box-shadow: 0px 4px 13px 0px #00000026;
+
+}
+
+.sol-show-more-btn:hover {
+    background: #d54a1f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(235, 93, 42, 0.3);
+}
+
+.sol-show-more-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 /* Clients Section */
@@ -3141,7 +3347,7 @@ select option[disabled] {
     }
 }
 
-.footer-header{
+.footer-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -3150,21 +3356,25 @@ select option[disabled] {
     padding-bottom: 30px;
     margin-bottom: 30px;
 }
-.footer-header .flex-1{
+
+.footer-header .flex-1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
 }
-.footer-header .gradient-heading-2{
+
+.footer-header .gradient-heading-2 {
     font-size: 30px !important;
     line-height: 36px !important;
 }
-.footer-header .flex-1 .text{
-font-weight: 500;
-font-size: 16px;
-color: #d5d5d5;
+
+.footer-header .flex-1 .text {
+    font-weight: 500;
+    font-size: 16px;
+    color: #d5d5d5;
 }
-.footer-header .width-1{
+
+.footer-header .width-1 {
     width: 29%;
 }

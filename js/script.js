@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initDropdowns();
   initScrollEffects();
   initIndustryFilters();
+  initSolutionsFilters();
   initCustomerStoriesImageFade();
   initDynamicBorderRadius();
   initMobileMenu();
@@ -129,6 +130,99 @@ function initIndustryFilters() {
 
       // Add active class to clicked button
       button.classList.add("cs-active");
+
+      // Reset pagination and show cards
+      initPagination();
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    const next = isMobile() ? 3 : 6;
+    if (next !== cardsPerPage) {
+      cardsPerPage = next;
+      initPagination();
+    }
+  });
+
+  // Initialize on page load
+  initPagination();
+}
+
+// Solutions filter functionality for solutions page
+function initSolutionsFilters() {
+  const filterButtons = document.querySelectorAll(".sol-filter-btn");
+  const storyCards = document.querySelectorAll(".sol-story-card");
+  const showMoreBtn = document.getElementById("solShowMoreBtn");
+
+  if (!filterButtons.length || !storyCards.length) return;
+
+  const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
+
+  let currentFilter = "all";
+  let currentPage = 1;
+  let cardsPerPage = isMobile() ? 3 : 6;
+
+  // Initialize pagination
+  function initPagination() {
+    currentPage = 1;
+    showCardsForCurrentFilter();
+    updateShowMoreButton();
+  }
+
+  // Show cards for current filter and page
+  function showCardsForCurrentFilter() {
+    const filteredCards = Array.from(storyCards).filter(card => {
+      const cardIndustry = card.getAttribute("data-industry");
+      return currentFilter === "all" || cardIndustry === currentFilter;
+    });
+
+    // Hide all cards first
+    storyCards.forEach(card => {
+      card.classList.remove("show");
+    });
+
+    // Show cards for current page
+    const startIndex = 0;
+    const endIndex = currentPage * cardsPerPage;
+    const cardsToShow = filteredCards.slice(startIndex, endIndex);
+
+    cardsToShow.forEach(card => {
+      card.classList.add("show");
+    });
+  }
+
+  // Update show more button state
+  function updateShowMoreButton() {
+    if (!showMoreBtn) return;
+
+    const filteredCards = Array.from(storyCards).filter(card => {
+      const cardIndustry = card.getAttribute("data-industry");
+      return currentFilter === "all" || cardIndustry === currentFilter;
+    });
+
+    const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+    showMoreBtn.style.display = currentPage >= totalPages ? "none" : "inline-block";
+  }
+
+  // Show more button functionality
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener("click", () => {
+      currentPage++;
+      showCardsForCurrentFilter();
+      updateShowMoreButton();
+    });
+  }
+
+  // Filter button functionality
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentFilter = button.getAttribute("data-industry");
+
+      // Remove active class from all buttons
+      filterButtons.forEach((btn) => btn.classList.remove("sol-active"));
+
+      // Add active class to clicked button
+      button.classList.add("sol-active");
 
       // Reset pagination and show cards
       initPagination();

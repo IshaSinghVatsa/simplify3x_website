@@ -627,13 +627,14 @@ body.menu-open {
   top: 101%;
   left: -44px;
   min-width: 220px;
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(15px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  overflow: hidden;
   display: none;
   z-index: 1001;
-  background: rgba(0, 0, 0, 0.25);
+padding-block: 5px;
+border-radius: 4px;
   border: none;
   backdrop-filter: blur(15px);
 }
@@ -691,6 +692,51 @@ body.menu-open {
 
 .dropdown-item:hover {
   color: #eb5d2a;
+}
+
+/* Submenu styles for Custom Solutions */
+.dropdown-item-has-submenu {
+  position: relative;
+}
+
+.dropdown-submenu {
+  position: absolute;
+  left: 104%;
+  top: -61px;
+  min-width: 180px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 8px 0;
+  display: none;
+  z-index: 1002;
+  margin-left: 4px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-has-submenu:hover .dropdown-submenu {
+  display: block;
+  opacity: 1;
+
+}
+
+.dropdown-submenu-item {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 12px 15px;
+  border-radius: 0px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dropdown-submenu-item:hover {
+
+  color: #FF7440;
 }
 
 .header-actions-2 {
@@ -2821,6 +2867,15 @@ body::-webkit-scrollbar {
     line-height: 1.5;
   }
 
+  /* Mobile submenu styles */
+  .dropdown-submenu {
+    left: 0;
+    top: 100%;
+    margin-left: 0;
+    margin-top: 4px;
+    width: 100%;
+  }
+
   /* Header mobile fixes */
   .header {
     padding: 1rem;
@@ -3768,6 +3823,10 @@ body::-webkit-scrollbar {
     padding: 40px 0;
   }
 
+  .sol-success-stories-section {
+    padding: 40px 0 !important;
+  }
+
   .section-title-2 {
     font-size: 2.4rem !important;
     text-align: left;
@@ -3786,6 +3845,47 @@ body::-webkit-scrollbar {
     background-color: transparent !important;
     border: none !important;
     border-radius: 0 !important;
+  }
+
+  .sol-industry-filters {
+    gap: 15px;
+    overflow: auto;
+    width: 100% !important;
+    justify-content: unset !important;
+    margin-top: 0px !important;
+    margin-bottom: 40px !important;
+    flex-wrap: nowrap !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .sol-filter-btn {
+    padding: 10px 15px !important;
+    font-size: 12px !important;
+    white-space: nowrap;
+    border-radius: 12px !important;
+    font-family: "montserrat", sans-serif;
+    color: #170f49;
+    font-weight: 600;
+    background-color: #f7f7f7 !important;
+    border: 0.5px solid #d7d7d7 !important;
+   
+  }
+
+  .sol-stories-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .sol-story-icon {
+    padding: 15px;
+  }
+
+  .sol-story-quote {
+    font-size: 13px;
   }
 
   .cs-discover-section {
@@ -4614,9 +4714,12 @@ body::-webkit-scrollbar {
   }
 
   .digital-section .height {
-    height: 560px !important;
+    height: 501px !important;
   }
-
+  .digital-section .gradient-heading.small-font {
+    font-size: 24px !important;
+    margin-bottom: 5px !important;
+}
   .load-logo-wid {
     width: 150px !important;
   }
