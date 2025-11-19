@@ -2,594 +2,454 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solutions - Simplify3x</title>
-  <link rel="stylesheet" href="css/newstyle.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights - Copora</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/newstyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-  <div id="loading-screen" class="load-back-1">
-    <div class="loader"></div>
-    <img class="load-logo-wid" style="position: absolute; bottom: 15vh;width: 200px;" src="assets/images/black-simp.svg" alt="Copora Logo">
-  </div>
-  <!-- Header -->
-  <header class="header">
-    <div>
-      <div class="header-content">
-        <div class="logo">
-          <a href="index.html">
-            <img src="assets/images/simp3x.svg" alt="Copora Logo" />
-          </a>
-        </div>
-        
-        <!-- Mobile hamburger button -->
-        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-        
-        <div class="header-actions">
-          <!-- Mobile Menu Header -->
-          <div class="mobile-menu-header">
-            <div class="mobile-menu-logo">
-              <a href="#home">
-                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
-              </a>
-            </div>
-           
-          </div>
-
-          <!-- Navigation -->
-          <nav class="nav">
-            <ul class="nav-list">
-              <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                  What we offer
-                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"  src="assets/images/sidebar-arrow.svg" alt="">
-                </button>
-
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-col">
-                    <a href="#" class="dropdown-item">SimplifyQA</a>
-                    <a href="#" class="dropdown-item">Hire3x</a>
-                    <a href="#" class="dropdown-item">Walnut</a>
-                    <a href="#" class="dropdown-item">DevOps Arc</a>
-                    <a href="#" class="dropdown-item">Bominso</a>
-                    <a href="solutions.html" class="dropdown-item">Custom Solutions</a>
-                  </div>
-                </div>
-              </li>
-              <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                  Who we are
-                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;" src="assets/images/sidebar-arrow.svg" alt="">
-                </button>
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-col">
-                    <a href="about.html" class="dropdown-item">About Us</a>
-                    <a href="insights.html" class="dropdown-item">Insights</a>
-                    <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <a href="customer-stories.html" class="nav-link">
-                  Customer Stories
-                </a>
-              </li>
-
-              <li>
-                <a href="contact.html" class="nav-link">
-                  Contact now
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          <!-- Newsletter Section -->
-          <div class="mobile-newsletter">
-            <div class="newsletter-text">
-              <div class="gradient-heading-2">Stay Updated</div>
-              <div class="gradient-heading-2">With Our Newsletter</div>
-            </div>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
-              <input type="email" class="newsletter-input" placeholder="Your email" required />
-              <button type="submit" class="newsletter-button">Subscribe</button>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div id="loading-screen" class="load-back-1">
+        <div class="loader"></div>
+        <img class="load-logo-wid" style="position: absolute; bottom: 15vh;width: 200px;" src="assets/images/black-simp.svg" alt="Copora Logo">
     </div>
-  </header>
-
-  <div class="main-container">
-    <!-- Hero Section -->
-    <section class="solutions-hero">
-      <div class="container">
-        <div class="solutions-hero-content">
-          <div class="solutions-hero-left">
-            <h1 class="solutions-hero-title">Stories of Impact</h1>
-            <p class="solutions-hero-description">
-              Read about how our firms are working with clients to combine solutions with action.
-            </p>
-            <a href="#" class="btn btn-primary solutions-cta-btn">
-              <span class="btn-text">Read our latest case study</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </div>
-          <div class="solutions-hero-right">
-            <div class="solutions-hero-graphic">
-              <div class="graphic-circle"></div>
-              <div class="graphic-lines"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Real Connections Section -->
-    <section class="culture-s-section">
-      <div class="container">
-          <div class="flex-one" style="display: flex; justify-content: space-between; align-items: start; gap: 60px;">
-             <div>
-              <h2 class="gradient-heading" style="margin: 0; flex: 0 0 auto; max-width: 500px;">
-                  Our Culture
-              </h2>
-              <div class="culture-subtitle">Driven by Innovation, United by Purpose</div>
-             </div>
-              <div style="display: flex; align-items: start; gap: 13px;">
-                  <div class="about-vert-line"></div>
-                  <p class="gradient-description" style="border-left:unset;"><span style="font-weight: 600;">
-                      At Simplify3x, we believe in solving complex problems with simple, powerful
-                      solutions — together.
-                  </span><br/><br/> Our culture is built on collaboration, continuous learning, and the shared
-                      belief that great things happen when talented people work together toward a common goal.
-                       </p>
-              </div>
-          </div>
-        
-      </div>
-  </section>
-  <section class="digital-section">
-<div class="container">
-  <div class="mob-carousel cust height" style="overflow: hidden; position: relative;height: 630px;">
-    <div class="mob-carousel-track">
-      <div class="mob-slide active">
-        <div style="display: flex;justify-content: space-between;" class="mob-flex-col">
-          <div class="slide-info mob-w-100" style="width: 50%;">
-            <span class="text-tag">Development Services</span>
-            <h2 class="text-block-title">Digital Transformation</h2>
-            <p class="text-block-description hideinmobile">
-              We help businesses adopt digital technology across all
-              aspects of their operations, driving transformative change
-              in how they function and deliver value to customers. By
-              embedding technology at the core, we enable organizations to
-              stay competitive and future-ready.<br /><br />
-              Our approach includes developing solutions from the ground
-              up, integrating cloud platforms, modernizing applications,
-              implementing DevOps practices, and transitioning from
-              monolithic systems to microservices—ensuring agility,
-              efficiency, and innovation at every stage.
-            </p>
-            <p class="text-block-description hideinlaptop">
-              We help businesses adopt digital technology across all
-              aspects of their operations, driving transformative change
-              in how they function and deliver value to customers.
-            </p>
-            <a class="btn btn-primary w217">
-              <span class="btn-text">Explore more</span>
-            </a>
-          </div>
-          <img style="width: 45%;" class="mob-w-100" src="assets/images/new-img.png" alt="Why customers choose us 1">
-        </div>
-      </div>
-      <div class="mob-slide">
-        <div style="display: flex;justify-content: space-between;" class="mob-flex-col">
-          <div class="slide-info mob-w-100" style="width: 50%;">
-            <span class="text-tag">Testing Services</span>
-            <h2 class="text-block-title">Quality Assurance & Testing</h2>
-            <p class="text-block-description hideinmobile">
-              We offer end-to-end quality assurance to ensure digital
-              solutions perform reliably and align with business goals.
-              Our key capabilities include Test Management, Test Case
-              Repository, Custom Quality Metrics, and Optimization,
-              providing a strong foundation for delivering consistent
-              quality<br /><br />
-              These capabilities are supported by services such as
-              Product, Integration, Migration, UAT, Automation, and
-              Non-Functional Testing. 
-            </p>
-            <p class="text-block-description hideinlaptop">
-              We offer end-to-end quality assurance to ensure digital
-              solutions perform reliably and align with business goals
-            </p>
-            <a class="btn btn-primary w217">
-              <span class="btn-text">Explore more</span>
-            </a>
-          </div>
-          <img style="width: 45%;" class="mob-w-100" src="assets/images/new-img.png" alt="Why customers choose us 1">
-        </div>
-      </div>
-      <div class="mob-slide">
-        <div style="display: flex;justify-content: space-between;" class="mob-flex-col">
-          <div class="slide-info mob-w-100" style="width: 50%;">
-            <span class="text-tag">Recruitment & Staffing</span>
-            <h2 class="text-block-title">Global Staffing Solutions</h2>
-            <p class="text-block-description hideinmobile">
-              We provide scalable offshore operations and specialized
-              staffing services to quickly address talent shortages and
-              resource needs. With access to experts worldwide, businesses
-              can meet project demands efficiently and strengthen their
-              teams without delays.<br /><br />
-              Our solutions are tailored to align with your business
-              goals, ensuring the right talent is in place when you need
-              it most. This flexible and targeted approach helps
-              organizations scale confidently and stay ahead of evolving
-              demands
-            </p>
-            <p class="text-block-description hideinlaptop">
-              We provide scalable offshore operations and specialized
-              staffing services to quickly address talent shortages and
-              resource needs
-            </p>
-            <a class="btn btn-primary w217">
-              <span class="btn-text">Explore more</span>
-            </a>
-          </div>
-          <img style="width: 45%;" class="mob-w-100" src="assets/images/new-img.png" alt="Why customers choose us 1">
-        </div>
-      </div>
-    
-    
-    </div>
-
-    <div class="mob-carousel-dots"></div>
-  </div>
-</div>
-  </section>
-
-    <!-- Success Stories by Industry -->
-    <section class="cs-success-stories-section">
-      <div class="container">
-        <h2 class="section-title-2 text-center">Our Case Studies</h2>
-
-        <!-- Filter Buttons -->
-        <div class="cs-industry-filters">
-          <button class="cs-filter-btn cs-active" data-industry="all">All Case Studies</button>
-          <button class="cs-filter-btn" data-industry="testing">Testing Case Studies</button>
-          <button class="cs-filter-btn" data-industry="development">Development Case Studies</button>
-        </div>
-
-        <!-- Story Cards Grid -->
-        <div class="cs-stories-grid">
-          <div class="cs-story-card" data-industry="testing">
-            <div class="cs-story-icon">🧪</div>
-            <h3 class="cs-story-company">QualityFirst Corp</h3>
-            <p class="cs-story-industry">QA Testing Solutions</p>
-            <blockquote class="cs-story-quote">
-              "Simplify3x's comprehensive testing framework reduced our bug detection time by 70%.
-              We achieved 99.8% test coverage and zero production issues in the last quarter."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">AM</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Alex Martinez</div>
-                <div class="cs-author-role">QA Director, QualityFirst Corp</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="development">
-            <div class="cs-story-icon">💻</div>
-            <h3 class="cs-story-company">DevScale Dynamics</h3>
-            <p class="cs-story-industry">Custom Development</p>
-            <blockquote class="cs-story-quote">
-              "Their development team delivered our enterprise platform 40% faster than expected.
-              The scalable architecture supports 2M+ concurrent users with 99.9% uptime."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">SC</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Sarah Chen</div>
-                <div class="cs-author-role">VP of Engineering</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="testing">
-            <div class="cs-story-icon">🔍</div>
-            <h3 class="cs-story-company">TestMaster Solutions</h3>
-            <p class="cs-story-industry">Automated Testing</p>
-            <blockquote class="cs-story-quote">
-              "Automated testing implementation reduced our release cycle from 2 weeks to 3 days.
-              We eliminated 95% of manual testing while improving quality metrics."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">RJ</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Robert Johnson</div>
-                <div class="cs-author-role">Test Automation Lead</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="development">
-            <div class="cs-story-icon">🚀</div>
-            <h3 class="cs-story-company">InnovateTech Inc</h3>
-            <p class="cs-story-industry">Full-Stack Development</p>
-            <blockquote class="cs-story-quote">
-              "End-to-end development solution transformed our digital presence.
-              Our customer engagement increased by 180% and conversion rates by 120%."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">LW</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Lisa Wang</div>
-                <div class="cs-author-role">Head of Product</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="testing">
-            <div class="cs-story-icon">⚡</div>
-            <h3 class="cs-story-company">RapidTest Labs</h3>
-            <p class="cs-story-industry">Performance Testing</p>
-            <blockquote class="cs-story-quote">
-              "Performance testing identified critical bottlenecks before launch.
-              We optimized our system to handle 10x more traffic with 50% better response times."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">DK</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">David Kim</div>
-                <div class="cs-author-role">Performance Engineer</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="development">
-            <div class="cs-story-icon">🔧</div>
-            <h3 class="cs-story-company">BuildTech Systems</h3>
-            <p class="cs-story-industry">DevOps & Infrastructure</p>
-            <blockquote class="cs-story-quote">
-              "DevOps implementation streamlined our deployment pipeline.
-              We reduced deployment time by 85% and achieved zero-downtime releases."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">MT</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Maria Torres</div>
-                <div class="cs-author-role">DevOps Manager</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Additional Testing Case Studies -->
-          <div class="cs-story-card" data-industry="testing">
-            <div class="cs-story-icon">🛡️</div>
-            <h3 class="cs-story-company">SecureTest Pro</h3>
-            <p class="cs-story-industry">Security Testing</p>
-            <blockquote class="cs-story-quote">
-              "Security testing framework identified 15 critical vulnerabilities before production.
-              We achieved 100% security compliance and zero security incidents."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">JS</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">James Smith</div>
-                <div class="cs-author-role">Security Testing Lead</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="testing">
-            <div class="cs-story-icon">📱</div>
-            <h3 class="cs-story-company">MobileTest Solutions</h3>
-            <p class="cs-story-industry">Mobile Testing</p>
-            <blockquote class="cs-story-quote">
-              "Cross-platform mobile testing reduced our app crashes by 90%.
-              We achieved 4.8-star rating across all app stores with 99.5% stability."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">EM</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Emma Miller</div>
-                <div class="cs-author-role">Mobile QA Manager</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="testing">
-            <div class="cs-story-icon">🌐</div>
-            <h3 class="cs-story-company">WebTest Experts</h3>
-            <p class="cs-story-industry">Web Application Testing</p>
-            <blockquote class="cs-story-quote">
-              "Comprehensive web testing improved our user experience scores by 85%.
-              We eliminated 98% of browser compatibility issues across all platforms."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">CD</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Chris Davis</div>
-                <div class="cs-author-role">Web Testing Specialist</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Additional Development Case Studies -->
-          <div class="cs-story-card" data-industry="development">
-            <div class="cs-story-icon">🎨</div>
-            <h3 class="cs-story-company">DesignTech Studio</h3>
-            <p class="cs-story-industry">UI/UX Development</p>
-            <blockquote class="cs-story-quote">
-              "User-centered design approach increased our conversion rates by 200%.
-              Customer satisfaction scores improved from 3.2 to 4.7 out of 5."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">AB</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Anna Brown</div>
-                <div class="cs-author-role">UX Design Director</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="development">
-            <div class="cs-story-icon">📊</div>
-            <h3 class="cs-story-company">DataDev Solutions</h3>
-            <p class="cs-story-industry">Data Platform Development</p>
-            <blockquote class="cs-story-quote">
-              "Custom data platform processes 10TB daily with real-time analytics.
-              We reduced data processing time by 75% and improved decision-making speed."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">TG</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Tom Garcia</div>
-                <div class="cs-author-role">Data Engineering Lead</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-story-card" data-industry="development">
-            <div class="cs-story-icon">🔗</div>
-            <h3 class="cs-story-company">APIConnect Ltd</h3>
-            <p class="cs-story-industry">API Development</p>
-            <blockquote class="cs-story-quote">
-              "RESTful API development enabled seamless third-party integrations.
-              We reduced integration time by 80% and increased partner onboarding by 300%."
-            </blockquote>
-            <div class="cs-story-author">
-              <div class="cs-author-avatar">SL</div>
-              <div class="cs-author-info">
-                <div class="cs-author-name">Sam Lee</div>
-                <div class="cs-author-role">API Development Manager</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Show More Button -->
-        <div class="cs-show-more-container">
-          <button class="btn btn-primary cs-show-more-btn" id="showMoreBtn">
-            <span class="btn-text">Show More</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer show-talk-box">
-      <div style="position: relative; z-index: 2" class="container">
-       
-        <div class="footer-header">
-          <div class="width-1 hideinlaptop">
-            <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-          </div>
-          <div class="gradient-heading-2">Say hello <br class="hideinmobile"/>to us!</div>
-          <div class="flex-1">
-            <img src="assets/images/foot-call.svg" alt="">
-            <div class="text">
-              9898989898
-            </div>
-          </div>
-          <div class="flex-1">
-            <img src="assets/images/foot-mail.svg" alt="">
-            <div class="text">
-              hello@example.com
-            </div>
-          </div>
-          <div class="width-1 hideinmobile">
-            <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-          </div>
-        </div>
-        <div class="footer-content">
-          <div class="footer-main">
-            <div class="footer-links">
-              <div class="footer-column">
-                <h4 class="footer-column-title">Pages</h4>
-                <div class="footer-links-grid">
-                  <div class="links-group">
-                    <a href="#home" class="footer-link">Home</a>
-                    <a href="#" class="footer-link">About Us</a>
-                    <a href="#about" class="footer-link">Insights</a>
-                    <a href="#" class="footer-link">Life @ Simplify3x</a>
-
-                    <a href="#" class="footer-link">Customer Stories</a>
-                    <a href="#" class="footer-link">Custom Solutions</a>
-                  </div>
-                </div>
-              </div>
-              <div class="footer-column col-1">
-                <h4 class="footer-column-title">Products</h4>
-                <div class="footer-links-grid">
-                  <div class="links-group">
-                    <a href="#home" class="footer-link">SimplifyQA</a>
-                    <a href="#" class="footer-link">Hire3x</a>
-                    <a href="#about" class="footer-link">Walnut</a>
-                    <a href="#" class="footer-link">DevOps Arc</a>
-                    <a href="#" class="footer-link">Bominso</a>
-                  </div>
-                </div>
-              </div>
-              <div class="footer-column col-2">
-                <h4 class="footer-column-title">Support</h4>
-                <div class="footer-links-grid">
-                  <div class="links-group">
-                    <a href="#" class="footer-link">Contact Us</a>
-                    <a href="#" class="footer-link">Careers</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="footer-brand hideinlaptop hideinmobile">
-              <div class="laptop-newsletter">
-                <div class="newsletter-text">
-                  <div class="gradient-heading-2">Stay Updated</div>
-                  <div class="gradient-heading-2">With Our Newsletter</div>
-                </div>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); return false;" style="margin-top: 30px;">
-                  <input type="email" class="newsletter-input" placeholder="Your email" required />
-                  <button type="submit" class="newsletter-button">Subscribe</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-       
-      </div>
-      <div style="background-color: #151515;padding-bottom: 30px;">
+    <!-- Header copied from index -->
+    <header class="header other-pages">
         <div class="container">
-          <div class=" footer-bottom">
-           <div class="footer-social">
-             <a href="https://www.facebook.com/" class="social-link">
-               <img src="assets/images/foot-insta.svg"
-                 alt="Facebook" class="social-icon" />
-             </a>
-             <a href="https://in.linkedin.com/" class="social-link">
-               <img src="assets/images/foot-linked.svg"
-                 alt="LinkedIn" class="social-icon" />
-             </a>
-           </div>
-          </div>
-         </div>
-      </div>
-    </footer>
-  </div>
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html#home">
+                        <img src="assets/images/simp3x.svg" alt="Copora Logo">
+                    </a>
+                </div>
+                
+                <!-- Mobile hamburger button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+                
+                <div class="header-actions">
+                    <!-- Mobile Menu Header -->
+                    <div class="mobile-menu-header">
+                      <div class="mobile-menu-logo">
+                        <a href="#home">
+                          <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+                        </a>
+                      </div>
+                     
+                    </div>
+          
+                    <!-- Navigation -->
+                    <nav class="nav">
+                      <ul class="nav-list">
+                        <li class="dropdown">
+                          <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                            What we offer
+                            <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"  src="assets/images/sidebar-arrow.svg" alt="">
+                          </button>
+          
+                          <div class="dropdown-menu" role="menu">
+                            <div class="dropdown-col">
+                              <a href="#" class="dropdown-item">SimplifyQA</a>
+                              <a href="#" class="dropdown-item">Hire3x</a>
+                              <a href="#" class="dropdown-item">Walnut</a>
+                              <a href="#" class="dropdown-item">DevOps Arc</a>
+                              <a href="#" class="dropdown-item">Bominso</a>
+                              <a href="solutions.html" class="dropdown-item">Custom Solutions</a>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="dropdown">
+                          <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                            Who we are
+                            <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;" src="assets/images/sidebar-arrow.svg" alt="">
+                          </button>
+                          <div class="dropdown-menu" role="menu">
+                            <div class="dropdown-col">
+                              <a href="about.html" class="dropdown-item">About Us</a>
+                              <a href="insights.html" class="dropdown-item">Insights</a>
+                              <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
+                            </div>
+                          </div>
+                        </li>
+          
+                        <li>
+                          <a href="customer-stories.html" class="nav-link">
+                            Customer Stories
+                          </a>
+                        </li>
+          
+                        <li>
+                          <a href="contact.html" class="nav-link">
+                            Contact now
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+          
+                    <!-- Newsletter Section -->
+                    <div class="mobile-newsletter">
+                      <div class="newsletter-text">
+                        <div class="gradient-heading-2">Stay Updated</div>
+              <div class="gradient-heading-2">With Our Newsletter</div>
+                      </div>
+                      <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
+                        <input type="email" class="newsletter-input" placeholder="Your email" required />
+                        <button type="submit" class="newsletter-button">Subscribe</button>
+                      </form>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </header>
+    <main class="insights-part position-relative">
+        <section class="container position-relative z-2">
+            <div class="main-section">
+                <div class="gradient-heading-2 grad-mob fs-70 mb-4">The Simplify3x Blog</div>
+                <div class="hero-description text-center max-wid-unset">Exploring technology, business, and growth —
+                    simplified for you.</div>
+                <div class="flex">
+                    <div class="number-part-item-1">
+                        <div class="number-part-number">50+</div>
+                        <div class="number-part-text">Articles</div>
+                    </div>
+                    <div class="number-part-item-1">
+                        <div class="number-part-number">10K+</div>
+                        <div class="number-part-text">Readers</div>
+                    </div>
+                    <div class="number-part-item-1">
+                        <div class="number-part-number">5</div>
+                        <div class="number-part-text">Categories</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <main class="insights-card-parent">
+        <section class="container">
+            <div class="mob-carousel mob-rel hideinlaptop cust">
+                <div class="mob-carousel-track">
+                  <div class="mob-slide active">
+                    <div class="insights-card-item insights-card-featured">
+                        <div class="img-wrap"><img class="main-img"
+                                src="assets/images/6842c86b60c7281d07d47b27_blog-image-01.webp" alt=""></div>
+                        <div class="insights-card-item-content">
+                            <div class="flex">
+                                <div class="tag">AI & Technology</div>
+                                <div class="date-text">June 20, 2025</div>
+                            </div>
+                            <div class="insights-card-item-content-title">Why your company needs a strategic roadmap in
+                                2025</div>
+                            <div class="insights-card-item-content-date">Discover how artificial intelligence is
+                                revolutionizing enterprise operations and what this means for the future of business
+                                automation. Learn about the latest trends, challenges, and opportunities in AI
+                                implementation.</div>
+                            <div class="insights-card-item-content-by">~ By John Doe</div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="mob-slide">
+                    <div class="insights-card-item insights-card-row">
+                        <div class="img-wrap"><img class="main-img"
+                                src="assets/images/6842cdf86dab0092b0494e83_blog-image-003.webp" alt=""></div>
+                        <div class="insights-card-item-content">
+                            <div class="flex">
+                                <div class="tag">Strategy</div>
+                                <div class="date-text">May 5, 2025</div>
+                            </div>
+                            <div class="insights-card-item-content-title">Operational excellence through data</div>
+                            <div class="insights-card-item-content-date">Discover how artificial intelligence is
+                                revolutionizing enterprise operations and what this means for the future of business
+                                automation. Learn about the latest trends, challenges.</div>
+                            <div class="insights-card-item-content-by">~ By Mary Stone</div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="mob-slide">
+                    <div class="insights-card-item insights-card-row">
+                        <div class="img-wrap"><img class="main-img"
+                                src="assets/images/6842ce1149a8de496b560ce4_blog-image-004.webp" alt=""></div>
+                        <div class="insights-card-item-content">
+                            <div class="flex">
+                                <div class="tag">Growth</div>
+                                <div class="date-text">Apr 2, 2025</div>
+                            </div>
+                            <div class="insights-card-item-content-title">Scaling teams without friction</div>
+                            <div class="insights-card-item-content-date">Discover how artificial intelligence is
+                                revolutionizing enterprise operations and what this means for the future of business
+                                automation. Learn about the latest trends, challenges.</div>
+                            <div class="insights-card-item-content-by">~ By Alex Lee</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="mob-carousel-dots"></div>
+              </div>
+            <div class="insights-layout hideinmobile">
+                <div class="insights-col-left">
+                    <!-- Featured left card (image left, text right) -->
+                    <div class="insights-card-item insights-card-featured">
+                        <div class="img-wrap"><img class="main-img"
+                                src="assets/images/6842c86b60c7281d07d47b27_blog-image-01.webp" alt=""></div>
+                        <div class="insights-card-item-content">
+                            <div class="flex">
+                                <div class="tag">AI & Technology</div>
+                                <div class="date-text">June 20, 2025</div>
+                            </div>
+                            <div class="insights-card-item-content-title">Why your company needs a strategic roadmap in
+                                2025</div>
+                            <div class="insights-card-item-content-date">Discover how artificial intelligence is
+                                revolutionizing enterprise operations and what this means for the future of business
+                                automation. Learn about the latest trends, challenges, and opportunities in AI
+                                implementation.</div>
+                            <div class="insights-card-item-content-by">~ By John Doe</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insights-col-right">
+                    <!-- Top right card -->
+                    <div class="insights-card-item insights-card-row">
+                        <div class="img-wrap"><img class="main-img"
+                                src="assets/images/6842cdf86dab0092b0494e83_blog-image-003.webp" alt=""></div>
+                        <div class="insights-card-item-content">
+                            <div class="flex">
+                                <div class="tag">Strategy</div>
+                                <div class="date-text">May 5, 2025</div>
+                            </div>
+                            <div class="insights-card-item-content-title">Operational excellence through data</div>
+                            <div class="insights-card-item-content-date">Discover how artificial intelligence is
+                                revolutionizing enterprise operations and what this means for the future of business
+                                automation. Learn about the latest trends, challenges.</div>
+                            <div class="insights-card-item-content-by">~ By Mary Stone</div>
+                        </div>
+                    </div>
+                    <!-- Bottom right card -->
+                    <div class="insights-card-item insights-card-row">
+                        <div class="img-wrap"><img class="main-img"
+                                src="assets/images/6842ce1149a8de496b560ce4_blog-image-004.webp" alt=""></div>
+                        <div class="insights-card-item-content">
+                            <div class="flex">
+                                <div class="tag">Growth</div>
+                                <div class="date-text">Apr 2, 2025</div>
+                            </div>
+                            <div class="insights-card-item-content-title">Scaling teams without friction</div>
+                            <div class="insights-card-item-content-date">Discover how artificial intelligence is
+                                revolutionizing enterprise operations and what this means for the future of business
+                                automation. Learn about the latest trends, challenges.</div>
+                            <div class="insights-card-item-content-by">~ By Alex Lee</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <main class="tabs-part">
+        <section class="container">
+            <div class="tabs-bar">
+                <button class="tab-button active" type="button">All Posts</button>
+                <button class="tab-button" type="button">AI & Technology</button>
+                <button class="tab-button" type="button">Business Growth</button>
+                <button class="tab-button" type="button">Leadership</button>
+                <button class="tab-button" type="button">Innovation</button>
+            </div>
+        </section>
+    </main>
 
-  <script src="js/script.js"></script>
-  <script src="js/mobscript.js"></script>
+    <main class="insights-grid-part">
+        <section class="container">
+            <div class="insights-grid">
+                <!-- Featured card spanning two columns -->
+                <article class="insights-card-item span-2">
+                    <div class="img-wrap"><img class="main-img"
+                            src="assets/images/6842c86b60c7281d07d47b27_blog-image-01.webp" alt=""></div>
+                    <div class="insights-card-item-content">
+                        <div class="flex insights-card-meta">
+                            <div class="tag">Business Growth</div>
+                            <div class="date-text">March 10, 2024</div>
+                        </div>
+                        <div class="insights-card-item-content-title">Scaling Your Business with Digital Transformation
+                        </div>
+                        <div class="insights-card-item-content-date">Learn the key strategies and technologies that
+                            successful companies use to scale their operations and drive sustainable growth.</div>
+                            <div class="insights-card-item-content-by">~ By John Doe</div>
+                    </div>
+                </article>
+
+                <!-- Right column top card -->
+                <article class="insights-card-item">
+                    <div class="img-wrap"><img class="main-img"
+                            src="assets/images/6842ce1149a8de496b560ce4_blog-image-004.webp" alt=""></div>
+                    <div class="insights-card-item-content">
+                        <div class="flex insights-card-meta">
+                            <div class="tag">Leadership</div>
+                            <div class="date-text">March 5, 2024</div>
+                        </div>
+                        <div class="insights-card-item-content-title">Building High-Performance Teams</div>
+                        <div class="insights-card-item-content-date">Essential leadership principles for creating and
+                            managing high‑performing technology teams.</div>
+                            <div class="insights-card-item-content-by">~ By John Doe</div>
+                    </div>
+                </article>
+
+                <!-- Bottom left large card -->
+                <article class="insights-card-item">
+                    <div class="img-wrap"><img class="main-img" src="assets/images/robot.webp" alt=""></div>
+                    <div class="insights-card-item-content">
+                        <div class="flex insights-card-meta">
+                            <div class="tag">Innovation</div>
+                            <div class="date-text">Feb 28, 2024</div>
+                        </div>
+                        <div class="insights-card-item-content-title">Innovation Through Simplicity</div>
+                        <div class="insights-card-item-content-date">How simplifying complex processes can lead to
+                            breakthrough innovations and competitive advantages.How simplifying </div>
+                            <div class="insights-card-item-content-by">~ By John Doe</div>
+                    </div>
+                </article>
+
+                <!-- Bottom middle card -->
+                <article class="insights-card-item">
+                    <div class="img-wrap"><img class="main-img"
+                            src="assets/images/6842cca2debce9f99ff675c3_blog-image-002.webp" alt=""></div>
+                    <div class="insights-card-item-content">
+                        <div class="flex insights-card-meta">
+                            <div class="tag">AI & Technology</div>
+                            <div class="date-text">Feb 20, 2024</div>
+                        </div>
+                        <div class="insights-card-item-content-title">Machine Learning in Business Analytics</div>
+                        <div class="insights-card-item-content-date">How simplifying complex processes can lead to
+                            breakthrough innovations and competitive advantages.</div>
+                            <div class="insights-card-item-content-by">~ By John Doe</div>
+                    </div>
+                </article>
+
+                <!-- Bottom right card -->
+                <article class="insights-card-item">
+                    <div class="img-wrap"><img class="main-img"
+                            src="assets/images/6842cdf86dab0092b0494e83_blog-image-003.webp" alt=""></div>
+                    <div class="insights-card-item-content">
+                        <div class="flex insights-card-meta">
+                            <div class="tag">Business Growth</div>
+                            <div class="date-text">Feb 15, 2024</div>
+                        </div>
+                        <div class="insights-card-item-content-title">Digital Strategy for Modern Enterprises</div>
+                        <div class="insights-card-item-content-date">How simplifying complex processes can lead to
+                            breakthrough innovations and competitive advantages.</div>
+                            <div class="insights-card-item-content-by">~ By John Doe</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer copied from index -->
+    <footer class="footer show-talk-box">
+        <div style="position: relative; z-index: 2" class="container">
+         
+          <div class="footer-header">
+            <div class="width-1 hideinlaptop">
+              <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
+            </div>
+            <div class="gradient-heading-2">Say hello <br class="hideinmobile"/>to us!</div>
+            <div class="flex-1">
+              <img src="assets/images/foot-call.svg" alt="">
+              <div class="text">
+                9898989898
+              </div>
+            </div>
+            <div class="flex-1">
+              <img src="assets/images/foot-mail.svg" alt="">
+              <div class="text">
+                hello@example.com
+              </div>
+            </div>
+            <div class="width-1 hideinmobile">
+              <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
+            </div>
+          </div>
+          <div class="footer-content">
+            <div class="footer-main">
+              <div class="footer-links">
+                <div class="footer-column">
+                  <h4 class="footer-column-title">Pages</h4>
+                  <div class="footer-links-grid">
+                    <div class="links-group">
+                      <a href="#home" class="footer-link">Home</a>
+                      <a href="#" class="footer-link">About Us</a>
+                      <a href="#about" class="footer-link">Insights</a>
+                      <a href="#" class="footer-link">Life @ Simplify3x</a>
+  
+                      <a href="#" class="footer-link">Customer Stories</a>
+                      <a href="#" class="footer-link">Custom Solutions</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-column col-1">
+                  <h4 class="footer-column-title">Products</h4>
+                  <div class="footer-links-grid">
+                    <div class="links-group">
+                      <a href="#home" class="footer-link">SimplifyQA</a>
+                      <a href="#" class="footer-link">Hire3x</a>
+                      <a href="#about" class="footer-link">Walnut</a>
+                      <a href="#" class="footer-link">DevOps Arc</a>
+                      <a href="#" class="footer-link">Bominso</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-column col-2">
+                  <h4 class="footer-column-title">Support</h4>
+                  <div class="footer-links-grid">
+                    <div class="links-group">
+                      <a href="#" class="footer-link">Contact Us</a>
+                      <a href="#" class="footer-link">Careers</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-brand hideinlaptop hideinmobile">
+                <div class="laptop-newsletter">
+                  <div class="newsletter-text">
+                    <div class="gradient-heading-2">Stay Updated</div>
+                    <div class="gradient-heading-2">With Our Newsletter</div>
+                  </div>
+                  <form class="newsletter-form" onsubmit="event.preventDefault(); return false;" style="margin-top: 30px;">
+                    <input type="email" class="newsletter-input" placeholder="Your email" required />
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+        <div style="background-color: #151515;padding-bottom: 30px;">
+          <div class="container">
+            <div class=" footer-bottom">
+             <div class="footer-social">
+               <a href="https://www.facebook.com/" class="social-link">
+                 <img src="assets/images/foot-insta.svg"
+                   alt="Facebook" class="social-icon" />
+               </a>
+               <a href="https://in.linkedin.com/" class="social-link">
+                 <img src="assets/images/foot-linked.svg"
+                   alt="LinkedIn" class="social-icon" />
+               </a>
+             </div>
+            </div>
+           </div>
+        </div>
+      </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/mobscript.js"></script>
 </body>
 
 </html>
