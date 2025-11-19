@@ -2750,19 +2750,19 @@ select option[disabled] {
 }
 
 .paper-1 img {
-    width: 45px;
+    width: 40px;
 }
 
 .paper-2 img {
-    width: 60px;
+    width: 55px;
 }
 
 .paper-3 img {
-    height: 45px;
+    height: 40px;
 }
 
 .paper-4 img {
-    width: 45px;
+    width: 40px;
 }
 
 
@@ -2884,21 +2884,9 @@ select option[disabled] {
 .folder__back {
     position: relative;
     width: 100px;
-    height: 80px;
-    background: var(--folder-back-color, #4785ff);
+    height: 65px;
+    background: #fb6630 !important;
     border-radius: 0px 10px 10px 10px;
-}
-
-.folder__back::after {
-    position: absolute;
-    z-index: 0;
-    bottom: 98%;
-    left: 0;
-    content: '';
-    width: 30px;
-    height: 10px;
-    background: var(--folder-back-color, #4785ff);
-    border-radius: 5px 5px 0 0;
 }
 
 .paper {
@@ -2946,8 +2934,8 @@ select option[disabled] {
     z-index: 3;
     width: 100%;
     height: 100%;
-    background: var(--folder-color, #70a1ff);
-    border-radius: 5px 10px 10px 10px;
+    background: #ff7f51 !important;
+    border-radius: 5px 0px 10px 10px;
     transform-origin: bottom;
     transition: all 0.3s ease-in-out;
 }
