@@ -1589,8 +1589,8 @@ if (folder) {
   }
 
   // Set folder colors
-  const folderColor = '#FF6B35';
-  const folderBackColor = darkenColor(folderColor, 0.08);
+  // const folderColor = '#FF6B35';
+  // const folderBackColor = darkenColor(folderColor, 0.08);
   const paper1 = darkenColor('#ffffff', 0.1);
   const paper2 = darkenColor('#ffffff', 0.05);
   const paper3 = '#ffffff';
@@ -1599,16 +1599,16 @@ if (folder) {
   function initializeFolder(folder) {
     if (!folder) return;
 
-    const folderBack = folder.querySelector('.folder__back');
-    if (folderBack) {
-      folderBack.style.setProperty('--folder-color', folderColor);
-      folderBack.style.setProperty('--folder-back-color', folderBackColor);
-      folderBack.style.background = folderBackColor;
-    }
+    // const folderBack = folder.querySelector('.folder__back');
+    // if (folderBack) {
+    //   folderBack.style.setProperty('--folder-color', folderColor);
+    //   folderBack.style.setProperty('--folder-back-color', folderBackColor);
+    //   folderBack.style.background = folderBackColor;
+    // }
 
-    folder.querySelectorAll('.folder__front').forEach(front => {
-      front.style.background = folderColor;
-    });
+    // folder.querySelectorAll('.folder__front').forEach(front => {
+    //   front.style.background = folderColor;
+    // });
 
     const papers = folder.querySelectorAll('.paper');
     papers.forEach((paper, index) => {
@@ -1863,29 +1863,29 @@ if (folder) {
 
   // Initialize each folder
   folders.forEach((folder) => {
-    const container = folder.closest('.folder-container');
+    // const container = folder.closest('.folder-container');
     const color = container?.dataset.color || '#fb6630';
-    const folderBackColor = darkenColor(color, 0.1);
+    // const folderBackColor = darkenColor(color, 0.1);
     const paper1 = darkenColor('#fcfcfc', 0.01);
     const paper2 = darkenColor('#fcfcfc', 0.01);
     const paper3 = '#ffffff';
 
     // Set CSS variables
-    const folderBack = folder.querySelector('.folder__back');
-    folderBack.style.setProperty('--folder-color', color);
-    folderBack.style.setProperty('--folder-back-color', folderBackColor);
+    // const folderBack = folder.querySelector('.folder__back');
+    // folderBack.style.setProperty('--folder-color', color);
+    // folderBack.style.setProperty('--folder-back-color', folderBackColor);
     folderBack.style.setProperty('--paper-1', paper1);
     folderBack.style.setProperty('--paper-2', paper2);
     folderBack.style.setProperty('--paper-3', paper3);
 
     // Apply colors to elements
-    folderBack.style.background = folderBackColor;
-    const afterElement = folderBack;
-    afterElement.style.setProperty('--folder-back-color', folderBackColor);
+    // folderBack.style.background = folderBackColor;
+    // const afterElement = folderBack;
+    // afterElement.style.setProperty('--folder-back-color', folderBackColor);
 
-    folder.querySelectorAll('.folder__front').forEach(front => {
-      front.style.background = color;
-    });
+    // folder.querySelectorAll('.folder__front').forEach(front => {
+    //   front.style.background = color;
+    // });
 
     const papers = folder.querySelectorAll('.paper');
     papers.forEach((paper, index) => {

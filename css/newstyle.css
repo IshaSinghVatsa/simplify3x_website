@@ -437,6 +437,15 @@
     margin-top: 10px;
 }
 
+.s-tabs-part {
+    padding: 90px 0 50px;
+}
+
+.s-tabs-part .container {
+    display: flex;
+    justify-content: center;
+}
+
 /* Tabs bar */
 .tabs-part {
     padding: 24px 0 80px;
@@ -966,8 +975,8 @@
 }
 
 .digital-section{
-    background-color: #fff;
-    padding: 90px 0 40px 0;
+    background-color: #f9f9f9;
+    padding: 90px 0 60px 0;
 }
 .digital-section .mob-slide{
     height: fit-content;
