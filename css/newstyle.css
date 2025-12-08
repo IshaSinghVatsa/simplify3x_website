@@ -3378,3 +3378,8 @@ select option[disabled] {
 .footer-header .width-1 {
     width: 29%;
 }
+
+.res-breaker{
+    background-color: #f8fafc;
+    padding: 90px 0;
+}
