@@ -1685,9 +1685,9 @@ if (folder) {
   // Set folder colors
   // const folderColor = '#FF6B35';
   // const folderBackColor = darkenColor(folderColor, 0.08);
-  const paper1 = darkenColor('#ffffff', 0.1);
-  const paper2 = darkenColor('#ffffff', 0.05);
-  const paper3 = '#ffffff';
+  const paper1 = darkenColor('#fcfcfc', 0.01);
+    const paper2 = darkenColor('#fcfcfc', 0.01);
+    const paper3 = '#ffffff';
 
   // Initialize folder function
   function initializeFolder(folder) {

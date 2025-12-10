@@ -1815,8 +1815,14 @@ body::-webkit-scrollbar {
 .mob-slide {
   flex: 0 0 100%;
 }
-
-
+.mob-slide > div{
+width: 100%;
+max-width: 1425px;
+}
+.digital-section .container{
+  width: 100%;
+  max-width: 100%;
+}
 .presence-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
