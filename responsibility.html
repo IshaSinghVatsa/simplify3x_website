@@ -1,501 +1,677 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simplify3x</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/newstyle.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/newstyle.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet" />
-</head>
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <div id="loading-screen" class="load-back-1">
-        <div class="loader"></div>
-        <img class="load-logo-wid" style="position: absolute; bottom: 15vh;width: 200px;" src="assets/images/black-simp.svg" alt="Copora Logo">
+      <div class="loader"></div>
+      <img
+        class="load-logo-wid"
+        style="position: absolute; bottom: 15vh; width: 200px"
+        src="assets/images/black-simp.svg"
+        alt="Copora Logo"
+      />
     </div>
     <header class="header other-pages">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html#home">
-                        <img src="assets/images/simp3x.svg" alt="Copora Logo">
-                    </a>
-                </div>
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="index.html#home">
+              <img src="assets/images/simp3x.svg" alt="Copora Logo" />
+            </a>
+          </div>
 
-                <!-- Mobile hamburger button -->
-                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
+          <!-- Mobile hamburger button -->
+          <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
 
-                <div class="header-actions">
-                    <!-- Mobile Menu Header -->
-                    <div class="mobile-menu-header">
-                        <div class="mobile-menu-logo">
-                            <a href="#home">
-                                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
-                            </a>
+          <div class="header-actions">
+            <!-- Mobile Menu Header -->
+            <div class="mobile-menu-header">
+              <div class="mobile-menu-logo">
+                <a href="#home">
+                  <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+                </a>
+              </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="nav">
+              <ul class="nav-list">
+                <li class="dropdown">
+                  <button
+                    class="nav-link dropdown-toggle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    What we offer
+                    <img
+                      class="hideinlaptop"
+                      style="margin-left: 10px; margin-top: 10px"
+                      src="assets/images/sidebar-arrow.svg"
+                      alt=""
+                    />
+                  </button>
+
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-col">
+                      <a href="#" class="dropdown-item">SimplifyQA</a>
+                      <a href="#" class="dropdown-item">Hire3x</a>
+                      <a href="#" class="dropdown-item">Walnut</a>
+                      <a href="#" class="dropdown-item">DevOps Arc</a>
+                      <a href="#" class="dropdown-item">Bominso</a>
+                      <div class="dropdown-has-submenu">
+                        <div class="dropdown-item dropdown-item-has-submenu">
+                          Custom Solutions
+                          <div class="dropdown-submenu">
+                            <a
+                              href="solutions.html"
+                              class="dropdown-submenu-item"
+                              >Quality Assurance Solution</a
+                            >
+                            <a
+                              href="devSolutions.html"
+                              class="dropdown-submenu-item"
+                              >Digital Transformation Solution</a
+                            >
+                          </div>
                         </div>
-
+                      </div>
                     </div>
-
-                    <!-- Navigation -->
-                    <nav class="nav">
-                        <ul class="nav-list">
-                            <li class="dropdown">
-                                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    What we offer
-                                    <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"
-                                        src="assets/images/sidebar-arrow.svg" alt="">
-                                </button>
-
-                                <div class="dropdown-menu" role="menu">
-                                    <div class="dropdown-col">
-                                        <a href="#" class="dropdown-item">SimplifyQA</a>
-                                        <a href="#" class="dropdown-item">Hire3x</a>
-                                        <a href="#" class="dropdown-item">Walnut</a>
-                                        <a href="#" class="dropdown-item">DevOps Arc</a>
-                                        <a href="#" class="dropdown-item">Bominso</a>
-                                        <div class="dropdown-has-submenu">
-                                            <div  class="dropdown-item dropdown-item-has-submenu">
-                                              Custom Solutions
-                                              <div class="dropdown-submenu">
-                                                <a href="solutions.html" class="dropdown-submenu-item">Tech Solutions</a>
-                                                <a href="devSolutions.html" class="dropdown-submenu-item">Dev Solutions</a>
-                                              </div>
-                                            </div>
-                                          </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Who we are
-                                    <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;"
-                                        src="assets/images/sidebar-arrow.svg" alt="">
-                                </button>
-                                <div class="dropdown-menu" role="menu">
-                                    <div class="dropdown-col">
-                                        <a href="about.html" class="dropdown-item">About Us</a>
-                                        <a href="insights.html" class="dropdown-item">Insights</a>
-                                        <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <a href="customer-stories.html" class="nav-link">
-                                    Customer Stories
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="contact.html" class="nav-link">
-                                    Contact now
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-
-                    <!-- Newsletter Section -->
-                    <div class="mobile-newsletter">
-                        <div class="newsletter-text">
-                            <div class="gradient-heading-2">Stay Updated</div>
-                            <div class="gradient-heading-2">With Our Newsletter</div>
-                        </div>
-                        <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
-                            <input type="email" class="newsletter-input" placeholder="Your email" required />
-                            <button type="submit" class="newsletter-button">Subscribe</button>
-                        </form>
+                  </div>
+                </li>
+                <li class="dropdown">
+                  <button
+                    class="nav-link dropdown-toggle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Who we are
+                    <img
+                      class="hideinlaptop"
+                      style="margin-left: 10px; margin-top: 10px"
+                      src="assets/images/sidebar-arrow.svg"
+                      alt=""
+                    />
+                  </button>
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-col">
+                      <a href="about.html" class="dropdown-item">About Us</a>
+                      <a href="insights.html" class="dropdown-item">Insights</a>
+                      <a href="life.html" class="dropdown-item"
+                        >Life @ Simplify3x</a
+                      >
                     </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <main class="life-part">
-        <section class="container position-relative z-2">
-            <div class="life-hero">
-                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"
-                    alt="Team working" class="life-hero-bg-media" />
-                <div class="life-hero-content">
-                    <h1 class="gradient-heading-2 grad-mob fs-70 mb-3" style="justify-self: center;">Social Responsibility
-                    </h1>
-                    <p class="hero-description">Where innovation meets people, and work feels inspiring.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-    <section class="culture-section mob-rel">
-        <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt="">
-        <div class="container">
-            <div class="flex-one mob-rel"
-                style="display: flex;  align-items: start; gap: 100px; z-index: 6;">
-                
-                <div style="display: flex; align-items: start; width: 50%;height: 350px;">
-                  <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 5px;" src="assets/images/6830493b27791a78a9f46410_hero-sm-image-02.jpg" alt="Social Responsibility">
-                </div>
-                <div style="width: 50%;">
-                    <h2 class="gradient-heading life-1" style="margin: 0; flex: 0 0 auto;">
-                        Our Culture
-                    </h2>
-                    <p class="gradient-description" style="border-left:unset;padding-left: 0;">
-                        At our core, we are a purpose-driven organization, striving to create a lasting impact not only for our stakeholders but also for the communities we serve by leveraging our resources, people, and practices to advance CSR initiatives. As steadfast corporate citizens, we are resolute in our ambition to be exemplary role models.
-                    </p>
-                </div>
-            </div>
+                  </div>
+                </li>
 
-        </div>
-    </section>
-    <main class="res-breaker">
-        <div class="container">
-            <div class="flex-one mob-rel"
-                style="display: flex;  align-items: start; gap: 100px; z-index: 6;">
-                <div style="width: 50%;">
-                    <h2 class="gradient-heading life-1" style="margin: 0; flex: 0 0 auto;">
-                        Firstsource is committed to advancing its CSR objectives through its overarching vision:
-                    </h2>
-                   
-                </div>
-                <div style="display: flex; align-items: start; width: 50%;height: 350px;">
-                  <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 5px;" src="assets/images/6830493b27791a78a9f46410_hero-sm-image-02.jpg" alt="Social Responsibility">
-                </div>
-               
-            </div>
+                <li>
+                  <a href="customer-stories.html" class="nav-link">
+                    Customer stories
+                  </a>
+                </li>
 
-        </div>
-    </main>
-    <section class="culture-section mob-rel">
-        <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt="">
-        <div class="container">
-            <div class="flex-one mob-rel"
-                style="display: flex;  align-items: start; gap: 100px; z-index: 6;">
-                
-                <div style="display: flex; align-items: start; width: 50%;height: 350px;">
-                  <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 5px;" src="assets/images/6830493b27791a78a9f46410_hero-sm-image-02.jpg" alt="Social Responsibility">
-                </div>
-                <div style="width: 50%;">
-                    <h2 class="gradient-heading life-1" style="margin: 0; flex: 0 0 auto;">
-                        What we impact
-                    </h2>
-                    <div class="gradient-description" style="border-left:unset;padding-left: 0;">We aim to make a positive impact on society in harmony with our Group’s overarching mission to empower lives through education, healthcare, gender equality, and addressing various social concerns</div>
-                    <ul class="csr-impact-list">
-                        <li>Education</li>
-                        <li>Environment</li>
-                        <li>Art & Culture</li>
-                    </ul>
-                </div>
-            </div>
+                <li>
+                  <a href="contact.html" class="nav-link"> Contact now </a>
+                </li>
+              </ul>
+            </nav>
 
-        </div>
-    </section>
-    <section class="culture-section mob-rel">
-        <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt="">
-        <div class="container">
-            <div class="flex-one mob-rel"
-                style="display: flex;  align-items: start; gap: 100px; z-index: 6;">
-                <div style="width: 50%;">
-                    <h2 class="gradient-heading life-1" style="margin: 0; flex: 0 0 auto;">
-                        How we impact
-                    </h2>
-                    <div class="gradient-description" style="border-left:unset;padding-left: 0;">We have a cohesive strategy that includes CSR projects, employee giving, volunteering, leadership representation, impact sourcing, and special initiatives to create a well-rounded approach.</div>
-                    <ul class="csr-impact-list">
-                        <li>Education</li>
-                        <li>Environment</li>
-                        <li>Art & Culture</li>
-                    </ul>
-                </div>
-                <div style="display: flex; align-items: start; width: 50%;height: 350px;">
-                  <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 5px;" src="assets/images/6830493b27791a78a9f46410_hero-sm-image-02.jpg" alt="Social Responsibility">
-                </div>
-                
-            </div>
-
-        </div>
-    </section>
-   
-    <section class="life-beyond">
-        
-        <div class="marquee" id="marquee">
-            <div class="marquee-track" id="marquee-track">
-                <!-- Content will be injected by JS -->
-            </div>
-        </div>
-    </section>
-
-
-    <script>
-        (function () {
-            var images = [
-                'assets/images/front-girl.jpg',
-                'assets/images/68314ec582b2956a9125402e_hero-image-02.jpg',
-                'assets/images/laptop.jpg',
-                'assets/images/fuutre-r.jpg',
-                'assets/images/trust.jpg',
-                'assets/images/inclusivity.jpg',
-                'assets/images/impact.jpg',
-                'assets/images/683402267e12e0bbfdb7f14c_a5bbe35d323660fa5848dc7f66f36921_about-image.jpg',
-                'assets/images/683543557f15cafe06b24971_work-step-01.jpg',
-                'assets/images/6836e5f5a4694c074d2325de_52291f00d7062ab738d0995727ef25e8_Smiling Asian Woman.jpg',
-                'assets/images/683d2d05d00a93e7ae267f3f_e24aa2f05c8041e6c7d2b276720729e6_Stylish Urban Portrait.jpg',
-                'assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg',
-                'assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg'
-            ];
-
-            function shuffle(arr) {
-                var a = arr.slice();
-                for (var i = a.length - 1; i > 0; i--) {
-                    var j = Math.floor(Math.random() * (i + 1));
-                    var t = a[i];
-                    a[i] = a[j];
-                    a[j] = t;
-                }
-                return a;
-            }
-
-            var cards = document.querySelectorAll('.voices-track .voice-card');
-            var pool = shuffle(images);
-            cards.forEach(function (card, idx) {
-                var img = pool[idx % pool.length];
-                card.style.setProperty('--image', "url('" + img + "')");
-            });
-        })();
-    </script>
-
-
-    <script>
-        // Photo metadata - you can update names and titles here
-        // The photos array is automatically generated from photoData keys
-        const photoData = {
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife1.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife2.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife3.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife4.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife5.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife6.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife7.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife30.jpeg": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife10.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife12.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife13.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife23.jpg": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife15.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife16.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife14.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife17.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife18.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife20.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife25.jpg": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife24.jpg": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife19.JPG": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife26.jpg": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife27.jpg": { name: "Name Here", title: "Title/Description" },
-            "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife28.jpg": { name: "Name Here", title: "Title/Description" },
-        };
-
-        // Generate photos array from photoData keys (no duplication needed)
-        const photos = Object.keys(photoData);
-
-        const track = document.getElementById('marquee-track');
-
-        function injectPhotos() {
-            let columnCount = 0;
-
-            // First set of columns
-            for (let i = 0; i < photos.length; i += 2) {
-                if (i + 1 < photos.length) {
-                    createColumn(photos[i], photos[i + 1], columnCount);
-                    columnCount++;
-                }
-            }
-
-            // Duplicate 3-4 times to ensure it covers wide screens
-            for (let duplicate = 0; duplicate < 3; duplicate++) {
-                for (let i = 0; i < photos.length; i += 2) {
-                    if (i + 1 < photos.length) {
-                        createColumn(photos[i], photos[i + 1], columnCount);
-                        columnCount++;
-                    }
-                }
-            }
-        }
-
-        function createImageWithOverlay(imgUrl, sizeClass) {
-            const imgDiv = document.createElement('div');
-            imgDiv.className = `marquee-img ${sizeClass}`;
-            imgDiv.style.backgroundImage = `url('${imgUrl}')`;
-            imgDiv.style.position = 'relative';
-
-            // Get photo data or use defaults
-            const data = photoData[imgUrl] || { name: "Name Here", title: "Title/Description" };
-
-            // Create overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'marquee-img-overlay';
-
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'marquee-overlay-name';
-            nameDiv.textContent = data.name;
-
-            const titleDiv = document.createElement('div');
-            titleDiv.className = 'marquee-overlay-title';
-            titleDiv.textContent = data.title;
-
-            overlay.appendChild(nameDiv);
-            overlay.appendChild(titleDiv);
-            imgDiv.appendChild(overlay);
-
-            return imgDiv;
-        }
-
-        function createColumn(img1, img2, columnIndex) {
-            const column = document.createElement('div');
-            column.className = 'marquee-column';
-
-            const isEvenColumn = columnIndex % 2 === 0;
-
-            if (isEvenColumn) {
-                // Even columns: 2:1 ratio (large on top, small on bottom)
-                const imgLarge = createImageWithOverlay(img1, 'marquee-img-large');
-                const imgSmall = createImageWithOverlay(img2, 'marquee-img-small');
-
-                column.appendChild(imgLarge);
-                column.appendChild(imgSmall);
-            } else {
-                // Odd columns: 1:2 ratio (small on top, large on bottom)
-                const imgSmall = createImageWithOverlay(img1, 'marquee-img-small');
-                const imgLarge = createImageWithOverlay(img2, 'marquee-img-large');
-
-                column.appendChild(imgSmall);
-                column.appendChild(imgLarge);
-            }
-
-            track.appendChild(column);
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            injectPhotos();
-        });
-
-        // Pause on hover
-        let hoverTimer;
-        track.parentElement.addEventListener('mouseover', () => {
-            hoverTimer = setTimeout(() => track.classList.add('paused'), 300);
-        });
-        track.parentElement.addEventListener('mouseout', () => {
-            clearTimeout(hoverTimer);
-            track.classList.remove('paused');
-        });
-    </script>
-
-<footer class="footer show-talk-box">
-    <div style="position: relative; z-index: 2" class="container">
-     
-      <div class="footer-header">
-        <div class="width-1 hideinlaptop">
-          <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-        </div>
-        <div class="gradient-heading-2">Say hello <br class="hideinmobile"/>to us!</div>
-        <div class="flex-1">
-          <img src="assets/images/foot-call.svg" alt="">
-          <div class="text">
-            9898989898
-          </div>
-        </div>
-        <div class="flex-1">
-          <img src="assets/images/foot-mail.svg" alt="">
-          <div class="text">
-            hello@example.com
-          </div>
-        </div>
-        <div class="width-1 hideinmobile">
-          <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-        </div>
-      </div>
-      <div class="footer-content">
-        <div class="footer-main">
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4 class="footer-column-title">Pages</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#home" class="footer-link">Home</a>
-                  <a href="#" class="footer-link">About Us</a>
-                  <a href="#about" class="footer-link">Insights</a>
-                  <a href="#" class="footer-link">Life @ Simplify3x</a>
-
-                  <a href="#" class="footer-link">Customer Stories</a>
-                  <a href="#" class="footer-link">Custom Solutions</a>
-                </div>
-              </div>
-            </div>
-            <div class="footer-column col-1">
-              <h4 class="footer-column-title">Products</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#home" class="footer-link">SimplifyQA</a>
-                  <a href="#" class="footer-link">Hire3x</a>
-                  <a href="#about" class="footer-link">Walnut</a>
-                  <a href="#" class="footer-link">DevOps Arc</a>
-                  <a href="#" class="footer-link">Bominso</a>
-                </div>
-              </div>
-            </div>
-            <div class="footer-column col-2">
-              <h4 class="footer-column-title">Support</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#" class="footer-link">Contact Us</a>
-                  <a href="#" class="footer-link">Careers</a>
-                  <a href="responsibility.html" class="footer-link">Responsibility</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="footer-brand hideinlaptop hideinmobile">
-            <div class="laptop-newsletter">
+            <!-- Newsletter Section -->
+            <div class="mobile-newsletter">
               <div class="newsletter-text">
                 <div class="gradient-heading-2">Stay Updated</div>
                 <div class="gradient-heading-2">With Our Newsletter</div>
               </div>
-              <form class="newsletter-form" onsubmit="event.preventDefault(); return false;" style="margin-top: 30px;">
-                <input type="email" class="newsletter-input" placeholder="Your email" required />
-                <button type="submit" class="newsletter-button">Subscribe</button>
+              <form
+                class="newsletter-form"
+                onsubmit="event.preventDefault(); return false;"
+              >
+                <input
+                  type="email"
+                  class="newsletter-input"
+                  placeholder="Your email"
+                  required
+                />
+                <button type="submit" class="newsletter-button">
+                  Subscribe
+                </button>
               </form>
             </div>
           </div>
         </div>
       </div>
-     
-    </div>
-    <div style="background-color: #151515;padding-bottom: 30px;">
-      <div class="container">
-        <div class=" footer-bottom">
-         <div class="footer-social">
-           <a href="https://www.facebook.com/" class="social-link">
-             <img src="assets/images/foot-insta.svg"
-               alt="Facebook" class="social-icon" />
-           </a>
-           <a href="https://in.linkedin.com/" class="social-link">
-             <img src="assets/images/foot-linked.svg"
-               alt="LinkedIn" class="social-icon" />
-           </a>
-         </div>
+    </header>
+    <main class="life-part">
+      <section class="container position-relative z-2">
+        <div class="life-hero">
+          <img
+            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"
+            alt="Team working"
+            class="life-hero-bg-media"
+          />
+          <div class="life-hero-content">
+            <h1
+              class="gradient-heading-2 grad-mob fs-70 mb-3"
+              style="justify-self: center"
+            >
+              Social Responsibility
+            </h1>
+            <p class="hero-description">
+              Where innovation meets people, and work feels inspiring.
+            </p>
+          </div>
         </div>
-       </div>
-    </div>
-  </footer>
+      </section>
+    </main>
+    <section class="culture-section mob-rel">
+      <img
+        class="mobile-dots-2 hideinlaptop"
+        src="assets/images/mobile-dotes.svg"
+        alt=""
+      />
+      <div class="container">
+        <div
+          class="flex-one mob-rel"
+          style="display: flex; align-items: start; gap: 100px; z-index: 6"
+        >
+          <div
+            style="display: flex; align-items: start; width: 50%; height: 350px"
+          >
+            <img
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+              "
+              src="assets/images/6830493b27791a78a9f46410_hero-sm-image-02.jpg"
+              alt="Social Responsibility"
+            />
+          </div>
+          <div style="width: 50%">
+            <h2
+              class="gradient-heading life-1"
+              style="margin: 0; flex: 0 0 auto"
+            >
+              Our Culture
+            </h2>
+            <p
+              class="gradient-description"
+              style="border-left: unset; padding-left: 0"
+            >
+              At our core, we are a purpose-driven organization, striving to
+              create a lasting impact not only for our stakeholders but also for
+              the communities we serve by leveraging our resources, people, and
+              practices to advance CSR initiatives. As steadfast corporate
+              citizens, we are resolute in our ambition to be exemplary role
+              models.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <main class="res-breaker">
+      <div class="container">
+        <div
+          class="flex-one mob-rel"
+          style="display: flex; align-items: start; gap: 100px; z-index: 6"
+        >
+          <div style="width: 50%">
+            <h2
+              class="gradient-heading life-1"
+              style="margin: 0; flex: 0 0 auto"
+            >
+              Firstsource is committed to advancing its CSR objectives through
+              its overarching vision:
+            </h2>
+          </div>
+          <div
+            style="display: flex; align-items: start; width: 50%; height: 350px"
+          >
+            <img
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+              "
+              src="assets/images/6830493b27791a78a9f46410_hero-sm-image-02.jpg"
+              alt="Social Responsibility"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+    <section class="culture-section mob-rel">
+      <img
+        class="mobile-dots-2 hideinlaptop"
+        src="assets/images/mobile-dotes.svg"
+        alt=""
+      />
+      <div class="container">
+        <div
+          class="flex-one mob-rel"
+          style="display: flex; align-items: start; gap: 100px; z-index: 6"
+        >
+          <div
+            style="display: flex; align-items: start; width: 50%; height: 350px"
+          >
+            <img
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+              "
+              src="assets/images/6830493b27791a78a9f46410_hero-sm-image-02.jpg"
+              alt="Social Responsibility"
+            />
+          </div>
+          <div style="width: 50%">
+            <h2
+              class="gradient-heading life-1"
+              style="margin: 0; flex: 0 0 auto"
+            >
+              What we impact
+            </h2>
+            <div
+              class="gradient-description"
+              style="border-left: unset; padding-left: 0"
+            >
+              We aim to make a positive impact on society in harmony with our
+              Group’s overarching mission to empower lives through education,
+              healthcare, gender equality, and addressing various social
+              concerns
+            </div>
+            <ul class="csr-impact-list">
+              <li>Education</li>
+              <li>Environment</li>
+              <li>Art & Culture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="culture-section mob-rel">
+      <img
+        class="mobile-dots-2 hideinlaptop"
+        src="assets/images/mobile-dotes.svg"
+        alt=""
+      />
+      <div class="container">
+        <div
+          class="flex-one mob-rel"
+          style="display: flex; align-items: start; gap: 100px; z-index: 6"
+        >
+          <div style="width: 50%">
+            <h2
+              class="gradient-heading life-1"
+              style="margin: 0; flex: 0 0 auto"
+            >
+              How we impact
+            </h2>
+            <div
+              class="gradient-description"
+              style="border-left: unset; padding-left: 0"
+            >
+              We have a cohesive strategy that includes CSR projects, employee
+              giving, volunteering, leadership representation, impact sourcing,
+              and special initiatives to create a well-rounded approach.
+            </div>
+            <ul class="csr-impact-list">
+              <li>Education</li>
+              <li>Environment</li>
+              <li>Art & Culture</li>
+            </ul>
+          </div>
+          <div
+            style="display: flex; align-items: start; width: 50%; height: 350px"
+          >
+            <img
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+              "
+              src="assets/images/6830493b27791a78a9f46410_hero-sm-image-02.jpg"
+              alt="Social Responsibility"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="life-beyond">
+      <div class="marquee" id="marquee">
+        <div class="marquee-track" id="marquee-track">
+          <!-- Content will be injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        var images = [
+          "assets/images/front-girl.jpg",
+          "assets/images/68314ec582b2956a9125402e_hero-image-02.jpg",
+          "assets/images/laptop.jpg",
+          "assets/images/fuutre-r.jpg",
+          "assets/images/trust.jpg",
+          "assets/images/inclusivity.jpg",
+          "assets/images/impact.jpg",
+          "assets/images/683402267e12e0bbfdb7f14c_a5bbe35d323660fa5848dc7f66f36921_about-image.jpg",
+          "assets/images/683543557f15cafe06b24971_work-step-01.jpg",
+          "assets/images/6836e5f5a4694c074d2325de_52291f00d7062ab738d0995727ef25e8_Smiling Asian Woman.jpg",
+          "assets/images/683d2d05d00a93e7ae267f3f_e24aa2f05c8041e6c7d2b276720729e6_Stylish Urban Portrait.jpg",
+          "assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg",
+          "assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg",
+        ];
+
+        function shuffle(arr) {
+          var a = arr.slice();
+          for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+          }
+          return a;
+        }
+
+        var cards = document.querySelectorAll(".voices-track .voice-card");
+        var pool = shuffle(images);
+        cards.forEach(function (card, idx) {
+          var img = pool[idx % pool.length];
+          card.style.setProperty("--image", "url('" + img + "')");
+        });
+      })();
+    </script>
+
+    <script>
+      // Photo metadata - you can update names and titles here
+      // The photos array is automatically generated from photoData keys
+      const photoData = {
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife1.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife2.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife3.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife4.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife5.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife6.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife7.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife30.jpeg":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife10.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife12.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife13.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife23.jpg":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife15.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife16.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife14.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife17.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife18.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife20.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife25.jpg":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife24.jpg":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife19.JPG":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife26.jpg":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife27.jpg":
+          { name: "Name Here", title: "Title/Description" },
+        "https://d33yrtc8qntbdn.cloudfront.net/Hire3xAssests/Website/Hire3xLife/hire3xlife28.jpg":
+          { name: "Name Here", title: "Title/Description" },
+      };
+
+      // Generate photos array from photoData keys (no duplication needed)
+      const photos = Object.keys(photoData);
+
+      const track = document.getElementById("marquee-track");
+
+      function injectPhotos() {
+        let columnCount = 0;
+
+        // First set of columns
+        for (let i = 0; i < photos.length; i += 2) {
+          if (i + 1 < photos.length) {
+            createColumn(photos[i], photos[i + 1], columnCount);
+            columnCount++;
+          }
+        }
+
+        // Duplicate 3-4 times to ensure it covers wide screens
+        for (let duplicate = 0; duplicate < 3; duplicate++) {
+          for (let i = 0; i < photos.length; i += 2) {
+            if (i + 1 < photos.length) {
+              createColumn(photos[i], photos[i + 1], columnCount);
+              columnCount++;
+            }
+          }
+        }
+      }
+
+      function createImageWithOverlay(imgUrl, sizeClass) {
+        const imgDiv = document.createElement("div");
+        imgDiv.className = `marquee-img ${sizeClass}`;
+        imgDiv.style.backgroundImage = `url('${imgUrl}')`;
+        imgDiv.style.position = "relative";
+
+        // Get photo data or use defaults
+        const data = photoData[imgUrl] || {
+          name: "Name Here",
+          title: "Title/Description",
+        };
+
+        // Create overlay
+        const overlay = document.createElement("div");
+        overlay.className = "marquee-img-overlay";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "marquee-overlay-name";
+        nameDiv.textContent = data.name;
+
+        const titleDiv = document.createElement("div");
+        titleDiv.className = "marquee-overlay-title";
+        titleDiv.textContent = data.title;
+
+        overlay.appendChild(nameDiv);
+        overlay.appendChild(titleDiv);
+        imgDiv.appendChild(overlay);
+
+        return imgDiv;
+      }
+
+      function createColumn(img1, img2, columnIndex) {
+        const column = document.createElement("div");
+        column.className = "marquee-column";
+
+        const isEvenColumn = columnIndex % 2 === 0;
+
+        if (isEvenColumn) {
+          // Even columns: 2:1 ratio (large on top, small on bottom)
+          const imgLarge = createImageWithOverlay(img1, "marquee-img-large");
+          const imgSmall = createImageWithOverlay(img2, "marquee-img-small");
+
+          column.appendChild(imgLarge);
+          column.appendChild(imgSmall);
+        } else {
+          // Odd columns: 1:2 ratio (small on top, large on bottom)
+          const imgSmall = createImageWithOverlay(img1, "marquee-img-small");
+          const imgLarge = createImageWithOverlay(img2, "marquee-img-large");
+
+          column.appendChild(imgSmall);
+          column.appendChild(imgLarge);
+        }
+
+        track.appendChild(column);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        injectPhotos();
+      });
+
+      // Pause on hover
+      let hoverTimer;
+      track.parentElement.addEventListener("mouseover", () => {
+        hoverTimer = setTimeout(() => track.classList.add("paused"), 300);
+      });
+      track.parentElement.addEventListener("mouseout", () => {
+        clearTimeout(hoverTimer);
+        track.classList.remove("paused");
+      });
+    </script>
+
+    <footer class="footer show-talk-box">
+      <div style="position: relative; z-index: 2" class="container">
+        <div class="footer-header">
+          <div class="width-1 hideinlaptop">
+            <img style="width: 100%" src="assets/images/simp3x.svg" alt="" />
+          </div>
+          <div class="gradient-heading-2">
+            Say hello <br class="hideinmobile" />to us!
+          </div>
+          <div class="flex-1">
+            <img src="assets/images/foot-call.svg" alt="" />
+            <div class="text">9898989898</div>
+          </div>
+          <div class="flex-1">
+            <img src="assets/images/foot-mail.svg" alt="" />
+            <div class="text">hello@example.com</div>
+          </div>
+          <div class="width-1 hideinmobile">
+            <img style="width: 100%" src="assets/images/simp3x.svg" alt="" />
+          </div>
+        </div>
+        <div class="footer-content">
+          <div class="footer-main">
+            <div class="footer-links">
+              <div class="footer-column">
+                <h4 class="footer-column-title">Pages</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#about" class="footer-link">Insights</a>
+                    <a href="#" class="footer-link">Life @ Simplify3x</a>
+
+                    <a href="#" class="footer-link">Customer Stories</a>
+                    <a href="#" class="footer-link">Custom Solutions</a>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-column col-1">
+                <h4 class="footer-column-title">Products</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#home" class="footer-link">SimplifyQA</a>
+                    <a href="#" class="footer-link">Hire3x</a>
+                    <a href="#about" class="footer-link">Walnut</a>
+                    <a href="#" class="footer-link">DevOps Arc</a>
+                    <a href="#" class="footer-link">Bominso</a>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-column col-2">
+                <h4 class="footer-column-title">Support</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#" class="footer-link">Contact Us</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="responsibility.html" class="footer-link"
+                      >Responsibility</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer-brand hideinlaptop hideinmobile">
+              <div class="laptop-newsletter">
+                <div class="newsletter-text">
+                  <div class="gradient-heading-2">Stay Updated</div>
+                  <div class="gradient-heading-2">With Our Newsletter</div>
+                </div>
+                <form
+                  class="newsletter-form"
+                  onsubmit="event.preventDefault(); return false;"
+                  style="margin-top: 30px"
+                >
+                  <input
+                    type="email"
+                    class="newsletter-input"
+                    placeholder="Your email"
+                    required
+                  />
+                  <button type="submit" class="newsletter-button">
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background-color: #151515; padding-bottom: 30px">
+        <div class="container">
+          <div class="footer-bottom">
+            <div class="footer-social">
+              <a href="https://www.facebook.com/" class="social-link">
+                <img
+                  src="assets/images/foot-insta.svg"
+                  alt="Facebook"
+                  class="social-icon"
+                />
+              </a>
+              <a href="https://in.linkedin.com/" class="social-link">
+                <img
+                  src="assets/images/foot-linked.svg"
+                  alt="LinkedIn"
+                  class="social-icon"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script src="js/script.js"></script>
     <script src="js/mobscript.js"></script>
-</body>
-
+  </body>
 </html>

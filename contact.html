@@ -1,486 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simplify3x</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/newstyle.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simplify3x</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/newstyle.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet" />
-</head>
-
-<body>
-  <div id="loading-screen" class="load-back-1">
-    <div class="loader"></div>
-    <img class="load-logo-wid" style="position: absolute; bottom: 15vh;width: 200px;" src="assets/images/black-simp.svg"
-      alt="Copora Logo">
-  </div>
-  <header class="header other-pages">
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <a href="index.html#home">
-            <img src="assets/images/simp3x.svg" alt="Copora Logo">
-          </a>
-        </div>
-
-        <!-- Mobile hamburger button -->
-        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-
-        <div class="header-actions">
-          <!-- Mobile Menu Header -->
-          <div class="mobile-menu-header">
-            <div class="mobile-menu-logo">
-              <a href="#home">
-                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
-              </a>
-            </div>
-
+  <body>
+    <div id="loading-screen" class="load-back-1">
+      <div class="loader"></div>
+      <img
+        class="load-logo-wid"
+        style="position: absolute; bottom: 15vh; width: 200px"
+        src="assets/images/black-simp.svg"
+        alt="Copora Logo"
+      />
+    </div>
+    <header class="header other-pages">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="index.html#home">
+              <img src="assets/images/simp3x.svg" alt="Copora Logo" />
+            </a>
           </div>
 
-          <!-- Navigation -->
-          <nav class="nav">
-            <ul class="nav-list">
-              <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                  What we offer
-                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"
-                    src="assets/images/sidebar-arrow.svg" alt="">
-                </button>
+          <!-- Mobile hamburger button -->
+          <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
 
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-col">
-                    <a href="#" class="dropdown-item">SimplifyQA</a>
-                    <a href="#" class="dropdown-item">Hire3x</a>
-                    <a href="#" class="dropdown-item">Walnut</a>
-                    <a href="#" class="dropdown-item">DevOps Arc</a>
-                    <a href="#" class="dropdown-item">Bominso</a>
-                    <div class="dropdown-has-submenu">
-                      <div class="dropdown-item dropdown-item-has-submenu">
-                        Custom Solutions
-                        <div class="dropdown-submenu">
-                          <a href="solutions.html" class="dropdown-submenu-item">Tech Solutions</a>
-                          <a href="devSolutions.html" class="dropdown-submenu-item">Dev Solutions</a>
+          <div class="header-actions">
+            <!-- Mobile Menu Header -->
+            <div class="mobile-menu-header">
+              <div class="mobile-menu-logo">
+                <a href="#home">
+                  <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+                </a>
+              </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="nav">
+              <ul class="nav-list">
+                <li class="dropdown">
+                  <button
+                    class="nav-link dropdown-toggle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    What we offer
+                    <img
+                      class="hideinlaptop"
+                      style="margin-left: 10px; margin-top: 10px"
+                      src="assets/images/sidebar-arrow.svg"
+                      alt=""
+                    />
+                  </button>
+
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-col">
+                      <a href="#" class="dropdown-item">SimplifyQA</a>
+                      <a href="#" class="dropdown-item">Hire3x</a>
+                      <a href="#" class="dropdown-item">Walnut</a>
+                      <a href="#" class="dropdown-item">DevOps Arc</a>
+                      <a href="#" class="dropdown-item">Bominso</a>
+                      <div class="dropdown-has-submenu">
+                        <div class="dropdown-item dropdown-item-has-submenu">
+                          Custom Solutions
+                          <div class="dropdown-submenu">
+                            <a
+                              href="solutions.html"
+                              class="dropdown-submenu-item"
+                              >Quality Assurance Solution</a
+                            >
+                            <a
+                              href="devSolutions.html"
+                              class="dropdown-submenu-item"
+                              >Digital Transformation Solution</a
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                  Who we are
-                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;"
-                    src="assets/images/sidebar-arrow.svg" alt="">
-                </button>
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-col">
-                    <a href="about.html" class="dropdown-item">About Us</a>
-                    <a href="insights.html" class="dropdown-item">Insights</a>
-                    <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
+                </li>
+                <li class="dropdown">
+                  <button
+                    class="nav-link dropdown-toggle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Who we are
+                    <img
+                      class="hideinlaptop"
+                      style="margin-left: 10px; margin-top: 10px"
+                      src="assets/images/sidebar-arrow.svg"
+                      alt=""
+                    />
+                  </button>
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-col">
+                      <a href="about.html" class="dropdown-item">About Us</a>
+                      <a href="insights.html" class="dropdown-item">Insights</a>
+                      <a href="life.html" class="dropdown-item"
+                        >Life @ Simplify3x</a
+                      >
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
 
-              <li>
+                <!-- <li>
                 <a href="customer-stories.html" class="nav-link">
-                  Customer Stories
+                  Customer stories
                 </a>
-              </li>
+              </li> -->
 
-              <li>
-                <a href="contact.html" class="nav-link">
-                  Contact now
-                </a>
-              </li>
-            </ul>
-          </nav>
+                <li>
+                  <a href="contact.html" class="nav-link"> Contact now </a>
+                </li>
+              </ul>
+            </nav>
 
-          <!-- Newsletter Section -->
-          <div class="mobile-newsletter">
-            <div class="newsletter-text">
-              <div class="gradient-heading-2">Stay Updated</div>
-              <div class="gradient-heading-2">With Our Newsletter</div>
-            </div>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
-              <input type="email" class="newsletter-input" placeholder="Your email" required />
-              <button type="submit" class="newsletter-button">Subscribe</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <main class="contact-part">
-    <section class="container">
-      <div class="contact-section">
-        <div class="gradient-heading-2 grad-mob mb-4">Contact our sales team now</div>
-        <div class="hero-description text-center max-wid-unset">Thank you for your interest in collaborating with us. We
-          are excited to work <br class="hideinmobile" />together and committed to providing top-notch support, ensuring
-          a seamless<br class="hideinmobile" />
-          experience throughout our partnership.</div>
-      </div>
-    </section>
-
-  </main>
-
-  <section class="contact-sections">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-cards">
-          <div>
-            <div class="gradient-heading-2">Get in<br class="hideinmobile" /> Touch <img class="contact-img"
-                src="assets/images/contact-arrow.svg" alt=""></div>
-            <div class="contact-card-desc mt-30" style="max-width: 335px;">Ready to transform your business
-              with our innovative solutions? Let's start a conversation about how we can help you achieve your goals.
-            </div>
-          </div>
-          <div class="contact-card mt-51">
-            <div class="contact-icon"><img src="assets/images/at.svg" alt="Email"></div>
-
-
-            <div class="contact-card-desc">hello@simplify3x.com</div>
-
-          </div>
-          <div class="contact-card">
-            <div class="contact-icon"><img src="assets/images/call.svg" alt="Phone"></div>
-
-
-            <div class="contact-card-desc">+1 202 555 0147</div>
-
-          </div>
-          <div class="contact-card">
-
-            <img src="assets/images/loc.svg" alt="Location">
-
-
-
-            <div class="contact-card-desc">Tech City, TX 12345</div>
-
-          </div>
-        </div>
-        <form class="contact-form">
-          <div class="form-row">
-            <div class="form-field"><label>First Name *</label><input type="text" placeholder="Enter your first name"
-                required></div>
-            <div class="form-field"><label>Last Name *</label><input type="text" placeholder="Enter your last name"
-                required></div>
-          </div>
-          <div class="form-row">
-            <div class="form-field"><label>Email Address *</label><input type="email"
-                placeholder="Enter your email address" required></div>
-            <div class="form-field"><label>Phone Number</label><input type="text" placeholder="Enter your phone number">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-field"><label>Company Name</label><input type="text" placeholder="Enter your company name">
-            </div>
-            <div class="form-field"><label>Industry</label>
-              <select required>
-                <option value="" selected disabled>Select Industry</option>
-                <option>Finance</option>
-                <option>Healthcare</option>
-                <option>Retail</option>
-                <option>Manufacturing</option>
-                <option>Technology</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-field"><label>Area of Interest</label>
-              <select required>
-                <option value="" selected disabled>Select Interest</option>
-                <option>Digital Transformation</option>
-                <option>AI Solutions</option>
-                <option>Cloud Migration</option>
-                <option>Data Analytics</option>
-                <option>Custom Development</option>
-                <option>Consulting</option>
-              </select>
-            </div>
-            <div class="form-field"></div>
-          </div>
-
-          <div class="header-content" style="margin-top: 10px;">
-            <label class="form-check"><input type="checkbox"> Subscribe to our newsletter for updates and
-              insights</label>
-            <a type="submit" class="btn btn-primary form-submit no-shadow"><span class="btn-text">Request
-                demo</span></a>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="offices-section">
-    <div class="container">
-      <div class="gradient-heading mb-5">Our Global<br class="hideinmobile" /> Offices</div>
-      <div style="position: relative;" class="contact-map">
-        <img style="width: 95%;justify-self: center;" class="map" src="assets/images/map-contact.svg" alt="">
-        <div class="office-card-container-1">
-          <div class="office-card pos-1 hideinmobile">
-            <div class="office-title">headquarters</div>
-            <div class="office-desc">New York, USA<br>Tech City, TX 12345</div>
-          </div>
-          <img class="one" src="assets/images/pin-contact.svg" alt="">
-        </div>
-        <div>
-          <div class="office-card pos-2 hideinmobile">
-            <div class="office-title">India Office</div>
-            <div class="office-desc">Bengluru, Karnataka<br>Bengluru EC1A 1BB</div>
-          </div>
-          <img class="two" src="assets/images/pin-contact.svg" alt="">
-        </div>
-        <div>
-          <div class="office-card pos-3 hideinmobile">
-            <div class="office-title">Malaysia Pacific</div>
-            <div class="office-desc">Singapore<br>Singapore 018956</div>
-          </div>
-          <img class="three" src="assets/images/pin-contact.svg" alt="">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="faq-section">
-    <div class="container">
-      <h3 class="gradient-heading">Frequently Asked <br /> Questions</h3>
-      <div class="faq-grid">
-        <div style="flex: 1;">
-          <div class="faq-card mb-4">
-            <div class="faq-question">
-              <span class="faq-text">How quickly can you start our project?</span>
-              <div class="faq-toggle">
-                <svg class="faq-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                </svg>
-              </div>
-            </div>
-            <div class="faq-answer">
-              <p>We typically ramp up within 1–2 weeks depending on scope and availability.</p>
-            </div>
-          </div>
-          <div class="faq-card">
-            <div class="faq-question">
-              <span class="faq-text">Do you offer ongoing support?</span>
-              <div class="faq-toggle">
-                <svg class="faq-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                </svg>
-              </div>
-            </div>
-            <div class="faq-answer">
-              <p>Yes, we provide flexible support plans for maintenance, enhancements, and SLAs.</p>
-            </div>
-          </div>
-        </div>
-        <div style="flex: 1;">
-          <div class="faq-card mb-4">
-            <div class="faq-question">
-              <span class="faq-text">What industries do you serve?</span>
-              <div class="faq-toggle">
-                <svg class="faq-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                </svg>
-              </div>
-            </div>
-            <div class="faq-answer">
-              <p>We work with technology, fintech, healthcare, retail, and more.</p>
-            </div>
-          </div>
-          <div class="faq-card">
-            <div class="faq-question">
-              <span class="faq-text">What industries do you serve?</span>
-              <div class="faq-toggle">
-                <svg class="faq-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                </svg>
-              </div>
-            </div>
-            <div class="faq-answer">
-              <p>We work with technology, fintech, healthcare, retail, and more.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer show-talk-box">
-    <div style="position: relative; z-index: 2" class="container">
-
-      <div class="footer-header">
-        <div class="width-1 hideinlaptop">
-          <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-        </div>
-        <div class="gradient-heading-2">Say hello <br class="hideinmobile" />to us!</div>
-        <div class="flex-1">
-          <img src="assets/images/foot-call.svg" alt="">
-          <div class="text">
-            9898989898
-          </div>
-        </div>
-        <div class="flex-1">
-          <img src="assets/images/foot-mail.svg" alt="">
-          <div class="text">
-            hello@example.com
-          </div>
-        </div>
-        <div class="width-1 hideinmobile">
-          <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-        </div>
-      </div>
-      <div class="footer-content">
-        <div class="footer-main">
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4 class="footer-column-title">Pages</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#home" class="footer-link">Home</a>
-                  <a href="#" class="footer-link">About Us</a>
-                  <a href="#about" class="footer-link">Insights</a>
-                  <a href="#" class="footer-link">Life @ Simplify3x</a>
-
-                  <a href="#" class="footer-link">Customer Stories</a>
-                  <a href="#" class="footer-link">Custom Solutions</a>
-                </div>
-              </div>
-            </div>
-            <div class="footer-column col-1">
-              <h4 class="footer-column-title">Products</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#home" class="footer-link">SimplifyQA</a>
-                  <a href="#" class="footer-link">Hire3x</a>
-                  <a href="#about" class="footer-link">Walnut</a>
-                  <a href="#" class="footer-link">DevOps Arc</a>
-                  <a href="#" class="footer-link">Bominso</a>
-                </div>
-              </div>
-            </div>
-            <div class="footer-column col-2">
-              <h4 class="footer-column-title">Support</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#" class="footer-link">Contact Us</a>
-                  <a href="#" class="footer-link">Careers</a>
-                  <a href="responsibility.html" class="footer-link">Responsibility</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="footer-brand hideinlaptop hideinmobile">
-            <div class="laptop-newsletter">
+            <!-- Newsletter Section -->
+            <div class="mobile-newsletter">
               <div class="newsletter-text">
                 <div class="gradient-heading-2">Stay Updated</div>
                 <div class="gradient-heading-2">With Our Newsletter</div>
               </div>
-              <form class="newsletter-form" onsubmit="event.preventDefault(); return false;" style="margin-top: 30px;">
-                <input type="email" class="newsletter-input" placeholder="Your email" required />
-                <button type="submit" class="newsletter-button">Subscribe</button>
+              <form
+                class="newsletter-form"
+                onsubmit="event.preventDefault(); return false;"
+              >
+                <input
+                  type="email"
+                  class="newsletter-input"
+                  placeholder="Your email"
+                  required
+                />
+                <button type="submit" class="newsletter-button">
+                  Subscribe
+                </button>
               </form>
             </div>
           </div>
         </div>
       </div>
+    </header>
+    <main class="contact-part">
+      <section class="container">
+        <div class="contact-section">
+          <div class="gradient-heading-2 grad-mob mb-4">
+            Contact our sales team now
+          </div>
+          <div class="hero-description text-center max-wid-unset">
+            Thank you for your interest in collaborating with us. We are excited
+            to work <br class="hideinmobile" />together and committed to
+            providing top-notch support, ensuring a seamless<br
+              class="hideinmobile"
+            />
+            experience throughout our partnership.
+          </div>
+        </div>
+      </section>
+    </main>
 
-    </div>
-    <div style="background-color: #151515;padding-bottom: 30px;">
+    <section class="contact-sections">
       <div class="container">
-        <div class=" footer-bottom">
-          <div class="footer-social">
-            <a href="https://www.facebook.com/" class="social-link">
-              <img src="assets/images/foot-insta.svg" alt="Facebook" class="social-icon" />
-            </a>
-            <a href="https://in.linkedin.com/" class="social-link">
-              <img src="assets/images/foot-linked.svg" alt="LinkedIn" class="social-icon" />
-            </a>
+        <div class="contact-grid">
+          <div class="contact-cards">
+            <div>
+              <div class="gradient-heading-2">
+                Get in<br class="hideinmobile" />
+                Touch
+                <img
+                  class="contact-img"
+                  src="assets/images/contact-arrow.svg"
+                  alt=""
+                />
+              </div>
+              <div class="contact-card-desc mt-30" style="max-width: 335px">
+                Ready to transform your business with our innovative solutions?
+                Let's start a conversation about how we can help you achieve
+                your goals.
+              </div>
+            </div>
+            <div class="contact-card mt-51">
+              <div class="contact-icon">
+                <img src="assets/images/at.svg" alt="Email" />
+              </div>
+
+              <div class="contact-card-desc">hello@simplify3x.com</div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">
+                <img src="assets/images/call.svg" alt="Phone" />
+              </div>
+
+              <div class="contact-card-desc">+1 202 555 0147</div>
+            </div>
+            <div class="contact-card">
+              <img src="assets/images/loc.svg" alt="Location" />
+
+              <div class="contact-card-desc">Tech City, TX 12345</div>
+            </div>
+          </div>
+          <form class="contact-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label>First Name *</label
+                ><input
+                  type="text"
+                  placeholder="Enter your first name"
+                  required
+                />
+              </div>
+              <div class="form-field">
+                <label>Last Name *</label
+                ><input
+                  type="text"
+                  placeholder="Enter your last name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>Email Address *</label
+                ><input
+                  type="email"
+                  placeholder="Enter your email address"
+                  required
+                />
+              </div>
+              <div class="form-field">
+                <label>Phone Number</label
+                ><input type="text" placeholder="Enter your phone number" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>Company Name</label
+                ><input type="text" placeholder="Enter your company name" />
+              </div>
+              <div class="form-field">
+                <label>Industry</label>
+                <select required>
+                  <option value="" selected disabled>Select Industry</option>
+                  <option>Finance</option>
+                  <option>Healthcare</option>
+                  <option>Retail</option>
+                  <option>Manufacturing</option>
+                  <option>Technology</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>Area of Interest</label>
+                <select required>
+                  <option value="" selected disabled>Select Interest</option>
+                  <option>Bominso</option>
+                  <option>SimplifyQA</option>
+                  <option>Hire3x</option>
+                  <option>Walnut</option>
+                  <option>DevOpsArk</option>
+                  <option>Digital Transformation Solution</option>
+                  <option>Global Staffing Solutions</option>
+                  <option>Quality Assurance & Testing</option>
+                </select>
+              </div>
+              <div class="form-field"></div>
+            </div>
+
+            <div class="header-content" style="margin-top: 10px">
+              <label class="form-check"
+                ><input type="checkbox" /> Subscribe to our newsletter for
+                updates and insights</label
+              >
+              <a type="submit" class="btn btn-primary form-submit no-shadow"
+                ><span class="btn-text">Request demo</span></a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="offices-section">
+      <div class="container">
+        <div class="gradient-heading mb-5">
+          Our Global<br class="hideinmobile" />
+          Offices
+        </div>
+        <div style="position: relative" class="contact-map">
+          <img
+            style="width: 95%; justify-self: center"
+            class="map"
+            src="assets/images/map-contact.svg"
+            alt=""
+          />
+          <div class="office-card-container-1">
+            <div class="office-card pos-1 hideinmobile">
+              <div class="office-title">headquarters</div>
+              <div class="office-desc">
+                New York, USA<br />Tech City, TX 12345
+              </div>
+            </div>
+            <img class="one" src="assets/images/pin-contact.svg" alt="" />
+          </div>
+          <div>
+            <div class="office-card pos-2 hideinmobile">
+              <div class="office-title">India Office</div>
+              <div class="office-desc">
+                Bengluru, Karnataka<br />Bengluru EC1A 1BB
+              </div>
+            </div>
+            <img class="two" src="assets/images/pin-contact.svg" alt="" />
+          </div>
+          <div>
+            <div class="office-card pos-3 hideinmobile">
+              <div class="office-title">Malaysia Pacific</div>
+              <div class="office-desc">Singapore<br />Singapore 018956</div>
+            </div>
+            <img class="three" src="assets/images/pin-contact.svg" alt="" />
           </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </section>
 
-  <script src="js/script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const map = document.querySelector('.contact-map');
-      if (!map) return;
+    <section class="faq-section">
+      <div class="container">
+        <h3 class="gradient-heading">
+          Frequently Asked <br />
+          Questions
+        </h3>
+        <div class="faq-grid">
+          <div style="flex: 1">
+            <div class="faq-card mb-4">
+              <div class="faq-question">
+                <span class="faq-text"
+                  >How quickly can you start our project?</span
+                >
+                <div class="faq-toggle">
+                  <svg
+                    class="faq-chevron"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  We typically ramp up within 1–2 weeks depending on scope and
+                  availability.
+                </p>
+              </div>
+            </div>
+            <div class="faq-card">
+              <div class="faq-question">
+                <span class="faq-text">Do you offer ongoing support?</span>
+                <div class="faq-toggle">
+                  <svg
+                    class="faq-chevron"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Yes, we provide flexible support plans for maintenance,
+                  enhancements, and SLAs.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style="flex: 1">
+            <div class="faq-card mb-4">
+              <div class="faq-question">
+                <span class="faq-text">What industries do you serve?</span>
+                <div class="faq-toggle">
+                  <svg
+                    class="faq-chevron"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  We work with technology, fintech, healthcare, retail, and
+                  more.
+                </p>
+              </div>
+            </div>
+            <div class="faq-card">
+              <div class="faq-question">
+                <span class="faq-text">What industries do you serve?</span>
+                <div class="faq-toggle">
+                  <svg
+                    class="faq-chevron"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  We work with technology, fintech, healthcare, retail, and
+                  more.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      const isMobile = () => window.matchMedia('(max-width: 1024px)').matches;
+    <footer class="footer show-talk-box">
+      <div style="position: relative; z-index: 2" class="container">
+        <div class="footer-header">
+          <div class="width-1 hideinlaptop">
+            <img style="width: 100%" src="assets/images/simp3x.svg" alt="" />
+          </div>
+          <div class="gradient-heading-2">
+            Say hello <br class="hideinmobile" />to us!
+          </div>
+          <div class="flex-1">
+            <img src="assets/images/foot-call.svg" alt="" />
+            <div class="text">9898989898</div>
+          </div>
+          <div class="flex-1">
+            <img src="assets/images/foot-mail.svg" alt="" />
+            <div class="text">hello@example.com</div>
+          </div>
+          <div class="width-1 hideinmobile">
+            <img style="width: 100%" src="assets/images/simp3x.svg" alt="" />
+          </div>
+        </div>
+        <div class="footer-content">
+          <div class="footer-main">
+            <div class="footer-links">
+              <div class="footer-column">
+                <h4 class="footer-column-title">Pages</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#about" class="footer-link">Insights</a>
+                    <a href="#" class="footer-link">Life @ Simplify3x</a>
 
-      // Pins
-      const pin1 = map.querySelector('img.one');
-      const pin2 = map.querySelector('img.two');
-      const pin3 = map.querySelector('img.three');
+                    <!-- <a href="#" class="footer-link">Customer Stories</a> -->
+                    <a href="#" class="footer-link">Custom Solutions</a>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-column col-1">
+                <h4 class="footer-column-title">Products</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#home" class="footer-link">SimplifyQA</a>
+                    <a href="#" class="footer-link">Hire3x</a>
+                    <a href="#about" class="footer-link">Walnut</a>
+                    <a href="#" class="footer-link">DevOps Arc</a>
+                    <a href="#" class="footer-link">Bominso</a>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-column col-2">
+                <h4 class="footer-column-title">Support</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#" class="footer-link">Contact Us</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <!-- <a href="responsibility.html" class="footer-link">Responsibility</a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer-brand hideinlaptop hideinmobile">
+              <div class="laptop-newsletter">
+                <div class="newsletter-text">
+                  <div class="gradient-heading-2">Stay Updated</div>
+                  <div class="gradient-heading-2">With Our Newsletter</div>
+                </div>
+                <form
+                  class="newsletter-form"
+                  onsubmit="event.preventDefault(); return false;"
+                  style="margin-top: 30px"
+                >
+                  <input
+                    type="email"
+                    class="newsletter-input"
+                    placeholder="Your email"
+                    required
+                  />
+                  <button type="submit" class="newsletter-button">
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background-color: #151515; padding-bottom: 30px">
+        <div class="container">
+          <div class="footer-bottom">
+            <div class="footer-social">
+              <a href="https://www.facebook.com/" class="social-link">
+                <img
+                  src="assets/images/foot-insta.svg"
+                  alt="Facebook"
+                  class="social-icon"
+                />
+              </a>
+              <a href="https://in.linkedin.com/" class="social-link">
+                <img
+                  src="assets/images/foot-linked.svg"
+                  alt="LinkedIn"
+                  class="social-icon"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-      // Cards
-      const card1 = map.querySelector('.office-card.pos-1');
-      const card2 = map.querySelector('.office-card.pos-2');
-      const card3 = map.querySelector('.office-card.pos-3');
-      const cards = [card1, card2, card3].filter(Boolean);
+    <script src="js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const map = document.querySelector(".contact-map");
+        if (!map) return;
 
-      function hideAll() {
-        cards.forEach(c => {
-          c.classList.remove('is-visible');
-          c.style.setProperty('display', 'none', 'important');
-        });
-      }
+        const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
 
-      function toggleCard(card) {
-        if (!isMobile() || !card) return;
-        const isVisible = window.getComputedStyle(card).display !== 'none';
-        hideAll();
-        if (!isVisible) {
-          card.style.setProperty('display', 'flex', 'important');
-          // Force reflow to ensure transition applies after display change
-          void card.offsetWidth;
-          card.classList.add('is-visible');
+        // Pins
+        const pin1 = map.querySelector("img.one");
+        const pin2 = map.querySelector("img.two");
+        const pin3 = map.querySelector("img.three");
+
+        // Cards
+        const card1 = map.querySelector(".office-card.pos-1");
+        const card2 = map.querySelector(".office-card.pos-2");
+        const card3 = map.querySelector(".office-card.pos-3");
+        const cards = [card1, card2, card3].filter(Boolean);
+
+        function hideAll() {
+          cards.forEach((c) => {
+            c.classList.remove("is-visible");
+            c.style.setProperty("display", "none", "important");
+          });
         }
-      }
 
-      pin1 && pin1.addEventListener('click', () => toggleCard(card1));
-      pin2 && pin2.addEventListener('click', () => toggleCard(card2));
-      pin3 && pin3.addEventListener('click', () => toggleCard(card3));
-
-      // Ensure hidden on load for mobile
-      if (isMobile()) hideAll();
-
-      // Reset inline styles when switching between mobile/desktop
-      let lastMobile = isMobile();
-      window.addEventListener('resize', () => {
-        const nowMobile = isMobile();
-        if (nowMobile !== lastMobile) {
-          if (!nowMobile) {
-            // Desktop: remove inline overrides and animation class
-            cards.forEach(c => {
-              c.classList.remove('is-visible');
-              c.style.removeProperty('display');
-            });
-          } else {
-            // Mobile: start hidden until a pin is clicked
-            hideAll();
+        function toggleCard(card) {
+          if (!isMobile() || !card) return;
+          const isVisible = window.getComputedStyle(card).display !== "none";
+          hideAll();
+          if (!isVisible) {
+            card.style.setProperty("display", "flex", "important");
+            // Force reflow to ensure transition applies after display change
+            void card.offsetWidth;
+            card.classList.add("is-visible");
           }
-          lastMobile = nowMobile;
         }
-      });
-    });
-  </script>
-</body>
 
+        pin1 && pin1.addEventListener("click", () => toggleCard(card1));
+        pin2 && pin2.addEventListener("click", () => toggleCard(card2));
+        pin3 && pin3.addEventListener("click", () => toggleCard(card3));
+
+        // Ensure hidden on load for mobile
+        if (isMobile()) hideAll();
+
+        // Reset inline styles when switching between mobile/desktop
+        let lastMobile = isMobile();
+        window.addEventListener("resize", () => {
+          const nowMobile = isMobile();
+          if (nowMobile !== lastMobile) {
+            if (!nowMobile) {
+              // Desktop: remove inline overrides and animation class
+              cards.forEach((c) => {
+                c.classList.remove("is-visible");
+                c.style.removeProperty("display");
+              });
+            } else {
+              // Mobile: start hidden until a pin is clicked
+              hideAll();
+            }
+            lastMobile = nowMobile;
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

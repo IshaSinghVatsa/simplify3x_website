@@ -506,7 +506,7 @@ function initAboutPageCounters() {
   const aboutNumbers = document.querySelectorAll(".number-part-number");
 
   const observerOptions = {
-    threshold: 0.5,
+    threshold: 0.9,
   };
 
   const observer = new IntersectionObserver((entries) => {

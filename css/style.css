@@ -703,7 +703,7 @@ border-radius: 4px;
   position: absolute;
   left: 100%;
   top: -53px;
-  min-width: 180px;
+  min-width: 236px;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(15px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -4467,7 +4467,7 @@ max-width: 1425px;
 
   .offices-section .two {
     position: absolute;
-    right: -43px !important;
+    right: 7px !important;
     top: 92px !important;
   }
 

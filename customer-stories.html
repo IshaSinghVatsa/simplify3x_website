@@ -1,418 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simplify3x</title>
+    <link rel="stylesheet" href="css/newstyle.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://unpkg.com/three@0.151.3/build/three.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simplify3x</title>
-  <link rel="stylesheet" href="css/newstyle.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://unpkg.com/three@0.151.3/build/three.min.js"></script>
-</head>
-
-<body>
-  <div id="loading-screen" class="load-back-1">
-    <div class="loader"></div>
-    <img class="load-logo-wid" style="position: absolute; bottom: 15vh;width: 200px;" src="assets/images/black-simp.svg"
-      alt="Copora Logo">
-  </div>
-  <!-- Header -->
-  <header class="header other-pages">
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <a href="index.html">
-            <img src="assets/images/simp3x.svg" alt="Copora Logo" />
-          </a>
-        </div>
-
-        <!-- Mobile hamburger button -->
-        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-
-        <div class="header-actions">
-          <!-- Mobile Menu Header -->
-          <div class="mobile-menu-header">
-            <div class="mobile-menu-logo">
-              <a href="#home">
-                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
-              </a>
-            </div>
-
+  <body>
+    <div id="loading-screen" class="load-back-1">
+      <div class="loader"></div>
+      <img
+        class="load-logo-wid"
+        style="position: absolute; bottom: 15vh; width: 200px"
+        src="assets/images/black-simp.svg"
+        alt="Copora Logo"
+      />
+    </div>
+    <!-- Header -->
+    <header class="header other-pages">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="index.html">
+              <img src="assets/images/simp3x.svg" alt="Copora Logo" />
+            </a>
           </div>
 
-          <!-- Navigation -->
-          <nav class="nav">
-            <ul class="nav-list">
-              <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                  What we offer
-                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"
-                    src="assets/images/sidebar-arrow.svg" alt="">
-                </button>
+          <!-- Mobile hamburger button -->
+          <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
 
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-col">
-                    <a href="#" class="dropdown-item">SimplifyQA</a>
-                    <a href="#" class="dropdown-item">Hire3x</a>
-                    <a href="#" class="dropdown-item">Walnut</a>
-                    <a href="#" class="dropdown-item">DevOps Arc</a>
-                    <a href="#" class="dropdown-item">Bominso</a>
-                    <div class="dropdown-has-submenu">
-                      <div class="dropdown-item dropdown-item-has-submenu">
-                        Custom Solutions
-                        <div class="dropdown-submenu">
-                          <a href="solutions.html" class="dropdown-submenu-item">Tech Solutions</a>
-                          <a href="devSolutions.html" class="dropdown-submenu-item">Dev Solutions</a>
+          <div class="header-actions">
+            <!-- Mobile Menu Header -->
+            <div class="mobile-menu-header">
+              <div class="mobile-menu-logo">
+                <a href="#home">
+                  <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+                </a>
+              </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="nav">
+              <ul class="nav-list">
+                <li class="dropdown">
+                  <button
+                    class="nav-link dropdown-toggle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    What we offer
+                    <img
+                      class="hideinlaptop"
+                      style="margin-left: 10px; margin-top: 10px"
+                      src="assets/images/sidebar-arrow.svg"
+                      alt=""
+                    />
+                  </button>
+
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-col">
+                      <a href="#" class="dropdown-item">SimplifyQA</a>
+                      <a href="#" class="dropdown-item">Hire3x</a>
+                      <a href="#" class="dropdown-item">Walnut</a>
+                      <a href="#" class="dropdown-item">DevOps Arc</a>
+                      <a href="#" class="dropdown-item">Bominso</a>
+                      <div class="dropdown-has-submenu">
+                        <div class="dropdown-item dropdown-item-has-submenu">
+                          Custom Solutions
+                          <div class="dropdown-submenu">
+                            <a
+                              href="solutions.html"
+                              class="dropdown-submenu-item"
+                              >Quality Assurance Solution</a
+                            >
+                            <a
+                              href="devSolutions.html"
+                              class="dropdown-submenu-item"
+                              >Digital Transformation Solution</a
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                  Who we are
-                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;"
-                    src="assets/images/sidebar-arrow.svg" alt="">
-                </button>
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-col">
-                    <a href="about.html" class="dropdown-item">About Us</a>
-                    <a href="insights.html" class="dropdown-item">Insights</a>
-                    <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
+                </li>
+                <li class="dropdown">
+                  <button
+                    class="nav-link dropdown-toggle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Who we are
+                    <img
+                      class="hideinlaptop"
+                      style="margin-left: 10px; margin-top: 10px"
+                      src="assets/images/sidebar-arrow.svg"
+                      alt=""
+                    />
+                  </button>
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-col">
+                      <a href="about.html" class="dropdown-item">About Us</a>
+                      <a href="insights.html" class="dropdown-item">Insights</a>
+                      <a href="life.html" class="dropdown-item"
+                        >Life @ Simplify3x</a
+                      >
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
 
-              <li>
+                <!-- <li>
                 <a href="customer-stories.html" class="nav-link">
-                  Customer Stories
+                  Customer stories
                 </a>
-              </li>
+              </li> -->
 
-              <li>
-                <a href="contact.html" class="nav-link">
-                  Contact now
-                </a>
-              </li>
-            </ul>
-          </nav>
+                <li>
+                  <a href="contact.html" class="nav-link"> Contact now </a>
+                </li>
+              </ul>
+            </nav>
 
-          <!-- Newsletter Section -->
-          <div class="mobile-newsletter">
-            <div class="newsletter-text">
-              <div class="gradient-heading-2">Stay Updated</div>
-              <div class="gradient-heading-2">With Our Newsletter</div>
-            </div>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
-              <input type="email" class="newsletter-input" placeholder="Your email" required />
-              <button type="submit" class="newsletter-button">Subscribe</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="cs-hero">
-    <div id="hero-canvas" class="hero-video"></div>
-    <div class="container">
-      <div class="cs-hero-content">
-        <h1 class="hero-title" style="max-width: unset !important;">Building scale through tech, building trust through
-          partnerships</h1>
-      </div>
-    </div>
-  </section>
-  <!-- Trusted by Industry Leaders -->
-  <section class="cs-trusted-section">
-    <div class="container">
-      <h2 class="cs-trusted-title">TRUSTED BY INDUSTRY LEADERS</h2>
-      <div class="cs-logos-grid">
-        <div class="client-left-overlay"></div>
-        <div class="cs-logos-track">
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-1.svg" alt="Company Logo 1">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-2.svg" alt="Company Logo 2">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-3.svg" alt="Company Logo 3">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-com-4.svg" alt="Company Logo 4">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-5.svg" alt="Company Logo 5">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-6.svg" alt="Company Logo 6">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-7.svg" alt="Company Logo 7">
-          </div>
-          <!-- Duplicate logos for seamless scrolling -->
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-1.svg" alt="Company Logo 1">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-2.svg" alt="Company Logo 2">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-3.svg" alt="Company Logo 3">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-com-4.svg" alt="Company Logo 4">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-5.svg" alt="Company Logo 5">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-6.svg" alt="Company Logo 6">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-7.svg" alt="Company Logo 7">
-          </div>
-          <!-- Duplicate logos for seamless scrolling -->
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-1.svg" alt="Company Logo 1">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-2.svg" alt="Company Logo 2">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-3.svg" alt="Company Logo 3">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-com-4.svg" alt="Company Logo 4">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-5.svg" alt="Company Logo 5">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-6.svg" alt="Company Logo 6">
-          </div>
-          <div class="cs-logo-item">
-            <img src="assets/images/black-comp-7.svg" alt="Company Logo 7">
-          </div>
-        </div>
-        <div class="client-right-overlay"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Success Stories by Industry -->
-  <section class="cs-success-stories-section">
-    <div class="container">
-      <h2 class="section-title-2 text-center hideinmobile">Hear From Our Clients</h2>
-      <div class="gradient-heading fs-70 mb-4 hideinlaptop">Hear From Our Clients</div>
-
-      <!-- Filter Buttons -->
-      <div class="cs-industry-filters">
-        <button class="cs-filter-btn cs-active" data-industry="all">All Industries</button>
-        <button class="cs-filter-btn" data-industry="finance">Finance</button>
-        <button class="cs-filter-btn" data-industry="healthcare">Healthcare</button>
-        <button class="cs-filter-btn" data-industry="retail">Retail</button>
-        <button class="cs-filter-btn" data-industry="manufacturing">Manufacturing</button>
-      </div>
-
-
-      <!-- Story Cards Grid -->
-      <div class="cs-stories-grid">
-        <div class="cs-story-card" data-industry="finance">
-          <div class="cs-story-icon">🏢</div>
-          <h3 class="cs-story-company">Global Finance Corp</h3>
-          <p class="cs-story-industry">Financial Services</p>
-          <blockquote class="cs-story-quote">
-            "Simplify3x transformed our legacy systems into a modern, scalable platform.
-            Our transaction processing time decreased by 60% and customer satisfaction increased dramatically."
-          </blockquote>
-          <div class="cs-story-author">
-            <div class="cs-author-avatar">MR</div>
-            <div class="cs-author-info">
-              <div class="cs-author-name">Michael Rodriguez</div>
-              <div class="cs-author-role">CEO, Global Finance Corp</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cs-story-card" data-industry="healthcare">
-          <div class="cs-story-icon">🏥</div>
-          <h3 class="cs-story-company">MedTech Solutions</h3>
-          <p class="cs-story-industry">Healthcare Technology</p>
-          <blockquote class="cs-story-quote">
-            "Their AI implementation helped us improve patient outcomes by 40%.
-            The team's expertise in healthcare compliance was exceptional."
-          </blockquote>
-          <div class="cs-story-author">
-            <div class="cs-author-avatar">DL</div>
-            <div class="cs-author-info">
-              <div class="cs-author-name">Dr. Sarah Lee</div>
-              <div class="cs-author-role">Chief Medical Officer</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cs-story-card" data-industry="retail">
-          <div class="cs-story-icon">🛍️</div>
-          <h3 class="cs-story-company">RetailMax</h3>
-          <p class="cs-story-industry">E-commerce Platform</p>
-          <blockquote class="cs-story-quote">
-            "From 100K to 5M+ customers in just 18 months.
-            Their scalable architecture and real-time analytics made it possible."
-          </blockquote>
-          <div class="cs-story-author">
-            <div class="cs-author-avatar">JK</div>
-            <div class="cs-author-info">
-              <div class="cs-author-name">Jennifer Kim</div>
-              <div class="cs-author-role">CTO, RetailMax</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cs-story-card" data-industry="manufacturing">
-          <div class="cs-story-icon">⚙️</div>
-          <h3 class="cs-story-company">Industrial Dynamics</h3>
-          <p class="cs-story-industry">Manufacturing</p>
-          <blockquote class="cs-story-quote">
-            "IoT integration and predictive maintenance reduced downtime by 50%.
-            Our production efficiency has never been better."
-          </blockquote>
-          <div class="cs-story-author">
-            <div class="cs-author-avatar">PT</div>
-            <div class="cs-author-info">
-              <div class="cs-author-name">Paul Thompson</div>
-              <div class="cs-author-role">Operations Director</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cs-story-card" data-industry="finance">
-          <div class="cs-story-icon">💳</div>
-          <h3 class="cs-story-company">PayTech Innovations</h3>
-          <p class="cs-story-industry">Fintech</p>
-          <blockquote class="cs-story-quote">
-            "Security and compliance were our biggest concerns.
-            Simplify3x delivered a bulletproof solution that exceeded all expectations."
-          </blockquote>
-          <div class="cs-story-author">
-            <div class="cs-author-avatar">AW</div>
-            <div class="cs-author-info">
-              <div class="cs-author-name">Alex Wang</div>
-              <div class="cs-author-role">Founder & CEO</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cs-story-card" data-industry="healthcare">
-          <div class="cs-story-icon">🧬</div>
-          <h3 class="cs-story-company">BioResearch Labs</h3>
-          <p class="cs-story-industry">Biotechnology</p>
-          <blockquote class="cs-story-quote">
-            "Data management and analysis at scale was crucial for our research.
-            Their cloud solutions enabled breakthrough discoveries."
-          </blockquote>
-          <div class="cs-story-author">
-            <div class="cs-author-avatar">DR</div>
-            <div class="cs-author-info">
-              <div class="cs-author-name">Dr. Robert Chen</div>
-              <div class="cs-author-role">Research Director</div>
+            <!-- Newsletter Section -->
+            <div class="mobile-newsletter">
+              <div class="newsletter-text">
+                <div class="gradient-heading-2">Stay Updated</div>
+                <div class="gradient-heading-2">With Our Newsletter</div>
+              </div>
+              <form
+                class="newsletter-form"
+                onsubmit="event.preventDefault(); return false;"
+              >
+                <input
+                  type="email"
+                  class="newsletter-input"
+                  placeholder="Your email"
+                  required
+                />
+                <button type="submit" class="newsletter-button">
+                  Subscribe
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </div>
-      <div class="cs-show-more-container hideinlaptop">
-        <button id="showMoreBtn" class="cs-show-more-btn">View more</button>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <section class="container">
-    <div class="mob-carousel mob-rel hideinlaptop cust" style="height: 400px;">
-      <div class="mob-carousel-track">
-        <div class="mob-slide active">
+    <!-- Hero Section -->
+    <section class="cs-hero">
+      <div id="hero-canvas" class="hero-video"></div>
+      <div class="container">
+        <div class="cs-hero-content">
+          <h1 class="hero-title" style="max-width: unset !important">
+            Building scale through tech, building trust through partnerships
+          </h1>
+        </div>
+      </div>
+    </section>
+    <!-- Trusted by Industry Leaders -->
+    <section class="cs-trusted-section">
+      <div class="container">
+        <h2 class="cs-trusted-title">TRUSTED BY INDUSTRY LEADERS</h2>
+        <div class="cs-logos-grid">
+          <div class="client-left-overlay"></div>
+          <div class="cs-logos-track">
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-1.svg" alt="Company Logo 1" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-2.svg" alt="Company Logo 2" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-3.svg" alt="Company Logo 3" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-com-4.svg" alt="Company Logo 4" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-5.svg" alt="Company Logo 5" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-6.svg" alt="Company Logo 6" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-7.svg" alt="Company Logo 7" />
+            </div>
+            <!-- Duplicate logos for seamless scrolling -->
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-1.svg" alt="Company Logo 1" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-2.svg" alt="Company Logo 2" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-3.svg" alt="Company Logo 3" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-com-4.svg" alt="Company Logo 4" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-5.svg" alt="Company Logo 5" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-6.svg" alt="Company Logo 6" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-7.svg" alt="Company Logo 7" />
+            </div>
+            <!-- Duplicate logos for seamless scrolling -->
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-1.svg" alt="Company Logo 1" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-2.svg" alt="Company Logo 2" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-3.svg" alt="Company Logo 3" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-com-4.svg" alt="Company Logo 4" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-5.svg" alt="Company Logo 5" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-6.svg" alt="Company Logo 6" />
+            </div>
+            <div class="cs-logo-item">
+              <img src="assets/images/black-comp-7.svg" alt="Company Logo 7" />
+            </div>
+          </div>
+          <div class="client-right-overlay"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success Stories by Industry -->
+    <section class="cs-success-stories-section">
+      <div class="container">
+        <h2 class="section-title-2 text-center hideinmobile">
+          Hear From Our Clients
+        </h2>
+        <div class="gradient-heading fs-70 mb-4 hideinlaptop">
+          Hear From Our Clients
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="cs-industry-filters">
+          <button class="cs-filter-btn cs-active" data-industry="all">
+            All Industries
+          </button>
+          <button class="cs-filter-btn" data-industry="finance">Finance</button>
+          <button class="cs-filter-btn" data-industry="healthcare">
+            Healthcare
+          </button>
+          <button class="cs-filter-btn" data-industry="retail">Retail</button>
+          <button class="cs-filter-btn" data-industry="manufacturing">
+            Manufacturing
+          </button>
+        </div>
+
+        <!-- Story Cards Grid -->
+        <div class="cs-stories-grid">
+          <div class="cs-story-card" data-industry="finance">
+            <div class="cs-story-icon">🏢</div>
+            <h3 class="cs-story-company">Global Finance Corp</h3>
+            <p class="cs-story-industry">Financial Services</p>
+            <blockquote class="cs-story-quote">
+              "Simplify3x transformed our legacy systems into a modern, scalable
+              platform. Our transaction processing time decreased by 60% and
+              customer satisfaction increased dramatically."
+            </blockquote>
+            <div class="cs-story-author">
+              <div class="cs-author-avatar">MR</div>
+              <div class="cs-author-info">
+                <div class="cs-author-name">Michael Rodriguez</div>
+                <div class="cs-author-role">CEO, Global Finance Corp</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-story-card" data-industry="healthcare">
+            <div class="cs-story-icon">🏥</div>
+            <h3 class="cs-story-company">MedTech Solutions</h3>
+            <p class="cs-story-industry">Healthcare Technology</p>
+            <blockquote class="cs-story-quote">
+              "Their AI implementation helped us improve patient outcomes by
+              40%. The team's expertise in healthcare compliance was
+              exceptional."
+            </blockquote>
+            <div class="cs-story-author">
+              <div class="cs-author-avatar">DL</div>
+              <div class="cs-author-info">
+                <div class="cs-author-name">Dr. Sarah Lee</div>
+                <div class="cs-author-role">Chief Medical Officer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-story-card" data-industry="retail">
+            <div class="cs-story-icon">🛍️</div>
+            <h3 class="cs-story-company">RetailMax</h3>
+            <p class="cs-story-industry">E-commerce Platform</p>
+            <blockquote class="cs-story-quote">
+              "From 100K to 5M+ customers in just 18 months. Their scalable
+              architecture and real-time analytics made it possible."
+            </blockquote>
+            <div class="cs-story-author">
+              <div class="cs-author-avatar">JK</div>
+              <div class="cs-author-info">
+                <div class="cs-author-name">Jennifer Kim</div>
+                <div class="cs-author-role">CTO, RetailMax</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-story-card" data-industry="manufacturing">
+            <div class="cs-story-icon">⚙️</div>
+            <h3 class="cs-story-company">Industrial Dynamics</h3>
+            <p class="cs-story-industry">Manufacturing</p>
+            <blockquote class="cs-story-quote">
+              "IoT integration and predictive maintenance reduced downtime by
+              50%. Our production efficiency has never been better."
+            </blockquote>
+            <div class="cs-story-author">
+              <div class="cs-author-avatar">PT</div>
+              <div class="cs-author-info">
+                <div class="cs-author-name">Paul Thompson</div>
+                <div class="cs-author-role">Operations Director</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-story-card" data-industry="finance">
+            <div class="cs-story-icon">💳</div>
+            <h3 class="cs-story-company">PayTech Innovations</h3>
+            <p class="cs-story-industry">Fintech</p>
+            <blockquote class="cs-story-quote">
+              "Security and compliance were our biggest concerns. Simplify3x
+              delivered a bulletproof solution that exceeded all expectations."
+            </blockquote>
+            <div class="cs-story-author">
+              <div class="cs-author-avatar">AW</div>
+              <div class="cs-author-info">
+                <div class="cs-author-name">Alex Wang</div>
+                <div class="cs-author-role">Founder & CEO</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-story-card" data-industry="healthcare">
+            <div class="cs-story-icon">🧬</div>
+            <h3 class="cs-story-company">BioResearch Labs</h3>
+            <p class="cs-story-industry">Biotechnology</p>
+            <blockquote class="cs-story-quote">
+              "Data management and analysis at scale was crucial for our
+              research. Their cloud solutions enabled breakthrough discoveries."
+            </blockquote>
+            <div class="cs-story-author">
+              <div class="cs-author-avatar">DR</div>
+              <div class="cs-author-info">
+                <div class="cs-author-name">Dr. Robert Chen</div>
+                <div class="cs-author-role">Research Director</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-show-more-container hideinlaptop">
+          <button id="showMoreBtn" class="cs-show-more-btn">View more</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="mob-carousel mob-rel hideinlaptop cust" style="height: 400px">
+        <div class="mob-carousel-track">
+          <div class="mob-slide active">
+            <div>
+              <img
+                src="assets/images/about-1.png"
+                alt="Why customers choose us 1"
+              />
+              <h2 class="section-title-2">
+                Scaling Businesses with Intelligent Innovation
+              </h2>
+              <p class="cs-discover-description">
+                We harness the power of AI, automation, and analytics to help
+                organizations scale efficiently — turning complex challenges
+                into smart, data-driven solutions.
+              </p>
+            </div>
+          </div>
+          <div class="mob-slide">
+            <div>
+              <img
+                src="assets/images/about-2.png"
+                alt="Why customers choose us 2"
+              />
+              <h2 class="section-title-2">
+                AI-Powered Partnerships that Build Trust
+              </h2>
+              <p class="cs-discover-description">
+                Our partnerships thrive on transparency, co-creation, and
+                continuous intelligence, ensuring every solution evolves with
+                your business needs.
+              </p>
+            </div>
+          </div>
+          <div class="mob-slide">
+            <div>
+              <img
+                src="assets/images/about-3.png"
+                alt="Why customers choose us 3"
+              />
+              <h2 class="section-title-2">
+                Transforming Growth Through Smart Technology
+              </h2>
+              <p class="cs-discover-description">
+                By integrating machine learning, predictive insights, and
+                adaptive platforms, we empower enterprises to innovate faster
+                and achieve measurable impact.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mob-carousel-dots"></div>
+      </div>
+    </section>
+    <section class="cs-discover-section hideinmobile">
+      <div class="container">
+        <div class="cs-discover-section-content">
           <div>
-            <img src="assets/images/about-1.png" alt="Why customers choose us 1">
-            <h2 class="section-title-2">Scaling Businesses with Intelligent Innovation</h2>
-            <p class="cs-discover-description">
-              We harness the power of AI, automation, and analytics to help organizations scale efficiently — turning
-              complex challenges into smart, data-driven solutions.
-            </p>
-
+            <div
+              id="cs-pointer-1"
+              class="cs-pointer-section first"
+              style="height: 70vh; padding-top: 145px"
+            >
+              <h2 class="section-title-2">
+                Scaling Businesses with Intelligent Innovation
+              </h2>
+              <p class="cs-discover-description">
+                We harness the power of AI, automation, and analytics to help
+                organizations scale efficiently — turning complex challenges
+                into smart, data-driven solutions.
+              </p>
+              <img
+                src="assets/images/about-1.png"
+                alt="Why customers choose us 1"
+                class="hideinlaptop"
+              />
+            </div>
+            <div
+              id="cs-pointer-2"
+              class="cs-pointer-section second"
+              style="height: 70vh; padding-top: 145px"
+            >
+              <h2 class="section-title-2">
+                AI-Powered Partnerships that Build Trust
+              </h2>
+              <p class="cs-discover-description">
+                Our partnerships thrive on transparency, co-creation, and
+                continuous intelligence, ensuring every solution evolves with
+                your business needs.
+              </p>
+              <img
+                src="assets/images/about-2.png"
+                alt="Why customers choose us 2"
+                class="hideinlaptop"
+              />
+            </div>
+            <div
+              id="cs-pointer-3"
+              class="cs-pointer-section third"
+              style="height: 50vh; padding-top: 95px"
+            >
+              <h2 class="section-title-2">
+                Transforming Growth Through Smart Technology
+              </h2>
+              <p class="cs-discover-description">
+                By integrating machine learning, predictive insights, and
+                adaptive platforms, we empower enterprises to innovate faster
+                and achieve measurable impact.
+              </p>
+              <img
+                src="assets/images/about-3.png"
+                alt="Why customers choose us 3"
+                class="hideinlaptop"
+              />
+            </div>
           </div>
-        </div>
-        <div class="mob-slide">
-          <div>
-            <img src="assets/images/about-2.png" alt="Why customers choose us 2">
-            <h2 class="section-title-2">AI-Powered Partnerships that Build Trust</h2>
-            <p class="cs-discover-description">
-              Our partnerships thrive on transparency, co-creation, and continuous intelligence, ensuring every solution
-              evolves with your business needs.
-            </p>
-
-          </div>
-        </div>
-        <div class="mob-slide">
-          <div>
-            <img src="assets/images/about-3.png" alt="Why customers choose us 3">
-            <h2 class="section-title-2">Transforming Growth Through Smart Technology</h2>
-            <p class="cs-discover-description">
-              By integrating machine learning, predictive insights, and adaptive platforms, we empower enterprises to
-              innovate faster and achieve measurable impact.
-            </p>
-
+          <div
+            class="cs-image-container hideinmobile"
+            style="position: sticky; top: 30vh"
+          >
+            <img
+              id="cs-image-1"
+              src="assets/images/about-1.png"
+              alt="Why customers choose us 1"
+              class="cs-fade-image cs-active"
+            />
+            <img
+              id="cs-image-2"
+              src="assets/images/about-2.png"
+              alt="Why customers choose us 2"
+              class="cs-fade-image"
+            />
+            <img
+              id="cs-image-3"
+              src="assets/images/about-3.png"
+              alt="Why customers choose us 3"
+              class="cs-fade-image"
+            />
           </div>
         </div>
       </div>
-
-      <div class="mob-carousel-dots"></div>
-    </div>
-  </section>
-  <section class="cs-discover-section hideinmobile">
-    <div class="container">
-      <div class="cs-discover-section-content">
-        <div>
-          <div id="cs-pointer-1" class="cs-pointer-section first" style="height: 70vh; padding-top:145px">
-            <h2 class="section-title-2">Scaling Businesses with Intelligent Innovation</h2>
-            <p class="cs-discover-description">
-              We harness the power of AI, automation, and analytics to help organizations scale efficiently — turning
-              complex challenges into smart, data-driven solutions.
-            </p>
-            <img src="assets/images/about-1.png" alt="Why customers choose us 1" class="hideinlaptop">
-          </div>
-          <div id="cs-pointer-2" class="cs-pointer-section second" style="height: 70vh;padding-top:145px">
-            <h2 class="section-title-2">AI-Powered Partnerships that Build Trust</h2>
-            <p class="cs-discover-description">
-              Our partnerships thrive on transparency, co-creation, and continuous intelligence, ensuring every solution
-              evolves with your business needs.
-            </p>
-            <img src="assets/images/about-2.png" alt="Why customers choose us 2" class="hideinlaptop">
-          </div>
-          <div id="cs-pointer-3" class="cs-pointer-section third" style="height: 50vh;padding-top: 95px;">
-            <h2 class="section-title-2">Transforming Growth Through Smart Technology</h2>
-            <p class="cs-discover-description">
-              By integrating machine learning, predictive insights, and adaptive platforms, we empower enterprises to
-              innovate faster and achieve measurable impact.
-            </p>
-            <img src="assets/images/about-3.png" alt="Why customers choose us 3" class="hideinlaptop">
-          </div>
-        </div>
-        <div class="cs-image-container hideinmobile" style="position: sticky; top: 30vh;">
-          <img id="cs-image-1" src="assets/images/about-1.png" alt="Why customers choose us 1"
-            class="cs-fade-image cs-active">
-          <img id="cs-image-2" src="assets/images/about-2.png" alt="Why customers choose us 2" class="cs-fade-image">
-          <img id="cs-image-3" src="assets/images/about-3.png" alt="Why customers choose us 3" class="cs-fade-image">
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Hear From Our Clients -->
-  <!-- <section class="cs-clients-section">
+    </section>
+    <!-- Hear From Our Clients -->
+    <!-- <section class="cs-clients-section">
     <div class="container">
       <h2 class="section-title-2 text-center">Hear From Our Clients</h2>
 
@@ -451,336 +566,360 @@
     </div>
   </section> -->
 
-  <!-- Ready to Write Your Success Story -->
-  <section class="cs-cta-section">
-    <div class="cta-container">
-      <div class="header-content" style="    gap: 124px;
-    justify-self: anchor-center;">
-        <div class="talk-message-2 hideinmobile">
-          Let's discuss your business goals — schedule a demo now
-        </div>
-
-        <div class="gradient-heading-2 hideinlaptop fs-70 mb-2" style="justify-content: center;"> Let's discuss your
-          business goals</div>
-        <p class="section-description hideinlaptop">Schedule a demo now</p>
-        <div class="header-content">
-          <a id="lets-talk-button" href="contact.html" class="btn btn-primary no-shadow">
-            <span class="btn-text">Request a Demo</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <footer class="footer show-talk-box">
-    <div style="position: relative; z-index: 2" class="container">
-
-      <div class="footer-header">
-        <div class="width-1 hideinlaptop">
-          <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-        </div>
-        <div class="gradient-heading-2">Say hello <br class="hideinmobile" />to us!</div>
-        <div class="flex-1">
-          <img src="assets/images/foot-call.svg" alt="">
-          <div class="text">
-            9898989898
+    <!-- Ready to Write Your Success Story -->
+    <section class="cs-cta-section">
+      <div class="cta-container">
+        <div
+          class="header-content"
+          style="gap: 124px; justify-self: anchor-center"
+        >
+          <div class="talk-message-2 hideinmobile">
+            Let's discuss your business goals — schedule a demo now
           </div>
-        </div>
-        <div class="flex-1">
-          <img src="assets/images/foot-mail.svg" alt="">
-          <div class="text">
-            hello@example.com
-          </div>
-        </div>
-        <div class="width-1 hideinmobile">
-          <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-        </div>
-      </div>
-      <div class="footer-content">
-        <div class="footer-main">
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4 class="footer-column-title">Pages</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#home" class="footer-link">Home</a>
-                  <a href="#" class="footer-link">About Us</a>
-                  <a href="#about" class="footer-link">Insights</a>
-                  <a href="#" class="footer-link">Life @ Simplify3x</a>
 
-                  <a href="#" class="footer-link">Customer Stories</a>
-                  <a href="#" class="footer-link">Custom Solutions</a>
-                </div>
-              </div>
-            </div>
-            <div class="footer-column col-1">
-              <h4 class="footer-column-title">Products</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#home" class="footer-link">SimplifyQA</a>
-                  <a href="#" class="footer-link">Hire3x</a>
-                  <a href="#about" class="footer-link">Walnut</a>
-                  <a href="#" class="footer-link">DevOps Arc</a>
-                  <a href="#" class="footer-link">Bominso</a>
-                </div>
-              </div>
-            </div>
-            <div class="footer-column col-2">
-              <h4 class="footer-column-title">Support</h4>
-              <div class="footer-links-grid">
-                <div class="links-group">
-                  <a href="#" class="footer-link">Contact Us</a>
-                  <a href="#" class="footer-link">Careers</a>
-                  <a href="responsibility.html" class="footer-link">Responsibility</a>
-                </div>
-              </div>
-            </div>
+          <div
+            class="gradient-heading-2 hideinlaptop fs-70 mb-2"
+            style="justify-content: center"
+          >
+            Let's discuss your business goals
           </div>
-          <div class="footer-brand hideinlaptop hideinmobile">
-            <div class="laptop-newsletter">
-              <div class="newsletter-text">
-                <div class="gradient-heading-2">Stay Updated</div>
-                <div class="gradient-heading-2">With Our Newsletter</div>
-              </div>
-              <form class="newsletter-form" onsubmit="event.preventDefault(); return false;" style="margin-top: 30px;">
-                <input type="email" class="newsletter-input" placeholder="Your email" required />
-                <button type="submit" class="newsletter-button">Subscribe</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div style="background-color: #151515;padding-bottom: 30px;">
-      <div class="container">
-        <div class=" footer-bottom">
-          <div class="footer-social">
-            <a href="https://www.facebook.com/" class="social-link">
-              <img src="assets/images/foot-insta.svg" alt="Facebook" class="social-icon" />
-            </a>
-            <a href="https://in.linkedin.com/" class="social-link">
-              <img src="assets/images/foot-linked.svg" alt="LinkedIn" class="social-icon" />
+          <p class="section-description hideinlaptop">Schedule a demo now</p>
+          <div class="header-content">
+            <a
+              id="lets-talk-button"
+              href="contact.html"
+              class="btn btn-primary no-shadow"
+            >
+              <span class="btn-text">Request a Demo</span>
             </a>
           </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </section>
+    <footer class="footer show-talk-box">
+      <div style="position: relative; z-index: 2" class="container">
+        <div class="footer-header">
+          <div class="width-1 hideinlaptop">
+            <img style="width: 100%" src="assets/images/simp3x.svg" alt="" />
+          </div>
+          <div class="gradient-heading-2">
+            Say hello <br class="hideinmobile" />to us!
+          </div>
+          <div class="flex-1">
+            <img src="assets/images/foot-call.svg" alt="" />
+            <div class="text">9898989898</div>
+          </div>
+          <div class="flex-1">
+            <img src="assets/images/foot-mail.svg" alt="" />
+            <div class="text">hello@example.com</div>
+          </div>
+          <div class="width-1 hideinmobile">
+            <img style="width: 100%" src="assets/images/simp3x.svg" alt="" />
+          </div>
+        </div>
+        <div class="footer-content">
+          <div class="footer-main">
+            <div class="footer-links">
+              <div class="footer-column">
+                <h4 class="footer-column-title">Pages</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#about" class="footer-link">Insights</a>
+                    <a href="#" class="footer-link">Life @ Simplify3x</a>
 
-  <script>
-    (function () {
-      try {
-        const mount = document.getElementById("hero-canvas"); // Mount container; change the ID if you want to attach canvas elsewhere
-        console.log("the mount is", mount);
-        if (!mount) return; // Stop if no mount is found
+                    <!-- <a href="#" class="footer-link">Customer Stories</a> -->
+                    <a href="#" class="footer-link">Custom Solutions</a>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-column col-1">
+                <h4 class="footer-column-title">Products</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#home" class="footer-link">SimplifyQA</a>
+                    <a href="#" class="footer-link">Hire3x</a>
+                    <a href="#about" class="footer-link">Walnut</a>
+                    <a href="#" class="footer-link">DevOps Arc</a>
+                    <a href="#" class="footer-link">Bominso</a>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-column col-2">
+                <h4 class="footer-column-title">Support</h4>
+                <div class="footer-links-grid">
+                  <div class="links-group">
+                    <a href="#" class="footer-link">Contact Us</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <!-- <a href="responsibility.html" class="footer-link">Responsibility</a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer-brand hideinlaptop hideinmobile">
+              <div class="laptop-newsletter">
+                <div class="newsletter-text">
+                  <div class="gradient-heading-2">Stay Updated</div>
+                  <div class="gradient-heading-2">With Our Newsletter</div>
+                </div>
+                <form
+                  class="newsletter-form"
+                  onsubmit="event.preventDefault(); return false;"
+                  style="margin-top: 30px"
+                >
+                  <input
+                    type="email"
+                    class="newsletter-input"
+                    placeholder="Your email"
+                    required
+                  />
+                  <button type="submit" class="newsletter-button">
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background-color: #151515; padding-bottom: 30px">
+        <div class="container">
+          <div class="footer-bottom">
+            <div class="footer-social">
+              <a href="https://www.facebook.com/" class="social-link">
+                <img
+                  src="assets/images/foot-insta.svg"
+                  alt="Facebook"
+                  class="social-icon"
+                />
+              </a>
+              <a href="https://in.linkedin.com/" class="social-link">
+                <img
+                  src="assets/images/foot-linked.svg"
+                  alt="LinkedIn"
+                  class="social-icon"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-        let scene, camera, renderer, particles, particlePositions; // Core Three.js objects
-        let clock = new THREE.Clock(); // Used to track time for animation
-        let mouseX = 0,
-          mouseY = 0; // Mouse position values
-        let isMouseDown = false; // Mouse click state
-        let targetRotationX = 0.3, // Initial tilt on X-axis; change 0.3 to tilt more/less
-          targetRotationY = 0; // Initial tilt on Y-axis
+    <script>
+      (function () {
+        try {
+          const mount = document.getElementById("hero-canvas"); // Mount container; change the ID if you want to attach canvas elsewhere
+          console.log("the mount is", mount);
+          if (!mount) return; // Stop if no mount is found
 
-        const gridSize = 150; // Number of particles along each side; increase for denser grid
-        const spacing = 0.4; // Distance between particles; increase for wider spacing
-        const waveHeight = 2.5; // Height of wave peaks; increase for taller waves
-        const waveSpeed = 2.5; // Speed of wave animation; increase for faster ripples
+          let scene, camera, renderer, particles, particlePositions; // Core Three.js objects
+          let clock = new THREE.Clock(); // Used to track time for animation
+          let mouseX = 0,
+            mouseY = 0; // Mouse position values
+          let isMouseDown = false; // Mouse click state
+          let targetRotationX = 0.3, // Initial tilt on X-axis; change 0.3 to tilt more/less
+            targetRotationY = 0; // Initial tilt on Y-axis
 
-        const primaryColor = new THREE.Color("#ff3300"); // Starting particle color; change hex for different tone
-        const secondaryColor = new THREE.Color("#ffaa00"); // Blend-to particle color; tweak for gradient effect
-        const bgColor = "#220000"; // Background color; replace hex for different background
+          const gridSize = 150; // Number of particles along each side; increase for denser grid
+          const spacing = 0.4; // Distance between particles; increase for wider spacing
+          const waveHeight = 2.5; // Height of wave peaks; increase for taller waves
+          const waveSpeed = 2.5; // Speed of wave animation; increase for faster ripples
 
-        init(); // Call initialization
-        console.log("calling animate");
-        animate(); // Start animation loop
+          const primaryColor = new THREE.Color("#ff3300"); // Starting particle color; change hex for different tone
+          const secondaryColor = new THREE.Color("#ffaa00"); // Blend-to particle color; tweak for gradient effect
+          const bgColor = "#220000"; // Background color; replace hex for different background
 
-        function init() {
-          scene = new THREE.Scene(); // Create scene container
-          scene.background = new THREE.Color(bgColor); // Apply background color
-          scene.fog = new THREE.Fog(bgColor, 15, 40); // Add fog effect; adjust 15/40 for start/end distances
+          init(); // Call initialization
+          console.log("calling animate");
+          animate(); // Start animation loop
 
-          camera = new THREE.PerspectiveCamera(
-            60, // Field of view; decrease for zoom-in, increase for zoom-out
-            mount.clientWidth / mount.clientHeight, // Aspect ratio
-            0.1, // Near clipping plane
-            100 // Far clipping plane
-          );
-          camera.position.set(18, 18, 18); // Camera position; change numbers for angle/distance
-          camera.lookAt(0, 0, 0); // Camera looks at origin
+          function init() {
+            scene = new THREE.Scene(); // Create scene container
+            scene.background = new THREE.Color(bgColor); // Apply background color
+            scene.fog = new THREE.Fog(bgColor, 15, 40); // Add fog effect; adjust 15/40 for start/end distances
 
-          renderer = new THREE.WebGLRenderer({
-            antialias: true, // Smooth edges; set false for performance
-            alpha: true, // Transparent background if needed
-            powerPreference: "high-performance", // Rendering preference
-          });
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Control pixel density; force 1 for performance
-          renderer.setSize(mount.clientWidth, mount.clientHeight); // Match container size
-          renderer.toneMapping = THREE.ACESFilmicToneMapping; // HDR tone mapping type
-          renderer.toneMappingExposure = 1.2; // Brightness; increase for lighter render
+            camera = new THREE.PerspectiveCamera(
+              60, // Field of view; decrease for zoom-in, increase for zoom-out
+              mount.clientWidth / mount.clientHeight, // Aspect ratio
+              0.1, // Near clipping plane
+              100 // Far clipping plane
+            );
+            camera.position.set(18, 18, 18); // Camera position; change numbers for angle/distance
+            camera.lookAt(0, 0, 0); // Camera looks at origin
 
-          mount.innerHTML = ""; // Clear existing canvas
-          mount.appendChild(renderer.domElement); // Add renderer canvas to page
+            renderer = new THREE.WebGLRenderer({
+              antialias: true, // Smooth edges; set false for performance
+              alpha: true, // Transparent background if needed
+              powerPreference: "high-performance", // Rendering preference
+            });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Control pixel density; force 1 for performance
+            renderer.setSize(mount.clientWidth, mount.clientHeight); // Match container size
+            renderer.toneMapping = THREE.ACESFilmicToneMapping; // HDR tone mapping type
+            renderer.toneMappingExposure = 1.2; // Brightness; increase for lighter render
 
-          createParticleSystem(); // Create particles
+            mount.innerHTML = ""; // Clear existing canvas
+            mount.appendChild(renderer.domElement); // Add renderer canvas to page
 
-          // Event listeners for interaction
-          window.addEventListener("resize", onWindowResize, false); // Resize handling
-          window.addEventListener("mousemove", onMouseMove, false); // Mouse move for interaction
-          window.addEventListener(
-            "mousedown",
-            () => (isMouseDown = true), // Track mouse down
-            false
-          );
-          window.addEventListener(
-            "mouseup",
-            () => (isMouseDown = false), // Track mouse up
-            false
-          );
-          window.addEventListener("wheel", onMouseWheel, false); // Zoom with wheel
-          window.addEventListener("keydown", onKeyDown, false); // Reset with keyboard
+            createParticleSystem(); // Create particles
 
-          onWindowResize(); // Adjust size at start
-        }
+            // Event listeners for interaction
+            window.addEventListener("resize", onWindowResize, false); // Resize handling
+            window.addEventListener("mousemove", onMouseMove, false); // Mouse move for interaction
+            window.addEventListener(
+              "mousedown",
+              () => (isMouseDown = true), // Track mouse down
+              false
+            );
+            window.addEventListener(
+              "mouseup",
+              () => (isMouseDown = false), // Track mouse up
+              false
+            );
+            window.addEventListener("wheel", onMouseWheel, false); // Zoom with wheel
+            window.addEventListener("keydown", onKeyDown, false); // Reset with keyboard
 
-        function createParticleSystem() {
-          const geometry = new THREE.BufferGeometry(); // Geometry to hold points
-          const positions = []; // Array for XYZ positions
-          const colors = []; // Array for RGB colors
-          const sizes = []; // Array for point sizes
+            onWindowResize(); // Adjust size at start
+          }
 
-          for (let i = 0; i < gridSize; i++) {
-            for (let j = 0; j < gridSize; j++) {
-              positions.push(
-                (i - gridSize / 2) * spacing, // X position; controlled by spacing/gridSize
-                0, // Y position (height, will animate later)
-                (j - gridSize / 2) * spacing // Z position
+          function createParticleSystem() {
+            const geometry = new THREE.BufferGeometry(); // Geometry to hold points
+            const positions = []; // Array for XYZ positions
+            const colors = []; // Array for RGB colors
+            const sizes = []; // Array for point sizes
+
+            for (let i = 0; i < gridSize; i++) {
+              for (let j = 0; j < gridSize; j++) {
+                positions.push(
+                  (i - gridSize / 2) * spacing, // X position; controlled by spacing/gridSize
+                  0, // Y position (height, will animate later)
+                  (j - gridSize / 2) * spacing // Z position
+                );
+
+                const t = Math.random() * 0.7; // Random blend factor for colors
+                const color = primaryColor.clone().lerp(secondaryColor, t); // Mix between primary/secondary colors
+                colors.push(color.r, color.g, color.b); // Add RGB values
+
+                sizes.push(Math.random() * 0.1 + 0.08); // Particle size variation
+              }
+            }
+
+            particlePositions = new Float32Array(positions); // Store positions in buffer
+            geometry.setAttribute(
+              "position",
+              new THREE.BufferAttribute(particlePositions, 3)
+            );
+            geometry.setAttribute(
+              "color",
+              new THREE.BufferAttribute(new Float32Array(colors), 3)
+            );
+            geometry.setAttribute(
+              "size",
+              new THREE.BufferAttribute(new Float32Array(sizes), 1)
+            );
+
+            const material = new THREE.PointsMaterial({
+              size: 0.15, // Base particle size; adjust for larger/smaller dots
+              vertexColors: true, // Use per-vertex colors
+              transparent: true, // Allow transparency
+              opacity: 0.9, // Particle opacity
+              blending: THREE.AdditiveBlending, // Glow-like effect; change to NormalBlending for solid
+              sizeAttenuation: true, // Makes particles smaller when farther away
+            });
+
+            particles = new THREE.Points(geometry, material); // Create point cloud
+            scene.add(particles); // Add to scene
+          }
+
+          function onWindowResize() {
+            const rect = mount.getBoundingClientRect(); // Get container size
+            const w = rect.width || window.innerWidth; // Width
+            const h = rect.height || window.innerHeight; // Height
+
+            camera.aspect = w / h; // Update aspect ratio
+            camera.updateProjectionMatrix(); // Apply changes
+            renderer.setSize(w, h); // Resize renderer
+          }
+
+          function onMouseMove(event) {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1; // Normalized X position
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Normalized Y position
+
+            if (isMouseDown) {
+              targetRotationY += event.movementX * 0.001; // Small horizontal rotation; increase multiplier for faster
+              targetRotationX += event.movementY * 0.001; // Small vertical rotation; increase for faster
+
+              targetRotationX = Math.max(
+                0.2, // Minimum tilt
+                Math.min(0.4, targetRotationX) // Maximum tilt
               );
-
-              const t = Math.random() * 0.7; // Random blend factor for colors
-              const color = primaryColor.clone().lerp(secondaryColor, t); // Mix between primary/secondary colors
-              colors.push(color.r, color.g, color.b); // Add RGB values
-
-              sizes.push(Math.random() * 0.1 + 0.08); // Particle size variation
+              targetRotationY = Math.max(
+                -0.1, // Min horizontal rotation
+                Math.min(0.1, targetRotationY) // Max horizontal rotation
+              );
             }
           }
 
-          particlePositions = new Float32Array(positions); // Store positions in buffer
-          geometry.setAttribute(
-            "position",
-            new THREE.BufferAttribute(particlePositions, 3)
-          );
-          geometry.setAttribute(
-            "color",
-            new THREE.BufferAttribute(new Float32Array(colors), 3)
-          );
-          geometry.setAttribute(
-            "size",
-            new THREE.BufferAttribute(new Float32Array(sizes), 1)
-          );
-
-          const material = new THREE.PointsMaterial({
-            size: 0.15, // Base particle size; adjust for larger/smaller dots
-            vertexColors: true, // Use per-vertex colors
-            transparent: true, // Allow transparency
-            opacity: 0.9, // Particle opacity
-            blending: THREE.AdditiveBlending, // Glow-like effect; change to NormalBlending for solid
-            sizeAttenuation: true, // Makes particles smaller when farther away
-          });
-
-          particles = new THREE.Points(geometry, material); // Create point cloud
-          scene.add(particles); // Add to scene
-        }
-
-        function onWindowResize() {
-          const rect = mount.getBoundingClientRect(); // Get container size
-          const w = rect.width || window.innerWidth; // Width
-          const h = rect.height || window.innerHeight; // Height
-
-          camera.aspect = w / h; // Update aspect ratio
-          camera.updateProjectionMatrix(); // Apply changes
-          renderer.setSize(w, h); // Resize renderer
-        }
-
-        function onMouseMove(event) {
-          mouseX = (event.clientX / window.innerWidth) * 2 - 1; // Normalized X position
-          mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Normalized Y position
-
-          if (isMouseDown) {
-            targetRotationY += event.movementX * 0.001; // Small horizontal rotation; increase multiplier for faster
-            targetRotationX += event.movementY * 0.001; // Small vertical rotation; increase for faster
-
-            targetRotationX = Math.max(
-              0.2, // Minimum tilt
-              Math.min(0.4, targetRotationX) // Maximum tilt
-            );
-            targetRotationY = Math.max(
-              -0.1, // Min horizontal rotation
-              Math.min(0.1, targetRotationY) // Max horizontal rotation
-            );
+          function onMouseWheel(event) {
+            camera.position.z += event.deltaY * 0.01; // Zoom in/out; change multiplier for sensitivity
+            camera.position.z = Math.max(5, Math.min(30, camera.position.z)); // Limit zoom range
           }
-        }
 
-        function onMouseWheel(event) {
-          camera.position.z += event.deltaY * 0.01; // Zoom in/out; change multiplier for sensitivity
-          camera.position.z = Math.max(5, Math.min(30, camera.position.z)); // Limit zoom range
-        }
-
-        function onKeyDown(event) {
-          if (event.code === "KeyR") {
-            targetRotationX = 0.3; // Reset tilt
-            targetRotationY = 0; // Reset rotation
-            camera.position.set(18, 18, 18); // Reset camera position
-          }
-        }
-
-        function animate() {
-          requestAnimationFrame(animate); // Loop animation
-
-          const time = clock.getElapsedTime() * waveSpeed; // Get time scaled by wave speed
-
-          let index = 0;
-          for (let i = 0; i < gridSize; i++) {
-            for (let j = 0; j < gridSize; j++) {
-              const x = (i - gridSize / 2) * spacing; // X position
-              const z = (j - gridSize / 2) * spacing; // Z position
-
-              const waveValue =
-                (Math.sin(x * 1.5 + time) * 0.5 + // Main wave frequency
-                  Math.cos(z * 1.2 + time * 1.3) * 0.3 + // Secondary wave
-                  Math.sin((x + z) * 0.7 + time * 0.7) * 0.2) * // Combined wave
-                waveHeight; // Scale wave by height
-
-              const mouseInfluence =
-                (Math.sin(mouseX * 15 + x * 2) * 0.5 + // Mouse-based distortion
-                  Math.cos(mouseY * 15 + z * 2) * 0.5) *
-                1.5; // Scale mouse effect
-
-              particlePositions[index + 1] = waveValue + mouseInfluence; // Update Y position (height)
-              index += 3; // Skip to next particle
+          function onKeyDown(event) {
+            if (event.code === "KeyR") {
+              targetRotationX = 0.3; // Reset tilt
+              targetRotationY = 0; // Reset rotation
+              camera.position.set(18, 18, 18); // Reset camera position
             }
           }
 
-          particles.geometry.attributes.position.needsUpdate = true; // Mark positions for update
+          function animate() {
+            requestAnimationFrame(animate); // Loop animation
 
-          particles.rotation.y +=
-            (targetRotationY - particles.rotation.y) * 0.05; // Smoothly rotate toward target Y
-          particles.rotation.x +=
-            (targetRotationX - particles.rotation.x) * 0.05; // Smoothly rotate toward target X
+            const time = clock.getElapsedTime() * waveSpeed; // Get time scaled by wave speed
 
-          const pulse = Math.sin(time * 2) * 0.1 + 0.9; // Pulsing factor for size
-          particles.material.size = 0.15 * pulse; // Apply pulse to particle size
+            let index = 0;
+            for (let i = 0; i < gridSize; i++) {
+              for (let j = 0; j < gridSize; j++) {
+                const x = (i - gridSize / 2) * spacing; // X position
+                const z = (j - gridSize / 2) * spacing; // Z position
 
-          renderer.render(scene, camera); // Render scene
+                const waveValue =
+                  (Math.sin(x * 1.5 + time) * 0.5 + // Main wave frequency
+                    Math.cos(z * 1.2 + time * 1.3) * 0.3 + // Secondary wave
+                    Math.sin((x + z) * 0.7 + time * 0.7) * 0.2) * // Combined wave
+                  waveHeight; // Scale wave by height
+
+                const mouseInfluence =
+                  (Math.sin(mouseX * 15 + x * 2) * 0.5 + // Mouse-based distortion
+                    Math.cos(mouseY * 15 + z * 2) * 0.5) *
+                  1.5; // Scale mouse effect
+
+                particlePositions[index + 1] = waveValue + mouseInfluence; // Update Y position (height)
+                index += 3; // Skip to next particle
+              }
+            }
+
+            particles.geometry.attributes.position.needsUpdate = true; // Mark positions for update
+
+            particles.rotation.y +=
+              (targetRotationY - particles.rotation.y) * 0.05; // Smoothly rotate toward target Y
+            particles.rotation.x +=
+              (targetRotationX - particles.rotation.x) * 0.05; // Smoothly rotate toward target X
+
+            const pulse = Math.sin(time * 2) * 0.1 + 0.9; // Pulsing factor for size
+            particles.material.size = 0.15 * pulse; // Apply pulse to particle size
+
+            renderer.render(scene, camera); // Render scene
+          }
+        } catch (e) {
+          console.warn("Hero particle background disabled:", e); // Error handling
         }
-      } catch (e) {
-        console.warn("Hero particle background disabled:", e); // Error handling
-      }
-    })();
-  </script>
+      })();
+    </script>
 
-  <script src="js/script.js"></script>
-  <script src="js/mobscript.js"></script>
-</body>
-
+    <script src="js/script.js"></script>
+    <script src="js/mobscript.js"></script>
+  </body>
 </html>

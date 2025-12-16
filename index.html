@@ -1,744 +1,871 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simplify3x</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/newstyle.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/three@0.151.3/build/three.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://unpkg.com/d3-geo@3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <style>
+      .globe-embed {
+        background: #0a2540;
+        padding: 0px 0;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simplify3x</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/newstyle.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet" />
-  <script src="https://unpkg.com/three@0.151.3/build/three.min.js"></script>
-  <script src="https://unpkg.com/topojson-client@3"></script>
-  <script src="https://unpkg.com/d3-geo@3"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-  <style>
-    .globe-embed {
-      background: #0a2540;
-      padding: 0px 0;
-    }
+      #globe {
+        width: 615px;
+        height: 615px;
+        margin: 0 auto;
+        position: relative;
+        margin-top: -10%;
+      }
 
-    #globe {
-      width: 615px;
-      height: 615px;
-      margin: 0 auto;
-      position: relative;
-      margin-top: -10%;
-    }
+      #globe canvas {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+      }
 
-    #globe canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-    }
+      .globe-pin {
+        position: absolute;
+        transform: translate(-50%, -100%);
+        pointer-events: auto;
+      }
 
-    .globe-pin {
-      position: absolute;
-      transform: translate(-50%, -100%);
-      pointer-events: auto;
-    }
+      .globe-pin svg {
+        width: 22px;
+        height: 22px;
+        display: block;
+        filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6));
+      }
+    </style>
+  </head>
 
-    .globe-pin svg {
-      width: 22px;
-      height: 22px;
-      display: block;
-      filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6));
-    }
-  </style>
-</head>
-
-<body>
-  <div id="loading-screen" class="load-back">
-    <div class="loader"></div>
-    <img class="load-logo-wid" style="position: absolute; bottom: 15vh;width: 200px;" src="assets/images/black-simp.svg"
-      alt="Copora Logo">
-  </div>
-  <!-- Header -->
-  <header class="header">
-    <div>
-      <div class="header-content">
-        <div class="logo">
-          <a href="#home">
-            <img src="assets/images/simp3x.svg" alt="Copora Logo" />
-          </a>
-        </div>
-
-        <!-- Mobile hamburger button -->
-        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-
-        <div class="header-actions">
-          <!-- Mobile Menu Header -->
-          <div class="mobile-menu-header">
-            <div class="mobile-menu-logo">
-              <a style="    display: flex
-              ;
-                  margin-top: 10px;" href="#home">
-                <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
-              </a>
-            </div>
-
+  <body>
+    <div id="loading-screen" class="load-back">
+      <div class="loader"></div>
+      <img
+        class="load-logo-wid"
+        style="position: absolute; bottom: 15vh; width: 200px"
+        src="assets/images/black-simp.svg"
+        alt="Copora Logo"
+      />
+    </div>
+    <!-- Header -->
+    <header class="header">
+      <div>
+        <div class="header-content">
+          <div class="logo">
+            <a href="#home">
+              <img src="assets/images/simp3x.svg" alt="Copora Logo" />
+            </a>
           </div>
 
-          <!-- Navigation -->
-          <nav class="nav">
-            <ul class="nav-list">
-              <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                  What we offer
-                  <img class="hideinlaptop" style="    margin-left: 10px;margin-top: 10px;"
-                    src="assets/images/sidebar-arrow.svg" alt="">
-                </button>
+          <!-- Mobile hamburger button -->
+          <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
 
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-col">
-                    <a href="#" class="dropdown-item">SimplifyQA</a>
-                    <a href="#" class="dropdown-item">Hire3x</a>
-                    <a href="#" class="dropdown-item">Walnut</a>
-                    <a href="#" class="dropdown-item">DevOps Arc</a>
-                    <a href="#" class="dropdown-item">Bominso</a>
-                    <div class="dropdown-has-submenu">
-                      <div class="dropdown-item dropdown-item-has-submenu">
-                        Custom Solutions
-                        <div class="dropdown-submenu">
-                          <a href="solutions.html" class="dropdown-submenu-item">Tech Solutions</a>
-                          <a href="devSolutions.html" class="dropdown-submenu-item">Dev Solutions</a>
+          <div class="header-actions">
+            <!-- Mobile Menu Header -->
+            <div class="mobile-menu-header">
+              <div class="mobile-menu-logo">
+                <a style="display: flex; margin-top: 10px" href="#home">
+                  <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
+                </a>
+              </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="nav">
+              <ul class="nav-list">
+                <li class="dropdown">
+                  <button
+                    class="nav-link dropdown-toggle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    What we offer
+                    <img
+                      class="hideinlaptop"
+                      style="margin-left: 10px; margin-top: 10px"
+                      src="assets/images/sidebar-arrow.svg"
+                      alt=""
+                    />
+                  </button>
+
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-col">
+                      <a href="#" class="dropdown-item">SimplifyQA</a>
+                      <a href="#" class="dropdown-item">Hire3x</a>
+                      <a href="#" class="dropdown-item">Walnut</a>
+                      <a href="#" class="dropdown-item">DevOps Arc</a>
+                      <a href="#" class="dropdown-item">Bominso</a>
+                      <div class="dropdown-has-submenu">
+                        <div class="dropdown-item dropdown-item-has-submenu">
+                          Custom Solutions
+                          <div class="dropdown-submenu">
+                            <a
+                              href="solutions.html"
+                              class="dropdown-submenu-item"
+                              >Quality Assurance Solution</a
+                            >
+                            <a
+                              href="devSolutions.html"
+                              class="dropdown-submenu-item"
+                              >Digital Transformation Solution</a
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="dropdown">
-                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                  Who we are
-                  <img class="hideinlaptop" style="  margin-left: 10px;  margin-top: 10px;"
-                    src="assets/images/sidebar-arrow.svg" alt="">
-                </button>
-                <div class="dropdown-menu" role="menu">
-                  <div class="dropdown-col">
-                    <a href="about.html" class="dropdown-item">About Us</a>
-                    <a href="insights.html" class="dropdown-item">Insights</a>
-                    <a href="life.html" class="dropdown-item">Life @ Simplify3x</a>
+                </li>
+                <li class="dropdown">
+                  <button
+                    class="nav-link dropdown-toggle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Who we are
+                    <img
+                      class="hideinlaptop"
+                      style="margin-left: 10px; margin-top: 10px"
+                      src="assets/images/sidebar-arrow.svg"
+                      alt=""
+                    />
+                  </button>
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-col">
+                      <a href="about.html" class="dropdown-item">About Us</a>
+                      <a href="insights.html" class="dropdown-item">Insights</a>
+                      <a href="life.html" class="dropdown-item"
+                        >Life @ Simplify3x</a
+                      >
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
 
-              <li>
-                <a href="customer-stories.html" class="nav-link">
-                  Customer Stories
-                </a>
-              </li>
+                <!-- <li>
+                  <a href="customer-stories.html" class="nav-link">
+                    Customer stories
+                  </a>
+                </li> -->
 
-              <li>
-                <a href="contact.html" class="nav-link">
-                  Contact now
-                </a>
-              </li>
-            </ul>
-          </nav>
+                <li>
+                  <a href="contact.html" class="nav-link"> Contact now </a>
+                </li>
+              </ul>
+            </nav>
 
-          <!-- Newsletter Section -->
-          <div class="mobile-newsletter">
-            <div class="newsletter-text">
-              <div class="gradient-heading-2">Stay Updated</div>
-              <div class="gradient-heading-2">With Our Newsletter</div>
+            <!-- Newsletter Section -->
+            <div class="mobile-newsletter">
+              <div class="newsletter-text">
+                <div class="gradient-heading-2">Stay Updated</div>
+                <div class="gradient-heading-2">With Our Newsletter</div>
+              </div>
+              <form
+                class="newsletter-form"
+                onsubmit="event.preventDefault(); return false;"
+              >
+                <input
+                  type="email"
+                  class="newsletter-input"
+                  placeholder="Your email"
+                  required
+                />
+                <button type="submit" class="newsletter-button">
+                  Subscribe
+                </button>
+              </form>
             </div>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); return false;">
-              <input type="email" class="newsletter-input" placeholder="Your email" required />
-              <button type="submit" class="newsletter-button">Subscribe</button>
-            </form>
           </div>
         </div>
       </div>
-    </div>
-  </header>
-  <div class="main-container">
-    <div id="lets-talk" class="talk-box hideinmobile">
-      <div class="talk-message">
-        Let's discuss your business goals — schedule a demo now
+    </header>
+    <div class="main-container">
+      <div id="lets-talk" class="talk-box hideinmobile">
+        <div class="talk-message">
+          Let's discuss your business goals — schedule a demo now
+        </div>
+        <div class="header-content">
+          <a
+            id="lets-talk-button"
+            href="contact.html"
+            class="btn btn-primary no-shadow"
+          >
+            <span class="btn-text">LET'S TALK</span>
+          </a>
+          <img src="assets/images/cross.svg" alt="Close" class="talk-close" />
+        </div>
       </div>
-      <div class="header-content">
-        <a id="lets-talk-button" href="contact.html" class="btn btn-primary no-shadow">
-          <span class="btn-text">LET'S TALK</span>
-        </a>
-        <img src="assets/images/cross.svg" alt="Close" class="talk-close" />
-      </div>
-    </div>
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-container">
-        <div class="hero-content h-100">
-          <div class="hero-left">
-            <div class="hero-text">
-              <h1 class="gradient-heading-2 grad-mob fs-70">
-                Turning complex problems into simple solutions
-              </h1>
-              <h5>
-                Empowering enterprises with AI-driven technology built for
-                tomorrow
-              </h5>
-              <a href="#ecosystem" class="btn btn-primary no-shadow hideinlaptop">
-                <span class="btn-text">Explore our Ecosystem</span>
-                <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
-              </a>
-              <div class="header-actions hideinmobile">
-                <a href="#ecosystem" class="btn btn-primary no-shadow">
+      <!-- Hero Section -->
+      <section id="home" class="hero">
+        <div class="hero-container">
+          <div class="hero-content h-100">
+            <div class="hero-left">
+              <div class="hero-text">
+                <h1 class="gradient-heading-2 grad-mob fs-70">
+                  Turning complex problems into simple solutions
+                </h1>
+                <h5>
+                  Empowering enterprises with AI-driven technology built for
+                  tomorrow
+                </h5>
+                <a
+                  href="#ecosystem"
+                  class="btn btn-primary no-shadow hideinlaptop"
+                >
                   <span class="btn-text">Explore our Ecosystem</span>
                   <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
                 </a>
-                <a href="#lets-talk-button" class="btn btn-primary no-shadow">
-                  <span class="btn-text">Request a Demo</span>
-                  <span class="btn-text-hover">REQUEST A DEMO</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-right-spline">
-        <!-- <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
-        <spline-viewer class="hero-spline"
-          url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer> -->
-
-        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.11.2/build/spline-viewer.js"></script>
-        <spline-viewer class="hero-spline"
-          url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer>
-      </div>
-      <section class="clients">
-        <div class="container">
-          <div class="clients-content">
-            <div class="client-left-overlay-b"></div>
-            <div class="clients-text">
-              <span class="clients-title">CLIENTS WHO TRUST US</span>
-            </div>
-            <div class="clients-logos">
-              <div class="logo-scroll">
-                <div class="purpose-awards">
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-1.svg" alt="Award 1" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-2.svg" alt="Award 2" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-3.svg" alt="Award 3" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-4.svg" alt="Award 4" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-5.svg" alt="Award 5" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-6.svg" alt="Award 6" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-7.svg" alt="Award 7" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-8.svg" alt="Award 8" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-9.svg" alt="Award 9" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-10.svg" alt="Award 10" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-11.svg" alt="Award 11" />
-                  </div>
-                  <div class="purpose-award">
-                    <img src="assets/images/comp-12.svg" alt="Award 12" />
-                  </div>
+                <div class="header-actions hideinmobile">
+                  <a href="#ecosystem" class="btn btn-primary no-shadow">
+                    <span class="btn-text">Explore our Ecosystem</span>
+                    <span class="btn-text-hover">EXPLORE OUR ECOSYSTEM</span>
+                  </a>
+                  <a href="#lets-talk-button" class="btn btn-primary no-shadow">
+                    <span class="btn-text">Request a Demo</span>
+                    <span class="btn-text-hover">REQUEST A DEMO</span>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="client-right-overlay-b"></div>
           </div>
         </div>
-      </section>
-      <div class="hide-spline"></div>
-    </section>
+        <div class="hero-right-spline">
+          <!-- <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
+        <spline-viewer class="hero-spline"
+          url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"></spline-viewer> -->
 
-    <!-- Clients Section -->
-    <!-- Services Section -->
-    <section id="services" class="services">
-      <!-- <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt=""> -->
-      <div class="container">
-        <div class="services-header mob-rel" style="
+          <script
+            type="module"
+            src="https://unpkg.com/@splinetool/viewer@1.11.2/build/spline-viewer.js"
+          ></script>
+          <spline-viewer
+            class="hero-spline"
+            url="https://prod.spline.design/rz7h61vkzNqAL3yx/scene.splinecode"
+          ></spline-viewer>
+        </div>
+        <section class="clients">
+          <div class="container">
+            <div class="clients-content">
+              <div class="client-left-overlay-b"></div>
+              <div class="clients-text">
+                <span class="clients-title">CLIENTS WHO TRUST US</span>
+              </div>
+              <div class="clients-logos">
+                <div class="logo-scroll">
+                  <div class="purpose-awards">
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-1.svg" alt="Award 1" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-2.svg" alt="Award 2" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-3.svg" alt="Award 3" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-4.svg" alt="Award 4" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-5.svg" alt="Award 5" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-6.svg" alt="Award 6" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-7.svg" alt="Award 7" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-8.svg" alt="Award 8" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-9.svg" alt="Award 9" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-10.svg" alt="Award 10" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-11.svg" alt="Award 11" />
+                    </div>
+                    <div class="purpose-award">
+                      <img src="assets/images/comp-12.svg" alt="Award 12" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="client-right-overlay-b"></div>
+            </div>
+          </div>
+        </section>
+        <div class="hide-spline"></div>
+      </section>
+
+      <!-- Clients Section -->
+      <!-- Services Section -->
+      <section id="services" class="services">
+        <!-- <img class="mobile-dots-2 hideinlaptop" src="assets/images/mobile-dotes.svg" alt=""> -->
+        <div class="container">
+          <div
+            class="services-header mob-rel"
+            style="
               display: flex;
               justify-content: space-between;
               align-items: center;
               gap: 60px;
               margin-bottom: 60px;
               z-index: 6;
-            ">
-          <h2 class="gradient-heading" style="margin: 0; flex: 0 0 auto; max-width: 500px">
-            Innovating with Purpose
-          </h2>
-          <p class="gradient-description" style="padding-block: 13px">
-            We build solutions that solve real challenges and move businesses
-            forward. Our focus is on shaping the future with clarity, impact,
-            and confidence
-          </p>
-        </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <a href="#" class="service-link">
-              <img src="assets/images/fuutre-r.jpg" alt="Business strategy" class="service-image" />
-              <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
-              <div class="service-title">
-                <div class="service-title-1">Future Ready</div>
-                <div class="service-title-subhead">
-                  Preparing enterprises with solutions built for tomorrow
-                </div>
-              </div>
-            </a>
+            "
+          >
+            <h2
+              class="gradient-heading"
+              style="margin: 0; flex: 0 0 auto; max-width: 500px"
+            >
+              Innovating with Purpose
+            </h2>
+            <p class="gradient-description" style="padding-block: 13px">
+              We build solutions that solve real challenges and move businesses
+              forward. Our focus is on shaping the future with clarity, impact,
+              and confidence
+            </p>
           </div>
-          <div class="service-card">
-            <a href="#" class="service-link">
-              <img src="assets/images/trust.jpg" alt="Process optimization" class="service-image" />
-              <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
-              <div class="service-title">
-                <div class="service-title-1">Trustworthy</div>
-                <div class="service-title-subhead">
-                  Technology you can rely on, every step of the way
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="service-card">
-            <a href="#" class="service-link">
-              <img src="assets/images/inclusivity.jpg" alt="Financial advisory" class="service-image" />
-              <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
-              <div class="service-title">
-                <div class="service-title-1">Inclusive</div>
-                <div class="service-title-subhead">
-                  An ecosystem that empowers everyone to grow
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="service-card">
-            <a href="#" class="service-link">
-              <img src="assets/images/impact.jpg" alt="Market research" class="service-image" />
-              <img src="assets/images/black-blur.png" alt="Business strategy" class="service-blur" />
-              <div class="service-title">
-                <div class="service-title-1">Impact Driven</div>
-                <div class="service-title-subhead">
-                  Simplifying complexity to deliver real results
-                </div>
-              </div>
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Card Carousel Section -->
-    <section class="carousel-section">
-      <div class="container">
-        <div class="gradient-heading text-center mb-5 justify-content-center">
-          Our Products
-        </div>
-
-        <!-- Carousel Tabs -->
-        <div class="carousel-tabs">
-          <button class="carousel-tab active" data-tab="0">
-            <img src="assets/images/QA.svg" alt="" />
-          </button>
-          <div class="carousel-tab-line"></div>
-          <button class="carousel-tab" data-tab="1">
-            <img src="assets/images/hire3x.svg" alt="" />
-          </button>
-          <div class="carousel-tab-line"></div>
-          <button class="carousel-tab" data-tab="2">
-            <img src="assets/images/walnut.svg" alt="" />
-          </button>
-          <div class="carousel-tab-line"></div>
-
-          <button class="carousel-tab" data-tab="3">
-            <img src="assets/images/devopsark.svg" alt="" />
-          </button>
-          <div class="carousel-tab-line"></div>
-          <button class="carousel-tab" data-tab="4">
-            <img src="assets/images/bominso.svg" alt="" />
-          </button>
-        </div>
-        <div class="mob-carousel hideinlaptop cust">
-          <div class="mob-carousel-track">
-            <div class="mob-slide active">
-              <div>
-                <div class="small-txt one"><img src="assets/images/1-qa.svg" alt=""></div>
-                <img src="assets/images/new-img.png" alt="Why customers choose us 1">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    All-in-One ALM & Automation Platform
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <a href="#" class="service-link">
+                <img
+                  src="assets/images/fuutre-r.jpg"
+                  alt="Business strategy"
+                  class="service-image"
+                />
+                <img
+                  src="assets/images/black-blur.png"
+                  alt="Business strategy"
+                  class="service-blur"
+                />
+                <div class="service-title">
+                  <div class="service-title-1">Future Ready</div>
+                  <div class="service-title-subhead">
+                    Preparing enterprises with solutions built for tomorrow
                   </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
                 </div>
-
-              </div>
+              </a>
             </div>
-            <div class="mob-slide">
-              <div>
-                <div class="small-txt two"><img src="assets/images/3-hire.svg" alt=""></div>
-                <img src="assets/images/new-img.png" alt="Why customers choose us 2">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    All your hiring needs, simplified and streamlined
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
+            <div class="service-card">
+              <a href="#" class="service-link">
+                <img
+                  src="assets/images/trust.jpg"
+                  alt="Process optimization"
+                  class="service-image"
+                />
+                <img
+                  src="assets/images/black-blur.png"
+                  alt="Business strategy"
+                  class="service-blur"
+                />
+                <div class="service-title">
+                  <div class="service-title-1">Trustworthy</div>
+                  <div class="service-title-subhead">
+                    Technology you can rely on, every step of the way
                   </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
                 </div>
-              </div>
+              </a>
             </div>
-            <div class="mob-slide">
-              <div>
-                <div class="small-txt three"><img src="assets/images/4-wal.svg" alt=""></div>
-                <img src="assets/images/walnut-screen.png" alt="Why customers choose us 3">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    AI Based tool for turbo charging Application Development
-                    Life Cycle
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
+            <div class="service-card">
+              <a href="#" class="service-link">
+                <img
+                  src="assets/images/inclusivity.jpg"
+                  alt="Financial advisory"
+                  class="service-image"
+                />
+                <img
+                  src="assets/images/black-blur.png"
+                  alt="Business strategy"
+                  class="service-blur"
+                />
+                <div class="service-title">
+                  <div class="service-title-1">Inclusive</div>
+                  <div class="service-title-subhead">
+                    An ecosystem that empowers everyone to grow
                   </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
                 </div>
-              </div>
+              </a>
             </div>
-            <div class="mob-slide">
-              <div>
-                <div class="small-txt four"><img src="assets/images/2-dev.svg" alt=""></div>
-                <img src="assets/images/bominso-screen.png" alt="Why customers choose us 3">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    DevOps Ark drives efficiency, automation, and secure
-                    delivery
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
+            <div class="service-card">
+              <a href="#" class="service-link">
+                <img
+                  src="assets/images/impact.jpg"
+                  alt="Market research"
+                  class="service-image"
+                />
+                <img
+                  src="assets/images/black-blur.png"
+                  alt="Business strategy"
+                  class="service-blur"
+                />
+                <div class="service-title">
+                  <div class="service-title-1">Impact Driven</div>
+                  <div class="service-title-subhead">
+                    Simplifying complexity to deliver real results
                   </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
                 </div>
-              </div>
-            </div>
-            <div class="mob-slide">
-              <div>
-                <div class="small-txt five"><img src="assets/images/5-bom.svg" alt=""></div>
-                <img src="assets/images/devopsark-screen.jpg" alt="Why customers choose us 3">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    At Bominso, we don't just find jobs—we find the right jobs
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
-                  </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="mob-carousel-dots"></div>
-        </div>
-        <div class="carousel hideinmobile">
-          <div class="card">
-            <div class="slide-content">
-              <div class="slide-left">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    All-in-One ALM & Automation Platform
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
-                  </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
-                </div>
-              </div>
-              <div class="slide-right">
-                <img class="img-4" src="assets/images/car-4.png" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="slide-content">
-              <div class="slide-left">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    All your hiring needs, simplified and streamlined
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
-                  </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
-                </div>
-              </div>
-              <div class="slide-right">
-                <img class="img-4" src="assets/images/car-4.png" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="slide-content">
-              <div class="slide-left">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    AI Based tool for turbo charging Application Development
-                    Life Cycle
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
-                  </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
-                </div>
-              </div>
-              <div class="slide-right">
-                <img class="img-4" src="assets/images/walnut-screen.svg" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="slide-content">
-              <div class="slide-left">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    DevOps Ark drives efficiency, automation, and secure
-                    delivery
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
-                  </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
-                </div>
-              </div>
-              <div class="slide-right">
-                <img class="img-4" src="assets/images/devopsark-screen.svg" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="slide-content">
-              <div class="slide-left">
-                <div class="slide-info">
-                  <h3 class="slide-title">
-                    At Bominso, we don't just find jobs—we find the right jobs
-                  </h3>
-
-                  <div class="slide-features">
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> Automated
-                      testing solutions Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" />
-                      Comprehensive test coverage Horem ipsum dolor sit amet,
-                      consectetur adipiscing elit
-                    </div>
-                    <div class="feature-item">
-                      <img src="assets/images/ticker.svg" alt="" /> CI/CD
-                      integration Horem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </div>
-                  </div>
-
-                  <a href="contact.html" class="btn btn-primary">
-                    <span class="btn-text">Explore SimplifyQA</span>
-                  </a>
-                </div>
-              </div>
-              <div class="slide-right">
-                <img class="img-4" src="assets/images/bominso-screen.svg" alt="" />
-              </div>
+              </a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- Scroll-Synced Folder Section -->
-    <section class="folder-text-section show-talk-box">
-      <img class="hideinmobile" src="assets/images/dots.png" alt="" id="folder-dots" style="
+      </section>
+
+      <!-- Card Carousel Section -->
+      <section class="carousel-section">
+        <div class="container">
+          <div class="gradient-heading text-center mb-5 justify-content-center">
+            Our Products
+          </div>
+
+          <!-- Carousel Tabs -->
+          <div class="carousel-tabs">
+            <button class="carousel-tab active" data-tab="0">
+              <img src="assets/images/QA.svg" alt="" />
+            </button>
+            <div class="carousel-tab-line"></div>
+            <button class="carousel-tab" data-tab="1">
+              <img src="assets/images/hire3x.svg" alt="" />
+            </button>
+            <div class="carousel-tab-line"></div>
+            <button class="carousel-tab" data-tab="2">
+              <img src="assets/images/walnut.svg" alt="" />
+            </button>
+            <div class="carousel-tab-line"></div>
+
+            <button class="carousel-tab" data-tab="3">
+              <img src="assets/images/devopsark.svg" alt="" />
+            </button>
+            <div class="carousel-tab-line"></div>
+            <button class="carousel-tab" data-tab="4">
+              <img src="assets/images/bominso.svg" alt="" />
+            </button>
+          </div>
+          <div class="mob-carousel hideinlaptop cust">
+            <div class="mob-carousel-track">
+              <div class="mob-slide active">
+                <div>
+                  <div class="small-txt one">
+                    <img src="assets/images/1-qa.svg" alt="" />
+                  </div>
+                  <img
+                    src="assets/images/new-img.png"
+                    alt="Why customers choose us 1"
+                  />
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      All-in-One ALM & Automation Platform
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="mob-slide">
+                <div>
+                  <div class="small-txt two">
+                    <img src="assets/images/3-hire.svg" alt="" />
+                  </div>
+                  <img
+                    src="assets/images/new-img.png"
+                    alt="Why customers choose us 2"
+                  />
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      All your hiring needs, simplified and streamlined
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="mob-slide">
+                <div>
+                  <div class="small-txt three">
+                    <img src="assets/images/4-wal.svg" alt="" />
+                  </div>
+                  <img
+                    src="assets/images/walnut-screen.png"
+                    alt="Why customers choose us 3"
+                  />
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      AI Based tool for turbo charging Application Development
+                      Life Cycle
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="mob-slide">
+                <div>
+                  <div class="small-txt four">
+                    <img src="assets/images/2-dev.svg" alt="" />
+                  </div>
+                  <img
+                    src="assets/images/bominso-screen.png"
+                    alt="Why customers choose us 3"
+                  />
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      DevOps Ark drives efficiency, automation, and secure
+                      delivery
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="mob-slide">
+                <div>
+                  <div class="small-txt five">
+                    <img src="assets/images/5-bom.svg" alt="" />
+                  </div>
+                  <img
+                    src="assets/images/devopsark-screen.jpg"
+                    alt="Why customers choose us 3"
+                  />
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      At Bominso, we don't just find jobs—we find the right jobs
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mob-carousel-dots"></div>
+          </div>
+          <div class="carousel hideinmobile">
+            <div class="card">
+              <div class="slide-content">
+                <div class="slide-left">
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      All-in-One ALM & Automation Platform
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="slide-right">
+                  <img class="img-4" src="assets/images/car-4.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="slide-content">
+                <div class="slide-left">
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      All your hiring needs, simplified and streamlined
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="slide-right">
+                  <img class="img-4" src="assets/images/car-4.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="slide-content">
+                <div class="slide-left">
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      AI Based tool for turbo charging Application Development
+                      Life Cycle
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="slide-right">
+                  <img
+                    class="img-4"
+                    src="assets/images/walnut-screen.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="slide-content">
+                <div class="slide-left">
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      DevOps Ark drives efficiency, automation, and secure
+                      delivery
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="slide-right">
+                  <img
+                    class="img-4"
+                    src="assets/images/devopsark-screen.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="slide-content">
+                <div class="slide-left">
+                  <div class="slide-info">
+                    <h3 class="slide-title">
+                      At Bominso, we don't just find jobs—we find the right jobs
+                    </h3>
+
+                    <div class="slide-features">
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> Automated
+                        testing solutions Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" />
+                        Comprehensive test coverage Horem ipsum dolor sit amet,
+                        consectetur adipiscing elit
+                      </div>
+                      <div class="feature-item">
+                        <img src="assets/images/ticker.svg" alt="" /> CI/CD
+                        integration Horem ipsum dolor sit amet, consectetur
+                        adipiscing elit
+                      </div>
+                    </div>
+
+                    <a href="contact.html" class="btn btn-primary">
+                      <span class="btn-text">Explore SimplifyQA</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="slide-right">
+                  <img
+                    class="img-4"
+                    src="assets/images/bominso-screen.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Scroll-Synced Folder Section -->
+      <section class="folder-text-section show-talk-box">
+        <img
+          class="hideinmobile"
+          src="assets/images/dots.png"
+          alt=""
+          id="folder-dots"
+          style="
             position: fixed;
             right: 0px;
             bottom: 0px;
@@ -746,274 +873,395 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
-          " />
-      <div class="container">
-        <div class="services-header" style="
+          "
+        />
+        <div class="container">
+          <div
+            class="services-header"
+            style="
               display: flex;
               justify-content: space-between;
               align-items: center;
               gap: 60px;
               margin-bottom: 60px;
-            ">
-          <h2 class="gradient-heading" style="margin: 0; flex: 0 0 auto; max-width: 477px">
-            Strategic Solution & Services
-          </h2>
-          <p class="gradient-description" style="padding-block: 8px">
-            Delivering structured solutions that align with your vision and
-            ensure sustainable success<br /><span class="culture-subtitle" style="
+            "
+          >
+            <h2
+              class="gradient-heading"
+              style="margin: 0; flex: 0 0 auto; max-width: 477px"
+            >
+              Strategic Solution & Services
+            </h2>
+            <p class="gradient-description" style="padding-block: 8px">
+              Delivering structured solutions that align with your vision and
+              ensure sustainable success<br />
+              <!-- <span
+                class="culture-subtitle"
+                style="
                   margin-top: 10px;
                   display: flex;
                   align-items: center;
                   color: #eb5d2a;
                   gap: 3px;
-                ">Get Started <img src="assets/images/get-started.svg" alt="" /></span>
-          </p>
-        </div>
-
-        <div class="folder-text-content">
-          <!-- Left: Text sections -->
-          <div class="text-sections">
-            <div class="one">
-              <div class="text-block" data-papers="3" data-index="0">
-                <span class="text-tag">Development Services</span>
-                <h2 class="text-block-title">Digital Transformation</h2>
-                <p class="text-block-description hideinmobile">
-                  We help businesses reimagine their operations with modern digital capabilities, improving efficiency,
-                  reducing complexity, and enhancing how they deliver value to customers. From cloud integration and
-                  application modernization to DevOps and microservices, we build scalable, future-ready solutions that
-                  drive continuous growth.
-                </p>
-                <p class="text-block-description hideinlaptop">
-                  We help businesses adopt digital technology across all
-                  aspects of their operations, driving transformative change
-                  in how they function and deliver value to customers.
-                </p>
-                <a class="btn btn-primary w217 hideinmobile">
-                  <span class="btn-text">Explore more</span>
-                </a>
-              </div>
-              <div class="folder-animation-wrapper hideinlaptop">
-                <div class="folder scroll-folder" id="mobile-scroll-folder-0">
-                  <img style="position: absolute;width: 60px; left: 0px; top: -20px;z-index:2;"
-                    src="assets/images/back-top.svg" alt="">
-                  <div class="folder__back">
-                    <div class="paper paper-1">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-qa.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-2">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-dev.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-3">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-walnut.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-4 paper-hire">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-hire.svg" alt="" />
-                      </div>
-                    </div>
-                    <!-- Inside papers that stay in folder -->
-                    <div class="inside-paper inside-paper-1"></div>
-                    <div class="inside-paper inside-paper-2"></div>
-                    <div class="folder__front"></div>
-                    <div class="folder__front right">
-                      <img style="position: absolute;right: 0px;top: -20px;z-index:2;width: 60px;"
-                        src="assets/images/front-top.svg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center; z-index: 6;">
-                <span class="btn-text">Explore more</span>
-              </a>
-              <img class="mobile-dots" src="assets/images/mobile-dotes.svg" alt="">
-            </div>
-
-            <div class="two">
-              <div class="text-block" data-papers="1" data-paper-type="hire" data-index="1">
-                <span class="text-tag">Recruitment & Staffing</span>
-                <h2 class="text-block-title">Global Staffing Solutions</h2>
-                <p class="text-block-description hideinmobile">
-                  We provide scalable offshore operations and specialized
-                  staffing services to quickly address talent shortages and
-                  resource needs. With access to experts worldwide, businesses
-                  can meet project demands efficiently and strengthen their
-                  teams without delays.<br /><br />
-                  Our solutions are tailored to align with your business
-                  goals, ensuring the right talent is in place when you need
-                  it most. This flexible and targeted approach helps
-                  organizations scale confidently and stay ahead of evolving
-                  demands
-                </p>
-                <p class="text-block-description hideinlaptop">
-                  We provide scalable offshore operations and specialized
-                  staffing services to quickly address talent shortages and
-                  resource needs
-                </p>
-                <a class="btn btn-primary w217 hideinmobile">
-                  <span class="btn-text">Explore more</span>
-                </a>
-              </div>
-              <div class="folder-animation-wrapper hideinlaptop">
-                <div class="folder scroll-folder" id="mobile-scroll-folder-1">
-                  <img style="position: absolute;width: 60px; left: 0px; top: -20px;z-index:2;"
-                    src="assets/images/back-top.svg" alt="">
-                  <div class="folder__back">
-                    <div class="paper paper-1">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-qa.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-2">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-dev.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-3">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-walnut.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-4 paper-hire">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-hire.svg" alt="" />
-                      </div>
-                    </div>
-                    <!-- Inside papers that stay in folder -->
-                    <div class="inside-paper inside-paper-1"></div>
-                    <div class="inside-paper inside-paper-2"></div>
-                    <div class="folder__front"></div>
-                    <div class="folder__front right">
-                      <img style="position: absolute;right: 0px;top: -20px;z-index:2;width: 60px;"
-                        src="assets/images/front-top.svg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center; z-index: 6;">
-                <span class="btn-text">Explore more</span>
-              </a>
-              <img class="mobile-dots" src="assets/images/mobile-dotes.svg" alt="">
-            </div>
-
-            <div class="three">
-              <div class="text-block" data-papers="1" data-paper-type="qa" data-index="2" style="padding-bottom: 90px">
-                <span class="text-tag">Testing Services</span>
-                <h2 class="text-block-title">Quality Assurance & Testing</h2>
-                <p class="text-block-description hideinmobile">
-                  We offer end-to-end quality assurance to ensure digital
-                  solutions perform reliably and align with business goals.
-                  Our key capabilities include Test Management, Test Case
-                  Repository, Custom Quality Metrics, and Optimization,
-                  providing a strong foundation for delivering consistent
-                  quality<br /><br />
-                  These capabilities are supported by services such as
-                  Product, Integration, Migration, UAT, Automation, and
-                  Non-Functional Testing. This structured approach enables
-                  businesses to manage, execute, and continuously enhance
-                  solution quality throughout the software lifecycle
-                </p>
-                <p class="text-block-description hideinlaptop">
-                  We offer end-to-end quality assurance to ensure digital
-                  solutions perform reliably and align with business goals
-                </p>
-                <a class="btn btn-primary w217 hideinmobile">
-                  <span class="btn-text">Explore more</span>
-                </a>
-              </div>
-              <div class="folder-animation-wrapper hideinlaptop">
-                <div class="folder scroll-folder" id="mobile-scroll-folder-2">
-                  <img style="position: absolute;width: 60px; left: 0px; top: -20px;z-index:2;"
-                    src="assets/images/back-top.svg" alt="">
-                  <div class="folder__back">
-                    <div class="paper paper-1">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-qa.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-2">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-dev.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-3">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-walnut.svg" alt="" />
-                      </div>
-                    </div>
-                    <div class="paper paper-4 paper-hire">
-                      <div class="paper-icon">
-                        <img src="assets/images/fan-hire.svg" alt="" />
-                      </div>
-                    </div>
-                    <!-- Inside papers that stay in folder -->
-                    <div class="inside-paper inside-paper-1"></div>
-                    <div class="inside-paper inside-paper-2"></div>
-                    <div class="folder__front"></div>
-                    <div class="folder__front right">
-                      <img style="position: absolute;right: 0px;top: -20px;z-index:2;width: 60px;"
-                        src="assets/images/front-top.svg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a class="btn btn-primary w217 hideinlaptop" style="justify-self: center; z-index: 6;">
-                <span class="btn-text">Explore more</span>
-              </a>
-              <img class="mobile-dots" src="assets/images/mobile-dotes.svg" alt="">
-            </div>
-
+                "
+                >Get Started <img src="assets/images/get-started.svg" alt=""
+              /></span> -->
+            </p>
           </div>
 
-          <!-- Right: Sticky folder -->
-          <div class="folder-sticky-container hideinmobile">
-            <div class="folder-animation-wrapper">
-              <div class="folder scroll-folder" id="desktop-scroll-folder">
-                <img style="position: absolute;width: 60px; left: 0px; top: -20px;z-index:2;"
-                  src="assets/images/back-top.svg" alt="">
-                <div class="folder__back">
-                  <div class="paper paper-1">
-                    <div class="paper-icon">
-                      <img src="assets/images/fan-qa.svg" alt="" />
+          <div class="folder-text-content">
+            <!-- Left: Text sections -->
+            <div class="text-sections">
+              <div class="one">
+                <div class="text-block" data-papers="3" data-index="0">
+                  <span class="text-tag">Development Services</span>
+                  <h2 class="text-block-title">
+                    Digital Transformation Solution
+                  </h2>
+                  <p class="text-block-description hideinmobile">
+                    We help businesses reimagine their operations with modern
+                    digital capabilities, improving efficiency, reducing
+                    complexity, and enhancing how they deliver value to
+                    customers. From cloud integration and application
+                    modernization to DevOps and microservices, we build
+                    scalable, future-ready solutions that drive continuous
+                    growth.
+                  </p>
+                  <p class="text-block-description hideinlaptop">
+                    We help businesses adopt digital technology across all
+                    aspects of their operations, driving transformative change
+                    in how they function and deliver value to customers.
+                  </p>
+                  <a
+                    href="devSolutions.html"
+                    class="btn btn-primary w217 hideinmobile"
+                  >
+                    <span class="btn-text">Explore more</span>
+                  </a>
+                </div>
+                <div class="folder-animation-wrapper hideinlaptop">
+                  <div class="folder scroll-folder" id="mobile-scroll-folder-0">
+                    <img
+                      style="
+                        position: absolute;
+                        width: 60px;
+                        left: 0px;
+                        top: -20px;
+                        z-index: 2;
+                      "
+                      src="assets/images/back-top.svg"
+                      alt=""
+                    />
+                    <div class="folder__back">
+                      <div class="paper paper-1">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-qa.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-2">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-dev.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-3">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-walnut.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-4 paper-hire">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-hire.svg" alt="" />
+                        </div>
+                      </div>
+                      <!-- Inside papers that stay in folder -->
+                      <div class="inside-paper inside-paper-1"></div>
+                      <div class="inside-paper inside-paper-2"></div>
+                      <div class="folder__front"></div>
+                      <div class="folder__front right">
+                        <img
+                          style="
+                            position: absolute;
+                            right: 0px;
+                            top: -20px;
+                            z-index: 2;
+                            width: 60px;
+                          "
+                          src="assets/images/front-top.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div class="paper paper-2">
-                    <div class="paper-icon">
-                      <img src="assets/images/fan-dev.svg" alt="" />
+                </div>
+                <a
+                  class="btn btn-primary w217 hideinlaptop"
+                  style="justify-self: center; z-index: 6"
+                >
+                  <span class="btn-text">Explore more</span>
+                </a>
+                <img
+                  class="mobile-dots"
+                  src="assets/images/mobile-dotes.svg"
+                  alt=""
+                />
+              </div>
+
+              <div class="two">
+                <div
+                  class="text-block"
+                  data-papers="1"
+                  data-paper-type="hire"
+                  data-index="1"
+                >
+                  <span class="text-tag">Recruitment & Staffing</span>
+                  <h2 class="text-block-title">Global Staffing Solutions</h2>
+                  <p class="text-block-description hideinmobile">
+                    We provide scalable offshore staffing solutions that address
+                    talent gaps and evolving resource needs. With access to a
+                    global network of experts, we help organizations strengthen
+                    their teams, meet project demands efficiently, and scale
+                    with confidence.
+                  </p>
+                  <p class="text-block-description hideinlaptop">
+                    We provide scalable offshore operations and specialized
+                    staffing services to quickly address talent shortages and
+                    resource needs
+                  </p>
+                  <!-- <a class="btn btn-primary w217 hideinmobile">
+                    <span class="btn-text">Explore more</span>
+                  </a> -->
+                </div>
+                <div class="folder-animation-wrapper hideinlaptop">
+                  <div class="folder scroll-folder" id="mobile-scroll-folder-1">
+                    <img
+                      style="
+                        position: absolute;
+                        width: 60px;
+                        left: 0px;
+                        top: -20px;
+                        z-index: 2;
+                      "
+                      src="assets/images/back-top.svg"
+                      alt=""
+                    />
+                    <div class="folder__back">
+                      <div class="paper paper-1">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-qa.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-2">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-dev.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-3">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-walnut.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-4 paper-hire">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-hire.svg" alt="" />
+                        </div>
+                      </div>
+                      <!-- Inside papers that stay in folder -->
+                      <div class="inside-paper inside-paper-1"></div>
+                      <div class="inside-paper inside-paper-2"></div>
+                      <div class="folder__front"></div>
+                      <div class="folder__front right">
+                        <img
+                          style="
+                            position: absolute;
+                            right: 0px;
+                            top: -20px;
+                            z-index: 2;
+                            width: 60px;
+                          "
+                          src="assets/images/front-top.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div class="paper paper-3">
-                    <div class="paper-icon">
-                      <img src="assets/images/fan-walnut.svg" alt="" />
+                </div>
+                <a
+                  class="btn btn-primary w217 hideinlaptop"
+                  style="justify-self: center; z-index: 6"
+                >
+                  <span class="btn-text">Explore more</span>
+                </a>
+                <img
+                  class="mobile-dots"
+                  src="assets/images/mobile-dotes.svg"
+                  alt=""
+                />
+              </div>
+
+              <div class="three">
+                <div
+                  class="text-block"
+                  data-papers="1"
+                  data-paper-type="qa"
+                  data-index="2"
+                  style="padding-bottom: 90px"
+                >
+                  <span class="text-tag">Testing Services</span>
+                  <h2 class="text-block-title">Quality Assurance & Testing</h2>
+                  <p class="text-block-description hideinmobile">
+                    We offer end-to-end quality assurance to ensure digital
+                    solutions perform reliably and align with business goals.
+                    Our key capabilities include Test Management, Test Case
+                    Repository, Custom Quality Metrics, and Optimization,
+                    providing a strong foundation for delivering consistent
+                    quality<br /><br />
+                    These capabilities are supported by services such as
+                    Product, Integration, Migration, UAT, Automation, and
+                    Non-Functional Testing. This structured approach enables
+                    businesses to manage, execute, and continuously enhance
+                    solution quality throughout the software lifecycle
+                  </p>
+                  <p class="text-block-description hideinlaptop">
+                    We offer end-to-end quality assurance to ensure digital
+                    solutions perform reliably and align with business goals
+                  </p>
+                  <a
+                    href="solutions.html"
+                    class="btn btn-primary w217 hideinmobile"
+                  >
+                    <span class="btn-text">Explore more</span>
+                  </a>
+                </div>
+                <div class="folder-animation-wrapper hideinlaptop">
+                  <div class="folder scroll-folder" id="mobile-scroll-folder-2">
+                    <img
+                      style="
+                        position: absolute;
+                        width: 60px;
+                        left: 0px;
+                        top: -20px;
+                        z-index: 2;
+                      "
+                      src="assets/images/back-top.svg"
+                      alt=""
+                    />
+                    <div class="folder__back">
+                      <div class="paper paper-1">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-qa.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-2">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-dev.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-3">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-walnut.svg" alt="" />
+                        </div>
+                      </div>
+                      <div class="paper paper-4 paper-hire">
+                        <div class="paper-icon">
+                          <img src="assets/images/fan-hire.svg" alt="" />
+                        </div>
+                      </div>
+                      <!-- Inside papers that stay in folder -->
+                      <div class="inside-paper inside-paper-1"></div>
+                      <div class="inside-paper inside-paper-2"></div>
+                      <div class="folder__front"></div>
+                      <div class="folder__front right">
+                        <img
+                          style="
+                            position: absolute;
+                            right: 0px;
+                            top: -20px;
+                            z-index: 2;
+                            width: 60px;
+                          "
+                          src="assets/images/front-top.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div class="paper paper-4 paper-hire">
-                    <div class="paper-icon">
-                      <img src="assets/images/fan-hire.svg" alt="" />
+                </div>
+                <a
+                  class="btn btn-primary w217 hideinlaptop"
+                  style="justify-self: center; z-index: 6"
+                >
+                  <span class="btn-text">Explore more</span>
+                </a>
+                <img
+                  class="mobile-dots"
+                  src="assets/images/mobile-dotes.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <!-- Right: Sticky folder -->
+            <div class="folder-sticky-container hideinmobile">
+              <div class="folder-animation-wrapper">
+                <div class="folder scroll-folder" id="desktop-scroll-folder">
+                  <img
+                    style="
+                      position: absolute;
+                      width: 60px;
+                      left: 0px;
+                      top: -20px;
+                      z-index: 2;
+                    "
+                    src="assets/images/back-top.svg"
+                    alt=""
+                  />
+                  <div class="folder__back">
+                    <div class="paper paper-1">
+                      <div class="paper-icon">
+                        <img src="assets/images/fan-qa.svg" alt="" />
+                      </div>
                     </div>
-                  </div>
-                  <!-- Inside papers that stay in folder -->
-                  <div class="inside-paper inside-paper-1"></div>
-                  <div class="inside-paper inside-paper-2"></div>
-                  <div class="folder__front"></div>
-                  <div class="folder__front right">
-                    <img style="position: absolute;right: 0px;top: -20px;z-index:2;width: 60px;"
-                      src="assets/images/front-top.svg" alt="">
+                    <div class="paper paper-2">
+                      <div class="paper-icon">
+                        <img src="assets/images/fan-dev.svg" alt="" />
+                      </div>
+                    </div>
+                    <div class="paper paper-3">
+                      <div class="paper-icon">
+                        <img src="assets/images/fan-walnut.svg" alt="" />
+                      </div>
+                    </div>
+                    <div class="paper paper-4 paper-hire">
+                      <div class="paper-icon">
+                        <img src="assets/images/fan-hire.svg" alt="" />
+                      </div>
+                    </div>
+                    <!-- Inside papers that stay in folder -->
+                    <div class="inside-paper inside-paper-1"></div>
+                    <div class="inside-paper inside-paper-2"></div>
+                    <div class="folder__front"></div>
+                    <div class="folder__front right">
+                      <img
+                        style="
+                          position: absolute;
+                          right: 0px;
+                          top: -20px;
+                          z-index: 2;
+                          width: 60px;
+                        "
+                        src="assets/images/front-top.svg"
+                        alt=""
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- Commented sections removed for cleaner code -->
-    <!-- <div id="ecosystem" class="stats">
+      </section>
+      <!-- Commented sections removed for cleaner code -->
+      <!-- <div id="ecosystem" class="stats">
       <div class="container">
         <div class="section-title-2 text-center">OUR ECOSYSTEM</div>
         <div class="orbit-container">
@@ -1136,864 +1384,908 @@
        
       </div>
     </div> -->
-    <section class="cs-cta-section hideinlaptop">
-      <div class="cta-container">
-        <div class="header-content" style="    gap: 124px;
-      justify-self: anchor-center;">
-          <div class="talk-message-2 hideinmobile">
-            Let's discuss your business goals — schedule a demo now
-          </div>
-
-          <div class="gradient-heading-2 hideinlaptop fs-70 mb-2" style="justify-content: center;"> Let's discuss your
-            business goals</div>
-          <p class="section-description hideinlaptop">Schedule a demo now</p>
-          <div class="header-content">
-            <a id="lets-talk-button" href="contact.html" class="btn btn-primary no-shadow">
-              <span class="btn-text">Request a Demo</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="purpose show-talk-box">
-      <div class="p-container">
-        <div class="purpose-content">
-          <div>
-            <div class="section-title color-00ffff mb-5">Global Presence</div>
-            <div class="section-description">
-              We deliver advanced technology solutions and innovative products
-              that empower organizations worldwide. With a strong global
-              presence, our teams collaborate across regions to provide
-              scalable, secure, and efficient services. Each year, we support
-              enterprises of all sizes in achieving operational excellence and
-              driving sustainable growth through technology
+      <section class="cs-cta-section hideinlaptop">
+        <div class="cta-container">
+          <div
+            class="header-content"
+            style="gap: 124px; justify-self: anchor-center"
+          >
+            <div class="talk-message-2 hideinmobile">
+              Let's discuss your business goals — schedule a demo now
             </div>
 
-            <!-- 2x2 Stats Grid -->
-            <div class="presence-stats">
-              <div class="presence-grid">
-                <div class="presence-stat">
-                  <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="" />
-                  <div class="presence-number">500+</div>
-                  <div class="presence-text">
-                    experts driving innovation and delivering real impact
+            <div
+              class="gradient-heading-2 hideinlaptop fs-70 mb-2"
+              style="justify-content: center"
+            >
+              Let's discuss your business goals
+            </div>
+            <p class="section-description hideinlaptop">Schedule a demo now</p>
+            <div class="header-content">
+              <a
+                id="lets-talk-button"
+                href="contact.html"
+                class="btn btn-primary no-shadow"
+              >
+                <span class="btn-text">Request a Demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="purpose show-talk-box">
+        <div class="p-container">
+          <div class="purpose-content">
+            <div>
+              <div class="section-title color-00ffff mb-5">Global Presence</div>
+              <div class="section-description">
+                We deliver advanced technology solutions and innovative products
+                that empower organizations worldwide. With a strong global
+                presence, our teams collaborate across regions to provide
+                scalable, secure, and efficient services. Each year, we support
+                enterprises of all sizes in achieving operational excellence and
+                driving sustainable growth through technology
+              </div>
+
+              <!-- 2x2 Stats Grid -->
+              <div class="presence-stats">
+                <div class="presence-grid">
+                  <div class="presence-stat">
+                    <img
+                      class="grad-pos"
+                      src="assets/images/or-side-grad.svg"
+                      alt=""
+                    />
+                    <div class="presence-number">500+</div>
+                    <div class="presence-text">
+                      experts driving innovation and delivering real impact
+                    </div>
                   </div>
-                </div>
-                <div class="presence-stat">
-                  <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="" />
-                  <div class="presence-number">4</div>
-                  <div class="presence-text">
-                    A growing global footprint, connecting businesses
-                    worldwide
+                  <div class="presence-stat">
+                    <img
+                      class="grad-pos"
+                      src="assets/images/or-side-grad.svg"
+                      alt=""
+                    />
+                    <div class="presence-number">4</div>
+                    <div class="presence-text">
+                      A growing global footprint, connecting businesses
+                      worldwide
+                    </div>
                   </div>
-                </div>
-                <div class="presence-stat">
-                  <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="" />
-                  <div class="presence-number">100+</div>
-                  <div class="presence-text">
-                    organizations empowered through smart, simple solutions
+                  <div class="presence-stat">
+                    <img
+                      class="grad-pos"
+                      src="assets/images/or-side-grad.svg"
+                      alt=""
+                    />
+                    <div class="presence-number">100+</div>
+                    <div class="presence-text">
+                      organizations empowered through smart, simple solutions
+                    </div>
                   </div>
-                </div>
-                <div class="presence-stat">
-                  <img class="grad-pos" src="assets/images/or-side-grad.svg" alt="" />
-                  <div class="presence-number">100+</div>
-                  <div class="presence-text">
-                    Successful Projects delivered with precision, speed, and
-                    excellence
+                  <div class="presence-stat">
+                    <img
+                      class="grad-pos"
+                      src="assets/images/or-side-grad.svg"
+                      alt=""
+                    />
+                    <div class="presence-number">100+</div>
+                    <div class="presence-text">
+                      Successful Projects delivered with precision, speed, and
+                      excellence
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Globe Embed (above hero) -->
-          <section class="globe-embed">
-            <div>
-              <canvas id="globe"></canvas>
-            </div>
-          </section>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-          <script>
-            // Global variables
-            let canvas, context, width, height;
-            let projection, path;
-            let world, countries, continent;
-            let rotation = [-101.6869, -3.139];
-            let autoRotate = true;
-            let nodes = [];
-            let connections = [];
-            let animationId;
-            let starPattern = null;
-            let startConnections = false;
+            <!-- Globe Embed (above hero) -->
+            <section class="globe-embed">
+              <div>
+                <canvas id="globe"></canvas>
+              </div>
+            </section>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+            <script>
+              // Global variables
+              let canvas, context, width, height;
+              let projection, path;
+              let world, countries, continent;
+              let rotation = [-101.6869, -3.139];
+              let autoRotate = true;
+              let nodes = [];
+              let connections = [];
+              let animationId;
+              let starPattern = null;
+              let startConnections = false;
 
-            // Network configuration
-            const maxConnections = 10;
-            const places = [
-              { name: "Bangalore, India", coord: [77.5946, 12.9716] },
-              // { name: "Nairobi, Kenya", coord: [36.8219, -1.2921] },
-              { name: "Kuala Lumpur, Malaysia", coord: [101.6869, 3.139] },
-              { name: "Atlanta, USA", coord: [-84.388, 33.749] },
-              { name: "Dubai, UAE", coord: [55.2708, 25.2048] },
-              // { name: "Madagascar", coord: [46.8691, -18.7669] },
-            ];
+              // Network configuration
+              const maxConnections = 10;
+              const places = [
+                { name: "Bangalore, India", coord: [77.5946, 12.9716] },
+                // { name: "Nairobi, Kenya", coord: [36.8219, -1.2921] },
+                { name: "Kuala Lumpur, Malaysia", coord: [101.6869, 3.139] },
+                { name: "Atlanta, USA", coord: [-84.388, 33.749] },
+                { name: "Dubai, UAE", coord: [55.2708, 25.2048] },
+                // { name: "Madagascar", coord: [46.8691, -18.7669] },
+              ];
 
-            // Initialize the globe
-            async function init() {
-              setupCanvas();
-              createStarPattern();
-              await loadWorldData();
-              await loadMarkerImage();
-              generateNodes();
-              setupInteraction();
-              observeGlobeVisibility();
-              animate();
-            }
-
-            let markerImage = null;
-            function loadMarkerImage() {
-              return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = function () {
-                  markerImage = img;
-                  resolve();
-                };
-
-                // Use your own image here:
-                img.src = "assets/images/location.svg"; // <-- Replace with your image path
-              });
-            }
-            function setupCanvas() {
-              canvas = d3.select("#globe").node();
-              context = canvas.getContext("2d");
-
-              const size =
-                Math.min(window.innerWidth, window.innerHeight) * 0.9;
-              width = height = size;
-
-              console.log("window.innwerheight", window.innerHeight);
-              if (window.innerHeight < 900) {
-                height = height * 1.2;
-                canvas.height = height * 1.5;
-                canvas.width = width * 1.3;
-              } else {
-                canvas.width = width * 1.2;
-                canvas.height = height * 1.5;
-              }
-              const mobile = window.innerWidth < 1024;
-              if (mobile) {
-                // height = height * 1.2;
-                canvas.height = height * 1.4;
-                canvas.width = width * 1.7;
-              }
-              canvas.style.width = !mobile ? width + "px" : (width * 1.5) + "px";
-              canvas.style.height = height + "px";
-              context.scale(2, 2);
-
-              // Setup D3 projection
-              projection = d3
-                .geoOrthographic()
-                .scale(width / 2)
-                .translate([width / 2, height / 1.7])
-                .clipAngle(90);
-
-              path = d3.geoPath(projection, context);
-            }
-
-            function createStarPattern() {
-              const patternCanvas = document.createElement("canvas");
-              const patternContext = patternCanvas.getContext("2d");
-              const SIZE = 18;
-              patternCanvas.width = SIZE;
-              patternCanvas.height = SIZE;
-
-              // Clear with transparent background
-              patternContext.clearRect(0, 0, 20, 20);
-              patternContext.fillStyle = "rgba(0, 120, 255, 0.6)";
-
-              // PATTERN 5: Grid of Small Stars
-
-              const starSize = 0.6;
-              const spacing = 4;
-
-              for (let x = 2; x < 20; x += spacing) {
-                for (let y = 2; y < 20; y += spacing) {
-                  patternContext.beginPath();
-                  patternContext.arc(x, y, starSize, 0, Math.PI * 2);
-                  patternContext.fill();
-                }
+              // Initialize the globe
+              async function init() {
+                setupCanvas();
+                createStarPattern();
+                await loadWorldData();
+                await loadMarkerImage();
+                generateNodes();
+                setupInteraction();
+                observeGlobeVisibility();
+                animate();
               }
 
-              // Create pattern from the canvas
-              starPattern = context.createPattern(patternCanvas, "repeat");
-            }
-            async function loadWorldData() {
-              try {
-                const worldData = await d3.json(
-                  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
-                );
-                world = worldData;
-                countries = topojson.feature(
-                  worldData,
-                  worldData.objects.countries
-                );
-              } catch (error) {
-                console.log("Using fallback world data");
-                createFallbackWorld();
-              }
-            }
+              let markerImage = null;
+              function loadMarkerImage() {
+                return new Promise((resolve) => {
+                  const img = new Image();
+                  img.onload = function () {
+                    markerImage = img;
+                    resolve();
+                  };
 
-            function createFallbackWorld() {
-              // Create a simple grid pattern for the globe
-              const features = [];
-              for (let lat = -80; lat <= 80; lat += 20) {
-                for (let lng = -180; lng <= 180; lng += 20) {
-                  features.push({
-                    type: "Feature",
-                    geometry: {
-                      type: "Point",
-                      coordinates: [lng, lat],
-                    },
-                  });
-                }
-              }
-              countries = { type: "FeatureCollection", features };
-            }
-
-            function generateNodes() {
-              nodes = [];
-              places.forEach((place, i) => {
-                nodes.push({
-                  id: i,
-                  name: place.name,
-                  coordinates: place.coord,
-                  //   color: `hsl(${i * 72 + 180}, 80%, 70%)`, // Evenly distributed hues
-                  color: `#EE7C55`,
-                  pulse: Math.random() * Math.PI * 2,
+                  // Use your own image here:
+                  img.src = "assets/images/location.svg"; // <-- Replace with your image path
                 });
-              });
-            }
+              }
+              function setupCanvas() {
+                canvas = d3.select("#globe").node();
+                context = canvas.getContext("2d");
 
-            function setupInteraction() {
-              let isInteracting = false;
-              let startPos = [0, 0];
+                const size =
+                  Math.min(window.innerWidth, window.innerHeight) * 0.9;
+                width = height = size;
 
-              // Mouse Events (Desktop)
-              canvas.addEventListener("mousedown", (e) => {
-                isInteracting = true;
-                autoRotate = false;
-                startPos = [e.clientX, e.clientY];
-              });
+                console.log("window.innwerheight", window.innerHeight);
+                if (window.innerHeight < 900) {
+                  height = height * 1.2;
+                  canvas.height = height * 1.5;
+                  canvas.width = width * 1.3;
+                } else {
+                  canvas.width = width * 1.2;
+                  canvas.height = height * 1.5;
+                }
+                const mobile = window.innerWidth < 1024;
+                if (mobile) {
+                  // height = height * 1.2;
+                  canvas.height = height * 1.4;
+                  canvas.width = width * 1.7;
+                }
+                canvas.style.width = !mobile
+                  ? width + "px"
+                  : width * 1.5 + "px";
+                canvas.style.height = height + "px";
+                context.scale(2, 2);
 
-              canvas.addEventListener("mousemove", (e) => {
-                if (!isInteracting) return;
-                const deltaX = e.clientX - startPos[0];
-                const deltaY = e.clientY - startPos[1];
-                rotation[0] += deltaX * 0.5;
-                rotation[1] = Math.max(
-                  -90,
-                  Math.min(90, rotation[1] - deltaY * 0.5)
-                );
-                startPos = [e.clientX, e.clientY];
-              });
+                // Setup D3 projection
+                projection = d3
+                  .geoOrthographic()
+                  .scale(width / 2)
+                  .translate([width / 2, height / 1.7])
+                  .clipAngle(90);
 
-              canvas.addEventListener("mouseup", () => {
-                isInteracting = false;
-                setTimeout(() => (autoRotate = true), 3000);
-              });
+                path = d3.geoPath(projection, context);
+              }
 
-              canvas.addEventListener("mouseleave", () => {
-                isInteracting = false;
-              });
+              function createStarPattern() {
+                const patternCanvas = document.createElement("canvas");
+                const patternContext = patternCanvas.getContext("2d");
+                const SIZE = 18;
+                patternCanvas.width = SIZE;
+                patternCanvas.height = SIZE;
 
-              // Touch Events (Mobile)
-              canvas.addEventListener("touchstart", (e) => {
-                if (e.touches.length === 1) {
+                // Clear with transparent background
+                patternContext.clearRect(0, 0, 20, 20);
+                patternContext.fillStyle = "rgba(0, 120, 255, 0.6)";
+
+                // PATTERN 5: Grid of Small Stars
+
+                const starSize = 0.6;
+                const spacing = 4;
+
+                for (let x = 2; x < 20; x += spacing) {
+                  for (let y = 2; y < 20; y += spacing) {
+                    patternContext.beginPath();
+                    patternContext.arc(x, y, starSize, 0, Math.PI * 2);
+                    patternContext.fill();
+                  }
+                }
+
+                // Create pattern from the canvas
+                starPattern = context.createPattern(patternCanvas, "repeat");
+              }
+              async function loadWorldData() {
+                try {
+                  const worldData = await d3.json(
+                    "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
+                  );
+                  world = worldData;
+                  countries = topojson.feature(
+                    worldData,
+                    worldData.objects.countries
+                  );
+                } catch (error) {
+                  console.log("Using fallback world data");
+                  createFallbackWorld();
+                }
+              }
+
+              function createFallbackWorld() {
+                // Create a simple grid pattern for the globe
+                const features = [];
+                for (let lat = -80; lat <= 80; lat += 20) {
+                  for (let lng = -180; lng <= 180; lng += 20) {
+                    features.push({
+                      type: "Feature",
+                      geometry: {
+                        type: "Point",
+                        coordinates: [lng, lat],
+                      },
+                    });
+                  }
+                }
+                countries = { type: "FeatureCollection", features };
+              }
+
+              function generateNodes() {
+                nodes = [];
+                places.forEach((place, i) => {
+                  nodes.push({
+                    id: i,
+                    name: place.name,
+                    coordinates: place.coord,
+                    //   color: `hsl(${i * 72 + 180}, 80%, 70%)`, // Evenly distributed hues
+                    color: `#EE7C55`,
+                    pulse: Math.random() * Math.PI * 2,
+                  });
+                });
+              }
+
+              function setupInteraction() {
+                let isInteracting = false;
+                let startPos = [0, 0];
+
+                // Mouse Events (Desktop)
+                canvas.addEventListener("mousedown", (e) => {
                   isInteracting = true;
                   autoRotate = false;
-                  const touch = e.touches[0];
-                  startPos = [touch.clientX, touch.clientY];
-                }
-              });
+                  startPos = [e.clientX, e.clientY];
+                });
 
-              canvas.addEventListener("touchmove", (e) => {
-                if (!isInteracting || e.touches.length !== 1) return;
-                e.preventDefault(); // prevent scrolling the page
-                const touch = e.touches[0];
-                const deltaX = touch.clientX - startPos[0];
-                const deltaY = touch.clientY - startPos[1];
-                rotation[0] += deltaX * 0.5;
-                rotation[1] = Math.max(
-                  -90,
-                  Math.min(90, rotation[1] - deltaY * 0.5)
-                );
-                startPos = [touch.clientX, touch.clientY];
-              });
+                canvas.addEventListener("mousemove", (e) => {
+                  if (!isInteracting) return;
+                  const deltaX = e.clientX - startPos[0];
+                  const deltaY = e.clientY - startPos[1];
+                  rotation[0] += deltaX * 0.5;
+                  rotation[1] = Math.max(
+                    -90,
+                    Math.min(90, rotation[1] - deltaY * 0.5)
+                  );
+                  startPos = [e.clientX, e.clientY];
+                });
 
-              canvas.addEventListener("touchend", () => {
-                isInteracting = false;
-                setTimeout(() => (autoRotate = true), 3000);
-              });
+                canvas.addEventListener("mouseup", () => {
+                  isInteracting = false;
+                  setTimeout(() => (autoRotate = true), 3000);
+                });
 
-              // Handle window resize
-              window.addEventListener("resize", setupCanvas);
-            }
+                canvas.addEventListener("mouseleave", () => {
+                  isInteracting = false;
+                });
 
-            function createConnection() {
-              if (connections.length >= maxConnections) return;
-
-              const source = nodes[Math.floor(Math.random() * nodes.length)];
-              let target;
-              do {
-                target = nodes[Math.floor(Math.random() * nodes.length)];
-              } while (target === source);
-
-              // 🔴 Check if a connection already exists (A→B or B→A)
-              const exists = connections.some(
-                (c) =>
-                  (c.source === source && c.target === target) ||
-                  (c.source === target && c.target === source)
-              );
-              if (exists) return; // skip creating duplicate
-
-              const hue = Math.random() * 360;
-              connections.push({
-                source,
-                target,
-                progress: 0,
-                speed: 0.0015, // slower + consistent speed
-                color: `#00ffff`,
-                opacity: 1,
-                lineProgress: 0,
-                id: Date.now() + Math.random(),
-              });
-            }
-            function updateConnections() {
-              // Create new connections randomly
-              if (
-                Math.random() < 0.1 &&
-                connections.length < maxConnections
-              ) {
-                createConnection();
-              }
-
-              // Update existing connections
-              connections.forEach((conn, index) => {
-                // First phase: draw the line from source to target (line grows smoothly)
-                const mobile = window.innerWidth < 1024;
-                if (conn.lineProgress < 1) {
-
-                  conn.lineProgress += mobile ? conn.speed * 20 : conn.speed * 9; // Line draws at steady pace
-
-                  if (conn.lineProgress > 1) conn.lineProgress = 1;
-                }
-
-                // Second phase: move the dot along the line (starts when line is mostly drawn)
-                if (conn.lineProgress > 0.7) {
-                  conn.progress += mobile ? conn.speed * 20 : conn.speed;
-                }
-
-                // Remove connection when dot reaches the end and line fades
-                if (conn.progress >= 1.05) {
-                  conn.opacity -= 0.025;
-                  if (conn.opacity <= 0) {
-                    connections.splice(index, 1);
+                // Touch Events (Mobile)
+                canvas.addEventListener("touchstart", (e) => {
+                  if (e.touches.length === 1) {
+                    isInteracting = true;
+                    autoRotate = false;
+                    const touch = e.touches[0];
+                    startPos = [touch.clientX, touch.clientY];
                   }
-                }
-              });
-            }
+                });
 
-            function drawGlobe() {
-              context.clearRect(0, 0, width, height);
+                canvas.addEventListener("touchmove", (e) => {
+                  if (!isInteracting || e.touches.length !== 1) return;
+                  e.preventDefault(); // prevent scrolling the page
+                  const touch = e.touches[0];
+                  const deltaX = touch.clientX - startPos[0];
+                  const deltaY = touch.clientY - startPos[1];
+                  rotation[0] += deltaX * 0.5;
+                  rotation[1] = Math.max(
+                    -90,
+                    Math.min(90, rotation[1] - deltaY * 0.5)
+                  );
+                  startPos = [touch.clientX, touch.clientY];
+                });
 
-              // Auto-rotate (slower)
-              if (autoRotate) {
-                rotation[0] += 0.05;
+                canvas.addEventListener("touchend", () => {
+                  isInteracting = false;
+                  setTimeout(() => (autoRotate = true), 3000);
+                });
+
+                // Handle window resize
+                window.addEventListener("resize", setupCanvas);
               }
 
-              projection.rotate(rotation);
+              function createConnection() {
+                if (connections.length >= maxConnections) return;
 
-              // Draw ocean with gradient
-              const gradient = context.createRadialGradient(
-                width / 2,
-                height / 2,
-                0,
-                width / 2,
-                height / 2,
-                width / 2
-              );
-              gradient.addColorStop(0, "rgba(0, 105, 148, 0.1)");
-              gradient.addColorStop(1, "rgba(0, 51, 102, 0.2)");
+                const source = nodes[Math.floor(Math.random() * nodes.length)];
+                let target;
+                do {
+                  target = nodes[Math.floor(Math.random() * nodes.length)];
+                } while (target === source);
 
-              context.beginPath();
-              path({ type: "Sphere" });
-              context.fillStyle = gradient;
-              context.fill();
+                // 🔴 Check if a connection already exists (A→B or B→A)
+                const exists = connections.some(
+                  (c) =>
+                    (c.source === source && c.target === target) ||
+                    (c.source === target && c.target === source)
+                );
+                if (exists) return; // skip creating duplicate
 
-              // Draw wireframe grid
-              drawWireframe();
+                const hue = Math.random() * 360;
+                connections.push({
+                  source,
+                  target,
+                  progress: 0,
+                  speed: 0.0015, // slower + consistent speed
+                  color: `#00ffff`,
+                  opacity: 1,
+                  lineProgress: 0,
+                  id: Date.now() + Math.random(),
+                });
+              }
+              function updateConnections() {
+                // Create new connections randomly
+                if (
+                  Math.random() < 0.1 &&
+                  connections.length < maxConnections
+                ) {
+                  createConnection();
+                }
 
-              // Draw countries with star pattern (no borders)
-              // if (countries) {
-              //   context.beginPath();
-              //   path(countries);
-              //   context.fillStyle = starPattern;
-              //   context.fill();
+                // Update existing connections
+                connections.forEach((conn, index) => {
+                  // First phase: draw the line from source to target (line grows smoothly)
+                  const mobile = window.innerWidth < 1024;
+                  if (conn.lineProgress < 1) {
+                    conn.lineProgress += mobile
+                      ? conn.speed * 20
+                      : conn.speed * 9; // Line draws at steady pace
 
-              //   // No borders drawn - removed border drawing code
-              //   // Now add slight white border
-              //   context.beginPath();
-              //   path(countries);
-              //   context.lineWidth = 0.2;
-              //   context.strokeStyle = "#fff";
-              //   context.stroke();
-              // }
-              if (countries) {
+                    if (conn.lineProgress > 1) conn.lineProgress = 1;
+                  }
+
+                  // Second phase: move the dot along the line (starts when line is mostly drawn)
+                  if (conn.lineProgress > 0.7) {
+                    conn.progress += mobile ? conn.speed * 20 : conn.speed;
+                  }
+
+                  // Remove connection when dot reaches the end and line fades
+                  if (conn.progress >= 1.05) {
+                    conn.opacity -= 0.025;
+                    if (conn.opacity <= 0) {
+                      connections.splice(index, 1);
+                    }
+                  }
+                });
+              }
+
+              function drawGlobe() {
+                context.clearRect(0, 0, width, height);
+
+                // Auto-rotate (slower)
+                if (autoRotate) {
+                  rotation[0] += 0.05;
+                }
+
+                projection.rotate(rotation);
+
+                // Draw ocean with gradient
+                const gradient = context.createRadialGradient(
+                  width / 2,
+                  height / 2,
+                  0,
+                  width / 2,
+                  height / 2,
+                  width / 2
+                );
+                gradient.addColorStop(0, "rgba(0, 105, 148, 0.1)");
+                gradient.addColorStop(1, "rgba(0, 51, 102, 0.2)");
+
                 context.beginPath();
-                path(countries);
-                context.fillStyle = starPattern;
+                path({ type: "Sphere" });
+                context.fillStyle = gradient;
                 context.fill();
 
-                // Add a unified border
-                context.beginPath();
-                path(countries);
+                // Draw wireframe grid
+                drawWireframe();
 
-                // Outer glow (helps smooth anti-aliasing differences)
-                context.lineWidth = 0.6;
-                context.strokeStyle = "rgba(255, 255, 255, 0.3)";
-                context.stroke();
+                // Draw countries with star pattern (no borders)
+                // if (countries) {
+                //   context.beginPath();
+                //   path(countries);
+                //   context.fillStyle = starPattern;
+                //   context.fill();
 
-                // Solid white edge for consistent coastline contrast
-                context.lineWidth = 0.3;
-                context.strokeStyle = "rgba(255, 255, 255, 0.9)";
-                context.stroke();
-              }
-
-              drawNodes();
-
-              drawConnections();
-
-              drawMarkers();
-              // Draw nodes
-
-              // Draw orange map markers
-              // Draw connections
-            }
-
-            function drawWireframe() {
-              // Draw latitude lines
-              for (let lat = -80; lat <= 80; lat += 20) {
-                context.beginPath();
-                const line = d3.geoCircle().center([0, lat]).radius(0.1)();
-
-                // Create longitude line
-                const coords = [];
-                for (let lng = -180; lng <= 180; lng += 5) {
-                  coords.push([lng, lat]);
-                }
-
-                path({
-                  type: "LineString",
-                  coordinates: coords,
-                });
-
-                context.strokeStyle = "rgba(0, 150, 255, 0.2)";
-                context.lineWidth = 0.3;
-                context.stroke();
-              }
-
-              // Draw longitude lines
-              for (let lng = -180; lng <= 180; lng += 30) {
-                context.beginPath();
-                const coords = [];
-                for (let lat = -90; lat <= 90; lat += 5) {
-                  coords.push([lng, lat]);
-                }
-
-                path({
-                  type: "LineString",
-                  coordinates: coords,
-                });
-
-                context.strokeStyle = "rgba(0, 150, 255, 0.2)";
-                context.lineWidth = 0.3;
-                context.stroke();
-              }
-            }
-
-            function drawNodes() {
-              nodes.forEach((node) => {
-                const pos = projection(node.coordinates);
-                if (pos && isVisible(node.coordinates)) {
-                  // Pulsing effect
-                  node.pulse += 0.1;
-                  const pulseSize = 1 + Math.sin(node.pulse) * 0.1;
-
-                  // Glow effect
-                  const gradient = context.createRadialGradient(
-                    pos[0],
-                    pos[1],
-                    0,
-                    pos[0],
-                    pos[1],
-                    pulseSize * 2
-                  );
-                  gradient.addColorStop(0, node.color);
-                  gradient.addColorStop(
-                    0.3,
-                    node.color.replace("70%", "50%")
-                  );
-                  gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-
+                //   // No borders drawn - removed border drawing code
+                //   // Now add slight white border
+                //   context.beginPath();
+                //   path(countries);
+                //   context.lineWidth = 0.2;
+                //   context.strokeStyle = "#fff";
+                //   context.stroke();
+                // }
+                if (countries) {
                   context.beginPath();
-                  context.arc(pos[0], pos[1], pulseSize * 3, 0, 2 * Math.PI);
-                  context.fillStyle = gradient;
+                  path(countries);
+                  context.fillStyle = starPattern;
                   context.fill();
 
+                  // Add a unified border
                   context.beginPath();
-                  context.arc(
-                    pos[0],
-                    pos[1],
-                    pulseSize * 2.5,
-                    0,
-                    2 * Math.PI
-                  );
-                  context.strokeStyle = node.color;
-                  context.lineWidth = 1;
+                  path(countries);
+
+                  // Outer glow (helps smooth anti-aliasing differences)
+                  context.lineWidth = 0.6;
+                  context.strokeStyle = "rgba(255, 255, 255, 0.3)";
                   context.stroke();
 
-                  // Core dot with city name on hover
+                  // Solid white edge for consistent coastline contrast
+                  context.lineWidth = 0.3;
+                  context.strokeStyle = "rgba(255, 255, 255, 0.9)";
+                  context.stroke();
+                }
+
+                drawNodes();
+
+                drawConnections();
+
+                drawMarkers();
+                // Draw nodes
+
+                // Draw orange map markers
+                // Draw connections
+              }
+
+              function drawWireframe() {
+                // Draw latitude lines
+                for (let lat = -80; lat <= 80; lat += 20) {
                   context.beginPath();
-                  context.arc(pos[0], pos[1], pulseSize, 0, 2 * Math.PI);
-                  context.fillStyle = node.color;
-                  context.fill();
+                  const line = d3.geoCircle().center([0, lat]).radius(0.1)();
 
-                  // Draw city name
-                  context.fillStyle = "rgba(255, 255, 255, 0.8)";
-                  context.font = "10px Arial";
-                  context.textAlign = "center";
-                  context.fillText(
-                    node.name,
-                    pos[0],
-                    pos[1] + pulseSize + 12
-                  );
-                }
-              });
-            }
-
-            function drawMarkers() {
-              nodes.forEach((node) => {
-                const pos = projection(node.coordinates);
-                if (pos && isVisible(node.coordinates)) {
-                  const markerWidth = 15;
-                  const markerHeight = 22;
-
-                  // Gentle pulse scale
-                  const pulse =
-                    Math.sin(Date.now() * 0.002 + node.id) * 0.05 + 1;
-                  const currentWidth = markerWidth * pulse;
-                  const currentHeight = markerHeight * pulse;
-
-                  context.save();
-                  context.translate(pos[0], pos[1]);
-                  context.scale(pulse, pulse);
-                  context.drawImage(
-                    markerImage,
-                    -currentWidth / 2,
-                    -currentHeight,
-                    currentWidth,
-                    currentHeight
-                  );
-                  context.restore();
-                }
-              });
-            }
-
-            function drawConnections() {
-              connections.forEach((conn) => {
-                const sourceCoord = conn.source.coordinates;
-                const targetCoord = conn.target.coordinates;
-                const sourcePos = projection(sourceCoord);
-                const targetPos = projection(targetCoord);
-
-                if (sourcePos && targetPos) {
-                  const visA = isVisible(sourceCoord);
-                  const visB = isVisible(targetCoord);
-                  // Draw the arc only for front-side segments; render if any endpoint is visible
-                  if (visA || visB) {
-                    drawGreatCircleArc(
-                      sourceCoord,
-                      targetCoord,
-                      conn.color,
-                      conn.opacity,
-                      conn.lineProgress
-                    );
-
-                    // Draw moving dot only if its current position is visible
-                    //     if (conn.lineProgress > 0.3 && conn.progress <= 1) {
-                    //       const dot = projectAlongGreatCircle(sourceCoord, targetCoord, conn.progress);
-                    //       if (dot && isVisible(dot.coord)) {
-                    //         const dotPos = dot.pos;
-                    //         const gradient = context.createRadialGradient(
-                    //           dotPos[0],
-                    //           dotPos[1],
-                    //           0,
-                    //           dotPos[0],
-                    //           dotPos[1],
-                    //           0.4
-                    //         );
-                    //         gradient.addColorStop(0, conn.color);
-                    //         gradient.addColorStop(0.5, conn.color.replace("60%", "40%"));
-                    //         gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-
-                    //         context.globalAlpha = conn.opacity;
-                    //         context.beginPath();
-                    //         context.arc(dotPos[0], dotPos[1], 4, 0, 2 * Math.PI);
-                    //         context.fillStyle = gradient;
-                    //         context.fill();
-
-                    //         context.beginPath();
-                    //         context.arc(dotPos[0], dotPos[1], 2, 0, 2 * Math.PI);
-                    //         context.fillStyle = "white";
-                    //         context.fill();
-                    //         context.globalAlpha = 1;
-                    //       }
-                    //     }
-                    //
+                  // Create longitude line
+                  const coords = [];
+                  for (let lng = -180; lng <= 180; lng += 5) {
+                    coords.push([lng, lat]);
                   }
-                }
-              });
-            }
 
-            // Project a point along the great-circle path and optionally lift it (for higher arc)
-            function projectAlongGreatCircle(sourceCoord, targetCoord, t) {
-              const interpolate = d3.geoInterpolate(sourceCoord, targetCoord);
-              const coord = interpolate(t);
-              const pos = projection(coord);
-              if (!pos) return null;
-              // Lift arc visually in screen space
-              const ARC_HEIGHT = 60; // px
-              const lift = Math.sin(Math.PI * t) * ARC_HEIGHT;
-              return { coord, pos: [pos[0], pos[1] - lift] };
-            }
-
-            function drawGreatCircleArc(
-              sourceCoord,
-              targetCoord,
-              color,
-              opacity,
-              lineProgress
-            ) {
-              const segments = 240;
-              const toRender = Math.max(
-                1,
-                Math.floor(segments * lineProgress)
-              );
-
-              const centerLonLat = projection.invert([width / 2, height / 2]);
-              const fadeMargin = 0.18; // radians (~10deg) to fade at horizon
-
-              let last = projectAlongGreatCircle(sourceCoord, targetCoord, 0);
-              for (let i = 1; i <= toRender; i++) {
-                const t = i / segments;
-                const p = projectAlongGreatCircle(
-                  sourceCoord,
-                  targetCoord,
-                  t
-                );
-                if (!p || !last) {
-                  last = p;
-                  continue;
-                }
-
-                const dVis = d3.geoDistance(p.coord, centerLonLat);
-                const visible = dVis <= Math.PI / 1.5;
-                if (!visible) break; // stop drawing beyond the horizon so it disappears cleanly
-
-                const fade = Math.max(
-                  0,
-                  Math.min(1, (Math.PI / 2 - dVis + fadeMargin) / fadeMargin)
-                );
-
-                context.beginPath();
-                context.moveTo(last.pos[0], last.pos[1]);
-                context.lineTo(p.pos[0], p.pos[1]);
-                context.strokeStyle = color;
-                context.lineWidth = 0.8;
-                context.globalAlpha = opacity * (0.6 + 0.4 * fade);
-                context.stroke();
-
-                context.lineWidth = 1;
-                context.globalAlpha = opacity * 0.2 * fade;
-                context.stroke();
-                context.globalAlpha = 1;
-
-                last = p;
-              }
-            }
-
-            function isVisible(coordinates) {
-              const distance = d3.geoDistance(
-                coordinates,
-                projection.invert([width / 2, height / 2])
-              );
-              return distance <= Math.PI / 2;
-            }
-
-            function animate() {
-              if (startConnections) {
-                updateConnections();
-              }
-              drawGlobe();
-              animationId = requestAnimationFrame(animate);
-            }
-
-            function observeGlobeVisibility() {
-              const section = document.querySelector(".globe-embed");
-              if (!section) return;
-
-              const observer = new IntersectionObserver(
-                (entries) => {
-                  entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                      startConnections = true; // Start connections when visible
-                    }
-                    //  else {
-                    //   startConnections = false; // Pause connections when out of view (optional)
-                    // }
+                  path({
+                    type: "LineString",
+                    coordinates: coords,
                   });
-                },
-                {
-                  threshold: 0.3, // Start when 30% of the globe section is visible
+
+                  context.strokeStyle = "rgba(0, 150, 255, 0.2)";
+                  context.lineWidth = 0.3;
+                  context.stroke();
                 }
-              );
 
-              observer.observe(section);
-            }
+                // Draw longitude lines
+                for (let lng = -180; lng <= 180; lng += 30) {
+                  context.beginPath();
+                  const coords = [];
+                  for (let lat = -90; lat <= 90; lat += 5) {
+                    coords.push([lng, lat]);
+                  }
 
-            // Initialize when page loads
-            init();
-          </script>
-          <script>
-            const talkBox = document.getElementById("lets-talk");
-            const closeBtn = document.querySelector(".talk-close");
+                  path({
+                    type: "LineString",
+                    coordinates: coords,
+                  });
 
-            closeBtn.addEventListener("click", () => {
-              talkBox.classList.add("hide");
-              talkBox.addEventListener(
-                "transitionend",
-                () => {
-                  talkBox.style.display = "none";
-                },
-                { once: true }
-              );
-            });
-          </script>
-        </div>
-      </div>
-    </section>
+                  context.strokeStyle = "rgba(0, 150, 255, 0.2)";
+                  context.lineWidth = 0.3;
+                  context.stroke();
+                }
+              }
 
-    <!-- Footer -->
-    <footer class="footer show-talk-box">
-      <div style="position: relative; z-index: 2" class="container">
+              function drawNodes() {
+                nodes.forEach((node) => {
+                  const pos = projection(node.coordinates);
+                  if (pos && isVisible(node.coordinates)) {
+                    // Pulsing effect
+                    node.pulse += 0.1;
+                    const pulseSize = 1 + Math.sin(node.pulse) * 0.1;
 
-        <div class="footer-header">
-          <div class="width-1 hideinlaptop">
-            <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
+                    // Glow effect
+                    const gradient = context.createRadialGradient(
+                      pos[0],
+                      pos[1],
+                      0,
+                      pos[0],
+                      pos[1],
+                      pulseSize * 2
+                    );
+                    gradient.addColorStop(0, node.color);
+                    gradient.addColorStop(
+                      0.3,
+                      node.color.replace("70%", "50%")
+                    );
+                    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+                    context.beginPath();
+                    context.arc(pos[0], pos[1], pulseSize * 3, 0, 2 * Math.PI);
+                    context.fillStyle = gradient;
+                    context.fill();
+
+                    context.beginPath();
+                    context.arc(
+                      pos[0],
+                      pos[1],
+                      pulseSize * 2.5,
+                      0,
+                      2 * Math.PI
+                    );
+                    context.strokeStyle = node.color;
+                    context.lineWidth = 1;
+                    context.stroke();
+
+                    // Core dot with city name on hover
+                    context.beginPath();
+                    context.arc(pos[0], pos[1], pulseSize, 0, 2 * Math.PI);
+                    context.fillStyle = node.color;
+                    context.fill();
+
+                    // Draw city name
+                    context.fillStyle = "rgba(255, 255, 255, 0.8)";
+                    context.font = "10px Arial";
+                    context.textAlign = "center";
+                    context.fillText(
+                      node.name,
+                      pos[0],
+                      pos[1] + pulseSize + 12
+                    );
+                  }
+                });
+              }
+
+              function drawMarkers() {
+                nodes.forEach((node) => {
+                  const pos = projection(node.coordinates);
+                  if (pos && isVisible(node.coordinates)) {
+                    const markerWidth = 15;
+                    const markerHeight = 22;
+
+                    // Gentle pulse scale
+                    const pulse =
+                      Math.sin(Date.now() * 0.002 + node.id) * 0.05 + 1;
+                    const currentWidth = markerWidth * pulse;
+                    const currentHeight = markerHeight * pulse;
+
+                    context.save();
+                    context.translate(pos[0], pos[1]);
+                    context.scale(pulse, pulse);
+                    context.drawImage(
+                      markerImage,
+                      -currentWidth / 2,
+                      -currentHeight,
+                      currentWidth,
+                      currentHeight
+                    );
+                    context.restore();
+                  }
+                });
+              }
+
+              function drawConnections() {
+                connections.forEach((conn) => {
+                  const sourceCoord = conn.source.coordinates;
+                  const targetCoord = conn.target.coordinates;
+                  const sourcePos = projection(sourceCoord);
+                  const targetPos = projection(targetCoord);
+
+                  if (sourcePos && targetPos) {
+                    const visA = isVisible(sourceCoord);
+                    const visB = isVisible(targetCoord);
+                    // Draw the arc only for front-side segments; render if any endpoint is visible
+                    if (visA || visB) {
+                      drawGreatCircleArc(
+                        sourceCoord,
+                        targetCoord,
+                        conn.color,
+                        conn.opacity,
+                        conn.lineProgress
+                      );
+
+                      // Draw moving dot only if its current position is visible
+                      //     if (conn.lineProgress > 0.3 && conn.progress <= 1) {
+                      //       const dot = projectAlongGreatCircle(sourceCoord, targetCoord, conn.progress);
+                      //       if (dot && isVisible(dot.coord)) {
+                      //         const dotPos = dot.pos;
+                      //         const gradient = context.createRadialGradient(
+                      //           dotPos[0],
+                      //           dotPos[1],
+                      //           0,
+                      //           dotPos[0],
+                      //           dotPos[1],
+                      //           0.4
+                      //         );
+                      //         gradient.addColorStop(0, conn.color);
+                      //         gradient.addColorStop(0.5, conn.color.replace("60%", "40%"));
+                      //         gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+                      //         context.globalAlpha = conn.opacity;
+                      //         context.beginPath();
+                      //         context.arc(dotPos[0], dotPos[1], 4, 0, 2 * Math.PI);
+                      //         context.fillStyle = gradient;
+                      //         context.fill();
+
+                      //         context.beginPath();
+                      //         context.arc(dotPos[0], dotPos[1], 2, 0, 2 * Math.PI);
+                      //         context.fillStyle = "white";
+                      //         context.fill();
+                      //         context.globalAlpha = 1;
+                      //       }
+                      //     }
+                      //
+                    }
+                  }
+                });
+              }
+
+              // Project a point along the great-circle path and optionally lift it (for higher arc)
+              function projectAlongGreatCircle(sourceCoord, targetCoord, t) {
+                const interpolate = d3.geoInterpolate(sourceCoord, targetCoord);
+                const coord = interpolate(t);
+                const pos = projection(coord);
+                if (!pos) return null;
+                // Lift arc visually in screen space
+                const ARC_HEIGHT = 60; // px
+                const lift = Math.sin(Math.PI * t) * ARC_HEIGHT;
+                return { coord, pos: [pos[0], pos[1] - lift] };
+              }
+
+              function drawGreatCircleArc(
+                sourceCoord,
+                targetCoord,
+                color,
+                opacity,
+                lineProgress
+              ) {
+                const segments = 240;
+                const toRender = Math.max(
+                  1,
+                  Math.floor(segments * lineProgress)
+                );
+
+                const centerLonLat = projection.invert([width / 2, height / 2]);
+                const fadeMargin = 0.18; // radians (~10deg) to fade at horizon
+
+                let last = projectAlongGreatCircle(sourceCoord, targetCoord, 0);
+                for (let i = 1; i <= toRender; i++) {
+                  const t = i / segments;
+                  const p = projectAlongGreatCircle(
+                    sourceCoord,
+                    targetCoord,
+                    t
+                  );
+                  if (!p || !last) {
+                    last = p;
+                    continue;
+                  }
+
+                  const dVis = d3.geoDistance(p.coord, centerLonLat);
+                  const visible = dVis <= Math.PI / 1.5;
+                  if (!visible) break; // stop drawing beyond the horizon so it disappears cleanly
+
+                  const fade = Math.max(
+                    0,
+                    Math.min(1, (Math.PI / 2 - dVis + fadeMargin) / fadeMargin)
+                  );
+
+                  context.beginPath();
+                  context.moveTo(last.pos[0], last.pos[1]);
+                  context.lineTo(p.pos[0], p.pos[1]);
+                  context.strokeStyle = color;
+                  context.lineWidth = 0.8;
+                  context.globalAlpha = opacity * (0.6 + 0.4 * fade);
+                  context.stroke();
+
+                  context.lineWidth = 1;
+                  context.globalAlpha = opacity * 0.2 * fade;
+                  context.stroke();
+                  context.globalAlpha = 1;
+
+                  last = p;
+                }
+              }
+
+              function isVisible(coordinates) {
+                const distance = d3.geoDistance(
+                  coordinates,
+                  projection.invert([width / 2, height / 2])
+                );
+                return distance <= Math.PI / 2;
+              }
+
+              function animate() {
+                if (startConnections) {
+                  updateConnections();
+                }
+                drawGlobe();
+                animationId = requestAnimationFrame(animate);
+              }
+
+              function observeGlobeVisibility() {
+                const section = document.querySelector(".globe-embed");
+                if (!section) return;
+
+                const observer = new IntersectionObserver(
+                  (entries) => {
+                    entries.forEach((entry) => {
+                      if (entry.isIntersecting) {
+                        startConnections = true; // Start connections when visible
+                      }
+                      //  else {
+                      //   startConnections = false; // Pause connections when out of view (optional)
+                      // }
+                    });
+                  },
+                  {
+                    threshold: 0.3, // Start when 30% of the globe section is visible
+                  }
+                );
+
+                observer.observe(section);
+              }
+
+              // Initialize when page loads
+              init();
+            </script>
+            <script>
+              const talkBox = document.getElementById("lets-talk");
+              const closeBtn = document.querySelector(".talk-close");
+
+              closeBtn.addEventListener("click", () => {
+                talkBox.classList.add("hide");
+                talkBox.addEventListener(
+                  "transitionend",
+                  () => {
+                    talkBox.style.display = "none";
+                  },
+                  { once: true }
+                );
+              });
+            </script>
           </div>
-          <div class="gradient-heading-2">Say hello <br class="hideinmobile" />to us!</div>
-          <div class="flex-1">
-            <img src="assets/images/foot-call.svg" alt="">
-            <div class="text">
-              9898989898
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer show-talk-box">
+        <div style="position: relative; z-index: 2" class="container">
+          <div class="footer-header">
+            <div class="width-1 hideinlaptop">
+              <img style="width: 100%" src="assets/images/simp3x.svg" alt="" />
+            </div>
+            <div class="gradient-heading-2">
+              Say hello <br class="hideinmobile" />to us!
+            </div>
+            <div class="flex-1">
+              <img src="assets/images/foot-call.svg" alt="" />
+              <div class="text">9898989898</div>
+            </div>
+            <div class="flex-1">
+              <img src="assets/images/foot-mail.svg" alt="" />
+              <div class="text">hello@example.com</div>
+            </div>
+            <div class="width-1 hideinmobile">
+              <img style="width: 100%" src="assets/images/simp3x.svg" alt="" />
             </div>
           </div>
-          <div class="flex-1">
-            <img src="assets/images/foot-mail.svg" alt="">
-            <div class="text">
-              hello@example.com
-            </div>
-          </div>
-          <div class="width-1 hideinmobile">
-            <img style="width: 100%;" src="assets/images/simp3x.svg" alt="">
-          </div>
-        </div>
-        <div class="footer-content">
-          <div class="footer-main">
-            <div class="footer-links">
-              <div class="footer-column">
-                <h4 class="footer-column-title">Pages</h4>
-                <div class="footer-links-grid">
-                  <div class="links-group">
-                    <a href="#home" class="footer-link">Home</a>
-                    <a href="#" class="footer-link">About Us</a>
-                    <a href="#about" class="footer-link">Insights</a>
-                    <a href="#" class="footer-link">Life @ Simplify3x</a>
+          <div class="footer-content">
+            <div class="footer-main">
+              <div class="footer-links">
+                <div class="footer-column">
+                  <h4 class="footer-column-title">Pages</h4>
+                  <div class="footer-links-grid">
+                    <div class="links-group">
+                      <a href="#home" class="footer-link">Home</a>
+                      <a href="#" class="footer-link">About Us</a>
+                      <a href="#about" class="footer-link">Insights</a>
+                      <a href="#" class="footer-link">Life @ Simplify3x</a>
 
-                    <a href="#" class="footer-link">Customer Stories</a>
-                    <a href="#" class="footer-link">Custom Solutions</a>
+                      <!-- <a href="#" class="footer-link">Customer Stories</a> -->
+                      <a href="#" class="footer-link">Custom Solutions</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-column col-1">
+                  <h4 class="footer-column-title">Products</h4>
+                  <div class="footer-links-grid">
+                    <div class="links-group">
+                      <a href="#home" class="footer-link">SimplifyQA</a>
+                      <a href="#" class="footer-link">Hire3x</a>
+                      <a href="#about" class="footer-link">Walnut</a>
+                      <a href="#" class="footer-link">DevOps Arc</a>
+                      <a href="#" class="footer-link">Bominso</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-column col-2">
+                  <h4 class="footer-column-title">Support</h4>
+                  <div class="footer-links-grid">
+                    <div class="links-group">
+                      <a href="contact.html" class="footer-link">Contact Us</a>
+                      <a href="#" class="footer-link">Careers</a>
+                      <!-- <a href="responsibility.html" class="footer-link"
+                        >Responsibility</a
+                      > -->
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="footer-column col-1">
-                <h4 class="footer-column-title">Products</h4>
-                <div class="footer-links-grid">
-                  <div class="links-group">
-                    <a href="#home" class="footer-link">SimplifyQA</a>
-                    <a href="#" class="footer-link">Hire3x</a>
-                    <a href="#about" class="footer-link">Walnut</a>
-                    <a href="#" class="footer-link">DevOps Arc</a>
-                    <a href="#" class="footer-link">Bominso</a>
+              <div class="footer-brand hideinlaptop hideinmobile">
+                <div class="laptop-newsletter">
+                  <div class="newsletter-text">
+                    <div class="gradient-heading-2">Stay Updated</div>
+                    <div class="gradient-heading-2">With Our Newsletter</div>
                   </div>
+                  <form
+                    class="newsletter-form"
+                    onsubmit="event.preventDefault(); return false;"
+                    style="margin-top: 30px"
+                  >
+                    <input
+                      type="email"
+                      class="newsletter-input"
+                      placeholder="Your email"
+                      required
+                    />
+                    <button type="submit" class="newsletter-button">
+                      Subscribe
+                    </button>
+                  </form>
                 </div>
-              </div>
-              <div class="footer-column col-2">
-                <h4 class="footer-column-title">Support</h4>
-                <div class="footer-links-grid">
-                  <div class="links-group">
-                    <a href="#" class="footer-link">Contact Us</a>
-                    <a href="#" class="footer-link">Careers</a>
-                    <a href="responsibility.html" class="footer-link">Responsibility</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="footer-brand hideinlaptop hideinmobile">
-              <div class="laptop-newsletter">
-                <div class="newsletter-text">
-                  <div class="gradient-heading-2">Stay Updated</div>
-                  <div class="gradient-heading-2">With Our Newsletter</div>
-                </div>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); return false;"
-                  style="margin-top: 30px;">
-                  <input type="email" class="newsletter-input" placeholder="Your email" required />
-                  <button type="submit" class="newsletter-button">Subscribe</button>
-                </form>
               </div>
             </div>
           </div>
         </div>
-
-      </div>
-      <div style="background-color: #151515;padding-bottom: 30px;">
-        <div class="container">
-          <div class=" footer-bottom">
-            <div class="footer-social">
-              <a href="https://www.facebook.com/" class="social-link">
-                <img src="assets/images/foot-insta.svg" alt="Facebook" class="social-icon" />
-              </a>
-              <a href="https://in.linkedin.com/" class="social-link">
-                <img src="assets/images/foot-linked.svg" alt="LinkedIn" class="social-icon" />
-              </a>
+        <div style="background-color: #151515; padding-bottom: 30px">
+          <div class="container">
+            <div class="footer-bottom">
+              <div class="footer-social">
+                <a href="https://www.facebook.com/" class="social-link">
+                  <img
+                    src="assets/images/foot-insta.svg"
+                    alt="Facebook"
+                    class="social-icon"
+                  />
+                </a>
+                <a href="https://in.linkedin.com/" class="social-link">
+                  <img
+                    src="assets/images/foot-linked.svg"
+                    alt="LinkedIn"
+                    class="social-icon"
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
 
-    <script src="js/script.js"></script>
-    <script src="js/mobscript.js"></script>
-  </div>
-</body>
-
+      <script src="js/script.js"></script>
+      <script src="js/mobscript.js"></script>
+    </div>
+  </body>
 </html>
