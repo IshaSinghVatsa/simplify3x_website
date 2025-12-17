@@ -1374,7 +1374,7 @@ select option[disabled] {
 .marquee {
     width: 100%;
     overflow: hidden;
-    padding: 20px 0;
+    margin: 20px 0;
 }
 
 .marquee-track {
@@ -1426,17 +1426,17 @@ select option[disabled] {
     cursor: pointer;
 }
 
-.marquee-img:hover {
+/* .marquee-img:hover {
     transform: scale(1.05);
-}
+} */
 
 .marquee-img-large {
-    height: 300px;
+    height: 320px;
     /* Increased height */
 }
 
 .marquee-img-small {
-    height: 150px;
+    height: 170px;
     /* Increased height */
 }
 
@@ -1515,11 +1515,11 @@ select option[disabled] {
     }
 
     .marquee-img-large {
-        height: 160px;
+        height: 180px;
     }
 
     .marquee-img-small {
-        height: 80px;
+        height: 100px;
     }
 
     .marquee-track {
@@ -1527,19 +1527,6 @@ select option[disabled] {
     }
 }
 
-@media screen and (max-width: 480px) {
-    .marquee-column {
-        width: 150px;
-    }
-
-    .marquee-img-large {
-        height: 140px;
-    }
-
-    .marquee-img-small {
-        height: 70px;
-    }
-}
 
 /* Customer Stories Page Styles */
 

@@ -41,7 +41,30 @@ body {
   overflow-x: hidden;
   /* Prevent horizontal scrolling */
 }
+.lb-img{
+  position: relative;
+  height: 220px; width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.lb-img::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+.lb-img:hover .play{
+  z-index: 2;
+}
+.lb-img .play{
+  cursor: pointer;
+}
 /* Gradient Heading Class */
 .gradient-heading {
   font-family: "Montserrat";
@@ -2540,7 +2563,7 @@ max-width: 1425px;
 
 .footer-links-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
 }
 
@@ -2558,6 +2581,63 @@ max-width: 1425px;
 }
 
 .footer-link:hover {
+  color: white;
+}
+
+/* Footer Dropdown Styles */
+.footer-dropdown {
+  position: relative;
+}
+
+.footer-dropdown-toggle {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+
+.footer-dropdown-toggle:hover {
+  color: white;
+}
+
+.footer-dropdown-toggle::after {
+  content: '▼';
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.footer-dropdown.open .footer-dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+.footer-dropdown-menu {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 5px;
+}
+
+.footer-dropdown.open .footer-dropdown-menu {
+  display: flex;
+}
+
+.footer-dropdown-item {
+  color: #999;
+  text-decoration: none;
+  font-size: 12px;
+  transition: color 0.3s ease;
+}
+
+.footer-dropdown-item:hover {
   color: white;
 }
 
@@ -2869,6 +2949,23 @@ max-width: 1425px;
 
 /* Tablet Styles */
 @media (max-width: 1024px) {
+  .life-hero-content.life{
+    position: absolute;
+  }
+
+  .life-part.life .life-hero{
+    border-radius: 12px;
+    padding-left: 0px !important;
+    height: 333px !important;
+  }
+  .life-part.life .marquee{
+    border-radius: 0 !important;
+    z-index: 0 !important;
+  }
+  .life-part.life .hero-description{
+    font-size: 16px !important;
+  }
+ 
   .gradient-heading {
     font-size: 2.5rem !important;
     line-height: 1.5;
@@ -3248,9 +3345,9 @@ max-width: 1425px;
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  .mobile-menu-close svg {
-    width: 24px;
-    height: 24px;
+  .mobile-menu-close img {
+    width: 40px;
+    height: 40px;
   }
 
   /* Show mobile menu header and newsletter on mobile */
@@ -4725,7 +4822,7 @@ max-width: 1425px;
   }
 
   .digital-section .height {
-    height: 501px !important;
+    height: 430px !important;
   }
   .digital-section .gradient-heading.small-font {
     font-size: 24px !important;

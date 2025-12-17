@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCustomerStoriesImageFade();
   // initDynamicBorderRadius(); // Function not defined, commented out
   initMobileMenu();
+  initFooterDropdowns();
   // initMobileCarousel();
 });
 
@@ -799,6 +800,34 @@ function initDropdowns() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       dropdowns.forEach((d) => d.classList.remove("open"));
+    }
+  });
+}
+
+// Initialize footer dropdowns
+function initFooterDropdowns() {
+  const footerDropdowns = document.querySelectorAll(".footer-dropdown");
+  if (!footerDropdowns.length) return;
+
+  footerDropdowns.forEach((dropdown) => {
+    const toggle = dropdown.querySelector(".footer-dropdown-toggle");
+    if (!toggle) return;
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      // Close other dropdowns
+      footerDropdowns.forEach((d) => {
+        if (d !== dropdown) d.classList.remove("open");
+      });
+      // Toggle current dropdown
+      dropdown.classList.toggle("open");
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".footer-dropdown")) {
+      footerDropdowns.forEach((d) => d.classList.remove("open"));
     }
   });
 
@@ -2165,6 +2194,15 @@ function initMobileMenu() {
       closeMenu();
     }
   });
+
+  // Close mobile menu when clicking the close button
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMenu();
+    });
+  }
 }
 
 // Note: initMobileMenu is already called in the main DOMContentLoaded handler above

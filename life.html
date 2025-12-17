@@ -44,10 +44,13 @@
             <!-- Mobile Menu Header -->
             <div class="mobile-menu-header">
               <div class="mobile-menu-logo">
-                <a href="#home">
+                <a href="index.html">
                   <img src="assets/images/simp3x.svg" alt="SIMPLIFY3X Logo" />
                 </a>
               </div>
+              <button class="mobile-menu-close" aria-label="Close menu">
+                <img src="assets/images/cross.svg" alt="Close" />
+              </button>
             </div>
 
             <!-- Navigation -->
@@ -85,6 +88,7 @@
                               class="dropdown-submenu-item"
                               >Quality Assurance Solution</a
                             >
+                            <a href="globalStaffing.html" class="dropdown-submenu-item">Global Staffing Solution</a>
                             <a
                               href="devSolutions.html"
                               class="dropdown-submenu-item"
@@ -114,7 +118,7 @@
                   <div class="dropdown-menu" role="menu">
                     <div class="dropdown-col">
                       <a href="about.html" class="dropdown-item">About Us</a>
-                      <a href="insights.html" class="dropdown-item">Insights</a>
+                      <!-- <a href="insights.html" class="dropdown-item">Insights</a> -->
                       <a href="life.html" class="dropdown-item"
                         >Life @ Simplify3x</a
                       >
@@ -159,17 +163,22 @@
         </div>
       </div>
     </header>
-    <main class="life-part">
+    <main class="life-part life">
       <section class="container position-relative z-2">
-        <div class="life-hero">
-          <img
+        <div class="life-hero" style="padding-left: 20px;">
+          <!-- <img
             src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"
             alt="Team working"
             class="life-hero-bg-media"
-          />
-          <div class="life-hero-content">
+          /> -->
+          <div class="marquee" id="marquee" style="border-radius: 17px;z-index: 2;">
+            <div class="marquee-track" id="marquee-track">
+              <!-- Content will be injected by JS -->
+            </div>
+          </div>
+          <div class="life-hero-content life" style="padding: 0 11px;">
             <h1
-              class="gradient-heading-2 grad-mob fs-70 mb-3"
+              class="gradient-heading-2 fs-70 mb-3"
               style="justify-self: center"
             >
               Life at Simplify3x
@@ -421,7 +430,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg');
+                --image: url('assets/images/testimonials/Tanvi.png');
               "
             >
               <div class="voice-inner">
@@ -455,7 +464,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05d00a93e7ae267f3f_e24aa2f05c8041e6c7d2b276720729e6_Stylish Urban Portrait.jpg');
+                --image: url('assets/images/testimonials/shubh.png');
               "
             >
               <div class="voice-inner">
@@ -487,7 +496,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/6836e5f5a4694c074d2325de_52291f00d7062ab738d0995727ef25e8_Smiling Asian Woman.jpg');
+                --image: url('assets/images/testimonials/Divya.png');
               "
             >
               <div class="voice-inner">
@@ -519,7 +528,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/Suresh\ Akula.png');
               "
             >
               <div class="voice-inner">
@@ -551,7 +560,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg');
+                --image: url('assets/images/testimonials/Prabhal.png');
               "
             >
               <div class="voice-inner">
@@ -587,7 +596,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/siddharth.png');
               "
             >
               <div class="voice-inner">
@@ -619,7 +628,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/harshit.svg');
               "
             >
               <div class="voice-inner">
@@ -651,7 +660,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/vishal.png');
               "
             >
               <div class="voice-inner">
@@ -683,7 +692,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/nirmal.png');
               "
             >
               <div class="voice-inner">
@@ -747,7 +756,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg');
+                --image: url('assets/images/testimonials/pankti.png');
               "
             >
               <div class="voice-inner">
@@ -779,7 +788,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/sowmick.png');
               "
             >
               <div class="voice-inner">
@@ -811,7 +820,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg');
+                --image: url('assets/images/testimonials/anushia.png');
               "
             >
               <div class="voice-inner">
@@ -843,7 +852,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/irshan.png');
               "
             >
               <div class="voice-inner">
@@ -911,7 +920,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/dharamraj.png');
               "
             >
               <div class="voice-inner">
@@ -943,7 +952,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/Thakur.png');
               "
             >
               <div class="voice-inner">
@@ -975,7 +984,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/goutham.png');
               "
             >
               <div class="voice-inner">
@@ -1007,7 +1016,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/titus.png');
               "
             >
               <div class="voice-inner">
@@ -1041,7 +1050,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/Juny.png');
               "
             >
               <div class="voice-inner">
@@ -1073,7 +1082,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/shubham.png');
               "
             >
               <div class="voice-inner">
@@ -1105,7 +1114,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/sahas.png');
               "
             >
               <div class="voice-inner">
@@ -1137,7 +1146,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/Franklin.png');
               "
             >
               <div class="voice-inner">
@@ -1169,7 +1178,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg');
+                --image: url('assets/images/683d2d05561133a4d29c7166_62dda3b9744  95834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg');
               "
             >
               <div class="voice-inner">
@@ -1205,7 +1214,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg');
+                --image: url('assets/images/testimonials/Changappa.png');
               "
             >
               <div class="voice-inner">
@@ -1237,7 +1246,7 @@
             <article
               class="voice-card"
               style="
-                --image: url('assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg');
+                --image: url('assets/images/testimonials/Ankita.png');
               "
             >
               <div class="voice-inner">
@@ -1337,7 +1346,8 @@
 
         <div class="lb-grid">
           <div class="lb-card">
-          <div style="height: 220px; width: 100%;">
+          <div class="lb-img">
+            <img class="play" style="position: absolute;height: 50px; " src="assets/images/wite-play.svg" alt="">
             <img style="height: 100%; width: 100%; object-fit: cover;" src="assets/images/sports-day.png" alt="">
           </div>
             <div class="lb-caption">
@@ -1345,7 +1355,8 @@
             </div>
           </div>
           <div class="lb-card ">
-            <div style="height: 220px; width: 100%;">
+            <div class="lb-img">
+              <img class="play" style="position: absolute;height: 50px; " src="assets/images/wite-play.svg" alt="">
               <img style="height: 100%; width: 100%; object-fit: cover;" src="assets/images/christmas.png" alt="">
             </div>
             <div class="lb-caption">
@@ -1353,7 +1364,8 @@
             </div>
           </div>
           <div class="lb-card ">
-            <div style="height: 220px; width: 100%;">
+            <div class="lb-img">
+              <img class="play" style="position: absolute;height: 50px; " src="assets/images/wite-play.svg" alt="">
               <img style="height: 100%; width: 100%; object-fit: cover;" src="assets/images/indi2.png" alt="">
             </div>
             <div class="lb-caption">
@@ -1361,7 +1373,8 @@
             </div>
           </div>
           <div class="lb-card ">
-            <div style="height: 220px; width: 100%;">
+            <div class="lb-img">
+              <img class="play" style="position: absolute;height: 50px; " src="assets/images/wite-play.svg" alt="">
               <img style="height: 100%; width: 100%; object-fit: cover;" src="assets/images/diwali.png" alt="">
             </div>
             <div class="lb-caption">
@@ -1370,11 +1383,11 @@
           </div>
         </div>
       </div>
-      <div class="marquee" id="marquee" style="margin-top: 45px">
+      <!-- <div class="marquee" id="marquee" style="margin-top: 45px">
         <div class="marquee-track" id="marquee-track">
-          <!-- Content will be injected by JS -->
+        
         </div>
-      </div>
+      </div> -->
     </section>
 
     <script>
@@ -1382,34 +1395,37 @@
         var images = [
           "assets/images/front-girl.jpg",
           "assets/images/68314ec582b2956a9125402e_hero-image-02.jpg",
-          "assets/images/laptop.jpg",
-          "assets/images/fuutre-r.jpg",
-          "assets/images/trust.jpg",
-          "assets/images/inclusivity.jpg",
-          "assets/images/impact.jpg",
-          "assets/images/683402267e12e0bbfdb7f14c_a5bbe35d323660fa5848dc7f66f36921_about-image.jpg",
-          "assets/images/683543557f15cafe06b24971_work-step-01.jpg",
-          "assets/images/6836e5f5a4694c074d2325de_52291f00d7062ab738d0995727ef25e8_Smiling Asian Woman.jpg",
-          "assets/images/683d2d05d00a93e7ae267f3f_e24aa2f05c8041e6c7d2b276720729e6_Stylish Urban Portrait.jpg",
-          "assets/images/683d2d05bb11df9731bbbb82_ae9466b28e09acb4d6157ce147931125_Portrait of a Smiling Man.jpg",
-          "assets/images/683d2d05561133a4d29c7166_62dda3b974495834a1fcd4ae2318bfb4_Smiling Asian Woman with Soft Background.jpg",
+          "assets/images/testimonials/Tanvi.png",
+          "assets/images/testimonials/shubh.png",
+          "assets/images/testimonials/Divya.png",
+          "assets/images/testimonials/Suresh\ Akula.png",
+          "assets/images/testimonials/Prabhal.png",
+          "assets/images/testimonials/siddharth.png",
+          "assets/images/testimonials/harshit.svg",
+          "assets/images/testimonials/vishal.png",
+          "assets/images/testimonials/nirmal.png",
+          "assets/images/68314ec582b2956a9125402e_hero-image-02.jpg",
+          "assets/images/testimonials/pankti.png",
+          "assets/images/testimonials/sowmick.png",
+          "assets/images/testimonials/anushia.png",
+          "assets/images/testimonials/irshan.png",
+          "assets/images/68314ec582b2956a9125402e_hero-image-02.jpg",
+          "assets/images/testimonials/dharamraj.png",
+          "assets/images/testimonials/titus.png",
+          "assets/images/testimonials/Juny.png",
+          "assets/images/testimonials/shubham.png",
+          "assets/images/testimonials/sahas.png",
+          "assets/images/testimonials/Franlen.png",
+          "assets/images/68314ec582b2956a9125402e_hero-image-02.jpg",
+          "assets/images/testimonials/Changappa.png",
+          "assets/images/testimonials/Ankita.png",
+          "assets/images/68314ec582b2956a9125402e_hero-image-02.jpg",
+     
         ];
 
-        function shuffle(arr) {
-          var a = arr.slice();
-          for (var i = a.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var t = a[i];
-            a[i] = a[j];
-            a[j] = t;
-          }
-          return a;
-        }
-
         var cards = document.querySelectorAll(".voices-track .voice-card");
-        var pool = shuffle(images);
         cards.forEach(function (card, idx) {
-          var img = pool[idx % pool.length];
+          var img = images[idx % images.length];
           card.style.setProperty("--image", "url('" + img + "')");
         });
       })();
@@ -1545,13 +1561,20 @@
                 <h4 class="footer-column-title">Pages</h4>
                 <div class="footer-links-grid">
                   <div class="links-group">
-                    <a href="#home" class="footer-link">Home</a>
+                    <a href="index.html" class="footer-link">Home</a>
                     <a href="#" class="footer-link">About Us</a>
-                    <a href="#about" class="footer-link">Insights</a>
+                    <!-- <a href="#about" class="footer-link">Insights</a> -->
                     <a href="#" class="footer-link">Life @ Simplify3x</a>
 
                     <!-- <a href="#" class="footer-link">Customer Stories</a> -->
-                    <a href="#" class="footer-link">Custom Solutions</a>
+                    <div class="footer-dropdown">
+                      <button class="footer-dropdown-toggle footer-link" type="button">Custom Solutions</button>
+                      <div class="footer-dropdown-menu">
+                        <a href="solutions.html" class="footer-dropdown-item">Quality Assurance Solution</a>
+                        <a href="globalStaffing.html" class="footer-dropdown-item">Global Staffing Solution</a>
+                        <a href="devSolutions.html" class="footer-dropdown-item">Digital Transformation Solution</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1559,7 +1582,7 @@
                 <h4 class="footer-column-title">Products</h4>
                 <div class="footer-links-grid">
                   <div class="links-group">
-                    <a href="#home" class="footer-link">SimplifyQA</a>
+                    <a href="index.html" class="footer-link">SimplifyQA</a>
                     <a href="#" class="footer-link">Hire3x</a>
                     <a href="#about" class="footer-link">Walnut</a>
                     <a href="#" class="footer-link">DevOps Arc</a>
