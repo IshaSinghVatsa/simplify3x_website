@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initIndustryFilters();
   initSolutionsFilters();
   initCustomerStoriesImageFade();
-  initDynamicBorderRadius();
+  // initDynamicBorderRadius(); // Function not defined, commented out
   initMobileMenu();
   // initMobileCarousel();
 });
@@ -778,6 +778,7 @@ function initDropdowns() {
 
     toggle.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation(); // Prevent event from bubbling to outside click handler
       // close others
       dropdowns.forEach((d) => {
         if (d !== drop) d.classList.remove("open");
@@ -1957,7 +1958,7 @@ if (folder) {
 
   // Initialize each folder
   folders.forEach((folder) => {
-    // const container = folder.closest('.folder-container');
+    const container = folder.closest('.folder-container');
     const color = container?.dataset.color || '#fb6630';
     // const folderBackColor = darkenColor(color, 0.1);
     const paper1 = darkenColor('#fcfcfc', 0.01);
@@ -1965,12 +1966,14 @@ if (folder) {
     const paper3 = '#ffffff';
 
     // Set CSS variables
-    // const folderBack = folder.querySelector('.folder__back');
-    // folderBack.style.setProperty('--folder-color', color);
-    // folderBack.style.setProperty('--folder-back-color', folderBackColor);
-    folderBack.style.setProperty('--paper-1', paper1);
-    folderBack.style.setProperty('--paper-2', paper2);
-    folderBack.style.setProperty('--paper-3', paper3);
+    const folderBack = folder.querySelector('.folder__back');
+    if (folderBack) {
+      // folderBack.style.setProperty('--folder-color', color);
+      // folderBack.style.setProperty('--folder-back-color', folderBackColor);
+      folderBack.style.setProperty('--paper-1', paper1);
+      folderBack.style.setProperty('--paper-2', paper2);
+      folderBack.style.setProperty('--paper-3', paper3);
+    }
 
     // Apply colors to elements
     // folderBack.style.background = folderBackColor;
@@ -2019,13 +2022,21 @@ if (folder) {
 // Mobile menu functionality
 function initMobileMenu() {
   const mobileToggle = document.querySelector('.mobile-menu-toggle');
-  const headerActions = document.querySelector('.header-actions');
+  
+  // Select header-actions that's inside the header element (not any other one)
+  const header = document.querySelector('.header');
+  
+  const headerActions = header ? header.querySelector('.header-actions') : document.querySelector('.header-actions');
+  
   const mobileMenuClose = document.querySelector('.mobile-menu-close');
   const body = document.body;
   const html = document.documentElement;
   let lockedScrollY = 0;
 
-  if (!mobileToggle || !headerActions) return;
+  if (!mobileToggle || !headerActions) {
+    console.warn('Mobile menu elements not found', { mobileToggle, headerActions, header });
+    return;
+  }
 
   function closeMenu() {
     mobileToggle.classList.remove('active');
@@ -2047,6 +2058,8 @@ function initMobileMenu() {
   function openMenu() {
     mobileToggle.classList.add('active');
     headerActions.classList.add('active');
+    // Force reflow to ensure class is applied
+    void headerActions.offsetHeight;
     // 🔒 Lock scroll properly for mobile
     lockedScrollY = window.scrollY;
     html.classList.add('menu-open');
@@ -2059,14 +2072,17 @@ function initMobileMenu() {
     body.style.overflow = 'hidden';
   }
 
-  mobileToggle.addEventListener('click', (e) => {
+  // Use capture phase and ensure it fires before other handlers
+  mobileToggle.addEventListener('click', function(e) {
+    e.preventDefault();
     e.stopPropagation();
+    e.stopImmediatePropagation();
     if (headerActions.classList.contains('active')) {
       closeMenu();
     } else {
       openMenu();
     }
-  });
+  }, true); // Use capture phase to ensure it fires first
 
   // Close button handler
   if (mobileMenuClose) {
@@ -2076,21 +2092,72 @@ function initMobileMenu() {
     });
   }
 
-  const navLinks = document.querySelectorAll('.nav-link:not(.dropdown-toggle), .dropdown-item');
+  // Close menu only on actual navigation link clicks (not dropdown toggles or buttons)
+  // Select only actual anchor links, not buttons or dropdown toggles
+  const navLinks = headerActions.querySelectorAll('a.nav-link, a.dropdown-item, a.dropdown-submenu-item');
   navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      closeMenu();
-    });
+    link.addEventListener('click', (e) => {
+      // Get the href to check if it's a real navigation link
+      const href = link.getAttribute('href');
+      
+      // Only process if it's a real navigation link (not # or empty)
+      if (href && href !== '#' && href.trim() !== '') {
+        // Stop propagation to prevent outside click handler from interfering
+        e.stopPropagation();
+        
+        // Close menu immediately for page navigation
+        // The browser will handle the navigation
+        closeMenu();
+        
+        // Don't prevent default - let the link navigate normally
+        // The navigation will happen naturally
+      }
+      // If href is # or empty, don't do anything (let dropdowns handle it)
+    }, true); // Use capture phase to ensure this fires first
   });
 
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (headerActions.classList.contains('active') &&
-      !headerActions.contains(e.target) &&
-      !mobileToggle.contains(e.target)) {
+  // Close mobile menu when clicking outside (but allow all clicks inside header-actions)
+  // Use a more reliable check that doesn't interfere with link navigation
+  document.addEventListener('click', function closeOnOutsideClick(e) {
+    // Only process if menu is active
+    if (!headerActions || !headerActions.classList.contains('active')) {
+      return;
+    }
+    
+    // Check if clicking on dropdown toggle or button inside header-actions
+    // These should NOT close the menu
+    const clickedDropdownToggle = e.target.closest('.dropdown-toggle');
+    const clickedButton = e.target.closest('button');
+    if ((clickedDropdownToggle || clickedButton) && headerActions.contains(e.target)) {
+      return; // Don't close menu for dropdown toggles or buttons
+    }
+    
+    // Check if the click target is a navigation link inside header-actions
+    // If it is, the link handler will deal with it (and stop propagation), so don't close here
+    const clickedLink = e.target.closest('a');
+    if (clickedLink && headerActions.contains(clickedLink)) {
+      const href = clickedLink.getAttribute('href');
+      // If it's a real navigation link (not #), let it navigate
+      if (href && href !== '#' && href.trim() !== '') {
+        return; // Let the link navigate, don't close menu here
+      }
+    }
+    
+    // Check if click is inside header-actions (including all nested children)
+    const clickedInside = headerActions.contains(e.target);
+    
+    // Also check if clicking on mobile toggle
+    const clickedOnToggle = mobileToggle && (
+      mobileToggle.contains(e.target) || 
+      e.target === mobileToggle || 
+      e.target.closest('.mobile-menu-toggle')
+    );
+    
+    // Only close if click is completely outside header-actions
+    if (!clickedInside && !clickedOnToggle) {
       closeMenu();
     }
-  });
+  }, false); // Use bubble phase so it fires after other handlers
 
   // Close mobile menu on escape key
   document.addEventListener('keydown', (e) => {
@@ -2100,8 +2167,7 @@ function initMobileMenu() {
   });
 }
 
-// Initialize mobile menu when DOM is loaded
-document.addEventListener('DOMContentLoaded', initMobileMenu);
+// Note: initMobileMenu is already called in the main DOMContentLoaded handler above
 
 // Mobile carousel (autoplay + dots + swipe)
 function initMobileCarousel() {
