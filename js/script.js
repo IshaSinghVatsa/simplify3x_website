@@ -1606,7 +1606,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sectionTop = sectionRect.top;
 
     // Trigger lock *as soon as* the section enters the top 15% of the viewport
-    if (sectionTop <= window.innerHeight * 0.15 && sectionTop > -50) {
+    if (sectionTop <= window.innerHeight * 0.01 && sectionTop > -10) {
       lockScrollAtSection(section);
     }
   });

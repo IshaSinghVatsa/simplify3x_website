@@ -2775,7 +2775,7 @@ max-width: 1425px;
 
 /* Card Carousel Section */
 .carousel-section {
-  padding: 90px 0;
+  padding: 60px 0 90px 0;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -2943,6 +2943,10 @@ max-width: 1425px;
 
 .mt-30 {
   margin-top: 30px;
+}
+.culture-section.solutions .culture-subtitle{
+  margin-top: 6px;
+  max-width: 500px;
 }
 
 /* ===== RESPONSIVE STYLES ===== */
@@ -3696,6 +3700,7 @@ max-width: 1425px;
   .contact-map {
     overflow: auto;
     padding-bottom: 20px;
+    width: 100%;
   }
 
   .contact-map .map {
@@ -4143,8 +4148,8 @@ max-width: 1425px;
   }
 
   .marquee-item {
-    width: 100px !important;
-    height: 60px !important;
+    /* width: 100px !important; */
+    height: 36px !important;
     padding: 10px !important;
   }
 
@@ -4585,12 +4590,12 @@ max-width: 1425px;
   }
 
   .office-desc {
-    font-size: 10px !important;
+    font-size: 8px !important;
   }
 
   .office-card {
     width: 155px !important;
-    height: 87px !important;
+    height: fit-content !important;
   }
 
   .contact-map .office-card {
@@ -4684,7 +4689,7 @@ max-width: 1425px;
   }
 
   .voice-quote {
-    font-size: 12px !important;
+    font-size: 11px !important;
   }
 
   .voice-person {
@@ -4822,7 +4827,7 @@ max-width: 1425px;
   }
 
   .digital-section .height {
-    height: 430px !important;
+    height: 480px !important;
   }
   .digital-section .gradient-heading.small-font {
     font-size: 24px !important;
